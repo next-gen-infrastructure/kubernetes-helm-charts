@@ -60,6 +60,25 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.0.0/deployment-1.0.0.tgz
     version: 1.0.0
+  jobs:
+  - apiVersion: v2
+    created: "2023-08-22T17:51:40.474855825Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: 1.0.0
+    description: Kubernetes Jobs
+    digest: c38df2ae510b7c84a421ac2359f2c03423e754ee420efc8e000039fc1f51c6a0
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: jobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/jobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/jobs-1.0.0/jobs-1.0.0.tgz
+    version: 1.0.0
   k8s-common:
   - annotations:
       category: Infrastructure
@@ -124,4 +143,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2023-08-10T13:24:45.993205689Z"
+generated: "2023-08-22T17:51:40.765558538Z"
