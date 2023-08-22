@@ -1,0 +1,60 @@
+{{- $allJob := default (dict) .Values.jobs -}}
+{{- $namePrefix := (include "k8s-common.names.fullname" .) }}
+{{- range $key, $value := $allJob }}
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ printf "%s-%s" $namePrefix $key | trunc 52 | trimSuffix "-"}}
+  namespace: {{ $.Release.Namespace }}
+  labels: {{ include "k8s-common.labels.standard" $ | nindent 4 }}
+  annotations: {{ toYaml $value.annotations | nindent 4 }}
+spec:
+  {{- if $.Values.global.production }}
+  backoffLimit: {{ $value.backoffLimit | default 6  }}
+  {{- else }}
+  backoffLimit: 0
+  {{- end }}
+  template:
+    spec:
+      {{- if $.Values.securityContext }}
+      securityContext: {{ toYaml $.Values.securityContext | nindent 6 }}
+      {{- end }}
+      {{- if $.Values.affinity }}
+      affinity: {{- include "k8s-common.tplvalues.render" (dict "value" $.Values.affinity "context" $) | nindent 6 }}
+      {{- else }}
+      affinity:
+        {{- if $.Values.podAffinityPreset }}
+        podAffinity: {{- include "k8s-common.affinities.pods" (dict "type" $.Values.podAffinityPreset "context" $) | nindent 8 }}
+        {{- end }}
+        {{- if $.Values.podAntiAffinityPreset }}
+        podAntiAffinity: {{- include "k8s-common.affinities.pods" (dict "type" $.Values.podAntiAffinityPreset "context" $) | nindent 8 }}
+        {{- end }}
+        {{- if $.Values.nodeAffinityPreset }}
+        nodeAffinity: {{- include "k8s-common.affinities.nodes" (dict "type" $.Values.nodeAffinityPreset.type "key" $.Values.nodeAffinityPreset.key "values" $.Values.nodeAffinityPreset.values) | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      {{- if $.Values.nodeSelector }}
+      nodeSelector: {{ toYaml $value.nodeSelector | nindent 6 }}
+      {{- end }}
+      {{- if $.Values.tolerations }}
+      tolerations: {{ toYaml $value.tolerations | nindent 6 }}
+      {{- end }}
+      restartPolicy: "Never"
+      containers:
+        - name: {{ $key }}
+          image: "{{ include "k8s-common.images.image"  $ }}"
+          imagePullPolicy: {{ $.Values.global.image.pullPolicy }}
+          env:
+            {{- include "jobs.job.vaultSecret" (dict "jobName" $key "job" $value "global" $) | indent 12 }}
+          {{- if $value.command }}
+          command: {{- toYaml $value.command | nindent 10 }}
+          {{- end }}
+          {{- if $value.args }}
+          args: {{ toYaml $value.args | nindent 10 }}
+          {{- end }}
+          {{- with merge (default dict $value.resources) (default dict $.Values.resources) }}
+          resources: {{ toYaml . | nindent 16 }}
+          {{- end }}
+{{- end }}
