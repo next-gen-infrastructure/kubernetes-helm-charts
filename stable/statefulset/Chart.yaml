@@ -8,7 +8,7 @@ dependencies:
     version: 1.0.0
     repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
-sources:
+sources: 
   - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/statefulset
 maintainers:
   - name: Alexander Dobrodey
