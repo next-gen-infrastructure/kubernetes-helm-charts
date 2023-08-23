@@ -9,7 +9,7 @@ Return generated volume mounts.
 {{- if $value.mountPath }}
 - name: {{ $key }}
   mountPath: {{ $value.mountPath }}
-  {{ if $value.subpath -}}
+  {{ if $value.subPath -}}
   subPath: {{ $value.subPath }}
   {{- end -}}
   {{ if or $value.secretName $value.vaultPath -}}
