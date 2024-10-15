@@ -4,7 +4,7 @@ Return generated container configuration.
 {{- include "k8s-common.containers.container" . }}
 */}}
 {{- define "k8s-common.containers.container" -}}
-- name: "{{ include "k8s-common.names.name" . }}"
+- name: "{{ include "k8s-common.names.fullname" . }}"
   image: "{{ include "k8s-common.images.image" . }}"
   imagePullPolicy: {{ (.Values.image).pullPolicy | default .Values.global.image.pullPolicy | quote }}
   {{- if .Values.command }}
@@ -18,7 +18,7 @@ Return generated container configuration.
   {{- if .Values.env.values -}}
   {{- include "k8s-common.envvar.value" . | trim | nindent 2 -}}
   {{- end -}}
-  {{- if .Values.env.refs -}}
+  {{- if or .Values.env.refs .Values.datadogIntegration -}}
   {{- include "k8s-common.envvar.ref" . | trim | nindent 2 -}}
   {{- end -}}
   {{- if .Values.env.configmap -}}
@@ -36,7 +36,7 @@ Return generated container configuration.
     {{- if .Values.livenessProbe.tcpSocket }}
     tcpSocket:
       port: {{ .Values.livenessProbe.tcpSocket }}
-    {{- else if .Values.service.ports.http }}
+    {{- else if (.Values.service).ports.http }}
     httpGet:
       path: {{ .Values.livenessProbe.healthCheckPath | default .Values.service.healthCheckPath }}
       port: http
@@ -52,7 +52,7 @@ Return generated container configuration.
     {{- if .Values.readinessProbe.tcpSocket }}
     tcpSocket:
       port: {{ .Values.readinessProbe.tcpSocket }}
-    {{- else if .Values.service.ports.http }}
+    {{- else if (.Values.service).ports.http }}
     httpGet:
       path: {{ .Values.readinessProbe.healthCheckPath | default .Values.service.healthCheckPath }}
       port: http
@@ -95,7 +95,8 @@ Return generated container configuration.
         command:
           - "/bin/sh"
           - "-c"
-          - "{{ .Values.lifecycle.postStartCommand }}"
+          - |
+            {{ .Values.lifecycle.postStartCommand | nindent 12 }}
   {{- end }}
   {{- if .Values.lifecycle.preStopCommand }}
     preStop:
@@ -103,17 +104,21 @@ Return generated container configuration.
         command:
           - "/bin/sh"
           - "-c"
-          - "{{ .Values.lifecycle.preStopCommand }}"
+          - |
+            {{ .Values.lifecycle.preStopCommand | nindent 12 }}
   {{- end }}
   {{- end }}
   {{- if .Values.resources }}
   resources: {{- toYaml .Values.resources | trim | nindent 4 }}
+  {{- else if .Values.resourcesPreset }}
+  resources: {{- include "k8s-common.resources.preset" (dict "type" .Values.resourcesPreset) | nindent 4 }}
   {{- end }}
   {{- if .Values.securityContext }}
   securityContext: {{- toYaml .Values.securityContext | trim | nindent 4 }}
   {{- end }}
+  volumeMounts:
   {{- if .Values.volumes }}
-  volumeMounts: {{- include "k8s-common.volume.mounts" . | trim | nindent 4 }}
+  {{- include "k8s-common.volume.mounts" . | trim | nindent 4 }}
   {{- end }}
   {{- if (.Values.persistence).enabled }}
     - name: data

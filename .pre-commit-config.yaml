@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -11,9 +11,11 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.17
+    rev: v0.1.23
     hooks:
       - id: helmlint
+        args:
+          - --args=--quiet
 
   - repo: local
     hooks:

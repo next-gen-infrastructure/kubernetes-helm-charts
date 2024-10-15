@@ -1,9 +1,14 @@
+{{/*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
 */}}
 {{- define "k8s-common.names.name" -}}
-{{- default .Release.Name .Values.nameOverride | replace .Release.Namespace "" | trunc 63 | trimAll "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
@@ -22,22 +27,41 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Release.Name .Values.global.serviceName -}}
+{{- $name := default .Chart.Name .Values.global.serviceName -}}
 {{- printf "%s-%s" $name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 
-{{/*{{- define "k8s-common.names.fullname" -}}*/}}
-{{/*{{- if .Values.fullnameOverride -}}*/}}
-{{/*{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" | quote -}}*/}}
-{{/*{{- else if .Values.global.serviceName -}}*/}}
-{{/*{{- .Values.global.serviceName | trunc 63 | trimSuffix "-" -}}*/}}
-{{/*{{- else -}}*/}}
-{{/*{{- $name := default .Chart.Name .Values.nameOverride -}}*/}}
-{{/*{{- if contains $name .Release.Name -}}*/}}
-{{/*{{- .Release.Name | trunc 63 | trimSuffix "-" | quote -}}*/}}
-{{/*{{- else -}}*/}}
-{{/*{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}*/}}
-{{/*{{- end -}}*/}}
-{{/*{{- end -}}*/}}
-{{/*{{- end -}}*/}}
+{{/*
+Create a default fully qualified dependency name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+Usage:
+{{ include "k8s-common.names.dependency.fullname" (dict "chartName" "dependency-chart-name" "chartValues" .Values.dependency-chart "context" $) }}
+*/}}
+{{- define "k8s-common.names.dependency.fullname" -}}
+{{- if .chartValues.fullnameOverride -}}
+{{- .chartValues.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .chartName .chartValues.nameOverride -}}
+{{- if contains $name .context.Release.Name -}}
+{{- .context.Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .context.Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Allow the release namespace to be overridden for multi-namespace deployments in combined charts.
+*/}}
+{{- define "k8s-common.names.namespace" -}}
+{{- default .Release.Namespace .Values.namespaceOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a fully qualified app name adding the installation's namespace.
+*/}}
+{{- define "k8s-common.names.fullname.namespace" -}}
+{{- printf "%s-%s" (include "k8s-common.names.fullname" .) (include "k8s-common.names.namespace" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
