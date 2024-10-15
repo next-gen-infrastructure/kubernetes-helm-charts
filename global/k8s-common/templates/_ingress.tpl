@@ -42,7 +42,7 @@ kubernetes.io/ingress.class: "alb"
 alb.ingress.kubernetes.io/actions.ssl-redirect: "{\"Type\":\"redirect\",\"RedirectConfig\":{\"Protocol\":\"HTTPS\",\"Port\":\"443\",\"StatusCode\":\"HTTP_301\"}}"
 alb.ingress.kubernetes.io/backend-protocol: "HTTP"
 # group name as cluster-name and optional '-public'
-alb.ingress.kubernetes.io/group.name: {{ .Values.global.product }}-{{ .Values.global.environment }}{{ if .Values.ingress.public -}}-public{{- end }}
+alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.environment }}{{ if .Values.ingress.public -}}-public{{- end }}
 alb.ingress.kubernetes.io/healthcheck-path: "{{ .Values.service.healthCheckPath | default "/" }}"
 alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\":80},{\"HTTPS\":443}]"
 alb.ingress.kubernetes.io/scheme: {{ if .Values.ingress.public -}}internet-facing{{- else -}}internal{{- end }}
@@ -84,11 +84,11 @@ Usage:
 {{- if eq .Values.global.environment "prod" -}}
 {{ .Values.global.domain }}
 {{- else if eq .Values.global.environment "stage" -}}
-{{ substr 0 4 .Values.global.product }}.stg.{{ .Values.global.domain }}
+{{ substr 0 4 .Values.global.project }}.stg.{{ .Values.global.domain }}
 {{- else if eq .Values.global.environment "perf" -}}
-{{ substr 0 4 .Values.global.product }}.prf.{{ .Values.global.domain }}
+{{ substr 0 4 .Values.global.project }}.prf.{{ .Values.global.domain }}
 {{- else -}}
-{{ substr 0 4 .Values.global.product }}.dev.{{ .Values.global.domain }}
+{{ substr 0 4 .Values.global.project }}.dev.{{ .Values.global.domain }}
 {{- end -}}
 {{- end -}}
 
