@@ -6,7 +6,7 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.product The product of the service
+  ## @param global.project The product of the service
   ##
   product: ""
   ## @param global.serviceName Name of the service. Affects public DNS.
@@ -17,7 +17,7 @@ global:
   ##
   environment: "dev"
   ## @param global.domain Company Root-level domain, expects
-  ## [<global.product>.<global.environment>].<global.domain> Route53 HZ.
+  ## [<global.project>.<global.environment>].<global.domain> Route53 HZ.
   ##
   domain: ""
 ## @section Common parameters

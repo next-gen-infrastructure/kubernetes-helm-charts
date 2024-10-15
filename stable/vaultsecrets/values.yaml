@@ -6,7 +6,7 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.product The product of the service
+  ## @param global.project The product of the service
   ##
   product: ""
   ## @param global.serviceName Name of the service. Affects public DNS.
@@ -17,7 +17,7 @@ global:
   ##
   environment: "dev"
   ## @param global.domain Company Root-level domain, expects
-  ## [<global.product>.<global.environment>].<global.domain> Route53 HZ.
+  ## [<global.project>.<global.environment>].<global.domain> Route53 HZ.
   ##
   domain: ""
   ## Configuration of the image for the deployment
@@ -44,7 +44,7 @@ global:
 ##      - name: foo
 ##        secret: password
 ##        path: mySecret
-## It will be find in /secret-<global.product>/<prod|dev>/k8s/
+## It will be find in /kv/<org>/<project>/<env>/
 ##
 ## @param kubeSecrets [object] Secrets that get added to the container from Hashicorp Vault
 ## Objects keys should be all lowercase or dashes/underscores

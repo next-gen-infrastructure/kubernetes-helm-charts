@@ -17,7 +17,7 @@ for testCase in */; do
       --generate-name \
       --namespace test \
       --dependency-update \
-      --set global.product=core \
+      --set global.project=core \
       --set global.serviceName=test \
       --values values.yaml > 1.yaml
     popd > /dev/null || exit

@@ -3,7 +3,7 @@ Compile all warnings into a single message, and call fail.
 */}}
 {{- define "deployment.validateValues" -}}
 {{- $messages := list -}}
-{{- $messages := append $messages (include "deployment.validateValues.product" .) -}}
+{{- $messages := append $messages (include "deployment.validateValues.project" .) -}}
 {{- $messages := without $messages "" -}}
 {{- $message := join "\n" $messages -}}
 
@@ -16,9 +16,9 @@ Compile all warnings into a single message, and call fail.
 Validate values of Deployment:
 - must set a org
 */}}
-{{- define "deployment.validateValues.product" -}}
-{{- if not .Values.global.product -}}
-deployment: global.product
-    You must set a global.product
+{{- define "deployment.validateValues.project" -}}
+{{- if not .Values.global.project -}}
+deployment: global.project
+    You must set a global.project
 {{- end -}}
 {{- end -}}

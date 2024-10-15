@@ -16,7 +16,7 @@ Kubernetes Cron Jobs
 
 | Name                 | Description                                             | Value     |
 | -------------------- | ------------------------------------------------------- | --------- |
-| `global.product`     | The product of the service                              | `""`      |
+| `global.project`     | The product of the service                              | `""`      |
 | `global.serviceName` | Name of the service. Affects public DNS.                | `example` |
 | `global.environment` | Type of the environment, one of "dev", "stage", "prod". | `dev`     |
 | `global.domain`      | Company Root-level domain, expects                      | `""`      |
