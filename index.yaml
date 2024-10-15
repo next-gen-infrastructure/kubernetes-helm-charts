@@ -2,6 +2,25 @@ apiVersion: v1
 entries:
   configmaps:
   - apiVersion: v2
+    created: "2024-10-15T23:06:36.710495099Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: The chart for creating configmaps.
+    digest: 85460a5ade982e7e37a9b8495be18a824dde1dcdf6081feef5fa659ab29fb41f
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: configmaps
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/configmaps
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/configmaps-1.1.2/configmaps-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
     created: "2024-10-15T16:17:46.402098298Z"
     dependencies:
     - name: k8s-common
@@ -60,6 +79,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2024-10-15T23:06:36.871022453Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Kubernetes Cron Jobs
+    digest: ac2f2d43bd4ffdcb0e70b8477a88933210a433d250247bba61734e024ca0389d
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-1.1.2/cronjobs-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
     created: "2024-10-15T16:17:46.609586632Z"
     dependencies:
     - name: k8s-common
@@ -115,6 +152,22 @@ entries:
     version: 1.0.0
   daemonset:
   - apiVersion: v2
+    created: "2024-10-15T23:06:37.038969492Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Typical Daemon Set application
+    digest: 1a35bc948d364583a23d226c3c777e8e62b1b013302fc964e14cb871370685db
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.2/daemonset-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
     created: "2024-10-15T16:17:46.875935212Z"
     dependencies:
     - name: k8s-common
@@ -147,6 +200,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2024-10-15T23:06:37.224918888Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: c3b6720708c92e3078c10f74975c7e44951a08ef5548e783a8a279abe2f10c89
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.1.2/deployment-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     created: "2024-10-15T16:17:47.072194585Z"
     dependencies:
@@ -298,6 +371,24 @@ entries:
     version: 1.0.0
   sso-roles:
   - apiVersion: v2
+    created: "2024-10-15T23:06:37.365790451Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Kubernetes SSO Roles
+    digest: 2f16fbfa96417524d96e081e12137785eef2abd1245fd1dd6bd1d5eb0df4d583
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: sso-roles
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/sso-roles
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/sso-roles-1.1.2/sso-roles-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
     created: "2024-10-15T16:17:47.243985837Z"
     dependencies:
     - name: k8s-common
@@ -334,6 +425,25 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/sso-roles-1.1.0/sso-roles-1.1.0.tgz
     version: 1.1.0
   statefulset:
+  - apiVersion: v2
+    created: "2024-10-15T23:06:37.516564109Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Typical StateFul Set application
+    digest: 44e33a7c148b4fb94e3af430e344446a5f4f1ee8a6e7be0ef9c03222ac91c8ac
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-1.1.2/statefulset-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     created: "2024-10-15T16:17:47.422531786Z"
     dependencies:
@@ -393,6 +503,25 @@ entries:
     version: 1.0.0
   vaultsecrets:
   - apiVersion: v2
+    created: "2024-10-15T23:06:37.670282749Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Generator of the secrets from remote Vault server
+    digest: 7bbcb721eb23f2be3de82f27258856e8bffe89ba34605b84d7456a0edf61cd01
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: vaultsecrets
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/vaultsecrets
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.1.2/vaultsecrets-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
     created: "2024-10-15T16:17:47.627200988Z"
     dependencies:
     - name: k8s-common
@@ -449,4 +578,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-15T16:17:47.627265289Z"
+generated: "2024-10-15T23:06:37.67036373Z"
