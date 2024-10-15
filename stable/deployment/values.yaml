@@ -6,30 +6,20 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
+  ## @param global.product The product of the service
+  ##
+  product: ""
   ## @param global.serviceName Name of the service. Affects public DNS.
   ## E.g. cherry-admin, tpt-service-api
   ##
   serviceName: "example"
-  ## @param global.org Company Organization Unit(product group).
+  ## @param global.environment Name of the environment, one of "dev", "stage", "prod".
   ##
-  org: ""
-  ## @param global.product The product of the service
-  ##
-  product: ""
-  ## @param global.environmentType Type of the environment, one of "dev", "stage", "prod".
-  ##
-  environmentType: "dev"
+  environment: "dev"
   ## @param global.domain Company Root-level domain, expects
-  ## <global.org>[|-<global.environmentType>].aws.<global.domain> Route53 HZ.
+  ## [<global.product>.<global.environment>].<global.domain> Route53 HZ.
   ##
   domain: ""
-  ## @param global.production Will the service run in production environment
-  ##
-  production: false
-  ## @param global.environmentName Name of the environment, user-specified.
-  ## E.g. feature, stage, dev-2.
-  ##
-  environmentName: "dev"
   ## Configuration of the image for the deployment
   ##
   image:
@@ -59,32 +49,60 @@ fullnameOverride: ""
 ## running service equal to the expected size.
 ##
 replicaCount: 1
-## @param podAnnotations Additional annotations to apply to the pod.
+## @param commonLabels Labels to add to all deployed objects
+##
+commonLabels: {}
+## @param commonAnnotations Annotations to add to all deployed objects
+##
+commonAnnotations: {}
+## @param podLabels Additional labels for the pod
+##
+podLabels: {}
+## @param podAnnotations Additional annotations for the pod.
 ##
 podAnnotations: { }
 ## @param priorityClassName priorityClassName
 ##
 priorityClassName: ""
-## @param podSecurityContext Pod security context
+## @extra podSecurityContext Pod security context
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
-## E.g.
-## podSecurityContext:
-##   runAsUser: 1000
-##   runAsGroup: 65534
-##   runAsNonRoot: true
-##   fsGroup: 1000
 ##
-podSecurityContext: { }
-## @param securityContext Security context for the container
-## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-## E.g.
-## securityContext:
-##   allowPrivilegeEscalation: false
-##   readOnlyRootFilesystem: true
-##   capabilities:
-##     drop: ["ALL"]
+podSecurityContext:
+  ## @param podSecurityContext.runAsUser The UID to run the entrypoint of the container process
+  ##
+  runAsUser: 1000
+  ## @param podSecurityContext.runAsNonRoot Indicates that the container must run as a non-root user
+  ##
+  runAsNonRoot: true
+  ## @param podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
+  ##
+  runAsGroup: 65534
+  ## @param podSecurityContext.fsGroup A special supplemental group that applies to all containers in a pod
+  ##
+  fsGroup: 65534
+## @extra securityContext Container security context
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
 ##
-securityContext: { }
+securityContext:
+  ## @param securityContext.allowPrivilegeEscalation Controls whether a process can gain more privileges than its parent process
+  ##
+  allowPrivilegeEscalation: false
+  ## @param securityContext.readOnlyRootFilesystem  Mounts the container's root filesystem as read-only
+  ##
+  readOnlyRootFilesystem: true
+  ## @param securityContext.runAsUser The UID to run the entrypoint of the container process
+  ##
+  runAsUser: 1000
+  ## @param securityContext.runAsNonRoot Indicates that the container must run as a non-root user
+  ##
+  runAsNonRoot: true
+  ## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
+  ##
+  runAsGroup: 65534
+  ## @section securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  capabilities:
+    ## @param securityContext.capabilities.drop Drop all capabilities by default
+    drop: [ "ALL" ]
 ## @param vaultVolumesSupport support for vault secrets as files. Defaults false.
 ##
 vaultVolumesSupport: false
@@ -162,16 +180,30 @@ nodeAffinityPreset:
 ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
 ##
 affinity: { }
-## @extra podDisruptionBudget Pod disruption budget configuration
+## @param topologySpreadConstraintPreset Control spread of containers across availability zones.
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
+## Allowed values: soft, hard
+topologySpreadConstraintPreset: soft
+## @param topologySpreadConstraints Control spread of containers across nodes, zones, etc.
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
+## Note: topologySpreadConstraintPreset will be ignored when it's set
+##
+topologySpreadConstraints: {}
+## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
+## This is ignored if resources is set (resources is recommended for production).
+## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/k8s-common/templates/_resources.tpl#L9
+##
+resourcesPreset: "nano"
+## @extra pdb Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ##
-podDisruptionBudget:
-  ## @param podDisruptionBudget.create Specifies whether a Pod disruption budget should be created
+pdb:
+  ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @param podDisruptionBudget.minAvailable Min available pods or percent of pods
+  ## @param pdb.minAvailable Min available pods or percent of pods
   minAvailable: 1
-  ## @param podDisruptionBudget.maxUnavailable Max non-available pods or percent of pods
+  ## @param pdb.maxUnavailable Max non-available pods or percent of pods
   ##
   maxUnavailable: 1
 ## @section Extra Containers
@@ -203,6 +235,26 @@ initContainers: [ ]
 ##     resources: {}
 ##
 sidecarContainers: [ ]
+## @param datadogIntegration Enable datadog related integration for tracing
+## E.g.
+## datadogIntegration: true
+datadogIntegration: false
+## @param githubActionsIntegration Allow github runners to create resources in namespace
+## E.g.
+## githubActionsIntegration: true
+githubActionsIntegration: false
+## @param resources Container resource requests and limits
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+##
+## E.g.
+## resources:
+##   requests:
+##     cpu: 10m
+##     memory: 50Mi
+##   limits:
+##     cpu: 50m
+##     memory: 50Mi
+resources: {}
 ## @section Image for the deployment
 ##
 image:
@@ -238,7 +290,7 @@ env:
   ## Supporting helm templates
   ## E.g.
   ## values:
-  ##   FOO: "bar-{{ .Values.global.environmentName }}"
+  ##   FOO: "bar-{{ .Values.global.environment }}"
   ##
   values: { }
   ## @param env.refs Environment variables as references to the pod
@@ -264,7 +316,7 @@ env:
   ##
   secret: { }
   ## @param env.vaultSecret Kubernetes secrets that get added to the container from Hashicorp Vault
-  ## path - Path within vault to the secret containing environment variable. It will be found in /secret-<global.org>/<prod|dev>/k8s/<release.namespace>/
+  ## path - Path within vault to the secret containing environment variable. It will be found in /secret-<global.product>/<prod|dev>/k8s/<release.namespace>/
   ## secret - Optional name of the variable inside secret. Defaults to the secret key
   ## E.g.
   ## vaultSecret:
@@ -408,9 +460,12 @@ ingress:
   ## Not recommended to for non-production environments.
   ##
   public: false
+  ## @param ingress.stickiness enable sticky sessions for provided number of seconds
+  ##
+  stickiness: 0
   ## @param ingress.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.environmentName>[.|-]<global.serviceName>.<global.org>[|-dev|-stage].aws.[organization.domain]
+  ## <global.serviceName>.[<global.product>.<global.environment>].<global.domain>
   ##
   subDomain: false
   ## @param ingress.path Prefix for the path routing
@@ -442,7 +497,7 @@ ingressExtra:
   public: false
   ## @param ingressExtra.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.environmentName>[.|-]<global.serviceName>.<global.org>[|-dev|-stage].aws.[organization.domain]
+  ## <global.serviceName>.[<global.product>.<global.environment>].<global.domain>
   ##
   subDomain: false
   ## @param ingressExtra.host DNS for the application external access
@@ -462,6 +517,23 @@ ingressExtra:
   ##   paths: []
   ##
   extraHosts: [ ]
+## @section RBAC management
+rbac:
+  ## @param rbac.create Specifies whether RBAC resources should be created
+  ##
+  create: true
+  ## @param rbac.rules Custom RBAC rules to set
+  ## e.g:
+  ## rules:
+  ##   - apiGroups:
+  ##       - ""
+  ##     resources:
+  ##       - pods
+  ##     verbs:
+  ##       - get
+  ##       - list
+  ##
+  rules: [ ]
 ## @section Prometheus Exporter / Metrics
 ##
 metrics:
@@ -471,6 +543,9 @@ metrics:
   ## @param metrics.path Path to the prometheus metrics endpoint
   ##
   path: /metrics
+  ## @param metrics.port Name of the service port for metrics
+  ##
+  port: http
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:
@@ -516,23 +591,6 @@ metrics:
     ##       resolved for this cloud to continue to maintain state.
     ##
     spec: [ ]
-## @section Container resource requests and limits
-## ref: https://kubernetes.io/docs/user-guide/compute-resources/
-resources:
-  ## @param resources.limits The resources limits for the container
-  ## E.g.
-  ## limits:
-  ##   cpu: 50m
-  ##   memory: 50Mi
-  ##
-  limits: { }
-  ## @param resources.requests The requests resources for the container
-  ## E.g.
-  ## requests:
-  ##   cpu: 10m
-  ##   memory: 50Mi
-  ##
-  requests: { }
 ## @section Lifecycle configuration
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
 lifecycle:
@@ -568,13 +626,37 @@ autoscaling:
   ## - type: Resource
   ##   resource:
   ##     name: cpu
-  ##     targetAverageUtilization: 60
+  ##     target:
+  ##       type: Utilization
+  ##       averageUtilization: 60
   ## - type: Resource
   ##   resource:
   ##     name: memory
-  ##     targetAverageUtilization: 60
+  ##       type: Utilization
+  ##       averageUtilization: 60
   ##
   metrics: [ ]
+  ## @param autoscaling.behavior HPA Behavior
+  ##
+  ## E.g.
+  ## behavior:
+  ##   scaleDown:
+  ##     stabilizationWindowSeconds: 300
+  ##     policies:
+  ##       - type: Percent
+  ##         value: 100
+  ##         periodSeconds: 15
+  ##   scaleUp:
+  ##     stabilizationWindowSeconds: 10
+  ##     policies:
+  ##       - type: Percent
+  ##         value: 100
+  ##         periodSeconds: 15
+  ##       - type: Pods
+  ##         value: 4
+  ##         periodSeconds: 15
+  ##     selectPolicy: Max
+  behavior: { }
 ## @section Persistence Parameters
 ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
 ##

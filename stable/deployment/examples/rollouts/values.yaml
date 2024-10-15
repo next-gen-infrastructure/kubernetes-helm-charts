@@ -1,6 +1,7 @@
 global:
   org: "core"
   serviceName: "test"
+  product: "test"
   production: true
   environmentName: "stage"
   image:
@@ -57,7 +58,7 @@ deployment:
       - eu-central-1b
       - eu-central-1c
   affinity: {}
-  podDisruptionBudget:
+  pdb:
     create: true
     minAvailable: 1
     maxUnavailable: 1
@@ -68,7 +69,7 @@ deployment:
     name: example
   env:
     values:
-      FOO1: "bar-{{ .Values.global.environmentName }}"
+      FOO1: "bar-{{ .Values.global.environment }}"
     refs:
       FOO2: metadata.name
     configmap:
@@ -99,7 +100,8 @@ deployment:
     enabled: true
     name: "z"
     type: "ClusterIP"
-    port: 80
+    ports:
+      http: 80
     healthCheckPath: "/"
   livenessProbe:
     enabled: true
@@ -175,11 +177,15 @@ deployment:
       - type: Resource
         resource:
           name: cpu
-          targetAverageUtilization: 60
+          target:
+            type: Utilization
+            averageUtilization: 60
       - type: Resource
         resource:
           name: memory
-          targetAverageUtilization: 60
+          target:
+            type: Utilization
+            averageUtilization: 60
   rollouts:
     enabled: true
     strategy: canary

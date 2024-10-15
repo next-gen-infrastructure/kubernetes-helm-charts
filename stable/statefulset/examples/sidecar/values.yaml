@@ -1,6 +1,7 @@
 global:
   org: "network"
   serviceName: "dac-redis"
+  product: "test"
   image:
     name: "redis/redis-stack-server"
     tag: "7.0.6-RC8"

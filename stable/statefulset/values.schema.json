@@ -5,17 +5,17 @@
         "global": {
             "type": "object",
             "properties": {
+                "product": {
+                    "type": "string",
+                    "description": "The product of the service",
+                    "default": ""
+                },
                 "serviceName": {
                     "type": "string",
                     "description": "Name of the service. Affects public DNS.",
                     "default": "example"
                 },
-                "org": {
-                    "type": "string",
-                    "description": "Company Organization Unit(product group).",
-                    "default": "example"
-                },
-                "environmentType": {
+                "environment": {
                     "type": "string",
                     "description": "Type of the environment, one of \"dev\", \"stage\", \"prod\".",
                     "default": "dev"
@@ -23,16 +23,6 @@
                 "domain": {
                     "type": "string",
                     "description": "Company Root-level domain, expects",
-                    "default": ""
-                },
-                "production": {
-                    "type": "boolean",
-                    "description": "Will the service run in production environment",
-                    "default": false
-                },
-                "environmentName": {
-                    "type": "string",
-                    "description": "Name of the environment, user-specified.",
                     "default": ""
                 },
                 "image": {
@@ -72,9 +62,24 @@
             "description": "Number of the parallel-running containers. The controller will eventually make the size of the",
             "default": 1
         },
+        "commonLabels": {
+            "type": "object",
+            "description": "Labels to add to all deployed objects",
+            "default": {}
+        },
+        "commonAnnotations": {
+            "type": "object",
+            "description": "Annotations to add to all deployed objects",
+            "default": {}
+        },
+        "podLabels": {
+            "type": "object",
+            "description": "Additional labels for the pod",
+            "default": {}
+        },
         "podAnnotations": {
             "type": "object",
-            "description": "Additional annotations to apply to the pod.",
+            "description": "Additional annotations for the pod.",
             "default": {}
         },
         "priorityClassName": {
@@ -90,15 +95,15 @@
                     "description": "The UID to run the entrypoint of the container process",
                     "default": 1000
                 },
-                "runAsGroup": {
-                    "type": "number",
-                    "description": "The GID to run the entrypoint of the container process",
-                    "default": 65534
-                },
                 "runAsNonRoot": {
                     "type": "boolean",
                     "description": "Indicates that the container must run as a non-root user",
                     "default": true
+                },
+                "runAsGroup": {
+                    "type": "number",
+                    "description": "The GID to run the entrypoint of the container process",
+                    "default": 65534
                 },
                 "fsGroup": {
                     "type": "number",
@@ -109,8 +114,48 @@
         },
         "securityContext": {
             "type": "object",
-            "description": "Security context for the container",
-            "default": {}
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean",
+                    "description": "Controls whether a process can gain more privileges than its parent process",
+                    "default": false
+                },
+                "readOnlyRootFilesystem": {
+                    "type": "boolean",
+                    "description": "Mounts the container's root filesystem as read-only",
+                    "default": true
+                },
+                "runAsUser": {
+                    "type": "number",
+                    "description": "The UID to run the entrypoint of the container process",
+                    "default": 1000
+                },
+                "runAsNonRoot": {
+                    "type": "boolean",
+                    "description": "Indicates that the container must run as a non-root user",
+                    "default": true
+                },
+                "runAsGroup": {
+                    "type": "number",
+                    "description": "The GID to run the entrypoint of the container process",
+                    "default": 65534
+                },
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "description": "Drop all capabilities by default",
+                            "default": [
+                                "ALL"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
         },
         "vaultVolumesSupport": {
             "type": "boolean",
@@ -155,6 +200,16 @@
             "description": "Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
             "default": "soft"
         },
+        "resourcesPreset": {
+            "type": "string",
+            "description": "Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).",
+            "default": "nano"
+        },
+        "resources": {
+            "type": "object",
+            "description": "Container resource requests and limits",
+            "default": {}
+        },
         "nodeAffinityPreset": {
             "type": "object",
             "properties": {
@@ -181,7 +236,7 @@
             "description": "Affinity for pod assignment",
             "default": {}
         },
-        "podDisruptionBudget": {
+        "pdb": {
             "type": "object",
             "properties": {
                 "create": {
@@ -276,58 +331,27 @@
                 }
             }
         },
-        "initContainer": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "If init container should be used in deployment",
-                    "default": false
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "description": "Name of the image repository",
-                            "default": ""
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag of the image",
-                            "default": ""
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "description": "The default pull policy is IfNotPresent",
-                            "default": "IfNotPresent"
-                        }
-                    }
-                },
-                "command": {
-                    "type": "array",
-                    "description": "The command field corresponds to entrypoint in container runtime.",
-                    "default": [],
-                    "items": {}
-                },
-                "args": {
-                    "type": "array",
-                    "description": "The arguments passed to the command.",
-                    "default": [],
-                    "items": {}
-                },
-                "resources": {
-                    "type": "object",
-                    "description": "Optionally specify how much of each resource a Container needs.",
-                    "default": {}
-                }
-            }
+        "initContainers": {
+            "type": "array",
+            "description": "Configuration for the init container",
+            "default": [],
+            "items": {}
         },
         "sidecarContainers": {
             "type": "array",
             "description": "Configuration for the init container",
             "default": [],
             "items": {}
+        },
+        "datadogIntegration": {
+            "type": "boolean",
+            "description": "Enable datadog related integration for tracing",
+            "default": false
+        },
+        "githubActionsIntegration": {
+            "type": "boolean",
+            "description": "Allow github runners to create resources in namespace",
+            "default": false
         },
         "service": {
             "type": "object",
@@ -547,6 +571,22 @@
                 }
             }
         },
+        "rbac": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "description": "Specifies whether RBAC resources should be created",
+                    "default": true
+                },
+                "rules": {
+                    "type": "array",
+                    "description": "Custom RBAC rules to set",
+                    "default": [],
+                    "items": {}
+                }
+            }
+        },
         "metrics": {
             "type": "object",
             "properties": {
@@ -559,6 +599,11 @@
                     "type": "string",
                     "description": "Path to the prometheus metrics endpoint",
                     "default": "/metrics"
+                },
+                "port": {
+                    "type": "string",
+                    "description": "Name of the service port for metrics",
+                    "default": "http"
                 },
                 "serviceMonitor": {
                     "type": "object",
@@ -600,21 +645,6 @@
                             "items": {}
                         }
                     }
-                }
-            }
-        },
-        "resources": {
-            "type": "object",
-            "properties": {
-                "limits": {
-                    "type": "object",
-                    "description": "The resources limits for the container",
-                    "default": {}
-                },
-                "requests": {
-                    "type": "object",
-                    "description": "The requests resources for the container",
-                    "default": {}
                 }
             }
         },
@@ -664,9 +694,7 @@
                 "accessModes": {
                     "type": "array",
                     "description": "Persistent Volume access modes",
-                    "default": [
-                        "ReadWriteOnce"
-                    ],
+                    "default": "[]",
                     "items": {
                         "type": "string"
                     }

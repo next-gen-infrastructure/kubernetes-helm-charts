@@ -1,6 +1,7 @@
 global:
   org: "core"
   serviceName: "test"
+  product: "test"
   production: true
   environmentName: "stage"
   image:

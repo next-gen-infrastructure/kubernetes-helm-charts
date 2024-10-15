@@ -3,7 +3,7 @@
 {{- range $key, $value := $allCronJobs }}
 
 ---
-apiVersion: batch/v1beta1
+apiVersion: {{ include "k8s-common.capabilities.cronjob.apiVersion" $ }}
 kind: CronJob
 metadata:
   name: {{ printf "%s-%s" $namePrefix $key | trunc 52 | trimSuffix "-"}}
@@ -16,7 +16,7 @@ metadata:
 spec:
   schedule: {{ $value.schedule | quote }}
   suspend: {{ $value.suspend | default false }}
-  {{- if $.Values.global.production }}
+  {{- if eq $.Values.global.environment "prod" }}
   concurrencyPolicy: {{ $value.concurrencyPolicy | default "Forbid" }}
   {{- else }}
   concurrencyPolicy: Forbid
@@ -31,7 +31,7 @@ spec:
 
   jobTemplate:
     spec:
-      {{- if $.Values.global.production }}
+      {{- if eq $.Values.global.environment "prod" }}
       backoffLimit: {{ $value.backoffLimit | default 6  }}
       {{- else }}
       backoffLimit: 0
@@ -41,6 +41,7 @@ spec:
           {{- if $.Values.podSecurityContext }}
           securityContext: {{ toYaml $.Values.podSecurityContext | nindent 12 }}
           {{- end }}
+          hostPid: $.Values.hostPid
           {{- if $.Values.affinity }}
           affinity: {{- include "k8s-common.tplvalues.render" (dict "value" $.Values.affinity "context" $) | nindent 12 }}
           {{- else }}
@@ -80,4 +81,10 @@ spec:
               {{- with merge (default dict $value.resources) (default dict $.Values.resources) }}
               resources: {{ toYaml . | nindent 16 }}
               {{- end }}
+              {{- if $.Values.volumes }}
+              volumeMounts: {{- include "k8s-common.volume.mounts" $ | trim | nindent 16 }}
+              {{- end }}
+          {{- if $.Values.volumes }}
+          volumes: {{- include "k8s-common.volume.definitions" $ | nindent 12 }}
+          {{- end }}
 {{- end }}

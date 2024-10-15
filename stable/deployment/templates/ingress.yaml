@@ -1,4 +1,5 @@
 {{- if and .Values.ingress.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
+{{- $serviceName := ternary "weighted-routing" (include "k8s-common.ingress.serviceName" .) (gt (int .Values.ingress.stickiness) 0) }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,10 +7,36 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels: {{ include "k8s-common.labels.standard" . | nindent 4 }}
   annotations:
-  {{- if .Values.ingress.annotations }}
-    {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.ingress.annotations "context" $ ) | nindent 4 }}
-  {{- end }}
   {{- include "k8s-common.ingress.annotations" . | nindent 4 }}
+  {{- if .Values.ingress.annotations }}
+      {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.ingress.annotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  {{- if gt (int .Values.ingress.stickiness) 0 }}
+    alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds={{ .Values.ingress.stickiness }}
+    alb.ingress.kubernetes.io/actions.weighted-routing: |
+      {
+        "type":"forward",
+        "forwardConfig": {
+          "targetGroups": [
+            {
+              "serviceName": "{{ include "k8s-common.ingress.serviceName" . }}",
+              "servicePort": "{{ .Values.service.ports.http }}",
+            }
+            {{- if .Values.rollouts.enabled }}
+            ,{
+              "serviceName": "preview-{{ include "k8s-common.ingress.serviceName" . }}",
+              "servicePort": "{{ .Values.service.ports.http }}",
+            }
+            {{- end }}
+          ],
+          "TargetGroupStickinessConfig": {
+            "Enabled": true,
+            "DurationSeconds": {{ .Values.ingress.stickiness }}
+          }
+        }
+      }
+  {{- end }}
+
 spec:
   rules:
     - host: {{ include "k8s-common.ingress.host" . }}
@@ -20,10 +47,14 @@ spec:
             backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
           - path: {{ .Values.ingress.path }}
             pathType: {{ .Values.ingress.pathType }}
+            {{- if gt (int .Values.ingress.stickiness) 0 }}
+            backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" "weighted-routing" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
+            {{- else }}
             {{- if and (eq .Values.rollouts.strategy "canary") .Values.rollouts.enabled }}
             backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" (include "k8s-common.ingress.serviceName" .) "servicePort" "use-annotation" "context" $)  | nindent 14 }}
             {{- else }}
             backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" (include "k8s-common.ingress.serviceName" .) "servicePort" "http" "context" $)  | nindent 14 }}
+            {{- end }}
             {{- end }}
 
     {{- if and (eq .Values.rollouts.strategy "blueGreen") .Values.rollouts.enabled }}
@@ -39,13 +70,16 @@ spec:
     - host: {{ required "A valid ingress.extraHosts.host entry required!" .host | quote }}
       http:
         paths:
-          - path: "/"
-            pathType: Prefix
-            backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
+          {{ if .paths -}}
           {{ range .paths -}}
           - path: {{ . }}
             pathType: {{ $.Values.ingress.pathType }}
             backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" (include "k8s-common.ingress.serviceName" $) "servicePort" $portName "context" $)  | nindent 14 }}
+          {{ end -}}
+          {{ else -}}
+          - path: "/"
+            pathType: Prefix
+            backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
           {{ end -}}
     {{ end -}}
 {{- end }}

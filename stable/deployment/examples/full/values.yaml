@@ -1,6 +1,7 @@
 global:
   org: "core"
   serviceName: "test"
+  product: "test"
   production: true
   environmentName: "stage"
   image:
@@ -12,6 +13,8 @@ deployment:
   replicaCount: 3
   nameOverride: ""
   fullnameOverride: ""
+  podLabels:
+    example: test
   podAnnotations:
     foo.example: bar
   priorityClassName: "critical"
@@ -66,7 +69,7 @@ deployment:
       - eu-central-1b
       - eu-central-1c
   affinity: {}
-  podDisruptionBudget:
+  pdb:
     create: true
     minAvailable: 1
     maxUnavailable: 1
@@ -77,8 +80,8 @@ deployment:
     name: example
   env:
     values:
-      FOO1: "foo-{{ .Values.global.environmentName }}"
-      BAR1: "bar-{{ .Values.global.environmentName }}"
+      FOO1: "foo-{{ .Values.global.environment }}"
+      BAR1: "bar-{{ .Values.global.environment }}"
     refs:
       FOO2: metadata.name
     configmap:
@@ -93,6 +96,7 @@ deployment:
       API_KEY:
         path: mySecret
         secret: password
+  datadogIntegration: true
   initContainers:
     - nameOverride: init
       image:
@@ -102,6 +106,16 @@ deployment:
         pullPolicy: "IfNotPresent"
       command: ["sh", "-c"]
       args: ["sleep 1"]
+      env:
+        values:
+          FOO: "foo"
+          BAR: "bar"
+        refs:
+          FOO2: metadata.name
+        vaultSecrets:
+          API_KEY:
+              path: mySecret
+              secret: password
       resources:
         limits:
           cpu: 50m
@@ -204,11 +218,15 @@ deployment:
       - type: Resource
         resource:
           name: cpu
-          targetAverageUtilization: 60
+          target:
+            type: Utilization
+            averageUtilization: 60
       - type: Resource
         resource:
           name: memory
-          targetAverageUtilization: 60
+          target:
+            type: Utilization
+            averageUtilization: 60
   rollouts:
     enabled: false
     strategy: canary

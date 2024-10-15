@@ -3,15 +3,22 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: {{ include "k8s-common.names.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" . | nindent 4 }}
+  namespace: {{ include "k8s-common.names.namespace" . | quote }}
+  labels: {{ include "k8s-common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
+  annotations:
+  {{ if .Values.env.vaultSecret }}
+    reloader.stakater.com/auto: "true"
+  {{- end }}
+  {{- if .Values.commonAnnotations }}
+    {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
 spec:
   revisionHistoryLimit: 2
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
-    matchLabels: {{ include "k8s-common.labels.matchLabels" . | nindent 6 }}
+    matchLabels: {{ include "k8s-common.labels.matchLabels" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 6 }}
   strategy:
   {{- if eq .Values.rollouts.strategy "canary" }}
     canary:
@@ -38,13 +45,18 @@ spec:
 
   template:
     metadata:
-      labels: {{ include "k8s-common.labels.matchLabels" . | nindent 8 }}
+      labels: {{ include "k8s-common.labels.standard" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 8 }}
       {{- if or .Values.podAnnotations .Values.metrics.enabled }}
       {{- include "k8s-common.annotations.podAnnotations" . | trim | nindent 8 }}
       {{- end }}
     spec:
       {{- if .Values.podSecurityContext }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- end }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "k8s-common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" $) | nindent 8 }}
+      {{- else if .Values.topologySpreadConstraintPreset  }}
+      topologySpreadConstraints: {{- include "k8s-common.topologySpreadConstraintPreset"  (dict "type" .Values.topologySpreadConstraintPreset "context" $) | nindent 6}}
       {{- end }}
       {{- if .Values.affinity }}
       affinity: {{- include "k8s-common.tplvalues.render" (dict "value" .Values.affinity "context" $) | nindent 8 }}

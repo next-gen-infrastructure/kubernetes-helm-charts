@@ -2,6 +2,7 @@ global:
   org: "core"
   domain: "example.com"
   serviceName: "test"
+  product: "test"
   production: true
   environmentName: "stage"
   image:
@@ -61,7 +62,7 @@ statefulset:
     enabled: true
     postStartCommand: echo Hello
     preStopCommand: echo Bye
-  podDisruptionBudget:
+  pdb:
     create: true
     minAvailable: 1
     maxUnavailable: 1
@@ -72,7 +73,7 @@ statefulset:
     name: example
   env:
     values:
-      FOO1: "bar-{{ .Values.global.environmentName }}"
+      FOO1: "bar-{{ .Values.global.environment }}"
     refs:
       FOO2: metadata.name
     configmap:
@@ -87,18 +88,18 @@ statefulset:
       API_KEY:
         path: mySecret
         secret: password
-  initContainer:
-    enabled: true
-    image:
-      repository: "abc.def"
-      tag: "latest"
-      pullPolicy: "IfNotPresent"
-    command: ["sh", "-c"]
-    args: ["sleep 1"]
-    resources:
-      limits:
-        cpu: 50m
-        memory: 50Mi
+  initContainers:
+    - nameOverride: foo
+      image:
+        name: "abc.def"
+        tag: "latest"
+        pullPolicy: "IfNotPresent"
+      command: ["sh", "-c"]
+      args: ["sleep 1"]
+      resources:
+        limits:
+          cpu: 50m
+          memory: 50Mi
   service:
     enabled: true
     name: "z"

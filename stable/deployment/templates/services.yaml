@@ -6,8 +6,8 @@ metadata:
   name: {{ include "k8s-common.ingress.serviceName" . }}
   namespace: {{ .Release.Namespace }}
   labels: {{ include "k8s-common.labels.standard" . | nindent 4 }}
-  annotations:
   {{- if .Values.service.annotations }}
+  annotations:
   {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.service.annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
@@ -31,7 +31,9 @@ spec:
     {{- end }}
     {{- end }}
   selector: {{ include "k8s-common.labels.matchLabels" . | nindent 4 }}
+  {{- if ne .Values.service.type "LoadBalancer" }}
   sessionAffinity: ClientIP
+  {{- end }}
 
 {{- if .Values.rollouts.enabled }}
 ---
