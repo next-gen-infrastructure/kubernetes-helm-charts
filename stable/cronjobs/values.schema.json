@@ -5,9 +5,14 @@
         "global": {
             "type": "object",
             "properties": {
-                "product": {
+                "org": {
                     "type": "string",
-                    "description": "The product of the service",
+                    "description": "The organization of the service",
+                    "default": ""
+                },
+                "project": {
+                    "type": "string",
+                    "description": "The project of the service",
                     "default": ""
                 },
                 "serviceName": {

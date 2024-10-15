@@ -111,9 +111,12 @@ for file in "$@"; do
     else
       pushd $file_chart_path > /dev/null
       # Installation: https://github.com/karuppiah7890/helm-schema-gen#install
-#      helm schema-gen values.yaml > values.schema.json
+      helm schema-gen values.yaml > values.schema.json
       # Installation: https://github.com/bitnami-labs/readme-generator-for-helm#install
-      readme-generator --values values.yaml --readme README.md --schema values.schema.json
+      readme-generator \
+        --values values.yaml \
+        --readme README.md \
+        --schema values.schema.json
       popd > /dev/null
       seen_chart_paths+=( "$file_chart_path" )
     fi

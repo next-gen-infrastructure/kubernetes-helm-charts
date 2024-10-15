@@ -9,7 +9,6 @@ global:
   ## @param global.org The name of the organization
   ##
   org: ""
-
   ## @param global.project The project of the service
   ##
   project: ""

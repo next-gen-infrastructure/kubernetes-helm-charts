@@ -16,7 +16,8 @@ Kubernetes Cron Jobs
 
 | Name                      | Description                                             | Value          |
 | ------------------------- | ------------------------------------------------------- | -------------- |
-| `global.project`          | The product of the service                              | `""`           |
+| `global.org`              | The organization of the service                         | `""`           |
+| `global.project`          | The project of the service                              | `""`           |
 | `global.serviceName`      | Name of the service. Affects public DNS.                | `""`           |
 | `global.environment`      | Name of the environment, one of "dev", "stage", "prod". | `dev`          |
 | `global.image.name`       | Name of the image,                                      | `""`           |

@@ -2,7 +2,7 @@ global:
   org: "core"
   domain: "example.com"
   serviceName: "test"
-  product: "test"
+  project:  "test"
   production: true
   environmentName: "stage"
   image:

@@ -6,9 +6,12 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.project The product of the service
+  ## @param global.org The organization of the service
   ##
-  product: ""
+  org: ""
+  ## @param global.project The project of the service
+  ##
+  project:  ""
   ## @param global.serviceName Name of the service. Affects public DNS.
   ## E.g. cherry-admin, tpt-service-api
   ##

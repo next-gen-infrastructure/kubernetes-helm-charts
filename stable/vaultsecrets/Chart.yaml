@@ -1,6 +1,6 @@
 apiVersion: v2
 name: vaultsecrets
-version: 1.1.1
+version: 1.1.2
 description: Generator of the secrets from remote Vault server
 type: application
 dependencies:
