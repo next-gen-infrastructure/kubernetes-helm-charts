@@ -56,16 +56,17 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Global parameters
 
-| Name                      | Description                                             | Value          |
-| ------------------------- | ------------------------------------------------------- | -------------- |
-| `global.org`              | The name of the organization                            | `""`           |
-| `global.project`          | The project of the service                              | `""`           |
-| `global.serviceName`      | Name of the service. Affects public DNS.                | `example`      |
-| `global.environment`      | Name of the environment, one of "dev", "stage", "prod". | `dev`          |
-| `global.domain`           | Company Root-level domain, expects                      | `""`           |
-| `global.image.name`       | Name of the image,                                      | `""`           |
-| `global.image.tag`        | Tag of the image                                        | `latest`       |
-| `global.image.pullPolicy` | The default pull policy is IfNotPresent which causes    | `IfNotPresent` |
+| Name                       | Description                                             | Value          |
+| -------------------------- | ------------------------------------------------------- | -------------- |
+| `global.org`               | The name of the organization                            | `""`           |
+| `global.project`           | The project of the service                              | `""`           |
+| `global.serviceName`       | Name of the service. Affects public DNS.                | `example`      |
+| `global.environment`       | Name of the environment, one of "dev", "stage", "prod". | `dev`          |
+| `global.domain`            | Company Root-level domain, expects                      | `""`           |
+| `global.image.name`        | Name of the image,                                      | `""`           |
+| `global.image.tag`         | Tag of the image                                        | `latest`       |
+| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes    | `IfNotPresent` |
+| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.        | `[]`           |
 
 ### Common parameters
 
