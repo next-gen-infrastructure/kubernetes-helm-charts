@@ -274,6 +274,14 @@ image:
   ## Ref: https://kubernetes.io/docs/concepts/containers/images/#updating-images
   ##
   pullPolicy: ""
+  ## @param image.pullSecrets Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ##
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: [ ]
 ## @section Configure Service Accounts for Pod
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 serviceAccount:

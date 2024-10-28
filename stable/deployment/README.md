@@ -130,11 +130,12 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Image for the deployment
 
-| Name               | Description                                          | Value |
-| ------------------ | ---------------------------------------------------- | ----- |
-| `image.name`       | Name of the image,                                   | `""`  |
-| `image.tag`        | Tag of the image                                     | `""`  |
-| `image.pullPolicy` | The default pull policy is IfNotPresent which causes | `""`  |
+| Name                | Description                                          | Value |
+| ------------------- | ---------------------------------------------------- | ----- |
+| `image.name`        | Name of the image,                                   | `""`  |
+| `image.tag`         | Tag of the image                                     | `""`  |
+| `image.pullPolicy`  | The default pull policy is IfNotPresent which causes | `""`  |
+| `image.pullSecrets` | Optionally specify an array of imagePullSecrets.     | `[]`  |
 
 ### Configure Service Accounts for Pod
 
