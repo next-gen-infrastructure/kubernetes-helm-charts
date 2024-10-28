@@ -201,6 +201,26 @@ entries:
     version: 1.1.0
   deployment:
   - apiVersion: v2
+    created: "2024-10-28T20:10:43.95911699Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 22fbd439d5c1024627581a91f46c33e4ffbcd76e110ce910834d2f137d508bcc
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.1.6/deployment-1.1.6.tgz
+    version: 1.1.6
+  - apiVersion: v2
     created: "2024-10-28T18:12:44.33854961Z"
     dependencies:
     - name: k8s-common
@@ -509,6 +529,25 @@ entries:
     version: 1.1.0
   statefulset:
   - apiVersion: v2
+    created: "2024-10-28T20:10:44.052741353Z"
+    dependencies:
+    - name: k8s-common
+      repository: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+      version: ^1.1.1
+    description: Typical StateFul Set application
+    digest: 5944616823d1f7cb7066fe58e6f128e71d9fcfd91e4ea81ff882b8fd24084f8f
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-1.1.6/statefulset-1.1.6.tgz
+    version: 1.1.6
+  - apiVersion: v2
     created: "2024-10-28T18:12:44.534700767Z"
     dependencies:
     - name: k8s-common
@@ -718,4 +757,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-28T18:12:44.534800063Z"
+generated: "2024-10-28T20:10:44.052867659Z"
