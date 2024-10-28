@@ -26,7 +26,7 @@ Return the proper Docker Image Registry Secret Names evaluating values as templa
   {{- $context := .context }}
 
   {{- if $context.Values.global }}
-    {{- range $context.Values.global.imagePullSecrets -}}
+    {{- range $context.Values.global.image.pullSecrets -}}
       {{- if kindIs "map" . -}}
         {{- $pullSecrets = append $pullSecrets (include "k8s-common.tplvalues.render" (dict "value" .name "context" $context)) -}}
       {{- else -}}
