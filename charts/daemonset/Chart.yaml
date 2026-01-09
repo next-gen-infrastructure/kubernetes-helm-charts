@@ -9,4 +9,4 @@ dependencies:
     repository: "file://../k8s-common"
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 sources:
-  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/daemonset
+  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset

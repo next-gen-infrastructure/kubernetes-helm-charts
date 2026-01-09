@@ -8,7 +8,7 @@ dependencies:
     version: ^1.0.0
     repository: "file://../k8s-common"
 sources:
-  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/cronjobs
+  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
 maintainers:
   - name: Alexander Dobrodey
     url: https://github.com/ADobrodey

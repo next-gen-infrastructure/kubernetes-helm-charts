@@ -10,7 +10,7 @@ keywords:
   - function
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 sources:
-  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/k8s-common
+  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/k8s-common
 maintainers:
   - name: Alexander Dobrodey
     url: https://github.com/ADobrodey

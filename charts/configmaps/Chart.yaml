@@ -1,7 +1,7 @@
 apiVersion: v2
-name: vaultsecrets
+name: configmaps
 version: 1.1.2
-description: Generator of the secrets from remote Vault server
+description: The chart for creating configmaps.
 type: application
 dependencies:
   - name: k8s-common
@@ -9,7 +9,7 @@ dependencies:
     repository: "file://../k8s-common"
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 sources:
-  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/stable/vaultsecrets
+  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/configmaps
 maintainers:
   - name: Alexander Dobrodey
     url: https://github.com/ADobrodey

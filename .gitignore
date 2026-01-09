@@ -3,7 +3,7 @@
 .idea/
 *.iml
 
-charts/
+charts/**/charts/
 uploads/
 
 # OS generated files
