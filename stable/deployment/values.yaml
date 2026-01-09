@@ -166,6 +166,30 @@ podAntiAffinityPreset: soft
 ## Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
 ##
 preStopDelaySeconds: 0
+## @extra basicAuth Enable basic authentication
+## Usage:
+## env:
+##   secret:
+##     BASIC_AUTH_USERNAME:
+##       name: {{ basicAuth.secretName }}
+##       secret: username
+##     BASIC_AUTH_PASSWORD:
+##       name: {{ basicAuth.secretName }}
+##       secret: password
+##
+basicAuth:
+  ## @param basicAuth.enabled Enable basic authentication
+  ##
+  enabled: false
+  ## @param basicAuth.username Username for basic authentication
+  ##
+  username: admin
+  ## @param basicAuth.password Password for basic authentication
+  ##
+  password: ""
+  ## @param basicAuth.secretName Name of the existing secret containing the basic auth credentials
+  ##
+  secretName: basic-auth
 ## @extra nodeAffinityPreset Node affinity preset
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
 ##
