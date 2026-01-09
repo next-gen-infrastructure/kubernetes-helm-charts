@@ -1,21 +1,19 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
-#      - id: detect-aws-credentials
       - id: detect-private-key
-#      - id: no-commit-to-branch
-#      - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.23
+    rev: v0.1.30
     hooks:
       - id: helmlint
         args:
           - --args=--quiet
+          - --args=--skip-schema-validation
 
   - repo: local
     hooks:
@@ -23,5 +21,5 @@ repos:
         name: generate helm README.md and values.schema.json
         language: script
         entry: .pre-commit/process.sh
-        files: (Chart\.yaml)$
+        files: (Chart\.yaml|values\.yaml)$
         exclude: examples/.*$

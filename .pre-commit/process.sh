@@ -110,6 +110,7 @@ for file in "$@"; do
       debug "Already linted $file_chart_path"
     else
       pushd $file_chart_path > /dev/null
+      helm dep update
       # Installation: https://github.com/karuppiah7890/helm-schema-gen#install
       helm schema-gen values.yaml > values.schema.json
       # Installation: https://github.com/bitnami-labs/readme-generator-for-helm#install

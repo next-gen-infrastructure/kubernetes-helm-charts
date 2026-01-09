@@ -4,73 +4,115 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "charts/**"
+
+env:
+  APP_ID: 2625515 # nextgen-release-please
 
 jobs:
-#  test:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 0
-#      - name: Set up Helm
-#        uses: azure/setup-helm@v3
-#        with:
-#          version: v3.10.0
-#      - name: lint
-#        run: |
-#          for x in ./stable/*; do
-#            pushd $x
-#            helm dependency update .
-#            helm lint . \
-#              --set global.org=core \
-#              --set global.serviceName=test \
-#              --with-subcharts \
-#              --strict
-#            popd
-#          done
-#      - name: validate
-#        run: |
-#          for x in ./stable/*; do
-#            if [[ "$x" != "./stable/k8s-common" ]]; then
-#              pushd $x
-#              helm template . \
-#                --debug \
-#                --generate-name \
-#                --namespace test \
-#                --dependency-update \
-#                --set global.org=core \
-#                --set global.serviceName=test \
-#                --values values.yaml
-#            popd
-#            fi
-#          done
-  release:
+  prepare-release:
     permissions:
       contents: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
-#    needs: test
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # PR should not be triggered by repository's token to trigger GHA for auto approval
+      # so, use github apps token instead of repository token
+      # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+      - id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ env.APP_ID }}
+          private-key: ${{ secrets.RELEASE_PLEASE_PRIVATE_KEY }}
+      - id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+
+  get-bumped-charts:
+    runs-on: ubuntu-latest
+    needs: prepare-release
+    if: ${{ needs.prepare-release.outputs.releases_created == 'true' }}
+    name: 'Get modified charts'
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2 # to be able to get files changed in the latest commit
+      - id: get-bumped-charts
+        name: 'Get modified charts'
+        run: |
+
+          # get the changed files
+          files_changed="$(git diff --name-only HEAD^)"
+          echo "files_changed=$files_changed"
+
+          # get the directories that includes Chart.yaml file changes to get the charts that changed version
+          chart_file_changed="$(echo $files_changed | grep 'Chart.yaml' | xargs dirname | sort | uniq || true)"
+
+          # Initialize an empty array for version-changed charts
+          version_changed_charts=()
+
+          for chart in $chart_file_changed; do
+            if [[ "$chart" == "." ]]; then
+              continue
+            fi
+            # Check if there's a version change in the Chart.yaml file
+            if git diff HEAD^ "$chart" | grep -q "+version"; then
+              version_changed_charts+=("$chart")
+            fi
+          done
+
+          # make the outputs
+          if [ ${#version_changed_charts[@]} -gt 0 ]; then
+            echo "charts=${version_changed_charts[@]}" >>$GITHUB_OUTPUT
+            echo "result=ok" >>$GITHUB_OUTPUT
+          else
+            echo "error=No version changed charts found" >>$GITHUB_OUTPUT
+            echo "result=fail" >>$GITHUB_OUTPUT
+          fi
+
+          # print the outputs
+          cat $GITHUB_OUTPUT
+
+      - id: show-warning
+        name: 'Show Warning'
+        if: ${{ steps.get-bumped-charts.outputs.result == 'fail' }}
+        run: |
+          echo "${{ steps.get-bumped-charts.outputs.error }}"
+          echo "publish jobs/steps will be interrupted"
+
+    outputs:
+      charts: ${{ steps.get-bumped-charts.outputs.charts }}
+      result: ${{ steps.get-bumped-charts.outputs.result }}
+
+  publish-charts:
+    runs-on: ubuntu-latest
+    needs: get-bumped-charts
+    if: ${{ needs.get-bumped-charts.outputs.result == 'ok' }}
+    name: Publish Charts to registry
+    permissions:
+      contents: write
+    env:
+      PUBLISH_DIR: ".target"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
 
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-
-      - name: Run chart-releaser for commons
-        uses: helm/chart-releaser-action@v1.6.0
-        with:
-          charts_dir: global
-          skip_existing: true
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
