@@ -216,6 +216,31 @@
             "description": "pre-stop delay for graceful pod shutdown",
             "default": 0
         },
+        "basicAuth": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable basic authentication",
+                    "default": false
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Username for basic authentication",
+                    "default": "admin"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password for basic authentication",
+                    "default": ""
+                },
+                "secretName": {
+                    "type": "string",
+                    "description": "Name of the existing secret containing the basic auth credentials",
+                    "default": "basic-auth"
+                }
+            }
+        },
         "nodeAffinityPreset": {
             "type": "object",
             "properties": {
