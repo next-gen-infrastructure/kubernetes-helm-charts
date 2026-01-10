@@ -1,31 +1,31 @@
 {
   "packages": {
     "charts/k8s-common": {
-      "component": "charts/k8s-common",
+      "component": "k8s-common",
       "package-name": "k8s-common"
     },
     "charts/configmaps": {
-      "component": "charts/configmaps",
+      "component": "configmaps",
       "package-name": "configmaps"
     },
     "charts/cronjobs": {
-      "component": "charts/cronjobs",
+      "component": "cronjobs",
       "package-name": "cronjobs"
     },
     "charts/daemonset": {
-      "component": "charts/daemonset",
+      "component": "daemonset",
       "package-name": "daemonset"
     },
     "charts/deployment": {
-      "component": "charts/deployment",
+      "component": "deployment",
       "package-name": "deployment"
     },
     "charts/statefulset": {
-      "component": "charts/statefulset",
+      "component": "statefulset",
       "package-name": "statefulset"
     },
     "charts/vaultsecrets": {
-      "component": "charts/vaultsecrets",
+      "component": "vaultsecrets",
       "package-name": "vaultsecrets"
     }
   },
