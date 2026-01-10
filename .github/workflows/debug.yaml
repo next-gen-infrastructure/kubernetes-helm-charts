@@ -31,6 +31,8 @@ jobs:
 
       - name: Build the package of updated Charts
         id: package-charts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           version_changed_charts=(
             "charts/deployment"
