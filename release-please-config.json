@@ -2,11 +2,11 @@
   "packages": {
     "charts/k8s-common": {
       "component": "charts/k8s-common",
-      "package-name": "k8s-common",
+      "package-name": "k8s-common"
     },
     "charts/configmaps": {
       "component": "charts/configmaps",
-      "package-name": "configmaps",
+      "package-name": "configmaps"
     },
     "charts/cronjobs": {
       "component": "charts/cronjobs",
