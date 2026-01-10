@@ -118,7 +118,7 @@ securityContext:
 ##
 vaultVolumesSupport: false
 ## @param volumes Container volumes configuration
-## E.g.
+## Usage:
 ## volumes:
 ##   shared-files:
 ##     mountPath: /tmp/shared
