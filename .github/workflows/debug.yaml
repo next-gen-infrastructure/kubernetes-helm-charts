@@ -1,0 +1,76 @@
+name: Debug Release
+
+on:
+  workflow_dispatch:
+jobs:
+  publish-charts:
+    runs-on: ubuntu-latest
+    name: Publish Charts to registry
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.7.0
+        with:
+          charts_dir: stable
+          skip_packaging: true
+          skip_existing: true
+          skip_upload: true
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+#      - name: Build the package of updated Charts
+#        id: package-charts
+#        run: |
+#          version_changed_charts="${{needs.get-bumped-charts.outputs.charts}}"
+#
+#          mkdir -p dist/
+#          for dir in ${version_changed_charts}; do
+#            helm package $dir --dependency-update --destination dist/
+#          done
+#
+#          for file in dist/*.tgz; do
+#            if [ -f "$file" ]; then
+#              echo "Publishing $file to GH releases"
+#              gh release upload $(basename "$file" .tgz) $file --clobber
+#            fi
+#          done
+#
+#
+#      - name: Update Helm repo index.yaml on gh-pages
+#        env:
+#          OWNER: ${{ github.repository_owner }}
+#          REPO: ${{ github.event.repository.name }}
+#        run: |
+#          set -euo pipefail
+#          mkdir -p gh-pages/charts
+#          cp -v dist/*.tgz gh-pages/charts/
+#
+#          # Merge into existing index.yaml (if present), and set absolute URL for chart tarballs
+#          URL="https://${OWNER}.github.io/${REPO}/charts"
+#          if [ -f gh-pages/index.yaml ]; then
+#            helm repo index gh-pages --merge gh-pages/index.yaml --url "$URL"
+#          else
+#            helm repo index gh-pages --url "$URL"
+#          fi
+#
+#      - name: Commit & push index.yaml
+#        run: |
+#          cd gh-pages
+#          git config user.name "github-actions[bot]"
+#          git config user.email "github-actions[bot]@users.noreply.github.com"
+#          git add index.yaml
+#          git commit -m "chore(helm): update index.yaml for release" || exit 0
+#          git push
