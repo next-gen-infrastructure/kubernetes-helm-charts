@@ -51,6 +51,7 @@ jobs:
               helm repo index dist/ \
                 --merge gh-pages/index.yaml \
                 --url "https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/${release_name}/${release_name}.tgz"
+              mv dist/index.yaml gh-pages/
             done
           done
 
@@ -58,7 +59,11 @@ jobs:
         run: |
           cd gh-pages
           git add index.yaml
-          git commit -m "Add Helm chart for $GITHUB_REF_NAME"
-          git push origin HEAD:gh-pages
+          if git diff --cached --quiet; then
+            echo "index.yaml unchanged — nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(helm): update index.yaml"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
