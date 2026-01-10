@@ -45,6 +45,7 @@ jobs:
               helm repo index dist/ \
                 --merge gh-pages/index.yaml \
                 --url "https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/${release_name}/${release_name}.tgz"
+            done
           done
 
       - name: Update GitHub Pages index
