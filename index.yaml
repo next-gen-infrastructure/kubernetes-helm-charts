@@ -201,6 +201,26 @@ entries:
     version: 1.1.0
   deployment:
   - apiVersion: v2
+    created: "2026-01-10T16:15:29.522936688Z"
+    dependencies:
+    - name: k8s-common
+      repository: file://../k8s-common
+      version: ^1.0.0
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 95f16760edfbc7e065a6306d0178b98fe094a1800bcf4ddbc86a4b50d5bf5f08
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.1.10/deployment-1.1.10.tgz/deployment-1.1.10.tgz
+    version: 1.1.10
+  - apiVersion: v2
     created: "2024-10-28T20:18:40.626476219Z"
     dependencies:
     - name: k8s-common
@@ -796,4 +816,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2024-10-28T20:18:40.738410484Z"
+generated: "2026-01-10T16:15:29.520013488Z"
