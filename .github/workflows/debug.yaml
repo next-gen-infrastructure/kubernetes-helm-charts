@@ -9,6 +9,7 @@ jobs:
     name: Publish Charts to registry
     permissions:
       contents: write
+      packages: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
