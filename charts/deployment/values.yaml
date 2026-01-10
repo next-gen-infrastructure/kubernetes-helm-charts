@@ -167,7 +167,7 @@ podAntiAffinityPreset: soft
 ##
 preStopDelaySeconds: 0
 ## @extra basicAuth Enable basic authentication
-## Usage example:
+## Usage:
 ## env:
 ##   secret:
 ##     BASIC_AUTH_USERNAME:
