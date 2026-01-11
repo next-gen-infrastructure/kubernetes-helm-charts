@@ -218,7 +218,7 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
     type: application
     urls:
-    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.1.10/deployment-1.1.10.tgz/deployment-1.1.10.tgz
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-1.1.10/deployment-1.1.10.tgz
     version: 1.1.10
   - apiVersion: v2
     created: "2026-01-11T12:22:41.639386142Z"
