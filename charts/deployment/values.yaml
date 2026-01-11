@@ -723,6 +723,7 @@ persistence:
   ## @param persistence.size Persistent Volume size
   ##
   size: 8Gi
+
 ## @section Configuration for Argo Rollouts
 ## Ref: https://argoproj.github.io/argo-rollouts/
 ##
