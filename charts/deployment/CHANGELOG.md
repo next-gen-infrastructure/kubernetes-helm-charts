@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.11](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-1.1.10...deployment-1.1.11) (2026-01-11)
+
+
+### Bug Fixes
+
+* testing chart releases ([9285b5b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/9285b5b2b0444bfc88a994ed0f0ba3ea269bea5c))
+
 ## [1.1.10](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-1.1.9...deployment-1.1.10) (2026-01-10)
 
 
