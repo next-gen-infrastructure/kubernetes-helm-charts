@@ -96,11 +96,18 @@ jobs:
     name: Publish Charts to registry
     permissions:
       contents: write
+      packages: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       - name: Install Helm
         uses: azure/setup-helm@v4
@@ -109,22 +116,39 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          cd gh-pages
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Build the package of updated Charts
         id: package-charts
         run: |
           version_changed_charts="${{needs.get-bumped-charts.outputs.charts}}"
+          owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
+          repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
 
-          mkdir -p .cr-release-packages/
           for dir in ${version_changed_charts}; do
-            helm package $dir --dependency-update --destination .cr-release-packages/
+            rm -rf dist/ && mkdir -p dist/
+            helm package $dir --dependency-update --destination dist/
+            for file in dist/*.tgz; do
+              release_name=$(basename $file .tgz)
+              gh release upload $release_name $file --clobber
+              helm repo index dist/ \
+                --merge gh-pages/index.yaml \
+                --url "https://github.com/${owner}/${repo}/releases/download/${release_name}"
+              mv dist/index.yaml gh-pages/
+            done
           done
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@main
-        with:
-          charts_dir: stable
-          skip_packaging: true
-          skip_existing: true
+      - name: Update GitHub Pages index
+        run: |
+          cd gh-pages
+          git add index.yaml
+          if git diff --cached --quiet; then
+            echo "index.yaml unchanged — nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(helm): update index.yaml"
+          git push
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
