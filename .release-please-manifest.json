@@ -1,9 +1,9 @@
 {
-  "charts/k8s-common": "1.1.2",
-  "charts/configmaps": "1.1.2",
-  "charts/cronjobs": "1.1.2",
-  "charts/daemonset": "1.1.2",
-  "charts/deployment": "1.1.8",
+  "charts/k8s-common": "1.1.3",
+  "charts/configmaps": "1.1.3",
+  "charts/cronjobs": "1.1.3",
+  "charts/daemonset": "1.1.3",
+  "charts/deployment": "1.1.9",
   "charts/statefulset": "1.1.8",
-  "charts/vaultsecrets": "1.1.2"
+  "charts/vaultsecrets": "1.1.3"
 }
