@@ -122,6 +122,8 @@ jobs:
 
       - name: Build the package of updated Charts
         id: package-charts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           version_changed_charts="${{needs.get-bumped-charts.outputs.charts}}"
           owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
