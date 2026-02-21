@@ -1,9 +1,9 @@
 {
-  "charts/common": "1.1.3",
-  "charts/configmaps": "1.1.3",
-  "charts/cronjobs": "1.1.3",
-  "charts/daemonset": "1.1.3",
-  "charts/deployment": "1.1.9",
-  "charts/statefulset": "1.1.8",
-  "charts/vaultsecrets": "1.1.3"
+  "charts/common": "2.0.0",
+  "charts/configmaps": "2.0.0",
+  "charts/cronjobs": "2.0.0",
+  "charts/daemonset": "2.0.0",
+  "charts/deployment": "2.0.0",
+  "charts/statefulset": "2.0.0",
+  "charts/vaultsecrets": "2.0.0"
 }
