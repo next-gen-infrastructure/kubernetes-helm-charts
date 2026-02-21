@@ -11,7 +11,7 @@ Return the proper image name
 {{- define "common.images.image" -}}
 {{- $localImage := .Values.image | default dict }}
 {{- $imageName := $localImage.name | default .Values.global.image.name -}}
-{{- $tag := $localImage.tag | default .Values.global.image.tag | default .Values.global.environment | toString -}}
+{{- $tag := $localImage.tag | default .Values.global.image.tag | default .Values.global.env | toString -}}
 {{- $separator := ":" -}}
 
 {{- printf "%s%s%s" $imageName $separator $tag -}}

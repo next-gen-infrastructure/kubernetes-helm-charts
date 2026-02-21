@@ -28,7 +28,7 @@ service:
 {{- end -}}
 
 {{- define "common.ingress.domain" -}}
-{{- if eq .Values.global.environment "prod" -}}
+{{- if eq .Values.global.env "prod" -}}
 {{ .Values.global.domain }}
 {{- else -}}
 {{ substr 0 4 .Values.global.project }}.{{ .Values.global.env }}.{{ .Values.global.domain }}
@@ -86,7 +86,7 @@ kubernetes.io/ingress.class: "alb"
 alb.ingress.kubernetes.io/actions.ssl-redirect: "{\"Type\":\"redirect\",\"RedirectConfig\":{\"Protocol\":\"HTTPS\",\"Port\":\"443\",\"StatusCode\":\"HTTP_301\"}}"
 alb.ingress.kubernetes.io/backend-protocol: "HTTP"
 # group name as cluster-name and optional '-public'
-alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.environment }}{{ if .Values.ingress.public -}}-public{{- end }}
+alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.env }}{{ if .Values.ingress.public -}}-public{{- end }}
 alb.ingress.kubernetes.io/healthcheck-path: "{{ .Values.service.healthCheckPath | default "/" }}"
 alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\":80},{\"HTTPS\":443}]"
 alb.ingress.kubernetes.io/scheme: {{ if .Values.ingress.public -}}internet-facing{{- else -}}internal{{- end }}
