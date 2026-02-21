@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-2.0.0...vaultsecrets-2.0.1) (2026-02-21)
+
+
+### Bug Fixes
+
+* bump common chart dependency to ^2.0.0 across all charts ([301eca2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/301eca2108d000f2a1ed2b2e2405ec81effc022b))
+
 ## [2.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-1.1.3...vaultsecrets-2.0.0) (2026-02-21)
 
 
