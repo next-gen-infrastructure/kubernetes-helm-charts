@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.0...common-2.0.1) (2026-02-21)
+
+
+### Bug Fixes
+
+* bump common chart dependency to ^2.0.0 across all charts ([0e4f94d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/0e4f94d1392a05f72205bf628bbc98c28da2c9f2))
+
 ## [2.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-1.1.3...common-2.0.0) (2026-02-21)
 
 
