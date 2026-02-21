@@ -5,7 +5,7 @@ description: Generator of the secrets from remote Vault server
 type: application
 dependencies:
   - name: common
-    version: ^1.0.0
+    version: ^2.0.0
     repository: "file://../common"
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 sources:
