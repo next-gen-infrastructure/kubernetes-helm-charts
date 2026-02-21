@@ -8,7 +8,7 @@ Typical Daemon Set application
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../k8s-common | k8s-common | 2.0.0   |
+| file://../common | common | 2.0.0   |
 
 ## Upgrading
 

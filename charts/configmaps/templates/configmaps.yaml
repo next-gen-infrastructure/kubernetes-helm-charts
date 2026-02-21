@@ -4,10 +4,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "k8s-common.names.fullname" $ }}-{{ $key }}
+  name: {{ include "common.names.fullname" $ }}-{{ $key }}
   labels:
     tier: configmap
-    {{- include "k8s-common.labels.standard" $ | nindent 4 }}
+    {{- include "common.labels.standard" $ | nindent 4 }}
 data:
 {{- range $file, $content := $value }}
   {{ $file }}: {{ toYaml $content | indent 2 }}

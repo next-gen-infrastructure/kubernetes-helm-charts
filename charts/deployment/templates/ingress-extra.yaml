@@ -2,13 +2,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "k8s-common.names.fullname" . }}-extra
+  name: {{ include "common.names.fullname" . }}-extra
   namespace: {{ .Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" . | nindent 4 }}
+  labels: {{ include "common.labels.standard" . | nindent 4 }}
   annotations:
-  {{- include "k8s-common.ingressExtra.annotations" . | nindent 4 }}
+  {{- include "common.ingressExtra.annotations" . | nindent 4 }}
   {{- if .Values.ingressExtra.annotations }}
-  {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.ingressExtra.annotations "context" $ ) | nindent 4 }}
+  {{- include "common.tplvalues.render" ( dict "value" .Values.ingressExtra.annotations "context" $ ) | nindent 4 }}
   {{- end }}
   {{- if gt (int .Values.ingress.stickiness) 0 }}
     alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds={{ .Values.ingress.stickiness }}
@@ -18,12 +18,12 @@ metadata:
         "forwardConfig": {
           "targetGroups": [
             {
-              "serviceName": "{{ include "k8s-common.ingress.serviceName" . }}",
+              "serviceName": "{{ include "common.ingress.serviceName" . }}",
               "servicePort": "{{ .Values.service.ports.http }}",
             }
             {{- if .Values.rollouts.enabled }}
             ,{
-              "serviceName": "preview-{{ include "k8s-common.ingress.serviceName" . }}",
+              "serviceName": "preview-{{ include "common.ingress.serviceName" . }}",
               "servicePort": "{{ .Values.service.ports.http }}",
             }
             {{- end }}
@@ -47,12 +47,12 @@ spec:
           {{ range .paths -}}
           - path: {{ . }}
             pathType: {{ $.Values.ingressExtra.pathType }}
-            backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" (include "k8s-common.ingress.serviceName" $) "servicePort" $portName "context" $)  | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "common.ingress.serviceName" $) "servicePort" $portName "context" $)  | nindent 14 }}
           {{ end -}}
           {{ else -}}
           - path: "/"
             pathType: Prefix
-            backend: {{- include "k8s-common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
           {{ end -}}
     {{ end -}}
 {{- end }}

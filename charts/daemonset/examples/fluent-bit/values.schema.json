@@ -1,0 +1,381 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "daemonset": {
+      "additionalProperties": false,
+      "properties": {
+        "args": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "title": "args",
+          "type": "array"
+        },
+        "command": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "title": "command",
+          "type": "array"
+        },
+        "fullnameOverride": {
+          "default": "",
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "nameOverride": {
+          "default": "",
+          "title": "nameOverride",
+          "type": "string"
+        },
+        "rbac": {
+          "additionalProperties": false,
+          "properties": {
+            "create": {
+              "default": false,
+              "title": "create",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "create"
+          ],
+          "title": "rbac",
+          "type": "object"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "128Mi",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "30m",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "64Mi",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "properties": {
+                "foo": {
+                  "default": "bar",
+                  "title": "foo",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "foo"
+              ],
+              "title": "annotations",
+              "type": "object"
+            }
+          },
+          "required": [
+            "annotations"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "volumes": {
+          "additionalProperties": false,
+          "properties": {
+            "config": {
+              "additionalProperties": false,
+              "properties": {
+                "configMap": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "customParsers": {
+                      "default": "[PARSER]\n    Name docker_no_time\n    Format json\n    Time_Keep Off\n    Time_Key time\n    Time_Format %Y-%m-%dT%H:%M:%S.%L\n",
+                      "title": "customParsers",
+                      "type": "string"
+                    },
+                    "filters": {
+                      "default": "[FILTER]\n    Name kubernetes\n    Match kube.*\n    Merge_Log On\n    Keep_Log Off\n    K8S-Logging.Parser On\n    K8S-Logging.Exclude On\n",
+                      "title": "filters",
+                      "type": "string"
+                    },
+                    "inputs": {
+                      "default": "[INPUT]\n    Name tail\n    Path /var/log/containers/*.log\n    multiline.parser docker, cri\n    Tag kube.*\n    Mem_Buf_Limit 5MB\n    Skip_Long_Lines On\n",
+                      "title": "inputs",
+                      "type": "string"
+                    },
+                    "outputs": {
+                      "default": "[OUTPUT]\n    Name es\n    Match kube.*\n    Host elasticsearch-master\n    Logstash_Format On\n    Retry_Limit False\n",
+                      "title": "outputs",
+                      "type": "string"
+                    },
+                    "service": {
+                      "default": "[SERVICE]\n    Daemon Off\n    Flush 1\n    Log_Level info\n    Parsers_File /fluent-bit/etc/parsers.conf\n    Parsers_File /fluent-bit/etc/conf/custom_parsers.conf\n    HTTP_Server On\n    HTTP_Listen 0.0.0.0\n    HTTP_Port {{ .Values.metricsPort }}\n    Health_Check On\n",
+                      "title": "service",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "service",
+                    "inputs",
+                    "filters",
+                    "outputs",
+                    "customParsers"
+                  ],
+                  "title": "configMap",
+                  "type": "object"
+                },
+                "mountPath": {
+                  "default": "/fluent-bit/etc/conf",
+                  "title": "mountPath",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "mountPath",
+                "configMap"
+              ],
+              "title": "config",
+              "type": "object"
+            },
+            "etcmachineid": {
+              "additionalProperties": false,
+              "properties": {
+                "hostPath": {
+                  "default": "/etc/machine-id",
+                  "title": "hostPath",
+                  "type": "string"
+                },
+                "mountPath": {
+                  "default": "/etc/machine-id",
+                  "title": "mountPath",
+                  "type": "string"
+                },
+                "readOnly": {
+                  "default": true,
+                  "title": "readOnly",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mountPath",
+                "hostPath",
+                "readOnly"
+              ],
+              "title": "etcmachineid",
+              "type": "object"
+            },
+            "varlibdockercontainers": {
+              "additionalProperties": false,
+              "properties": {
+                "hostPath": {
+                  "default": "/var/lib/docker/containers",
+                  "title": "hostPath",
+                  "type": "string"
+                },
+                "mountPath": {
+                  "default": "/var/lib/docker/containers",
+                  "title": "mountPath",
+                  "type": "string"
+                },
+                "readOnly": {
+                  "default": true,
+                  "title": "readOnly",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "mountPath",
+                "hostPath",
+                "readOnly"
+              ],
+              "title": "varlibdockercontainers",
+              "type": "object"
+            },
+            "varlog": {
+              "additionalProperties": false,
+              "properties": {
+                "hostPath": {
+                  "default": "/var/log",
+                  "title": "hostPath",
+                  "type": "string"
+                },
+                "mountPath": {
+                  "default": "/var/log",
+                  "title": "mountPath",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "mountPath",
+                "hostPath"
+              ],
+              "title": "varlog",
+              "type": "object"
+            }
+          },
+          "required": [
+            "varlog",
+            "varlibdockercontainers",
+            "etcmachineid",
+            "config"
+          ],
+          "title": "volumes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "nameOverride",
+        "fullnameOverride",
+        "serviceAccount",
+        "rbac",
+        "resources",
+        "command",
+        "args",
+        "volumes"
+      ],
+      "title": "daemonset",
+      "type": "object"
+    },
+    "global": {
+      "additionalProperties": false,
+      "description": "yaml-language-server: $schema=values.schema.json",
+      "properties": {
+        "domain": {
+          "default": "example.com",
+          "title": "domain",
+          "type": "string"
+        },
+        "environmentName": {
+          "default": "stage",
+          "title": "environmentName",
+          "type": "string"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "registry.platform.next-gen-infrastructure.dev",
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "fluent/fluentd",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "v1.16-debian-amd64-2",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "tag",
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "org": {
+          "default": "core",
+          "title": "org",
+          "type": "string"
+        },
+        "production": {
+          "default": true,
+          "title": "production",
+          "type": "boolean"
+        },
+        "project": {
+          "default": "test",
+          "title": "project",
+          "type": "string"
+        },
+        "serviceName": {
+          "default": "test",
+          "title": "serviceName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "org",
+        "domain",
+        "serviceName",
+        "project",
+        "production",
+        "environmentName",
+        "image"
+      ],
+      "title": "global",
+      "type": "object"
+    }
+  },
+  "required": [
+    "global",
+    "daemonset"
+  ],
+  "type": "object"
+}

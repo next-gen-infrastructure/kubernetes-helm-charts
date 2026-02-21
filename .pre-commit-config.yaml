@@ -7,14 +7,6 @@ repos:
       - id: detect-private-key
       - id: trailing-whitespace
 
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.30
-    hooks:
-      - id: helmlint
-        args:
-          - --args=--quiet
-          - --args=--skip-schema-validation
-
   - repo: local
     hooks:
       - id: generate-docs
@@ -23,3 +15,11 @@ repos:
         entry: .pre-commit/process.sh
         files: (Chart\.yaml|values\.yaml)$
         exclude: examples/.*$
+
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.30
+    hooks:
+      - id: helmlint
+        exclude: examples/.*$
+        args:
+          - --quiet

@@ -5,9 +5,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "k8s-common.names.fullname" $ }}-{{ $key }}
+  name: {{ include "common.names.fullname" $ }}-{{ $key }}
   namespace: {{ $.Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" $ | nindent 4 }}
+  labels: {{ include "common.labels.standard" $ | nindent 4 }}
 data:
 {{- range $file, $content := $value.configMap }}
   {{ $file }}: {{ toYaml $content | indent 2 }}
@@ -23,9 +23,9 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "k8s-common.names.fullname" $ }}-{{ $key }}
+  name: {{ include "common.names.fullname" $ }}-{{ $key }}
   namespace: {{ $.Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" $ | nindent 4 }}
+  labels: {{ include "common.labels.standard" $ | nindent 4 }}
 data:
 {{- range $file, $content := $value.configMap }}
   {{ $file }}: {{ toYaml $content | indent 2 }}

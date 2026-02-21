@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=values.schema.json
+## charts/common
+## It is required by CI/CD tools and processes.
+## @skip exampleValue
+##
+exampleValue: common-chart
+

@@ -1,8 +1,8 @@
 {
   "packages": {
-    "charts/k8s-common": {
-      "component": "k8s-common",
-      "package-name": "k8s-common"
+    "charts/common": {
+      "component": "common",
+      "package-name": "common"
     },
     "charts/configmaps": {
       "component": "configmaps",

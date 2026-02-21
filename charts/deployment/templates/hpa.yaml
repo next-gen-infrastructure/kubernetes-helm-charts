@@ -1,10 +1,10 @@
 {{- if .Values.autoscaling.enabled -}}
-apiVersion: {{ include "k8s-common.capabilities.hpa.apiVersion" ( dict "context" $ ) }}
+apiVersion: {{ include "common.capabilities.hpa.apiVersion" ( dict "context" $ ) }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name:  {{ include "k8s-common.names.fullname" . }}
+  name:  {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" . | nindent 4 }}
+  labels: {{ include "common.labels.standard" . | nindent 4 }}
 spec:
   {{- if .Values.autoscaling.behavior }}
   behavior:
@@ -15,10 +15,10 @@ spec:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
     {{ else -}}
-    apiVersion: {{ include "k8s-common.capabilities.deployment.apiVersion" . }}
+    apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
     kind: Deployment
     {{ end -}}
-    name: {{ include "k8s-common.names.fullname" . }}
+    name: {{ include "common.names.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics: {{- toYaml .Values.autoscaling.metrics | nindent 4 }}

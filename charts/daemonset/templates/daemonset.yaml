@@ -1,25 +1,25 @@
-apiVersion: {{ include "k8s-common.capabilities.daemonset.apiVersion" . }}
+apiVersion: {{ include "common.capabilities.daemonset.apiVersion" . }}
 kind: DaemonSet
 metadata:
-  name: {{ template "k8s-common.names.fullname" . }}
+  name: {{ template "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels: {{ include "k8s-common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
+  labels: {{ include "common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
   annotations:
   {{ if .Values.env.vaultSecret }}
     reloader.stakater.com/auto: "true"
   {{- end }}
   {{- if .Values.commonAnnotations }}
-    {{- include "k8s-common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   revisionHistoryLimit: 2
   selector:
-    matchLabels: {{ include "k8s-common.labels.matchLabels" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 6 }}
+    matchLabels: {{ include "common.labels.matchLabels" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 6 }}
   template:
     metadata:
-      labels: {{ include "k8s-common.labels.standard" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 8 }}
+      labels: {{ include "common.labels.standard" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 8 }}
       {{- if or .Values.podAnnotations .Values.metrics.enabled }}
-      annotations: {{ include "k8s-common.annotations.podAnnotations" . | trim | nindent 8 }}
+      annotations: {{ include "common.annotations.podAnnotations" . | trim | nindent 8 }}
       {{- end }}
     spec:
       {{- if .Values.terminationGracePeriodSeconds }}
@@ -29,26 +29,26 @@ spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       {{- end }}
       {{- if .Values.affinity }}
-      affinity: {{- include "k8s-common.tplvalues.render" (dict "value" .Values.affinity "context" $) | nindent 8 }}
+      affinity: {{- include "common.tplvalues.render" (dict "value" .Values.affinity "context" $) | nindent 8 }}
       {{- else }}
       affinity:
         {{- if .Values.podAffinityPreset }}
-        podAffinity: {{- include "k8s-common.affinities.pods" (dict "type" .Values.podAffinityPreset "context" $) | nindent 10 }}
+        podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAffinityPreset "context" $) | nindent 10 }}
         {{- end }}
         {{- if .Values.podAntiAffinityPreset }}
-        podAntiAffinity: {{- include "k8s-common.affinities.pods" (dict "type" .Values.podAntiAffinityPreset "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAntiAffinityPreset "context" $) | nindent 10 }}
         {{- end }}
         {{- if .Values.nodeAffinityPreset.type }}
-        nodeAffinity: {{- include "k8s-common.affinities.nodes" (dict "type" .Values.nodeAffinityPreset.type "key" .Values.nodeAffinityPreset.key "values" .Values.nodeAffinityPreset.values) | nindent 10 }}
+        nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.nodeAffinityPreset.type "key" .Values.nodeAffinityPreset.key "values" .Values.nodeAffinityPreset.values) | nindent 10 }}
         {{- end }}
       {{- end }}
       {{- if .Values.nodeSelector }}
-      nodeSelector: {{- include "k8s-common.tplvalues.render" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
+      nodeSelector: {{- include "common.tplvalues.render" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
       {{- if .Values.tolerations }}
-      tolerations: {{- include "k8s-common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "k8s-common.serviceAccount.name" . }}
+      serviceAccountName: {{ include "common.serviceAccount.name" . }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
@@ -59,11 +59,11 @@ spec:
         {{- $name := required "nameOverride is required for the init containers" $values.Values.nameOverride }}
         {{- $_ := set $values.Values "global" $.Values.global -}}
         {{- $__ := set $values.Values "volumes" ($values.Values.volumes | default $.Values.volumes) -}}
-        {{- include "k8s-common.containers.container" $values | nindent 8 }}
+        {{- include "common.containers.container" $values | nindent 8 }}
         {{- end }}
       {{- end }}
       containers:
-        {{- include "k8s-common.containers.container" . | nindent 8 }}
+        {{- include "common.containers.container" . | nindent 8 }}
         {{/* Process sidecar containers */}}
         {{- if .Values.sidecarContainers }}
         {{- range .Values.sidecarContainers }}
@@ -72,14 +72,14 @@ spec:
         {{- $name := required "nameOverride is required for the sidecar containers" $values.Values.nameOverride }}
         {{- $_ := set $values.Values "global" $.Values.global -}}
         {{- $__ := set $values.Values "volumes" ($values.Values.volumes | default $.Values.volumes) -}}
-        {{- include "k8s-common.containers.container" $values | nindent 8 }}
+        {{- include "common.containers.container" $values | nindent 8 }}
         {{- end }}
         {{- end }}
-      volumes: {{- include "k8s-common.volume.definitions" . | nindent 8 }}
+      volumes: {{- include "common.volume.definitions" . | nindent 8 }}
       {{- if .Values.persistence.enabled }}
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "k8s-common.names.fullname" . }}
+            claimName: {{ include "common.names.fullname" . }}
       {{- end }}
   {{- if .Values.volumes }}
   {{ $claimsList := list }}
@@ -89,6 +89,6 @@ spec:
   {{- end }}
   {{- end }}
   {{- if ne (len $claimsList ) 0 }}
-  volumeClaimTemplates: {{ include "k8s-common.volume.claims" . | nindent 4 }}
+  volumeClaimTemplates: {{ include "common.volume.claims" . | nindent 4 }}
   {{- end }}
   {{- end }}

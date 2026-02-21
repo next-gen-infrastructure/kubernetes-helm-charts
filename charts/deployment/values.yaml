@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=values.schema.json
 # Default values for typical microservice.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -226,7 +227,7 @@ topologySpreadConstraintPreset: soft
 topologySpreadConstraints: {}
 ## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
 ## This is ignored if resources is set (resources is recommended for production).
-## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/k8s-common/templates/_resources.tpl#L9
+## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
 ##
 resourcesPreset: "nano"
 ## @extra pdb Pod disruption budget configuration

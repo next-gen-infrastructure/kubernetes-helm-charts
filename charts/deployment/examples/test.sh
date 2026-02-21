@@ -13,8 +13,7 @@ for testCase in */; do
     rm -rf ./charts/ Chart.lock
     helm dependency update > /dev/null
     helm template . \
-      --debug \
-      --dry-run \
+      --dry-run=client \
       --generate-name \
       --namespace test \
       --dependency-update \

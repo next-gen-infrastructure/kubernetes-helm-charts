@@ -1,5 +1,0 @@
-## global/k8s-common
-## It is required by CI/CD tools and processes.
-## @skip exampleValue
-exampleValue: k8s-common-chart
-

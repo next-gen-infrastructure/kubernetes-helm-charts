@@ -2,7 +2,7 @@
 {{- $allExtraEnv := default (dict) .Values.env.values -}}
 {{- range $key, $value := $allExtraEnv }}
 - name: {{ $key }}
-  value: {{ include "k8s-common.tplvalues.render" (dict "value" $value "context" $) | quote }}
+  value: {{ include "common.tplvalues.render" (dict "value" $value "context" $) | quote }}
 {{- end -}}
 {{- end -}}
 

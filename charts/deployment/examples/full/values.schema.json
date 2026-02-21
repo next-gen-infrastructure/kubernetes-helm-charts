@@ -1,0 +1,1260 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "deployment": {
+      "description": "Typical microservice chart. Supports Ingress controller, horizontal-scalable containers",
+      "properties": {
+        "affinity": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity\n# Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set\n#",
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "args": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "title": "args",
+          "type": "array"
+        },
+        "autoscaling": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/\n#",
+          "properties": {
+            "behavior": {
+              "additionalProperties": false,
+              "description": "#\n#\n# E.g.\n# behavior:\n#   scaleDown:\n#     stabilizationWindowSeconds: 300\n#     policies:\n#       - type: Percent\n#         value: 100\n#         periodSeconds: 15\n#   scaleUp:\n#     stabilizationWindowSeconds: 10\n#     policies:\n#       - type: Percent\n#         value: 100\n#         periodSeconds: 15\n#       - type: Pods\n#         value: 4\n#         periodSeconds: 15\n#     selectPolicy: Max",
+              "required": [],
+              "title": "behavior",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "maxReplicas": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "maxReplicas",
+              "type": "integer"
+            },
+            "metrics": {
+              "description": "#\n# E.g.\n# metrics:\n# - type: Resource\n#   resource:\n#     name: cpu\n#     target:\n#       type: Utilization\n#       averageUtilization: 60\n# - type: Resource\n#   resource:\n#     name: memory\n#       type: Utilization\n#       averageUtilization: 60\n#",
+              "items": {
+                "required": []
+              },
+              "title": "metrics",
+              "type": "array"
+            },
+            "minReplicas": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "minReplicas",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "autoscaling",
+          "type": "object"
+        },
+        "basicAuth": {
+          "additionalProperties": false,
+          "description": "#\n# Usage:\n# env:\n#   secret:\n#     BASIC_AUTH_USERNAME:\n#       name: {{ basicAuth.secretName }}\n#       secret: username\n#     BASIC_AUTH_PASSWORD:\n#       name: {{ basicAuth.secretName }}\n#       secret: password\n#",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "password": {
+              "default": "",
+              "description": "#\n#",
+              "title": "password",
+              "type": "string"
+            },
+            "secretName": {
+              "default": "basic-auth",
+              "description": "#\n#",
+              "title": "secretName",
+              "type": "string"
+            },
+            "username": {
+              "default": "admin",
+              "description": "#\n#",
+              "title": "username",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "basicAuth",
+          "type": "object"
+        },
+        "command": {
+          "description": "#\n#",
+          "items": {
+            "required": []
+          },
+          "title": "command",
+          "type": "array"
+        },
+        "commonAnnotations": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "commonAnnotations",
+          "type": "object"
+        },
+        "commonLabels": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "commonLabels",
+          "type": "object"
+        },
+        "datadogIntegration": {
+          "default": false,
+          "description": "#\n# E.g.\n# datadogIntegration: true",
+          "title": "datadogIntegration",
+          "type": "boolean"
+        },
+        "env": {
+          "additionalProperties": false,
+          "description": "#",
+          "properties": {
+            "configmap": {
+              "additionalProperties": false,
+              "description": "#\n# E.g.\n# configmap:\n#   API_CONFIG:\n#     name: myConfigMap\n#     key: foo.txt\n#",
+              "required": [],
+              "title": "configmap",
+              "type": "object"
+            },
+            "refs": {
+              "additionalProperties": false,
+              "description": "#\n# E.g.\n# refs:\n#   FOO: metadata.name\n#",
+              "required": [],
+              "title": "refs",
+              "type": "object"
+            },
+            "secret": {
+              "additionalProperties": false,
+              "description": "#\n# E.g.\n# secret:\n#   API_PASSWORD:\n#     name: mySecret\n#     secret: password\n#",
+              "required": [],
+              "title": "secret",
+              "type": "object"
+            },
+            "values": {
+              "additionalProperties": false,
+              "description": "#\n# Supporting helm templates\n# E.g.\n# values:\n#   FOO: \"bar-{{ .Values.global.environment }}\"\n#",
+              "required": [],
+              "title": "values",
+              "type": "object"
+            },
+            "vaultSecret": {
+              "additionalProperties": false,
+              "description": "#\n# path - Path within vault to the secret containing environment variable. It will be found in /kv/\u003corg\u003e/\u003cproject\u003e/\u003cenv\u003e/\u003crelease.namespace\u003e\n# secret - Optional name of the variable inside secret. Defaults to the secret key\n# E.g.\n# vaultSecret:\n#  API_KEY:\n#    path: mySecret\n#    secret: password\n#",
+              "required": [],
+              "title": "vaultSecret",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "env",
+          "type": "object"
+        },
+        "exampleValue": {
+          "default": "common-chart",
+          "description": "yaml-language-server: $schema=values.schema.json\n# charts/common\n# It is required by CI/CD tools and processes.\n#\n#",
+          "title": "exampleValue",
+          "type": "string"
+        },
+        "fullnameOverride": {
+          "default": "",
+          "description": "#\n# This overrides that and uses the given string instead.\n#",
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "githubActionsIntegration": {
+          "default": false,
+          "description": "#\n# E.g.\n# githubActionsIntegration: true",
+          "title": "githubActionsIntegration",
+          "type": "boolean"
+        },
+        "global": {
+          "additionalProperties": false,
+          "description": "#\n# Global Docker image parameters",
+          "properties": {
+            "domain": {
+              "default": "",
+              "description": "#\n# [\u003cglobal.project\u003e.\u003cglobal.environment\u003e].\u003cglobal.domain\u003e Route53 HZ.\n#",
+              "title": "domain",
+              "type": "string"
+            },
+            "environment": {
+              "default": "dev",
+              "description": "#\n#",
+              "title": "environment",
+              "type": "string"
+            },
+            "image": {
+              "additionalProperties": false,
+              "description": "# Configuration of the image for the deployment\n#",
+              "properties": {
+                "name": {
+                  "default": "",
+                  "description": "#\n# E.g.\n# name: \"1234567890.dkr.ecr.eu-central-1.amazonaws.com/example\"\n#",
+                  "title": "name",
+                  "type": "string"
+                },
+                "pullPolicy": {
+                  "default": "IfNotPresent",
+                  "description": "#\n# the kubelet to skip pulling an image if it already exists.\n# Ref: https://kubernetes.io/docs/concepts/containers/images/#updating-images\n#",
+                  "title": "pullPolicy",
+                  "type": "string"
+                },
+                "pullSecrets": {
+                  "description": "#\n# Secrets must be manually created in the namespace.\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/\n#\n# pullSecrets:\n#   - myRegistryKeySecretName\n#",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "pullSecrets",
+                  "type": "array"
+                },
+                "tag": {
+                  "default": "latest",
+                  "description": "#\n#",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "image",
+              "type": "object"
+            },
+            "org": {
+              "default": "",
+              "description": "#\n#",
+              "title": "org",
+              "type": "string"
+            },
+            "project": {
+              "default": "",
+              "description": "#\n#",
+              "title": "project",
+              "type": "string"
+            },
+            "serviceName": {
+              "default": "example",
+              "description": "#\n# E.g. cherry-admin, tpt-service-api\n#",
+              "title": "serviceName",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "global",
+          "type": "object"
+        },
+        "image": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "properties": {
+            "name": {
+              "default": "",
+              "description": "#\n# E.g.\n# name: \"1234567890.dkr.ecr.eu-central-1.amazonaws.com/example\"\n#",
+              "title": "name",
+              "type": "string"
+            },
+            "pullPolicy": {
+              "default": "",
+              "description": "#\n# the kubelet to skip pulling an image if it already exists.\n# Ref: https://kubernetes.io/docs/concepts/containers/images/#updating-images\n#",
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "pullSecrets": {
+              "description": "#\n# Secrets must be manually created in the namespace.\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/\n#\n# pullSecrets:\n#   - myRegistryKeySecretName\n#",
+              "items": {
+                "required": []
+              },
+              "title": "pullSecrets",
+              "type": "array"
+            },
+            "tag": {
+              "default": "",
+              "description": "#\n#",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "image",
+          "type": "object"
+        },
+        "ingress": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "extraHosts": {
+              "description": "#\n# E.g.\n# extraHosts:\n# - host: example.local\n#   port: http\n#   paths: []\n#",
+              "items": {
+                "required": []
+              },
+              "title": "extraHosts",
+              "type": "array"
+            },
+            "path": {
+              "default": "/",
+              "description": "#\n#",
+              "title": "path",
+              "type": "string"
+            },
+            "pathType": {
+              "default": "Prefix",
+              "description": "#\n#",
+              "title": "pathType",
+              "type": "string"
+            },
+            "public": {
+              "default": false,
+              "description": "#\n# Not recommended to for non-production environments.\n#",
+              "title": "public",
+              "type": "boolean"
+            },
+            "stickiness": {
+              "default": 0,
+              "description": "#\n#",
+              "title": "stickiness",
+              "type": "integer"
+            },
+            "subDomain": {
+              "default": false,
+              "description": "#\n# The default DNS is constructed as:\n# \u003cglobal.serviceName\u003e.[\u003cglobal.project\u003e.\u003cglobal.environment\u003e].\u003cglobal.domain\u003e\n#",
+              "title": "subDomain",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "ingress",
+          "type": "object"
+        },
+        "ingressExtra": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "extraHosts": {
+              "description": "#\n# E.g.\n# extraHosts:\n# - host: example.local\n#   port: http\n#   paths: []\n#",
+              "items": {
+                "required": []
+              },
+              "title": "extraHosts",
+              "type": "array"
+            },
+            "host": {
+              "default": "",
+              "description": "#\n#",
+              "title": "host",
+              "type": "string"
+            },
+            "path": {
+              "default": "/",
+              "description": "#\n#",
+              "title": "path",
+              "type": "string"
+            },
+            "pathType": {
+              "default": "Prefix",
+              "description": "#\n#",
+              "title": "pathType",
+              "type": "string"
+            },
+            "public": {
+              "default": false,
+              "description": "#\n# Not recommended to for non-production environments.\n#",
+              "title": "public",
+              "type": "boolean"
+            },
+            "subDomain": {
+              "default": false,
+              "description": "#\n# The default DNS is constructed as:\n# \u003cglobal.serviceName\u003e.[\u003cglobal.project\u003e.\u003cglobal.environment\u003e].\u003cglobal.domain\u003e\n#",
+              "title": "subDomain",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "ingressExtra",
+          "type": "object"
+        },
+        "initContainers": {
+          "description": "#\n#\n#\n# E.g.\n# initContainers:\n#   - nameOverride: foo\n#     image:\n#       name: \"\"\n#       tag: \"\"\n#       pullPolicy: \"IfNotPresent\"\n#     command: []\n#     args: []\n#     resources: {}\n#",
+          "items": {
+            "required": []
+          },
+          "title": "initContainers",
+          "type": "array"
+        },
+        "lifecycle": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "postStartCommand": {
+              "default": "",
+              "description": "#\n# E.g.\n# postStartCommand: echo 'Hello!'\n#",
+              "title": "postStartCommand",
+              "type": "string"
+            },
+            "preStopCommand": {
+              "default": "",
+              "description": "#\n# E.g.\n# preStopCommand: echo 'Bye!'\n#",
+              "title": "preStopCommand",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "lifecycle",
+          "type": "object"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "description": "#\n#",
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "healthCheckPath": {
+              "default": "",
+              "description": "#\n#",
+              "title": "healthCheckPath",
+              "type": "string"
+            },
+            "initialDelaySeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "tcpSocket": {
+              "default": 0,
+              "description": "#\n# E.g.\n# tcpSocket: 80\n#",
+              "title": "tcpSocket",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "metrics": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "path": {
+              "default": "/metrics",
+              "description": "#\n#",
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": "http",
+              "description": "#\n#",
+              "title": "port",
+              "type": "string"
+            },
+            "rules": {
+              "additionalProperties": false,
+              "description": "# Prometheus Operator PrometheusRules configuration\n#",
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "description": "#\n#",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "spec": {
+                  "description": "#\n# Ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusrulespec\n# E.g.\n# spec:\n# - alert: ApplicationUnstable\n#   expr: |\n#     absent(example_app_info)\n#   for: 15m\n#   labels:\n#     severity: critical\n#   annotations:\n#     summary: \"[Example] No reported applications\"\n#     description: \u003e\n#       Example has not reported any applications data for the past 15 minutes which\n#       means that it must be down or not functioning properly. This needs to be\n#       resolved for this cloud to continue to maintain state.\n#",
+                  "items": {
+                    "required": []
+                  },
+                  "title": "spec",
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "title": "rules",
+              "type": "object"
+            },
+            "serviceMonitor": {
+              "additionalProperties": false,
+              "description": "# Prometheus Operator ServiceMonitor configuration\n#",
+              "properties": {
+                "enabled": {
+                  "default": false,
+                  "description": "#\n#",
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "interval": {
+                  "default": "10s",
+                  "description": "#\n# ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint\n#",
+                  "title": "interval",
+                  "type": "string"
+                },
+                "scrapeTimeout": {
+                  "default": "3s",
+                  "description": "#\n# ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint\n#",
+                  "title": "scrapeTimeout",
+                  "type": "string"
+                },
+                "selector": {
+                  "additionalProperties": false,
+                  "description": "#\n# ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration\n# e.g:\n# selector:\n#   prometheus: my-prometheus\n#",
+                  "required": [],
+                  "title": "selector",
+                  "type": "object"
+                }
+              },
+              "required": [],
+              "title": "serviceMonitor",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "metrics",
+          "type": "object"
+        },
+        "nameOverride": {
+          "default": "",
+          "description": "#\n#\n# This overrides that and uses the given string instead.\n#",
+          "title": "nameOverride",
+          "type": "string"
+        },
+        "nodeAffinityPreset": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity\n#",
+          "properties": {
+            "key": {
+              "default": "",
+              "description": "#\n# E.g.\n# key: \"topology.kubernetes.io/zone\"\n#",
+              "title": "key",
+              "type": "string"
+            },
+            "type": {
+              "default": "",
+              "description": "#\n#",
+              "title": "type",
+              "type": "string"
+            },
+            "values": {
+              "description": "#\n# E.g.\n# values:\n#   - eu-central-1a\n#   - eu-central-1b\n#   - eu-central-1c\n#",
+              "items": {
+                "required": []
+              },
+              "title": "values",
+              "type": "array"
+            }
+          },
+          "required": [],
+          "title": "nodeAffinityPreset",
+          "type": "object"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/user-guide/node-selection/\n#",
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "pdb": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/\n#",
+          "properties": {
+            "create": {
+              "default": false,
+              "description": "#\n#",
+              "title": "create",
+              "type": "boolean"
+            },
+            "maxUnavailable": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "maxUnavailable",
+              "type": "integer"
+            },
+            "minAvailable": {
+              "default": 1,
+              "description": "#",
+              "title": "minAvailable",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "pdb",
+          "type": "object"
+        },
+        "persistence": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/user-guide/persistent-volumes/\n#",
+          "properties": {
+            "accessModes": {
+              "description": "#\n#",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "accessModes",
+              "type": "array"
+            },
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "path": {
+              "default": "",
+              "description": "#\n#",
+              "title": "path",
+              "type": "string"
+            },
+            "size": {
+              "default": "8Gi",
+              "description": "#\n#",
+              "title": "size",
+              "type": "string"
+            },
+            "storageClass": {
+              "default": "",
+              "description": "#\n# If defined, storageClassName: \u003cstorageClass\u003e",
+              "title": "storageClass",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "persistence",
+          "type": "object"
+        },
+        "podAffinityPreset": {
+          "default": "",
+          "description": "#\n# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n#",
+          "title": "podAffinityPreset",
+          "type": "string"
+        },
+        "podAnnotations": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podAntiAffinityPreset": {
+          "default": "soft",
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity\n# Allowed values: soft, hard\n#",
+          "title": "podAntiAffinityPreset",
+          "type": "string"
+        },
+        "podLabels": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod\n#",
+          "properties": {
+            "fsGroup": {
+              "default": 65534,
+              "description": "#\n#",
+              "title": "fsGroup",
+              "type": "integer"
+            },
+            "runAsGroup": {
+              "default": 65534,
+              "description": "#\n#",
+              "title": "runAsGroup",
+              "type": "integer"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "description": "#\n#",
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1000,
+              "description": "#\n#",
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "preStopDelaySeconds": {
+          "default": 0,
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/\n#",
+          "title": "preStopDelaySeconds",
+          "type": "integer"
+        },
+        "priorityClassName": {
+          "default": "",
+          "description": "#\n#",
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "rbac": {
+          "additionalProperties": false,
+          "description": "#",
+          "properties": {
+            "create": {
+              "default": true,
+              "description": "#\n#",
+              "title": "create",
+              "type": "boolean"
+            },
+            "rules": {
+              "description": "#\n# e.g:\n# rules:\n#   - apiGroups:\n#       - \"\"\n#     resources:\n#       - pods\n#     verbs:\n#       - get\n#       - list\n#",
+              "items": {
+                "required": []
+              },
+              "title": "rules",
+              "type": "array"
+            }
+          },
+          "required": [],
+          "title": "rbac",
+          "type": "object"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "description": "#\n#",
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "healthCheckPath": {
+              "default": "",
+              "description": "#\n#",
+              "title": "healthCheckPath",
+              "type": "string"
+            },
+            "initialDelaySeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "tcpSocket": {
+              "default": 0,
+              "description": "#\n# E.g.\n# tcpSocket: 80\n#",
+              "title": "tcpSocket",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "description": "#\n# running service equal to the expected size.\n#",
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "#\n# ref: https://kubernetes.io/docs/user-guide/compute-resources/\n#\n# E.g.\n# resources:\n#   requests:\n#     cpu: 10m\n#     memory: 50Mi\n#   limits:\n#     cpu: 50m\n#     memory: 50Mi",
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        },
+        "resourcesPreset": {
+          "default": "nano",
+          "description": "#\n# This is ignored if resources is set (resources is recommended for production).\n# More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9\n#",
+          "title": "resourcesPreset",
+          "type": "string"
+        },
+        "rollouts": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://argoproj.github.io/argo-rollouts/\n#",
+          "properties": {
+            "autoPromotionEnabled": {
+              "default": true,
+              "description": "#\n# to the active service or enter a paused state. If not specified, the\n# default value is true.\n# Note: autoPromotionEnabled will be ignored if rollouts.strategy is set to `canary`\n#",
+              "title": "autoPromotionEnabled",
+              "type": "boolean"
+            },
+            "autoPromotionSeconds": {
+              "default": 0,
+              "description": "#\n# specified pause delay in seconds after the ReplicaSet becomes ready.\n# If omitted, the Rollout enters and remains in a paused state until\n# manually resumed by resetting spec.Paused to false.\n# Note: autoPromotionSeconds will be ignored if rollouts.strategy is set to `canary`\n#",
+              "title": "autoPromotionSeconds",
+              "type": "integer"
+            },
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "scaleDownDelaySeconds": {
+              "default": 30,
+              "description": "#\n# the Rollout waits 30 seconds before scaling down the previous ReplicaSet.\n# A minimum of 30 seconds is recommended to ensure IP table propagation\n# across the nodes in a cluster.\n# Note: scaleDownDelaySeconds will be ignored if rollouts.strategy is set to `canary`\n#",
+              "title": "scaleDownDelaySeconds",
+              "type": "integer"
+            },
+            "steps": {
+              "description": "#\n# Skipped upon initial deploy of a rollout.\n# Note: steps will be ignored if rollouts.strategy is set to `blueGreen`\n# E.g.\n# steps:\n# - setWeight: 20\n# - pause: {}\n# - setWeight: 40\n# - pause: {duration: 10s}\n# - setWeight: 60\n# - pause: {duration: 10m}\n# - setWeight: 80\n# - pause: {duration: 10h}\n#",
+              "items": {
+                "required": []
+              },
+              "title": "steps",
+              "type": "array"
+            },
+            "strategy": {
+              "default": "canary",
+              "description": "#\n#",
+              "title": "strategy",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "rollouts",
+          "type": "object"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container\n#",
+          "properties": {
+            "allowPrivilegeEscalation": {
+              "default": false,
+              "description": "#\n#",
+              "title": "allowPrivilegeEscalation",
+              "type": "boolean"
+            },
+            "capabilities": {
+              "additionalProperties": false,
+              "description": "#",
+              "properties": {
+                "drop": {
+                  "description": "#",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "drop",
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "title": "capabilities",
+              "type": "object"
+            },
+            "readOnlyRootFilesystem": {
+              "default": true,
+              "description": "#\n#",
+              "title": "readOnlyRootFilesystem",
+              "type": "boolean"
+            },
+            "runAsGroup": {
+              "default": 65534,
+              "description": "#\n#",
+              "title": "runAsGroup",
+              "type": "integer"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "description": "#\n#",
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1000,
+              "description": "#\n#",
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "description": "#\n#",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "healthCheckPath": {
+              "default": "/",
+              "description": "#\n#",
+              "title": "healthCheckPath",
+              "type": "string"
+            },
+            "loadBalancerSourceRanges": {
+              "description": "#\n# ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service\n# Example:\n# loadBalancerSourceRanges:\n# - 10.10.10.0/24\n#",
+              "items": {
+                "required": []
+              },
+              "title": "loadBalancerSourceRanges",
+              "type": "array"
+            },
+            "name": {
+              "default": "",
+              "description": "#\n#",
+              "title": "name",
+              "type": "string"
+            },
+            "ports": {
+              "additionalProperties": false,
+              "description": "#\n# E.g.\n# ports:\n#   http: 80\n#   https: 443",
+              "required": [],
+              "title": "ports",
+              "type": "object"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "description": "#\n# Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types\n#",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/",
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "#\n#",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": false,
+              "description": "#\n#",
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "description": "#\n# If not set and create is true, a name is generated using the fullname template\n#",
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "sidecarContainers": {
+          "description": "#\n#\n# E.g.\n# sidecarContainers:\n#   - nameOverride: foo\n#     image:\n#       name: \"\"\n#       tag: \"\"\n#       pullPolicy: \"IfNotPresent\"\n#     command: []\n#     args: []\n#     resources: {}\n#",
+          "items": {
+            "required": []
+          },
+          "title": "sidecarContainers",
+          "type": "array"
+        },
+        "startupProbe": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes\n#",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "#\n#",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "failureThreshold": {
+              "default": 3,
+              "description": "#\n#",
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "healthCheckPath": {
+              "default": "",
+              "description": "#\n#",
+              "title": "healthCheckPath",
+              "type": "string"
+            },
+            "initialDelaySeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "description": "#\n#",
+              "title": "periodSeconds",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "successThreshold",
+              "type": "integer"
+            },
+            "tcpSocket": {
+              "default": 0,
+              "description": "#\n# E.g.\n# tcpSocket: 80\n#",
+              "title": "tcpSocket",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "default": 1,
+              "description": "#\n#",
+              "title": "timeoutSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "startupProbe",
+          "type": "object"
+        },
+        "tolerations": {
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/\n#",
+          "items": {
+            "required": []
+          },
+          "title": "tolerations",
+          "type": "array"
+        },
+        "topologySpreadConstraintPreset": {
+          "default": "soft",
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field\n# Allowed values: soft, hard",
+          "title": "topologySpreadConstraintPreset",
+          "type": "string"
+        },
+        "topologySpreadConstraints": {
+          "additionalProperties": false,
+          "description": "#\n# Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field\n# Note: topologySpreadConstraintPreset will be ignored when it's set\n#",
+          "required": [],
+          "title": "topologySpreadConstraints",
+          "type": "object"
+        },
+        "vaultVolumesSupport": {
+          "default": false,
+          "description": "#\n#",
+          "title": "vaultVolumesSupport",
+          "type": "boolean"
+        },
+        "volumes": {
+          "additionalProperties": false,
+          "description": "#\n# e.g.:\n# volumes:\n#   shared-files:\n#     mountPath: /tmp/shared\n#     emptyDir: true\n#   central-config:\n#     mountPath: /central-config\n#     configMap:\n#       application.yaml: |\n#         configserver:\n#           name:  JHipster Registry\n#           status: Connected to the JHipster Registry running in Kubernetes\n#  credentials:\n#    mountPath: /var/lib/.key\n#    secretName: kubernetes-secret\n#  vaultCredentials:\n#    mountPath: /var/lib\n#    vaultPath: my_secret_files\n#    items:\n#      - key.pass",
+          "required": [],
+          "title": "volumes",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "deployment",
+      "type": "object"
+    },
+    "global": {
+      "additionalProperties": false,
+      "description": "yaml-language-server: $schema=values.schema.json",
+      "properties": {
+        "environmentName": {
+          "default": "stage",
+          "title": "environmentName",
+          "type": "string"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "1234567890.dkr.ecr.eu-central-1.amazonaws.com",
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "k8s/example-service",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "dev",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "tag",
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "org": {
+          "default": "core",
+          "title": "org",
+          "type": "string"
+        },
+        "production": {
+          "default": true,
+          "title": "production",
+          "type": "boolean"
+        },
+        "project": {
+          "default": "test",
+          "title": "project",
+          "type": "string"
+        },
+        "serviceName": {
+          "default": "test",
+          "title": "serviceName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "org",
+        "serviceName",
+        "project",
+        "production",
+        "environmentName",
+        "image"
+      ],
+      "title": "global",
+      "type": "object"
+    }
+  },
+  "required": [
+    "global",
+    "deployment"
+  ],
+  "type": "object"
+}

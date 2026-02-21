@@ -5,19 +5,20 @@ pushd ../ > /dev/null
 rm -rf ./charts/ Chart.lock
 helm dependency update > /dev/null
 popd > /dev/null || exit
-
+#declare -a testCases=( './php' )
+#for testCase in "${testCases[@]}"; do
 for testCase in */; do
     echo "Test case: ${testCase}"
     pushd "${testCase}/" > /dev/null || exit
     rm -rf ./charts/ Chart.lock
     helm dependency update > /dev/null
     helm template . \
-      --debug \
-      --dry-run \
+      --dry-run=client \
       --generate-name \
       --namespace test \
       --dependency-update \
       --set global.project=core \
+      --set global.domain=example.com \
       --set global.serviceName=test \
       --values values.yaml > 1.yaml
     popd > /dev/null || exit

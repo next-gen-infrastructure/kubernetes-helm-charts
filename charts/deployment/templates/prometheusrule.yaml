@@ -2,11 +2,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ include "k8s-common.names.fullname" . }}
+  name: {{ include "common.names.fullname" . }}
   namespace: monitoring
-  labels: {{- include "k8s-common.labels.standard" . | nindent 4 }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
 spec:
   groups:
-  - name: {{ include "k8s-common.names.fullname" . }}
+  - name: {{ include "common.names.fullname" . }}
     rules: {{ toYaml .Values.metrics.rules.spec | nindent 6 }}
 {{- end }}

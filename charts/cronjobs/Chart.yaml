@@ -4,9 +4,9 @@ version: 1.1.3
 description: Kubernetes Cron Jobs
 type: application
 dependencies:
-  - name: k8s-common
+  - name: common
     version: ^1.0.0
-    repository: "file://../k8s-common"
+    repository: "file://../common"
 sources:
   - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
 maintainers:
