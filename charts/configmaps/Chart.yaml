@@ -1,6 +1,6 @@
 apiVersion: v2
 name: configmaps
-version: 2.0.0
+version: 2.0.1
 description: The chart for creating configmaps.
 type: application
 dependencies:
