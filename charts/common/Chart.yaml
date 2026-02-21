@@ -3,6 +3,8 @@ name: common
 version: 2.0.0
 description: A Library Helm Chart for grouping common logic between charts. This
   chart is not deployable by itself.
+annotations:
+  category: Infrastructure
 type: library
 keywords:
   - common
@@ -15,5 +17,3 @@ sources:
 maintainers:
   - name: Alexander Dobrodey
     url: https://github.com/ADobrodey
-annotations:
-  category: Infrastructure
