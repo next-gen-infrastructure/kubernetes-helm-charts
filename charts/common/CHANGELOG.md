@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-1.1.3...common-2.0.0) (2026-02-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Rename common chart
+
+### Features
+
+* Rename common chart ([d39753f](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d39753f39db3877beea14da7ab0d9621e97f03e0))
+
 ## [1.1.3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-1.1.2...common-1.1.3) (2026-01-11)
 
 
