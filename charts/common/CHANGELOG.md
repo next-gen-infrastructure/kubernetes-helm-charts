@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.2...common-2.0.3) (2026-02-22)
+
+
+### Bug Fixes
+
+* remove redundant "app" label from common chart template ([3153c97](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3153c971bbf8de54223ce2bf9a891cdd14ecbd2c))
+
 ## [2.0.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.1...common-2.0.2) (2026-02-22)
 
 
