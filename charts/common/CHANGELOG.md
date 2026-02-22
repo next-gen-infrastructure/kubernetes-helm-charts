@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.1...common-2.0.2) (2026-02-22)
+
+
+### Bug Fixes
+
+* enhance image tag construction logic in common chart template ([fab67af](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/fab67af95bb05d6edabfbaa48082ba179dbd20bc))
+* Support for global.env - short environment name/type ([7c6e100](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/7c6e1000c92394693c892c5e97da39268c921b9c))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.0...common-2.0.1) (2026-02-21)
 
 
