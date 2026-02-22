@@ -19,13 +19,12 @@ Return the proper image name
 {{- $digest := (get $localImage "digest") | default (get $globalImage "digest") -}}
 
 {{- $full := $repository | default $name -}}
-{{- if $registry -}}
-  {{- $registry = trimSuffix "/" $registry -}}
-  {{- $full = printf "%s/%s" $registry $repository -}}
+{{- if not $full -}}
+  {{- fail "image.repository or image.name must be set either in .Values.image or .Values.global.image" -}}
 {{- end -}}
 {{- if $registry -}}
   {{- $registry = trimSuffix "/" $registry -}}
-  {{- $full = printf "%s/%s" $registry $repository -}}
+  {{- $full = printf "%s/%s" $registry $full -}}
 {{- end -}}
 {{- /* digest wins over tag */ -}}
 {{- if $digest -}}
