@@ -17,7 +17,6 @@ Kubernetes standard labels
 {{- end -}}
 {{ template "common.tplvalues.merge" (dict "values" (list .customLabels $default) "context" .context) }}
 {{- else -}}
-app: {{ include "common.names.fullname" . }}
 app.kubernetes.io/name: {{ include "common.names.name" . }}
 helm.sh/chart: {{ include "common.names.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
