@@ -4,6 +4,29 @@ entries:
   - annotations:
       category: Infrastructure
     apiVersion: v2
+    created: "2026-02-22T01:17:49.803009329Z"
+    description: A Library Helm Chart for grouping common logic between charts. This
+      chart is not deployable by itself.
+    digest: 05aa3f3109d3d7d3a20664d61129f42dfaa997ed461a3d38e78f9607b8a2a219
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: common
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/common-2.0.2/common-2.0.2.tgz
+    version: 2.0.2
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
     created: "2026-02-21T22:48:01.368042808Z"
     description: A Library Helm Chart for grouping common logic between charts. This
       chart is not deployable by itself.
@@ -971,4 +994,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-02-21T22:48:01.366728567Z"
+generated: "2026-02-22T01:17:49.802264867Z"
