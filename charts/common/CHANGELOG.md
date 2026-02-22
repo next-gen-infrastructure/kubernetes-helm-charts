@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.3...common-2.0.4) (2026-02-22)
+
+
+### Bug Fixes
+
+* improve image construction validation in common chart template ([2935917](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2935917bb66df530b1b6256e309d082fc57eb202))
+
 ## [2.0.3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.2...common-2.0.3) (2026-02-22)
 
 
