@@ -10,11 +10,29 @@ Return the proper image name
 */}}
 {{- define "common.images.image" -}}
 {{- $localImage := .Values.image | default dict }}
-{{- $imageName := $localImage.name | default .Values.global.image.name -}}
-{{- $tag := $localImage.tag | default .Values.global.image.tag | default .Values.global.env | toString -}}
-{{- $separator := ":" -}}
+{{- $globalImage := .Values.global.image | default dict }}
 
-{{- printf "%s%s%s" $imageName $separator $tag -}}
+{{- $registry := (get $localImage "registry") | default (get $globalImage "registry") -}}
+{{- $repository := (get $localImage "repository") | default (get $globalImage "repository") -}}
+{{- $name := (get $localImage "name") | default (get $globalImage "name") | default .Release.Name -}}
+{{- $tag := (get $localImage "tag") | default (get $globalImage "tag") | default .Chart.AppVersion -}}
+{{- $digest := (get $localImage "digest") | default (get $globalImage "digest") -}}
+
+{{- $full := $repository | default $name -}}
+{{- if $registry -}}
+  {{- $registry = trimSuffix "/" $registry -}}
+  {{- $full = printf "%s/%s" $registry $repository -}}
+{{- end -}}
+{{- if $registry -}}
+  {{- $registry = trimSuffix "/" $registry -}}
+  {{- $full = printf "%s/%s" $registry $repository -}}
+{{- end -}}
+{{- /* digest wins over tag */ -}}
+{{- if $digest -}}
+  {{- printf "%s@%s" $full $digest -}}
+{{- else -}}
+  {{- printf "%s:%s" $full $tag -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
