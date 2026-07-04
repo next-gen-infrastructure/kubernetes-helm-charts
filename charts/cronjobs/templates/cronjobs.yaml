@@ -7,7 +7,7 @@ apiVersion: {{ include "common.capabilities.cronjob.apiVersion" $ }}
 kind: CronJob
 metadata:
   name: {{ printf "%s-%s" $namePrefix $key | trunc 52 | trimSuffix "-"}}
-  namespace: {{ $.Release.Namespace }}
+  namespace: {{ include "common.names.namespace" $ | quote }}
   labels: {{ include "common.labels.standard" $ | nindent 4 }}
     app.kubernetes.io/component: cronjob
   {{- if $value.annotations }}
@@ -15,6 +15,9 @@ metadata:
   {{- end }}
 spec:
   schedule: {{ $value.schedule | quote }}
+  {{- with $value.timeZone }}
+  timeZone: {{ . | quote }}
+  {{- end }}
   suspend: {{ $value.suspend | default false }}
   {{- if eq $.Values.global.environment "prod" }}
   concurrencyPolicy: {{ $value.concurrencyPolicy | default "Forbid" }}
@@ -36,12 +39,17 @@ spec:
       {{- else }}
       backoffLimit: 0
       {{- end }}
+      {{- with $value.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ . }}
+      {{- end }}
       template:
         spec:
           {{- if $.Values.podSecurityContext }}
           securityContext: {{ toYaml $.Values.podSecurityContext | nindent 12 }}
           {{- end }}
-          hostPid: $.Values.hostPid
+          {{- if $.Values.hostPid }}
+          hostPID: {{ $.Values.hostPid }}
+          {{- end }}
           {{- if $.Values.affinity }}
           affinity: {{- include "common.tplvalues.render" (dict "value" $.Values.affinity "context" $) | nindent 12 }}
           {{- else }}
@@ -68,6 +76,9 @@ spec:
             - name: {{ $key }}
               image: "{{ include "common.images.image"  $ }}"
               imagePullPolicy: {{ $.Values.global.image.pullPolicy }}
+              {{- with $value.securityContext }}
+              securityContext: {{ toYaml . | nindent 16 }}
+              {{- end }}
               env:
                 {{- include "cronjobs.globalenv.value" $ | indent 16 }}
                 {{- include "cronjobs.job.value" $value | indent 16 }}
