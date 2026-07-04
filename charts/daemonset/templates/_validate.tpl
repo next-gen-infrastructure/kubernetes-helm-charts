@@ -13,12 +13,12 @@ Compile all warnings into a single message, and call fail.
 {{- end -}}
 
 {{/*
-Validate values of Deployment:
+Validate values of DaemonSet:
 - must set a org
 */}}
 {{- define "daemonset.validateValues.project" -}}
 {{- if not .Values.global.project -}}
-deployment: global.project
+daemonset: global.project
     You must set a global.project
 {{- end -}}
 {{- end -}}

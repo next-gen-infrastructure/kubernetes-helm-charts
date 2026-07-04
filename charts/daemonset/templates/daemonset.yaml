@@ -2,7 +2,7 @@ apiVersion: {{ include "common.capabilities.daemonset.apiVersion" . }}
 kind: DaemonSet
 metadata:
   name: {{ template "common.names.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels: {{ include "common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
   annotations:
   {{ if .Values.env.vaultSecret }}
@@ -81,14 +81,3 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "common.names.fullname" . }}
       {{- end }}
-  {{- if .Values.volumes }}
-  {{ $claimsList := list }}
-  {{- range $key, $value :=.Values.volumes }}
-  {{- if $value.storage }}
-    {{ $claimsList := append $claimsList $key }}
-  {{- end }}
-  {{- end }}
-  {{- if ne (len $claimsList ) 0 }}
-  volumeClaimTemplates: {{ include "common.volume.claims" . | nindent 4 }}
-  {{- end }}
-  {{- end }}
