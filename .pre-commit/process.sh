@@ -113,6 +113,10 @@ for file in "$@"; do
       helm dep update
       # Installation: https://github.com/dadav/helm-schema?tab=readme-ov-file#installation
       helm-schema
+      # helm-schema recurses into examples/; those schemas go stale and break example rendering
+      if [ -d examples ]; then
+        find examples -name values.schema.json -delete
+      fi
       # Installation: https://github.com/bitnami-labs/readme-generator-for-helm#install
       readme-generator \
         --values values.yaml \

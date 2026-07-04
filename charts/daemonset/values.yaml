@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=values.schema.json
-# Default values for statefulset.
+# Default values for daemonset.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
