@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.4...common-2.0.5) (2026-07-04)
+
+
+### Bug Fixes
+
+* improve helm chart templates for ingress, volume, and containers ([82c9bd0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/82c9bd04da95503801769933b2527d0ba5714cad))
+
 ## [2.0.4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.3...common-2.0.4) (2026-02-22)
 
 

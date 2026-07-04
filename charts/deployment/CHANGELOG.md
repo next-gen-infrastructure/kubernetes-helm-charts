@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-2.0.1...deployment-2.1.0) (2026-07-04)
+
+
+### Features
+
+* remove `values.schema.json` files from example folders ([17ae197](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/17ae1972dfd2604497289b3856846ca767f4840f))
+
+
+### Bug Fixes
+
+* add `Chart` context to external-secret template ([a71909c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a71909c0f7723aeb56f3aa05b2a85cc78c463dc4))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-2.0.0...deployment-2.0.1) (2026-02-21)
 
 

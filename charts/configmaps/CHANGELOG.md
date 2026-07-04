@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.1...configmaps-2.0.2) (2026-07-04)
+
+
+### Bug Fixes
+
+* use `tplvalues.render` in configmap templates ([74d37d4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/74d37d4b0eda0be75216cb3c7f71ae718dd446f1))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.0...configmaps-2.0.1) (2026-02-21)
 
 
