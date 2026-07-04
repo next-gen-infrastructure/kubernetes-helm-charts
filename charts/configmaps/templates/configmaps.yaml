@@ -10,6 +10,6 @@ metadata:
     {{- include "common.labels.standard" $ | nindent 4 }}
 data:
 {{- range $file, $content := $value }}
-  {{ $file }}: {{ toYaml $content | indent 2 }}
+  {{ $file }}: |{{ include "common.tplvalues.render" (dict "value" $content "context" $) | nindent 4 }}
 {{- end -}}
 {{- end -}}
