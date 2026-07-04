@@ -38,6 +38,9 @@ Return generated volume definitions.
   {{- else if $value.hostPath -}}
   hostPath:
     path: {{ $value.hostPath }}
+    {{- with $value.hostPathType }}
+    type: {{ . }}
+    {{- end }}
   {{- else if $value.vaultPath -}}
   secret:
     secretName: {{ include "common.names.fullname" $ }}-vault-{{ $key }}

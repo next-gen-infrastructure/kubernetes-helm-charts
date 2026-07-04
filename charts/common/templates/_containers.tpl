@@ -122,6 +122,6 @@ Return generated container configuration.
   {{- end }}
   {{- if (.Values.persistence).enabled }}
     - name: data
-      mountPath: {{ required "peristence.path is required if persistence is enabled" .Values.persistence.path }}
+      mountPath: {{ required "persistence.path is required if persistence is enabled" .Values.persistence.path }}
   {{- end }}
 {{- end -}}

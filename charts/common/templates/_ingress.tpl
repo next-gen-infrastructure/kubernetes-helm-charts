@@ -28,10 +28,10 @@ service:
 {{- end -}}
 
 {{- define "common.ingress.domain" -}}
-{{- if eq .Values.global.env "prod" -}}
+{{- if eq .Values.global.environment "prod" -}}
 {{ .Values.global.domain }}
 {{- else -}}
-{{ substr 0 4 .Values.global.project }}.{{ .Values.global.env }}.{{ .Values.global.domain }}
+{{ substr 0 4 .Values.global.project }}.{{ .Values.global.environment }}.{{ .Values.global.domain }}
 {{- end -}}
 {{- end -}}
 
@@ -86,12 +86,12 @@ kubernetes.io/ingress.class: "alb"
 alb.ingress.kubernetes.io/actions.ssl-redirect: "{\"Type\":\"redirect\",\"RedirectConfig\":{\"Protocol\":\"HTTPS\",\"Port\":\"443\",\"StatusCode\":\"HTTP_301\"}}"
 alb.ingress.kubernetes.io/backend-protocol: "HTTP"
 # group name as cluster-name and optional '-public'
-alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.env }}{{ if .Values.ingress.public -}}-public{{- end }}
+alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.environment }}{{ if .Values.ingress.public -}}-public{{- end }}
 alb.ingress.kubernetes.io/healthcheck-path: "{{ .Values.service.healthCheckPath | default "/" }}"
 alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\":80},{\"HTTPS\":443}]"
 alb.ingress.kubernetes.io/scheme: {{ if .Values.ingress.public -}}internet-facing{{- else -}}internal{{- end }}
 alb.ingress.kubernetes.io/security-groups: "generic-web{{ if .Values.ingress.public -}} ,generic-public-web{{- end -}}"
-alb.ingress.kubernetes.io/ssl-policy: "ELBSecurityPolicy-TLS-1-2-2017-01"
+alb.ingress.kubernetes.io/ssl-policy: "{{ .Values.ingress.tlsPolicy | default "ELBSecurityPolicy-TLS-1-2-2017-01" }}"
 alb.ingress.kubernetes.io/success-codes: "200"
 alb.ingress.kubernetes.io/target-type: "ip"
 {{- end -}}
