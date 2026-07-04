@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-2.0.1...cronjobs-2.1.0) (2026-07-04)
+
+
+### Features
+
+* remove `values.schema.json` files from example folders ([17ae197](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/17ae1972dfd2604497289b3856846ca767f4840f))
+
+
+### Bug Fixes
+
+* enhance cronjob template with namespace, timezone, and ttl support ([1e5940f](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/1e5940f909e1b11eded8bdc046d835e2ae3ab2e7))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-2.0.0...cronjobs-2.0.1) (2026-02-21)
 
 

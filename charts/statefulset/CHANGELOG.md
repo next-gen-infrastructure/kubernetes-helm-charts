@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-2.0.1...statefulset-2.1.0) (2026-07-04)
+
+
+### Features
+
+* remove `values.schema.json` files from example folders ([17ae197](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/17ae1972dfd2604497289b3856846ca767f4840f))
+
+
+### Bug Fixes
+
+* enhance configmap, external-secret, and statefulset templates ([85dc5a5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/85dc5a59653efa62b738827e98b057e25e141860))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-2.0.0...statefulset-2.0.1) (2026-02-21)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-2.0.1...vaultsecrets-2.0.2) (2026-07-04)
+
+
+### Bug Fixes
+
+* simplify external-secret template key construction ([5e98809](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/5e98809d5c476f901630d362329b80ed5c61b5ac))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-2.0.0...vaultsecrets-2.0.1) (2026-02-21)
 
 

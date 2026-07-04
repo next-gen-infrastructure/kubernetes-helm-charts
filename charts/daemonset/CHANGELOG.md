@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-2.0.1...daemonset-2.1.0) (2026-07-04)
+
+
+### Features
+
+* remove `values.schema.json` files from example folders ([17ae197](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/17ae1972dfd2604497289b3856846ca767f4840f))
+
+
+### Bug Fixes
+
+* enhance daemonset and configmap templates ([adcff10](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/adcff1020947faca0629d42bdef0abb9af2e854f))
+* update daemonset defaults and clean up stale schema files ([84340f9](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/84340f9d6fcd1bee90ab6c3dea2060a8121eeb63))
+
 ## [2.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-2.0.0...daemonset-2.0.1) (2026-02-21)
 
 
