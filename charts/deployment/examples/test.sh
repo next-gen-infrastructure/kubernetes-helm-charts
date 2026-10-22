@@ -17,7 +17,6 @@ for testCase in */; do
       --generate-name \
       --namespace test \
       --dependency-update \
-      --set global.project=core \
       --set global.domain=example.com \
       --set global.serviceName=test \
       --values values.yaml > 1.yaml

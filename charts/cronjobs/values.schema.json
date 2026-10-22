@@ -15,6 +15,11 @@
                     "description": "Name of the service. Affects public DNS.",
                     "default": ""
                 },
+                "secretStore": {
+                    "type": "string",
+                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
+                    "default": "vault"
+                },
                 "environment": {
                     "type": "string",
                     "description": "Name of the environment, one of \"dev\", \"stage\", \"prod\".",

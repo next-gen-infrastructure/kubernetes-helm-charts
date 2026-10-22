@@ -1,7 +1,6 @@
 # yaml-language-server: $schema=values.schema.json
 global:
   serviceName: "test"
-  project:  "test"
   production: true
   environmentName: "stage"
   image:

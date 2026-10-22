@@ -32,7 +32,6 @@ jobs:
             pushd $x
             helm dependency update . --skip-refresh
             helm lint . \
-              --set global.project=core \
               --set global.domain=example.com \
               --set global.serviceName=test \
               --set global.environment=test \
@@ -50,7 +49,6 @@ jobs:
               --generate-name \
               --namespace test \
               --dependency-update \
-              --set global.project=core \
               --set global.domain=example.com \
               --set global.serviceName=test \
               --set global.environment=test \

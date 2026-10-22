@@ -14,6 +14,9 @@ global:
   ## E.g. php-admin, service-api
   ##
   serviceName: ""
+  ## @param global.secretStore Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets
+  ##
+  secretStore: "vault"
   ## @param global.environment Name of the environment, one of "dev", "stage", "prod".
   ## E.g. feature, stage, dev-2.
   ##
@@ -155,7 +158,7 @@ env:
   ##
   secret: {}
   ## @param env.vaultSecret Kubernetes secrets that get added to the container from Hashicorp Vault
-  ## path - Path within vault to the secret containing environment variable. It will be found in /kv/<org>/<project>/<env>/<release.namespace>
+  ## path - Path within vault to the secret containing environment variable. It will be found in Vault at <env>/<path> (store: global.secretStore)
   ## secret - Optional name of the variable inside secret. Defaults to the secret key
   ## E.g.
   ## vaultSecret:
