@@ -1,0 +1,24 @@
+common (kubernetes-helm-charts)
+
+This chart includes and adapts Helm template helpers from the Bitnami
+"common" library chart:
+
+  https://github.com/bitnami/charts/tree/main/bitnami/common
+
+Copyright VMware, Inc. (now Broadcom, Inc.)
+Licensed under the Apache License, Version 2.0 (see the LICENSE file).
+
+The files below derive from that work and have been modified (new helpers
+added, others changed or removed); the original copyright and SPDX headers are
+retained in each file:
+
+  templates/_affinities.tpl     templates/_resources.tpl
+  templates/_capabilities.tpl   templates/_secrets.tpl
+  templates/_errors.tpl         templates/_storage.tpl
+  templates/_images.tpl         templates/_tplvalues.tpl
+  templates/_ingress.tpl        templates/_utils.tpl
+  templates/_labels.tpl         templates/_warnings.tpl
+  templates/_names.tpl
+
+The remaining templates (_annotations, _containers, _environment,
+_serviceaccount, _spread, _volume) were written for this repository.

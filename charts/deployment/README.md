@@ -49,24 +49,23 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 - Fix configMaps names
 - Fix vaultSecret names
 - Support additional `service.ports`
-- Support for `podAffinityPreset`, `podAntiAffinityPreset`, `nodeAffinityPreset`
+- Support for `podAffinity`, `podAntiAffinity`, `nodeAffinityPreset`
 - Change `podSecurityContext` for nonRoot by default and 1001 user
 
 ## Parameters
 
 ### Global parameters
 
-| Name                       | Description                                             | Value          |
-| -------------------------- | ------------------------------------------------------- | -------------- |
-| `global.org`               | The name of the organization                            | `""`           |
-| `global.project`           | The project of the service                              | `""`           |
-| `global.serviceName`       | Name of the service. Affects public DNS.                | `example`      |
-| `global.environment`       | Name of the environment, one of "dev", "stage", "prod". | `dev`          |
-| `global.domain`            | Company Root-level domain, expects                      | `""`           |
-| `global.image.name`        | Name of the image,                                      | `""`           |
-| `global.image.tag`         | Tag of the image                                        | `latest`       |
-| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes    | `IfNotPresent` |
-| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.        | `[]`           |
+| Name                       | Description                                                              | Value          |
+| -------------------------- | ------------------------------------------------------------------------ | -------------- |
+| `global.serviceName`       | Name of the service. Affects public DNS.                                 | `example`      |
+| `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets | `vault`        |
+| `global.environment`       | Name of the environment, one of "dev", "stage", "prod".                  | `dev`          |
+| `global.domain`            | Company Root-level domain, expects                                       | `""`           |
+| `global.image.name`        | Name of the image,                                                       | `""`           |
+| `global.image.tag`         | Tag of the image                                                         | `latest`       |
+| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes                     | `IfNotPresent` |
+| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.                         | `[]`           |
 
 ### Common parameters
 
@@ -74,6 +73,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------- |
 | `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                                     | `""`    |
 | `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                             | `""`    |
+| `namespaceOverride`                        | Override the namespace of all rendered resources (defaults to the release namespace)           | `""`    |
 | `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the | `1`     |
 | `commonLabels`                             | Labels to add to all deployed objects                                                          | `{}`    |
 | `commonAnnotations`                        | Annotations to add to all deployed objects                                                     | `{}`    |
@@ -94,35 +94,40 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
 
-| Name                                | Description                                                                                                                        | Value        |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]`    |
-| `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`      |
-| `volumes`                           | Container volumes configuration                                                                                                    | `{}`         |
-| `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`         |
-| `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`         |
-| `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`         |
-| `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`         |
-| `podAffinityPreset`                 | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                                | `""`         |
-| `podAntiAffinityPreset`             | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                           | `soft`       |
-| `preStopDelaySeconds`               | pre-stop delay for graceful pod shutdown                                                                                           | `0`          |
-| `basicAuth`                         | Enable basic authentication                                                                                                        |              |
-| `basicAuth.enabled`                 | Enable basic authentication                                                                                                        | `false`      |
-| `basicAuth.username`                | Username for basic authentication                                                                                                  | `admin`      |
-| `basicAuth.password`                | Password for basic authentication                                                                                                  | `""`         |
-| `basicAuth.secretName`              | Name of the existing secret containing the basic auth credentials                                                                  | `basic-auth` |
-| `nodeAffinityPreset`                | Node affinity preset                                                                                                               |              |
-| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`         |
-| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                                                              | `""`         |
-| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`         |
-| `affinity`                          | Affinity for pod assignment                                                                                                        | `{}`         |
-| `topologySpreadConstraintPreset`    | Control spread of containers across availability zones.                                                                            | `soft`       |
-| `topologySpreadConstraints`         | Control spread of containers across nodes, zones, etc.                                                                             | `{}`         |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`       |
-| `pdb`                               | Pod disruption budget configuration                                                                                                |              |
-| `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`      |
-| `pdb.minAvailable`                  | Min available pods or percent of pods                                                                                              | `1`          |
-| `pdb.maxUnavailable`                | Max non-available pods or percent of pods                                                                                          | `1`          |
+| Name                                | Description                                                                                                                        | Value                         |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]`                     |
+| `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`                       |
+| `volumes`                           | Container volumes configuration                                                                                                    | `{}`                          |
+| `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`                          |
+| `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`                          |
+| `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`                          |
+| `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`                          |
+| `podAffinity`                       | Pod affinity. Ignored if `affinity` is set                                                                                         |                               |
+| `podAffinity.preset`                | Preset type: soft (preferred), hard (required) or disabled                                                                         | `disabled`                    |
+| `podAffinity.topologyKey`           | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
+| `podAntiAffinity`                   | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                               |
+| `podAntiAffinity.preset`            | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                        |
+| `podAntiAffinity.topologyKey`       | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
+| `preStopDelaySeconds`               | pre-stop delay for graceful pod shutdown                                                                                           | `0`                           |
+| `basicAuth`                         | Enable basic authentication                                                                                                        |                               |
+| `basicAuth.enabled`                 | Enable basic authentication                                                                                                        | `false`                       |
+| `basicAuth.username`                | Username for basic authentication                                                                                                  | `admin`                       |
+| `basicAuth.password`                | Password for basic authentication                                                                                                  | `""`                          |
+| `basicAuth.secretName`              | Name of the existing secret containing the basic auth credentials                                                                  | `basic-auth`                  |
+| `nodeAffinityPreset`                | Node affinity preset                                                                                                               |                               |
+| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                          |
+| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                                                              | `""`                          |
+| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`                          |
+| `affinity`                          | Affinity for pod assignment                                                                                                        | `{}`                          |
+| `topologySpread`                    | Control spread of pods across topology domains (zones, nodes, etc.)                                                                |                               |
+| `topologySpread.preset`             | Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled                                     | `soft`                        |
+| `topologySpread.topologyKey`        | Topology key for soft/hard presets                                                                                                 | `topology.kubernetes.io/zone` |
+| `topologySpread.maxSkew`            | Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)                                         | `""`                          |
+| `topologySpread.constraints`        | Raw topologySpreadConstraints, used only when preset is custom (supports templating)                                               | `[]`                          |
+| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                        |
+| `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
+| `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
 
 ### Extra Containers
 
@@ -218,8 +223,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | --------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingress.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingress.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingress.public`      | If container will be accessible outside VPN.                                     | `false`  |
-| `ingress.stickiness`  | enable sticky sessions for provided number of seconds                            | `0`      |
 | `ingress.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingress.path`        | Prefix for the path routing                                                      | `/`      |
 | `ingress.annotations` | Ingress annotations                                                              | `{}`     |
@@ -231,7 +234,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | -------------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingressExtra.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingressExtra.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingressExtra.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingressExtra.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingressExtra.host`        | DNS for the application external access                                          | `""`     |
 | `ingressExtra.path`        | Prefix for the path routing                                                      | `/`      |
@@ -247,17 +249,18 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Prometheus Exporter / Metrics
 
-| Name                                   | Description                                  | Value      |
-| -------------------------------------- | -------------------------------------------- | ---------- |
-| `metrics.enabled`                      | Enable prometheus to access metrics endpoint | `false`    |
-| `metrics.path`                         | Path to the prometheus metrics endpoint      | `/metrics` |
-| `metrics.port`                         | Name of the service port for metrics         | `http`     |
-| `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                 | `false`    |
-| `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped  | `10s`      |
-| `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended      | `3s`       |
-| `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object  | `{}`       |
-| `metrics.rules.enabled`                | Create PrometheusRules object                | `false`    |
-| `metrics.rules.spec`                   | Configuration for the application alerting   | `[]`       |
+| Name                                   | Description                                  | Value        |
+| -------------------------------------- | -------------------------------------------- | ------------ |
+| `metrics.enabled`                      | Enable prometheus to access metrics endpoint | `false`      |
+| `metrics.path`                         | Path to the prometheus metrics endpoint      | `/metrics`   |
+| `metrics.port`                         | Name of the service port for metrics         | `http`       |
+| `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                 | `false`      |
+| `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped  | `10s`        |
+| `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended      | `3s`         |
+| `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object  | `{}`         |
+| `metrics.rules.enabled`                | Create PrometheusRules object                | `false`      |
+| `metrics.rules.namespace`              | Namespace of the PrometheusRules object      | `monitoring` |
+| `metrics.rules.spec`                   | Configuration for the application alerting   | `[]`         |
 
 ### Lifecycle configuration
 

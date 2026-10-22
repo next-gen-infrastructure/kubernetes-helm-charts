@@ -60,7 +60,7 @@ Return a topologyKey definition
 
 {{/*
 Return a soft podAffinity/podAntiAffinity definition
-{{ include "common.affinities.pods.soft" (dict "component" "FOO" "customLabels" .Values.podLabels "extraMatchLabels" .Values.extraMatchLabels "topologyKey" "BAR" "extraPodAffinityTerms" .Values.extraPodAffinityTerms "context" $) -}}
+{{ include "common.affinities.pods.soft" (dict "component" "FOO" "customLabels" .Values.podLabels "extraMatchLabels" .Values.extraMatchLabels "topologyKey" "BAR" "extraPodAffinityTerms" .Values.extraPodAffinityTerms "extraNamespaces" (list "namespace1" "namespace2") "context" $) -}}
 */}}
 {{- define "common.affinities.pods.soft" -}}
 {{- $component := default "" .component -}}
@@ -80,7 +80,7 @@ preferredDuringSchedulingIgnoredDuringExecution:
           {{- end }}
       {{- if $extraNamespaces }}
       namespaces:
-        - {{ .context.Release.Namespace }}
+        - {{ include "common.names.namespace" .context }}
         {{- with $extraNamespaces }}
         {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 8 }}
         {{- end }}
@@ -99,7 +99,7 @@ preferredDuringSchedulingIgnoredDuringExecution:
           {{- end }}
       {{- if .namespaces }}
       namespaces:
-        - {{ $.context.Release.Namespace }}
+        - {{ include "common.names.namespace" $.context }}
         {{- with .namespaces }}
         {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 8 }}
         {{- end }}
@@ -130,7 +130,7 @@ requiredDuringSchedulingIgnoredDuringExecution:
         {{- end }}
     {{- if $extraNamespaces }}
     namespaces:
-      - {{ .context.Release.Namespace }}
+      - {{ include "common.names.namespace" .context }}
       {{- with $extraNamespaces }}
       {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 6 }}
       {{- end }}
@@ -147,7 +147,7 @@ requiredDuringSchedulingIgnoredDuringExecution:
         {{- end }}
     {{- if .namespaces }}
     namespaces:
-      - {{ $.context.Release.Namespace }}
+      - {{ include "common.names.namespace" $.context }}
       {{- with .namespaces }}
       {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 6 }}
       {{- end }}

@@ -7,21 +7,18 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.org The name of the organization
-  ##
-  org: ""
-  ## @param global.project The project of the service
-  ##
-  project: ""
   ## @param global.serviceName Name of the service. Affects public DNS.
   ## E.g. cherry-admin, tpt-service-api
   ##
   serviceName: "example"
+  ## @param global.secretStore Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets
+  ##
+  secretStore: "vault"
   ## @param global.environment Name of the environment, one of "dev", "stage", "prod".
   ##
   environment: "dev"
   ## @param global.domain Company Root-level domain, expects
-  ## [<global.project>.<global.environment>].<global.domain> Route53 HZ.
+  ## [<global.environment>].<global.domain> Route53 HZ.
   ##
   domain: ""
   ## Configuration of the image for the deployment
@@ -57,6 +54,9 @@ nameOverride: ""
 ## This overrides that and uses the given string instead.
 ##
 fullnameOverride: ""
+## @param namespaceOverride Override the namespace of all rendered resources (defaults to the release namespace)
+##
+namespaceOverride: ""
 ## @param replicaCount Number of the parallel-running containers. The controller will eventually make the size of the
 ## running service equal to the expected size.
 ##
@@ -154,15 +154,26 @@ nodeSelector: { }
 ## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 ##
 tolerations: [ ]
-## @param podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
-## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-##
-podAffinityPreset: ""
-## @param podAntiAffinityPreset Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+## @extra podAffinity Pod affinity. Ignored if `affinity` is set
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-## Allowed values: soft, hard
 ##
-podAntiAffinityPreset: soft
+podAffinity:
+  ## @param podAffinity.preset Preset type: soft (preferred), hard (required) or disabled
+  ##
+  preset: disabled
+  ## @param podAffinity.topologyKey Topology key of the affinity term
+  ##
+  topologyKey: kubernetes.io/hostname
+## @extra podAntiAffinity Pod anti-affinity. Ignored if `affinity` is set
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+##
+podAntiAffinity:
+  ## @param podAntiAffinity.preset Preset type: soft (preferred), hard (required) or disabled
+  ##
+  preset: soft
+  ## @param podAntiAffinity.topologyKey Topology key of the affinity term
+  ##
+  topologyKey: kubernetes.io/hostname
 ## @param preStopDelaySeconds pre-stop delay for graceful pod shutdown
 ## Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
 ##
@@ -213,18 +224,25 @@ nodeAffinityPreset:
   values: [ ]
 ## @param affinity Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
+## Note: podAffinity, podAntiAffinity and nodeAffinityPreset will be ignored when it's set
 ##
 affinity: { }
-## @param topologySpreadConstraintPreset Control spread of containers across availability zones.
+## @extra topologySpread Control spread of pods across topology domains (zones, nodes, etc.)
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
-## Allowed values: soft, hard
-topologySpreadConstraintPreset: soft
-## @param topologySpreadConstraints Control spread of containers across nodes, zones, etc.
-## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
-## Note: topologySpreadConstraintPreset will be ignored when it's set
 ##
-topologySpreadConstraints: {}
+topologySpread:
+  ## @param topologySpread.preset Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled
+  ##
+  preset: soft
+  ## @param topologySpread.topologyKey Topology key for soft/hard presets
+  ##
+  topologyKey: topology.kubernetes.io/zone
+  ## @param topologySpread.maxSkew Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)
+  ##
+  maxSkew: ""
+  ## @param topologySpread.constraints Raw topologySpreadConstraints, used only when preset is custom (supports templating)
+  ##
+  constraints: []
 ## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
 ## This is ignored if resources is set (resources is recommended for production).
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
@@ -232,16 +250,18 @@ topologySpreadConstraints: {}
 resourcesPreset: "nano"
 ## @extra pdb Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+## minAvailable and maxUnavailable accept a number (1) or a percent string ("25%"); set only one, the other must be 0 or "".
 ##
 pdb:
   ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @param pdb.minAvailable Min available pods or percent of pods
+  ## @skip pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
+  ## The generated schema cannot express "number or string", so the type is not validated.
   minAvailable: 1
-  ## @param pdb.maxUnavailable Max non-available pods or percent of pods
+  ## @skip pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
   ##
-  maxUnavailable: 1
+  maxUnavailable: 0
 ## @section Extra Containers
 ## @param initContainers Configuration for the init container
 ##
@@ -360,7 +380,7 @@ env:
   ##
   secret: { }
   ## @param env.vaultSecret Kubernetes secrets that get added to the container from Hashicorp Vault
-  ## path - Path within vault to the secret containing environment variable. It will be found in /kv/<org>/<project>/<env>/<release.namespace>
+  ## path - Path within vault to the secret containing environment variable. It will be found in Vault at <env>/<path> (store: global.secretStore)
   ## secret - Optional name of the variable inside secret. Defaults to the secret key
   ## E.g.
   ## vaultSecret:
@@ -500,16 +520,9 @@ ingress:
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingress.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
-  ## @param ingress.stickiness enable sticky sessions for provided number of seconds
-  ##
-  stickiness: 0
   ## @param ingress.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
+  ## <global.serviceName>.[<global.environment>].<global.domain>
   ##
   subDomain: false
   ## @param ingress.path Prefix for the path routing
@@ -535,13 +548,9 @@ ingressExtra:
   ## @param ingressExtra.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingressExtra.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingressExtra.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
+  ## <global.serviceName>.[<global.environment>].<global.domain>
   ##
   subDomain: false
   ## @param ingressExtra.host DNS for the application external access
@@ -617,6 +626,9 @@ metrics:
     ## @param metrics.rules.enabled Create PrometheusRules object
     ##
     enabled: false
+    ## @param metrics.rules.namespace Namespace of the PrometheusRules object
+    ##
+    namespace: monitoring
     ## @param metrics.rules.spec Configuration for the application alerting
     ## Ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusrulespec
     ## E.g.

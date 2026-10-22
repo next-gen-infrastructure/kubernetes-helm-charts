@@ -29,20 +29,18 @@ spec:
       {{- if .Values.podSecurityContext }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       {{- end }}
-      {{- if .Values.topologySpreadConstraints }}
-      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" $) | nindent 8 }}
-      {{- else if .Values.topologySpreadConstraintPreset  }}
-      topologySpreadConstraints: {{- include "common.topologySpreadConstraintPreset"  (dict "type" .Values.topologySpreadConstraintPreset "context" $) | nindent 6}}
+      {{- with include "common.topologySpread" (dict "context" $) }}
+      topologySpreadConstraints: {{- . | nindent 8 }}
       {{- end }}
       {{- if .Values.affinity }}
       affinity: {{- include "common.tplvalues.render" (dict "value" .Values.affinity "context" $) | nindent 8 }}
       {{- else }}
       affinity:
-        {{- if .Values.podAffinityPreset }}
-        podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAffinityPreset "context" $) | nindent 10 }}
+        {{- if has .Values.podAffinity.preset (list "soft" "hard") }}
+        podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAffinity.preset "topologyKey" .Values.podAffinity.topologyKey "context" $) | nindent 10 }}
         {{- end }}
-        {{- if .Values.podAntiAffinityPreset }}
-        podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAntiAffinityPreset "context" $) | nindent 10 }}
+        {{- if has .Values.podAntiAffinity.preset (list "soft" "hard") }}
+        podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAntiAffinity.preset "topologyKey" .Values.podAntiAffinity.topologyKey "context" $) | nindent 10 }}
         {{- end }}
         {{- if .Values.nodeAffinityPreset.type }}
         nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.nodeAffinityPreset.type "key" .Values.nodeAffinityPreset.key "values" .Values.nodeAffinityPreset.values) | nindent 10 }}

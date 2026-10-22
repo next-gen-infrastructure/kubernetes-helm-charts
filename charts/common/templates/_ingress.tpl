@@ -69,44 +69,6 @@ Usage:
 {{- end -}}
 
 {{/*
-Labels to use on deploy.spec.selector.matchLabels and svc.spec.selector
-*/}}
-{{- define "common.ingress.annotations" -}}
-{{- if eq .Values.ingress.className "alb" -}}
-kubernetes.io/ingress.class: "alb"
-
-alb.ingress.kubernetes.io/actions.ssl-redirect: "{\"Type\":\"redirect\",\"RedirectConfig\":{\"Protocol\":\"HTTPS\",\"Port\":\"443\",\"StatusCode\":\"HTTP_301\"}}"
-alb.ingress.kubernetes.io/backend-protocol: "HTTP"
-# group name as cluster-name and optional '-public'
-alb.ingress.kubernetes.io/group.name: {{ .Values.global.project }}-{{ .Values.global.environment }}{{ if .Values.ingress.public -}}-public{{- end }}
-alb.ingress.kubernetes.io/healthcheck-path: "{{ .Values.service.healthCheckPath | default "/" }}"
-alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\":80},{\"HTTPS\":443}]"
-alb.ingress.kubernetes.io/scheme: {{ if .Values.ingress.public -}}internet-facing{{- else -}}internal{{- end }}
-alb.ingress.kubernetes.io/security-groups: "generic-web{{ if .Values.ingress.public -}} ,generic-public-web{{- end -}}"
-alb.ingress.kubernetes.io/ssl-policy: "{{ .Values.ingress.tlsPolicy | default "ELBSecurityPolicy-TLS-1-2-2017-01" }}"
-alb.ingress.kubernetes.io/success-codes: "200"
-alb.ingress.kubernetes.io/target-type: "ip"
-{{- end -}}
-{{- end -}}
-
-{{- define "common.ingressExtra.annotations" -}}
-{{- if eq .Values.ingressExtra.className "alb" -}}
-kubernetes.io/ingress.class: "alb"
-
-alb.ingress.kubernetes.io/actions.ssl-redirect: "{\"Type\":\"redirect\",\"RedirectConfig\":{\"Protocol\":\"HTTPS\",\"Port\":\"443\",\"StatusCode\":\"HTTP_301\"}}"
-alb.ingress.kubernetes.io/backend-protocol: "HTTP"
-alb.ingress.kubernetes.io/group.name: {{ .Release.Namespace }}-extra
-alb.ingress.kubernetes.io/healthcheck-path: "{{ .Values.service.healthCheckPath | default "/" }}"
-alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\":80},{\"HTTPS\":443}]"
-alb.ingress.kubernetes.io/scheme: {{ if .Values.ingressExtra.public -}}internet-facing{{- else -}}internal{{- end }}
-alb.ingress.kubernetes.io/security-groups: "generic-web{{ if .Values.ingressExtra.public -}} ,generic-public-web{{- end -}}"
-alb.ingress.kubernetes.io/ssl-policy: "{{ .Values.ingressExtra.tlsPolicy | default "ELBSecurityPolicy-TLS-1-2-2017-01"}}"
-alb.ingress.kubernetes.io/success-codes: "200"
-alb.ingress.kubernetes.io/target-type: "ip"
-{{- end -}}
-{{- end -}}
-
-{{/*
 Print "true" if the API pathType field is supported
 Usage:
 {{ include "k8s-common.ingress.supportsPathType" . }}

@@ -1,8 +1,6 @@
 # yaml-language-server: $schema=values.schema.json
 global:
-  org: "core"
   serviceName: "test"
-  project:  "test"
   production: true
   environmentName: "stage"
   image:
@@ -60,8 +58,10 @@ deployment:
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
-  podAffinityPreset: hard
-  podAntiAffinityPreset: soft
+  podAffinity:
+    preset: hard
+  podAntiAffinity:
+    preset: soft
   nodeAffinityPreset:
     type: soft
     key: topology.kubernetes.io/zone
@@ -73,7 +73,6 @@ deployment:
   pdb:
     create: true
     minAvailable: 1
-    maxUnavailable: 1
   serviceAccount:
     create: true
     annotations:
@@ -159,7 +158,6 @@ deployment:
     timeoutSeconds: 1
   ingress:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     extraHosts:
@@ -168,7 +166,6 @@ deployment:
          - "/"
   ingressExtra:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     host: simple.host

@@ -44,17 +44,17 @@ Typical StateFul Set application
 
 ### Global parameters
 
-| Name                       | Description                                             | Value          |
-| -------------------------- | ------------------------------------------------------- | -------------- |
-| `global.org`               | The organization of the service                         | `""`           |
-| `global.project`           | The project of the service                              | `""`           |
-| `global.serviceName`       | Name of the service. Affects public DNS.                | `example`      |
-| `global.environment`       | Type of the environment, one of "dev", "stage", "prod". | `dev`          |
-| `global.domain`            | Company Root-level domain, expects                      | `""`           |
-| `global.image.name`        | Name of the image,                                      | `""`           |
-| `global.image.tag`         | Tag of the image                                        | `latest`       |
-| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes    | `IfNotPresent` |
-| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.        | `[]`           |
+| Name                       | Description                                                              | Value          |
+| -------------------------- | ------------------------------------------------------------------------ | -------------- |
+| `global.project`           | The project of the service                                               | `""`           |
+| `global.serviceName`       | Name of the service. Affects public DNS.                                 | `example`      |
+| `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets | `vault`        |
+| `global.environment`       | Type of the environment, one of "dev", "stage", "prod".                  | `dev`          |
+| `global.domain`            | Company Root-level domain, expects                                       | `""`           |
+| `global.image.name`        | Name of the image,                                                       | `""`           |
+| `global.image.tag`         | Tag of the image                                                         | `latest`       |
+| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes                     | `IfNotPresent` |
+| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.                         | `[]`           |
 
 ### Common parameters
 
@@ -190,7 +190,6 @@ Typical StateFul Set application
 | --------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingress.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingress.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingress.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingress.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingress.path`        | Prefix for the path routing                                                      | `/`      |
 | `ingress.annotations` | Ingress annotations                                                              | `{}`     |
@@ -202,7 +201,6 @@ Typical StateFul Set application
 | -------------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingressExtra.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingressExtra.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingressExtra.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingressExtra.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingressExtra.host`        | DNS for the application external access                                          | `""`     |
 | `ingressExtra.path`        | Prefix for the path routing                                                      | `/`      |

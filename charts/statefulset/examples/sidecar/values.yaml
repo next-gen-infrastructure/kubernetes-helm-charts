@@ -1,8 +1,6 @@
 # yaml-language-server: $schema=values.schema.json
 global:
-  org: "network"
   serviceName: "dac-redis"
-  project:  "test"
   image:
     name: "redis/redis-stack-server"
     tag: "7.0.6-RC8"

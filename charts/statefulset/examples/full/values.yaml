@@ -1,9 +1,7 @@
 # yaml-language-server: $schema=values.schema.json
 global:
-  org: "core"
   domain: "example.com"
   serviceName: "test"
-  project:  "test"
   production: true
   environmentName: "stage"
   image:
@@ -127,7 +125,6 @@ statefulset:
     timeoutSeconds: 1
   ingress:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     extraHosts:
@@ -136,7 +133,6 @@ statefulset:
          - "/"
   ingressExtra:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     host: simple.host

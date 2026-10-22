@@ -5,11 +5,6 @@
         "global": {
             "type": "object",
             "properties": {
-                "org": {
-                    "type": "string",
-                    "description": "The organization of the service",
-                    "default": ""
-                },
                 "project": {
                     "type": "string",
                     "description": "The project of the service",
@@ -19,6 +14,11 @@
                     "type": "string",
                     "description": "Name of the service. Affects public DNS.",
                     "default": "example"
+                },
+                "secretStore": {
+                    "type": "string",
+                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
+                    "default": "vault"
                 },
                 "environment": {
                     "type": "string",
@@ -514,11 +514,6 @@
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
                 },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
-                },
                 "subDomain": {
                     "type": "boolean",
                     "description": "If DNS has environment as sub-domain.",
@@ -554,11 +549,6 @@
                     "type": "string",
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
-                },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
                 },
                 "subDomain": {
                     "type": "boolean",

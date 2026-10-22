@@ -5,20 +5,15 @@
         "global": {
             "type": "object",
             "properties": {
-                "org": {
-                    "type": "string",
-                    "description": "The name of the organization",
-                    "default": ""
-                },
-                "project": {
-                    "type": "string",
-                    "description": "The project of the service",
-                    "default": ""
-                },
                 "serviceName": {
                     "type": "string",
                     "description": "Name of the service. Affects public DNS.",
                     "default": "example"
+                },
+                "secretStore": {
+                    "type": "string",
+                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
+                    "default": "vault"
                 },
                 "environment": {
                     "type": "string",
@@ -66,6 +61,11 @@
         "fullnameOverride": {
             "type": "string",
             "description": "By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.",
+            "default": ""
+        },
+        "namespaceOverride": {
+            "type": "string",
+            "description": "Override the namespace of all rendered resources (defaults to the release namespace)",
             "default": ""
         },
         "replicaCount": {
@@ -201,15 +201,35 @@
             "default": [],
             "items": {}
         },
-        "podAffinityPreset": {
-            "type": "string",
-            "description": "Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": ""
+        "podAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "disabled"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
         },
-        "podAntiAffinityPreset": {
-            "type": "string",
-            "description": "Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": "soft"
+        "podAntiAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
         },
         "preStopDelaySeconds": {
             "type": "number",
@@ -267,15 +287,31 @@
             "description": "Affinity for pod assignment",
             "default": {}
         },
-        "topologySpreadConstraintPreset": {
-            "type": "string",
-            "description": "Control spread of containers across availability zones.",
-            "default": "soft"
-        },
-        "topologySpreadConstraints": {
+        "topologySpread": {
             "type": "object",
-            "description": "Control spread of containers across nodes, zones, etc.",
-            "default": {}
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled",
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key for soft/hard presets",
+                    "default": "topology.kubernetes.io/zone"
+                },
+                "maxSkew": {
+                    "type": "string",
+                    "description": "Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)",
+                    "default": ""
+                },
+                "constraints": {
+                    "type": "array",
+                    "description": "Raw topologySpreadConstraints, used only when preset is custom (supports templating)",
+                    "default": [],
+                    "items": {}
+                }
+            }
         },
         "resourcesPreset": {
             "type": "string",
@@ -289,16 +325,6 @@
                     "type": "boolean",
                     "description": "Specifies whether a Pod disruption budget should be created",
                     "default": false
-                },
-                "minAvailable": {
-                    "type": "number",
-                    "description": "Min available pods or percent of pods",
-                    "default": 1
-                },
-                "maxUnavailable": {
-                    "type": "number",
-                    "description": "Max non-available pods or percent of pods",
-                    "default": 1
                 }
             }
         },
@@ -594,16 +620,6 @@
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
                 },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
-                },
-                "stickiness": {
-                    "type": "number",
-                    "description": "enable sticky sessions for provided number of seconds",
-                    "default": 0
-                },
                 "subDomain": {
                     "type": "boolean",
                     "description": "If DNS has environment as sub-domain.",
@@ -639,11 +655,6 @@
                     "type": "string",
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
-                },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
                 },
                 "subDomain": {
                     "type": "boolean",
@@ -739,6 +750,11 @@
                             "type": "boolean",
                             "description": "Create PrometheusRules object",
                             "default": false
+                        },
+                        "namespace": {
+                            "type": "string",
+                            "description": "Namespace of the PrometheusRules object",
+                            "default": "monitoring"
                         },
                         "spec": {
                             "type": "array",

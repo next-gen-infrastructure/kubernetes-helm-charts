@@ -14,16 +14,17 @@ Charts do not render without a few global values; CI always sets them. Lint and 
 cd charts/deployment
 helm dependency update .
 helm lint . --strict --with-subcharts \
-  --set global.project=core --set global.domain=example.com --set global.serviceName=test
+  --set global.domain=example.com --set global.serviceName=test
 helm template . --debug --generate-name --namespace test --dependency-update \
-  --set global.project=core --set global.domain=example.com --set global.serviceName=test \
+  --set global.domain=example.com --set global.serviceName=test \
   --values values.yaml
 ```
 
-Render the example scenarios of a chart (each of `deployment`, `cronjobs`, `daemonset`, `statefulset` has an `examples/` dir with a runner):
+Render the example scenarios of a chart (each of `deployment`, `cronjobs`, `daemonset`, `statefulset` has an `examples/` dir; one shared runner renders them all):
 
 ```bash
-cd charts/deployment/examples && ./test.sh
+scripts/test-examples.sh            # all charts
+scripts/test-examples.sh deployment # a single chart
 ```
 
 Pre-commit (config in `.pre-commit-config.yaml`): `pre-commit run --all-files`. Requires `helm-schema` (github.com/dadav/helm-schema) and `readme-generator` (bitnami-labs/readme-generator-for-helm) on PATH.
@@ -47,6 +48,6 @@ release-please (`release-please-config.json`, manifest in `.release-please-manif
 labels: {{ include "common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $) | nindent 4 }}
 ```
 
-Values flow: a shared `global` block (`org`, `project`, `serviceName`, `environment`, `domain`, `image.{name,tag,pullPolicy,pullSecrets}`) drives naming, DNS/ingress hosts (`[<project>.<environment>].<domain>`), and image construction; chart-level values cover the workload specifics. Since `common` is consumed through each chart's `charts/` subdirectory, changes to `common` only take effect in a dependent chart after re-running `helm dependency update` there — stale vendored copies are the usual cause of "my template change did nothing".
+Values flow: a shared `global` block (`serviceName`, `environment`, `secretStore`, `domain`, `image.{name,tag,pullPolicy,pullSecrets}`) drives naming, DNS/ingress hosts (`<serviceName>.[<environment>].<domain>`) and the ExternalSecret store (`secretStore`) and Vault path (`<environment>/<path>`), and image construction; chart-level values cover the workload specifics. Since `common` is consumed through each chart's `charts/` subdirectory, changes to `common` only take effect in a dependent chart after re-running `helm dependency update` there — stale vendored copies are the usual cause of "my template change did nothing".
 
 The `deployment` chart renders either a standard Deployment or an Argo Rollout depending on `rollouts.enabled` (mutually exclusive templates gated by the same flag).

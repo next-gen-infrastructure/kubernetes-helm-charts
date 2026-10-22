@@ -18,5 +18,4 @@ Return  the proper Storage Class
       {{- printf "storageClassName: %s" $storageClass -}}
   {{- end -}}
 {{- end -}}
-
 {{- end -}}

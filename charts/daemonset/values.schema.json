@@ -5,11 +5,6 @@
         "global": {
             "type": "object",
             "properties": {
-                "org": {
-                    "type": "string",
-                    "description": "The organization of the service",
-                    "default": ""
-                },
                 "project": {
                     "type": "string",
                     "description": "The project of the service",
@@ -19,6 +14,11 @@
                     "type": "string",
                     "description": "Name of the service. Affects public DNS.",
                     "default": "example"
+                },
+                "secretStore": {
+                    "type": "string",
+                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
+                    "default": "vault"
                 },
                 "environment": {
                     "type": "string",

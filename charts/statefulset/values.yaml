@@ -7,9 +7,6 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.org The organization of the service
-  ##
-  org: ""
   ## @param global.project The project of the service
   ##
   project:  ""
@@ -17,11 +14,14 @@ global:
   ## E.g. cherry-admin, tpt-service-api
   ##
   serviceName: "example"
+  ## @param global.secretStore Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets
+  ##
+  secretStore: "vault"
   ## @param global.environment Type of the environment, one of "dev", "stage", "prod".
   ##
   environment: "dev"
   ## @param global.domain Company Root-level domain, expects
-  ## [<global.project>.<global.environment>].<global.domain> Route53 HZ.
+  ## [<global.environment>].<global.domain> Route53 HZ.
   ##
   domain: ""
   ## Configuration of the image for the deployment
@@ -291,7 +291,7 @@ env:
   ##
   secret: {}
   ## @param env.vaultSecret Kubernetes secrets that get added to the container from Hashicorp Vault
-  ## path - Path within vault to the secret containing environment variable. It will be found in /kv/<org>/<project>/<env>/<release.namespace>
+  ## path - Path within vault to the secret containing environment variable. It will be found in Vault at <env>/<path> (store: global.secretStore)
   ## secret - Optional name of the variable inside secret. Defaults to the secret key
   ## E.g.
   ## vaultSecret:
@@ -438,13 +438,9 @@ ingress:
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingress.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingress.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
+  ## <global.serviceName>.[<global.environment>].<global.domain>
   ##
   subDomain: false
   ## @param ingress.path Prefix for the path routing
@@ -470,13 +466,9 @@ ingressExtra:
   ## @param ingressExtra.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingressExtra.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingressExtra.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
-  ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain> Route53 HZ.
+  ## <global.serviceName>.[<global.environment>].<global.domain> Route53 HZ.
   ##
   subDomain: false
   ## @param ingressExtra.host DNS for the application external access
