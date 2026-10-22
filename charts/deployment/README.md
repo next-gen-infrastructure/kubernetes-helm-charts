@@ -235,6 +235,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `ingress.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingress.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
 | `ingress.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
+| `ingress.hostPrefix`  | Host label placed before the domain, replaces <global.serviceName> when set.     | `""`     |
 | `ingress.path`        | Prefix for the path routing                                                      | `/`      |
 | `ingress.annotations` | Ingress annotations                                                              | `{}`     |
 | `ingress.extraHosts`  | Extra hosts for ingress                                                          | `[]`     |
