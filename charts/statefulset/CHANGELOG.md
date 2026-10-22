@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-3.0.1...statefulset-4.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* image.name and global.image.name are replaced by image.registry/image.repository and global.image.registry/repository.
+
+### Features
+
+* add envFrom, configMap and image registry/repository to cronjobs, daemonset and statefulset ([710ca14](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/710ca1468322b6f29b42ab7aaf13c12661fbfa3a))
+
+
+### Bug Fixes
+
+* relax chart dependency constraint in examples to &gt;=2 ([4ee1e5a](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/4ee1e5a5be2b9842eac4486df24d01976713cab9))
+
 ## [3.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-3.0.0...statefulset-3.0.1) (2026-10-22)
 
 
