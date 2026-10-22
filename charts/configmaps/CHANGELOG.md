@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.2...configmaps-2.0.3) (2026-10-22)
+
+
+### Bug Fixes
+
+* relax common dependency constraint and update actions ([10850d9](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/10850d967d293e8bda8258e422892316dc492577))
+* relax common dependency constraint to &gt;=2.0.0 ([b438591](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b438591feb787c34c7409949d89bb2b5ab791a80))
+
 ## [2.0.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.1...configmaps-2.0.2) (2026-07-04)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-3.0.0...daemonset-3.0.1) (2026-10-22)
+
+
+### Bug Fixes
+
+* relax common dependency constraint and update actions ([10850d9](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/10850d967d293e8bda8258e422892316dc492577))
+* relax common dependency constraint to &gt;=2.0.0 ([b438591](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b438591feb787c34c7409949d89bb2b5ab791a80))
+
 ## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-2.1.0...daemonset-3.0.0) (2026-10-22)
 
 
