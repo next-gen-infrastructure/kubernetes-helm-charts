@@ -5,11 +5,6 @@
         "global": {
             "type": "object",
             "properties": {
-                "org": {
-                    "type": "string",
-                    "description": "The organization of the service",
-                    "default": ""
-                },
                 "project": {
                     "type": "string",
                     "description": "The project of the service",

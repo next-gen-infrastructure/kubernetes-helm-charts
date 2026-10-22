@@ -16,7 +16,6 @@ Generator of the secrets from remote Vault server
 
 | Name                      | Description                                             | Value          |
 | ------------------------- | ------------------------------------------------------- | -------------- |
-| `global.org`              | The organization of the service                         | `""`           |
 | `global.project`          | The project of the service                              | `""`           |
 | `global.serviceName`      | Name of the service. Affects public DNS.                | `example`      |
 | `global.environment`      | Type of the environment, one of "dev", "stage", "prod". | `dev`          |

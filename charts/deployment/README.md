@@ -58,7 +58,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 | Name                       | Description                                             | Value          |
 | -------------------------- | ------------------------------------------------------- | -------------- |
-| `global.org`               | The name of the organization                            | `""`           |
 | `global.project`           | The project of the service                              | `""`           |
 | `global.serviceName`       | Name of the service. Affects public DNS.                | `example`      |
 | `global.environment`       | Name of the environment, one of "dev", "stage", "prod". | `dev`          |

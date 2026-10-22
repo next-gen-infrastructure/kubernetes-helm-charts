@@ -7,9 +7,6 @@
 ## @section Global parameters
 ## Global Docker image parameters
 global:
-  ## @param global.org The organization of the service
-  ##
-  org: ""
   ## @param global.project The project of the service
   ##
   project:  ""
