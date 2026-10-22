@@ -30,12 +30,11 @@ jobs:
         run: |
           for x in ./charts/*; do
             pushd $x
-            helm dependency update .
+            helm dependency update . --skip-refresh
             helm lint . \
               --set global.project=core \
               --set global.domain=example.com \
               --set global.serviceName=test \
-              --set global.org=example \
               --set global.environment=test \
               --with-subcharts \
               --strict
@@ -54,7 +53,6 @@ jobs:
               --set global.project=core \
               --set global.domain=example.com \
               --set global.serviceName=test \
-              --set global.org=example \
               --set global.environment=test \
               --values values.yaml \
               | kubeconform -strict -ignore-missing-schemas -summary
