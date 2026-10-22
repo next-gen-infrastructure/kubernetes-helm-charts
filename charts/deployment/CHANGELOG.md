@@ -1,5 +1,32 @@
 # Changelog
 
+## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-2.1.0...deployment-3.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove global.project and add global.secretStore
+* remove global.org
+* remove ALB ingress annotation support
+* **deployment:** replace podAffinityPreset and podAntiAffinityPreset with blocks
+* **deployment:** replace topologySpread presets with a topologySpread block
+
+### Features
+
+* **deployment:** add namespaceOverride, PDB guard, PrometheusRule namespace and ExternalSecret v1 ([dc2e9e2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/dc2e9e2b4719d9eaba755835e0cf0d25b46cc546))
+* **deployment:** allow number or percent string for pdb.minAvailable and pdb.maxUnavailable ([ca0771e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ca0771e2c86c09a2bcccdd7f9fb5b82aae561693))
+* **deployment:** replace podAffinityPreset and podAntiAffinityPreset with blocks ([1d28ea6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/1d28ea65cc30bf8558573e36a771aadd11f9455d))
+* **deployment:** replace topologySpread presets with a topologySpread block ([baac1dd](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/baac1dded9680778baba332f1de3583776ebb267))
+* remove ALB ingress annotation support ([2f25d40](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2f25d402bd7a3259f85dd4b9f4b834f70260cba6))
+* remove global.org ([868e93d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/868e93df8cb9eefa7a2873c9abad705db9ca4615))
+* remove global.project and add global.secretStore ([3d735e3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3d735e32a375b955f928697b80cbb78f1bbf7202))
+
+
+### Bug Fixes
+
+* **deployment:** default pdb.maxUnavailable to an empty string and regenerate docs ([c79d436](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c79d436a43ebe0ffc3b6affa0eba858b7f2c0606))
+* **deployment:** set only one of minAvailable/maxUnavailable in examples ([2f3d98c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2f3d98cb0a80f1c439ee22e634f5c243a69edc99))
+
 ## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-2.0.1...deployment-2.1.0) (2026-07-04)
 
 
