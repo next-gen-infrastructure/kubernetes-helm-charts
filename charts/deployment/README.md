@@ -74,6 +74,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------- |
 | `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                                     | `""`    |
 | `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                             | `""`    |
+| `namespaceOverride` | Override the namespace of all rendered resources (defaults to the release namespace) | `""` |
 | `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the | `1`     |
 | `commonLabels`                             | Labels to add to all deployed objects                                                          | `{}`    |
 | `commonAnnotations`                        | Annotations to add to all deployed objects                                                     | `{}`    |
@@ -128,8 +129,8 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`       |
 | `pdb`                               | Pod disruption budget configuration                                                                                                |              |
 | `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`      |
-| `pdb.minAvailable`                  | Min available pods or percent of pods                                                                                              | `1`          |
-| `pdb.maxUnavailable`                | Max non-available pods or percent of pods                                                                                          | `1`          |
+| `pdb.minAvailable`                  | Min available pods or percent of pods. Set only one of minAvailable and maxUnavailable                                                                                            | `1`          |
+| `pdb.maxUnavailable`                | Max non-available pods or percent of pods                                                                                          | `null`        |
 
 ### Extra Containers
 
@@ -261,6 +262,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `metrics.port`                         | Name of the service port for metrics         | `http`     |
 | `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                 | `false`    |
 | `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped  | `10s`      |
+| `metrics.rules.namespace` | Namespace of the PrometheusRules object | `monitoring` |
 | `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended      | `3s`       |
 | `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object  | `{}`       |
 | `metrics.rules.enabled`                | Create PrometheusRules object                | `false`    |

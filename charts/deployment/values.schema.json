@@ -68,6 +68,11 @@
             "description": "By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.",
             "default": ""
         },
+        "namespaceOverride": {
+            "type": "string",
+            "description": "Override the namespace of all rendered resources (defaults to the release namespace)",
+            "default": ""
+        },
         "replicaCount": {
             "type": "number",
             "description": "Number of the parallel-running containers. The controller will eventually make the size of the",
@@ -765,6 +770,11 @@
                             "type": "string",
                             "description": "Timeout after which the scrape is ended",
                             "default": "3s"
+                        },
+                        "namespace": {
+                            "type": "string",
+                            "description": "Namespace of the PrometheusRules object",
+                            "default": "monitoring"
                         },
                         "selector": {
                             "type": "object",

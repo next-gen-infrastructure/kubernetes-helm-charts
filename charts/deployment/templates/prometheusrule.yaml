@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: {{ include "common.names.fullname" . }}
-  namespace: monitoring
+  namespace: {{ .Values.metrics.rules.namespace | quote }}
   labels: {{- include "common.labels.standard" . | nindent 4 }}
 spec:
   groups:
