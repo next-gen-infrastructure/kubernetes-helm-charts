@@ -53,15 +53,8 @@ jobs:
               --set global.serviceName=test \
               --set global.environment=test \
               --values values.yaml \
-              | kubeconform -strict -ignore-missing-schemas -summary
+              | ../../scripts/kubeconform.sh -
             popd
           done
       - name: examples
-        run: |
-          for x in ./charts/*/examples; do
-            pushd $x
-            ./test.sh
-            popd
-          done
-
-
+        run: ./scripts/test-examples.sh

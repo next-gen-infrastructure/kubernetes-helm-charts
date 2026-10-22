@@ -20,10 +20,11 @@ helm template . --debug --generate-name --namespace test --dependency-update \
   --values values.yaml
 ```
 
-Render the example scenarios of a chart (each of `deployment`, `cronjobs`, `daemonset`, `statefulset` has an `examples/` dir with a runner):
+Render the example scenarios of a chart (each of `deployment`, `cronjobs`, `daemonset`, `statefulset` has an `examples/` dir; one shared runner renders them all):
 
 ```bash
-cd charts/deployment/examples && ./test.sh
+scripts/test-examples.sh            # all charts
+scripts/test-examples.sh deployment # a single chart
 ```
 
 Pre-commit (config in `.pre-commit-config.yaml`): `pre-commit run --all-files`. Requires `helm-schema` (github.com/dadav/helm-schema) and `readme-generator` (bitnami-labs/readme-generator-for-helm) on PATH.
