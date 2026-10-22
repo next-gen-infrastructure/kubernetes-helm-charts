@@ -1,5 +1,5 @@
 {
-  "charts/common": "2.0.5",
+  "charts/common": "2.0.6",
   "charts/configmaps": "2.0.2",
   "charts/cronjobs": "2.1.0",
   "charts/daemonset": "2.1.0",

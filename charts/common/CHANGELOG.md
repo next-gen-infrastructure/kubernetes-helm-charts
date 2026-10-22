@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.5...common-2.0.6) (2026-10-22)
+
+
+### Bug Fixes
+
+* remove unneeded domain ([afb40c6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/afb40c683fbd38ace780b6698c3b6b245c0073a7))
+
 ## [2.0.5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.4...common-2.0.5) (2026-07-04)
 
 
