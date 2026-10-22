@@ -330,16 +330,6 @@
                     "type": "boolean",
                     "description": "Specifies whether a Pod disruption budget should be created",
                     "default": false
-                },
-                "minAvailable": {
-                    "type": "number",
-                    "description": "Min available pods. Set only one of minAvailable and maxUnavailable (set minAvailable to 0 to use maxUnavailable)",
-                    "default": 1
-                },
-                "maxUnavailable": {
-                    "type": "string",
-                    "description": "Max non-available pods or percent of pods, as a string (e.g. \"1\" or \"25%\")",
-                    "default": "\"\""
                 }
             }
         },

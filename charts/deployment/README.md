@@ -129,8 +129,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                        |
 | `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
 | `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
-| `pdb.minAvailable`                  | Min available pods. Set only one of minAvailable and maxUnavailable (set minAvailable to 0 to use maxUnavailable)                  | `1`                           |
-| `pdb.maxUnavailable`                | Max non-available pods or percent of pods, as a string (e.g. "1" or "25%")                                                         | `""`                          |
 
 ### Extra Containers
 
