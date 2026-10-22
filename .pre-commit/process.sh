@@ -110,7 +110,7 @@ for file in "$@"; do
       debug "Already linted $file_chart_path"
     else
       pushd $file_chart_path > /dev/null
-      helm dep update
+      helm dep update --skip-refresh
       # Installation: https://github.com/dadav/helm-schema?tab=readme-ov-file#installation
       helm-schema
       # helm-schema recurses into examples/; those schemas go stale and break example rendering
