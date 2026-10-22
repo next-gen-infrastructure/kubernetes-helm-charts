@@ -33,9 +33,14 @@
                 "image": {
                     "type": "object",
                     "properties": {
-                        "name": {
+                        "registry": {
                             "type": "string",
-                            "description": "Name of the image,",
+                            "description": "Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com",
+                            "default": ""
+                        },
+                        "repository": {
+                            "type": "string",
+                            "description": "Image repository, E.g. k8s/example-service",
                             "default": ""
                         },
                         "tag": {
@@ -247,6 +252,11 @@
             "description": "Affinity for pod assignment",
             "default": {}
         },
+        "revisionHistoryLimit": {
+            "type": "number",
+            "description": "Number of old revisions to retain for rollback",
+            "default": 2
+        },
         "pdb": {
             "type": "object",
             "properties": {
@@ -275,9 +285,14 @@
         "image": {
             "type": "object",
             "properties": {
-                "name": {
+                "registry": {
                     "type": "string",
-                    "description": "Name of the image,",
+                    "description": "Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com",
+                    "default": ""
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "Image repository, E.g. k8s/example-service",
                     "default": ""
                 },
                 "tag": {
@@ -344,6 +359,27 @@
                 "vaultSecret": {
                     "type": "object",
                     "description": "Kubernetes secrets that get added to the container from Hashicorp Vault",
+                    "default": {}
+                }
+            }
+        },
+        "envFrom": {
+            "type": "array",
+            "description": "Sources of environment variables for the container (configMapRef / secretRef). Supports helm templates",
+            "default": [],
+            "items": {}
+        },
+        "configMap": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Create a ConfigMap from configMap.data and load it into the container via envFrom",
+                    "default": false
+                },
+                "data": {
+                    "type": "object",
+                    "description": "Key-value pairs of the ConfigMap",
                     "default": {}
                 }
             }

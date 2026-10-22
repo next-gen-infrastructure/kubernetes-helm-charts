@@ -12,7 +12,7 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels: {{ include "common.labels.matchLabels" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 6 }}
   template:

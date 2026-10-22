@@ -27,11 +27,12 @@ global:
   ## Configuration of the image for the deployment
   ##
   image:
-    ## @param global.image.name Name of the image,
-    ## E.g.
-    ## name: "1234567890.dkr.ecr.eu-central-1.amazonaws.com/example"
+    ## @param global.image.registry Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com
     ##
-    name: ""
+    registry: ""
+    ## @param global.image.repository Image repository, E.g. k8s/example-service
+    ##
+    repository: ""
     ## @param global.image.tag Tag of the image
     ##
     tag: "latest"
@@ -205,6 +206,9 @@ nodeAffinityPreset:
 ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
 ##
 affinity: {}
+## @param revisionHistoryLimit Number of old revisions to retain for rollback
+##
+revisionHistoryLimit: 2
 ## @section Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ##
@@ -224,11 +228,12 @@ terminationGracePeriodSeconds: ""
 ## @section Image for the deployment
 ##
 image:
-  ## @param image.name Name of the image,
-  ## E.g.
-  ## name: "1234567890.dkr.ecr.eu-central-1.amazonaws.com/example"
+  ## @param image.registry Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com
   ##
-  name: ""
+  registry: ""
+  ## @param image.repository Image repository, E.g. k8s/example-service
+  ##
+  repository: ""
   ## @param image.tag Tag of the image
   ##
   tag: ""
@@ -300,6 +305,27 @@ env:
   ##    secret: password
   ##
   vaultSecret: {}
+## @param envFrom Sources of environment variables for the container (configMapRef / secretRef). Supports helm templates
+## E.g.
+## envFrom:
+##   - configMapRef:
+##       name: global-configmap
+##   - secretRef:
+##       name: global-secret
+##
+envFrom: [ ]
+## @section ConfigMap with environment variables for the container
+##
+configMap:
+  ## @param configMap.enabled Create a ConfigMap from configMap.data and load it into the container via envFrom
+  ##
+  enabled: false
+  ## @param configMap.data Key-value pairs of the ConfigMap
+  ## E.g.
+  ## data:
+  ##   key1: value1
+  ##
+  data: { }
 ## @section Extra Containers
 ## @param initContainers Configuration for the init container
 ##
