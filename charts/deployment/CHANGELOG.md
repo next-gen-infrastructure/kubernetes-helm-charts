@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.0.0...deployment-4.1.0) (2026-10-22)
+
+
+### Features
+
+* **deployment:** add ingress.hostPrefix and make ingress.subDomain work ([ccc910a](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ccc910ac071e010ab846f3a4f4028295f526ba8d))
+* **deployment:** add ingress.hostPrefix and make ingress.subDomain work ([a92ebb8](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a92ebb813756817808e68d8314dead4f103f4c67))
+
 ## [4.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-3.0.1...deployment-4.0.0) (2026-10-22)
 
 
