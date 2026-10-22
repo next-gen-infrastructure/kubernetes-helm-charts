@@ -1,7 +1,4 @@
-{{/*
-Copyright VMware, Inc.
-SPDX-License-Identifier: APACHE-2.0
-*/}}
+
 
 {{/* vim: set filetype=mustache: */}}
 
@@ -18,5 +15,4 @@ Return  the proper Storage Class
       {{- printf "storageClassName: %s" $storageClass -}}
   {{- end -}}
 {{- end -}}
-
 {{- end -}}

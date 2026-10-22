@@ -1,7 +1,7 @@
-{{/*
-Copyright VMware, Inc.
-SPDX-License-Identifier: APACHE-2.0
-*/}}
+
+
+{{/* vim: set filetype=mustache: */}}
+
 {{/*
 Sanitize a value for use as a Kubernetes label value.
 Label values may contain alphanumeric characters, '-', '_' and '.', and must
@@ -11,9 +11,6 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 {{- define "common.labels.value" -}}
 {{- regexReplaceAll "[^A-Za-z0-9]+$" (. | toString | replace "+" "_" | trunc 63) "" -}}
 {{- end -}}
-
-
-{{/* vim: set filetype=mustache: */}}
 
 {{/*
 Kubernetes standard labels
