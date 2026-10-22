@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository purpose
 
-Monorepo of reusable Helm charts published to https://next-gen-infrastructure.github.io/kubernetes-helm-charts. One library chart, `charts/common`, provides all shared named templates; the application charts (`deployment`, `cronjobs`, `daemonset`, `statefulset`, `configmaps`, `vaultsecrets`) depend on it via `repository: "file://../common"` with a `^2.0.0` version range.
+Monorepo of reusable Helm charts published to https://next-gen-infrastructure.github.io/kubernetes-helm-charts. One library chart, `charts/common`, provides all shared named templates; the application charts (`deployment`, `cronjobs`, `daemonset`, `statefulset`, `configmaps`, `vaultsecrets`) depend on it via `repository: "file://../common"` with a `>=2.0.0` version range.
 
 ## Commands
 
