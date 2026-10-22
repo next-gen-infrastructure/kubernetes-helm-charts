@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-3.0.0...common-4.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deployment:** image.name and global.image.name are replaced by image.registry/image.repository and global.image.registry/repository.
+
+### Features
+
+* **deployment:** add envFrom, configMap and revisionHistoryLimit; use image registry/repository ([3aad84c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3aad84cd36311e83030161d3811f0f2c16dd2681))
+
 ## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.6...common-3.0.0) (2026-10-22)
 
 
