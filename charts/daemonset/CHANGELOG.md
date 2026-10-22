@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-2.1.0...daemonset-3.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove global.project and add global.secretStore
+* remove global.org
+
+### Features
+
+* remove global.org ([868e93d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/868e93df8cb9eefa7a2873c9abad705db9ca4615))
+* remove global.project and add global.secretStore ([3d735e3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3d735e32a375b955f928697b80cbb78f1bbf7202))
+
 ## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-2.0.1...daemonset-2.1.0) (2026-07-04)
 
 

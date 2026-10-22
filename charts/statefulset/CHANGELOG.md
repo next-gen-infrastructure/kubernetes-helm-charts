@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-2.1.0...statefulset-3.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove global.project and add global.secretStore
+* remove global.org
+* remove ALB ingress annotation support
+
+### Features
+
+* remove ALB ingress annotation support ([2f25d40](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2f25d402bd7a3259f85dd4b9f4b834f70260cba6))
+* remove global.org ([868e93d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/868e93df8cb9eefa7a2873c9abad705db9ca4615))
+* remove global.project and add global.secretStore ([3d735e3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3d735e32a375b955f928697b80cbb78f1bbf7202))
+
 ## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-2.0.1...statefulset-2.1.0) (2026-07-04)
 
 

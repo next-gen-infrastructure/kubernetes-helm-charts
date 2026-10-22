@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.6...common-3.0.0) (2026-10-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **common:** sanitize label values and derive fullname from release and chart name
+* remove ALB ingress annotation support
+* **deployment:** replace topologySpread presets with a topologySpread block
+
+### Features
+
+* **deployment:** add namespaceOverride, PDB guard, PrometheusRule namespace and ExternalSecret v1 ([dc2e9e2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/dc2e9e2b4719d9eaba755835e0cf0d25b46cc546))
+* **deployment:** replace topologySpread presets with a topologySpread block ([baac1dd](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/baac1dded9680778baba332f1de3583776ebb267))
+* remove ALB ingress annotation support ([2f25d40](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2f25d402bd7a3259f85dd4b9f4b834f70260cba6))
+
+
+### Bug Fixes
+
+* **common:** fail on unknown topologySpread.preset ([2fae552](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2fae552ba8ccbfec9ef344c66fa6f66a0ad7f367))
+* **common:** sanitize label values and derive fullname from release and chart name ([aca50f6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/aca50f673f70fb97a24888c65158b8569dd54d17))
+
 ## [2.0.6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-2.0.5...common-2.0.6) (2026-10-22)
 
 
