@@ -5,10 +5,8 @@ metadata:
   name: {{ template "common.names.fullname" . }}-extra
   namespace: {{ .Release.Namespace }}
   labels: {{ include "common.labels.standard" . | nindent 4 }}
-  annotations:
-  {{- include "common.ingressExtra.annotations" . | nindent 4 }}
-  {{- if .Values.ingressExtra.annotations }}
-  {{- include "common.tplvalues.render" ( dict "value" .Values.ingressExtra.annotations "context" $ ) | nindent 4 }}
+  {{- with .Values.ingressExtra.annotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" . "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   rules:
@@ -26,7 +24,7 @@ spec:
           {{ else -}}
           - path: "/"
             pathType: "Prefix"
-            backend: {{- include "common.ingress.backend" (dict "serviceName" "ssl-redirect" "servicePort" "use-annotation" "context" $)  | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "common.ingress.serviceName" $) "servicePort" $portName "context" $)  | nindent 14 }}
           {{ end -}}
   {{ end -}}
 {{- end }}

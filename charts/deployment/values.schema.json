@@ -337,14 +337,14 @@
                     "default": false
                 },
                 "minAvailable": {
-                    "type": "number",
+                    "type": ["number", "string", "null"],
                     "description": "Min available pods or percent of pods",
                     "default": 1
                 },
                 "maxUnavailable": {
-                    "type": "number",
+                    "type": ["number", "string", "null"],
                     "description": "Max non-available pods or percent of pods",
-                    "default": 1
+                    "default": null
                 }
             }
         },
@@ -640,16 +640,6 @@
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
                 },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
-                },
-                "stickiness": {
-                    "type": "number",
-                    "description": "enable sticky sessions for provided number of seconds",
-                    "default": 0
-                },
                 "subDomain": {
                     "type": "boolean",
                     "description": "If DNS has environment as sub-domain.",
@@ -685,11 +675,6 @@
                     "type": "string",
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
-                },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
                 },
                 "subDomain": {
                     "type": "boolean",
@@ -771,11 +756,6 @@
                             "description": "Timeout after which the scrape is ended",
                             "default": "3s"
                         },
-                        "namespace": {
-                            "type": "string",
-                            "description": "Namespace of the PrometheusRules object",
-                            "default": "monitoring"
-                        },
                         "selector": {
                             "type": "object",
                             "description": "Additional labels for ServiceMonitor object",
@@ -790,6 +770,11 @@
                             "type": "boolean",
                             "description": "Create PrometheusRules object",
                             "default": false
+                        },
+                        "namespace": {
+                            "type": "string",
+                            "description": "Namespace of the PrometheusRules object",
+                            "default": "monitoring"
                         },
                         "spec": {
                             "type": "array",

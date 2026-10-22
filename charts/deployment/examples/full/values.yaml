@@ -161,7 +161,6 @@ deployment:
     timeoutSeconds: 1
   ingress:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     extraHosts:
@@ -170,7 +169,6 @@ deployment:
          - "/"
   ingressExtra:
     enabled: true
-    public: true
     subDomain: true
     annotations: {}
     host: simple.host

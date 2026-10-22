@@ -226,8 +226,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | --------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingress.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingress.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingress.public`      | If container will be accessible outside VPN.                                     | `false`  |
-| `ingress.stickiness`  | enable sticky sessions for provided number of seconds                            | `0`      |
 | `ingress.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingress.path`        | Prefix for the path routing                                                      | `/`      |
 | `ingress.annotations` | Ingress annotations                                                              | `{}`     |
@@ -239,7 +237,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | -------------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingressExtra.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingressExtra.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingressExtra.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingressExtra.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingressExtra.host`        | DNS for the application external access                                          | `""`     |
 | `ingressExtra.path`        | Prefix for the path routing                                                      | `/`      |
@@ -262,10 +259,10 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `metrics.port`                         | Name of the service port for metrics         | `http`     |
 | `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                 | `false`    |
 | `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped  | `10s`      |
-| `metrics.rules.namespace` | Namespace of the PrometheusRules object | `monitoring` |
 | `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended      | `3s`       |
 | `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object  | `{}`       |
 | `metrics.rules.enabled`                | Create PrometheusRules object                | `false`    |
+| `metrics.rules.namespace` | Namespace of the PrometheusRules object | `monitoring` |
 | `metrics.rules.spec`                   | Configuration for the application alerting   | `[]`       |
 
 ### Lifecycle configuration

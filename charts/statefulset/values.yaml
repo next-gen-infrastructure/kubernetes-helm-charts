@@ -438,10 +438,6 @@ ingress:
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingress.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingress.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
   ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
@@ -470,10 +466,6 @@ ingressExtra:
   ## @param ingressExtra.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingressExtra.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingressExtra.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
   ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain> Route53 HZ.

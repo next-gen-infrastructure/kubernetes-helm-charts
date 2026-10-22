@@ -514,11 +514,6 @@
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
                 },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
-                },
                 "subDomain": {
                     "type": "boolean",
                     "description": "If DNS has environment as sub-domain.",
@@ -554,11 +549,6 @@
                     "type": "string",
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
                     "default": "Prefix"
-                },
-                "public": {
-                    "type": "boolean",
-                    "description": "If container will be accessible outside VPN.",
-                    "default": false
                 },
                 "subDomain": {
                     "type": "boolean",

@@ -521,13 +521,6 @@ ingress:
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingress.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
-  ## @param ingress.stickiness enable sticky sessions for provided number of seconds
-  ##
-  stickiness: 0
   ## @param ingress.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
   ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
@@ -556,10 +549,6 @@ ingressExtra:
   ## @param ingressExtra.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
-  ## @param ingressExtra.public If container will be accessible outside VPN.
-  ## Not recommended to for non-production environments.
-  ##
-  public: false
   ## @param ingressExtra.subDomain If DNS has environment as sub-domain.
   ## The default DNS is constructed as:
   ## <global.serviceName>.[<global.project>.<global.environment>].<global.domain>
@@ -627,9 +616,6 @@ metrics:
     scrapeTimeout: 3s
     ## @param metrics.serviceMonitor.selector Additional labels for ServiceMonitor object
     ## ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration
-    ## @param metrics.rules.namespace Namespace of the PrometheusRules object
-    ##
-    namespace: monitoring
     ## e.g:
     ## selector:
     ##   prometheus: my-prometheus
@@ -641,6 +627,9 @@ metrics:
     ## @param metrics.rules.enabled Create PrometheusRules object
     ##
     enabled: false
+    ## @param metrics.rules.namespace Namespace of the PrometheusRules object
+    ##
+    namespace: monitoring
     ## @param metrics.rules.spec Configuration for the application alerting
     ## Ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusrulespec
     ## E.g.

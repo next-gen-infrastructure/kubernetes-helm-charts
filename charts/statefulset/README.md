@@ -190,7 +190,6 @@ Typical StateFul Set application
 | --------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingress.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingress.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingress.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingress.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingress.path`        | Prefix for the path routing                                                      | `/`      |
 | `ingress.annotations` | Ingress annotations                                                              | `{}`     |
@@ -202,7 +201,6 @@ Typical StateFul Set application
 | -------------------------- | -------------------------------------------------------------------------------- | -------- |
 | `ingressExtra.enabled`     | If service will be accessible outside of Kubernetes environment                  | `false`  |
 | `ingressExtra.pathType`    | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix` |
-| `ingressExtra.public`      | If container will be accessible outside VPN.                                     | `false`  |
 | `ingressExtra.subDomain`   | If DNS has environment as sub-domain.                                            | `false`  |
 | `ingressExtra.host`        | DNS for the application external access                                          | `""`     |
 | `ingressExtra.path`        | Prefix for the path routing                                                      | `/`      |
