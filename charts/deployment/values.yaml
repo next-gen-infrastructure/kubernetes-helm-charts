@@ -216,15 +216,22 @@ nodeAffinityPreset:
 ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
 ##
 affinity: { }
-## @param topologySpreadConstraintPreset Control spread of containers across availability zones.
+## @extra topologySpread Control spread of pods across topology domains (zones, nodes, etc.)
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
-## Allowed values: soft, hard
-topologySpreadConstraintPreset: soft
-## @param topologySpreadConstraints Control spread of containers across nodes, zones, etc.
-## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
-## Note: topologySpreadConstraintPreset will be ignored when it's set
 ##
-topologySpreadConstraints: {}
+topologySpread:
+  ## @param topologySpread.preset Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled
+  ##
+  preset: soft
+  ## @param topologySpread.topologyKey Topology key for soft/hard presets
+  ##
+  topologyKey: topology.kubernetes.io/zone
+  ## @param topologySpread.maxSkew Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)
+  ##
+  maxSkew: ""
+  ## @param topologySpread.constraints Raw topologySpreadConstraints, used only when preset is custom (supports templating)
+  ##
+  constraints: []
 ## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
 ## This is ignored if resources is set (resources is recommended for production).
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9

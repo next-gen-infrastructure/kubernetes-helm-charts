@@ -267,15 +267,32 @@
             "description": "Affinity for pod assignment",
             "default": {}
         },
-        "topologySpreadConstraintPreset": {
-            "type": "string",
-            "description": "Control spread of containers across availability zones.",
-            "default": "soft"
-        },
-        "topologySpreadConstraints": {
+        "topologySpread": {
             "type": "object",
-            "description": "Control spread of containers across nodes, zones, etc.",
-            "default": {}
+            "description": "Control spread of pods across topology domains (zones, nodes, etc.)",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled",
+                    "enum": ["soft", "hard", "custom", "disabled"],
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key for soft/hard presets",
+                    "default": "topology.kubernetes.io/zone"
+                },
+                "maxSkew": {
+                    "type": ["integer", "string"],
+                    "description": "Override maxSkew for soft/hard presets",
+                    "default": ""
+                },
+                "constraints": {
+                    "type": "array",
+                    "description": "Raw topologySpreadConstraints, used only when preset is custom (supports templating)",
+                    "default": []
+                }
+            }
         },
         "resourcesPreset": {
             "type": "string",
