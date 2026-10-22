@@ -35,6 +35,9 @@ Usage: {{- include "common.topologySpread" (dict "context" $) }}
 {{- define "common.topologySpread" -}}
 {{- $ts := .context.Values.topologySpread | default dict -}}
 {{- $preset := $ts.preset | default "soft" -}}
+{{- if not (has $preset (list "soft" "hard" "custom" "disabled")) -}}
+{{- fail (printf "topologySpread.preset must be one of soft, hard, custom, disabled (got %q)" $preset) -}}
+{{- end -}}
 {{- $custom := ternary $ts.constraints (list) (eq $preset "custom") -}}
 {{- if $custom -}}
 {{- include "common.tplvalues.render" (dict "value" $custom "context" .context) -}}
