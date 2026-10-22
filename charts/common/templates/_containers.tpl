@@ -31,6 +31,16 @@ Return generated container configuration.
   {{- include "common.envvar.vaultSecret" . | trim | nindent 2 -}}
   {{- end -}}
   {{- end -}}
+  {{- if or .Values.envFrom (.Values.configMap).enabled }}
+  envFrom:
+  {{- if (.Values.configMap).enabled }}
+    - configMapRef:
+        name: {{ include "common.names.fullname" . }}
+  {{- end }}
+  {{- with .Values.envFrom }}
+    {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 4 }}
+  {{- end }}
+  {{- end }}
   {{- if (.Values.livenessProbe).enabled }}
   livenessProbe:
     {{- if .Values.livenessProbe.tcpSocket }}

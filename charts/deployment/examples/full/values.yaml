@@ -10,6 +10,14 @@ global:
     pullPolicy: "IfNotPresent"
 deployment:
   replicaCount: 3
+  revisionHistoryLimit: 5
+  envFrom:
+    - secretRef:
+        name: shared-secret
+  configMap:
+    enabled: true
+    data:
+      LOG_LEVEL: info
   nameOverride: ""
   fullnameOverride: ""
   podLabels:

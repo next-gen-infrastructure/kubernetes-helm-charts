@@ -62,7 +62,8 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets | `vault`        |
 | `global.environment`       | Name of the environment, one of "dev", "stage", "prod".                  | `dev`          |
 | `global.domain`            | Company Root-level domain, expects                                       | `""`           |
-| `global.image.name`        | Name of the image,                                                       | `""`           |
+| `global.image.registry`    | Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com       | `""`           |
+| `global.image.repository`  | Image repository, E.g. k8s/example-service                               | `""`           |
 | `global.image.tag`         | Tag of the image                                                         | `latest`       |
 | `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes                     | `IfNotPresent` |
 | `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.                         | `[]`           |
@@ -75,6 +76,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                             | `""`    |
 | `namespaceOverride`                        | Override the namespace of all rendered resources (defaults to the release namespace)           | `""`    |
 | `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the | `1`     |
+| `revisionHistoryLimit`                     | Number of old ReplicaSets to retain for rollback                                               | `2`     |
 | `commonLabels`                             | Labels to add to all deployed objects                                                          | `{}`    |
 | `commonAnnotations`                        | Annotations to add to all deployed objects                                                     | `{}`    |
 | `podLabels`                                | Additional labels for the pod                                                                  | `{}`    |
@@ -141,12 +143,13 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Image for the deployment
 
-| Name                | Description                                          | Value |
-| ------------------- | ---------------------------------------------------- | ----- |
-| `image.name`        | Name of the image,                                   | `""`  |
-| `image.tag`         | Tag of the image                                     | `""`  |
-| `image.pullPolicy`  | The default pull policy is IfNotPresent which causes | `""`  |
-| `image.pullSecrets` | Optionally specify an array of imagePullSecrets.     | `[]`  |
+| Name                | Description                                                        | Value |
+| ------------------- | ------------------------------------------------------------------ | ----- |
+| `image.registry`    | Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com | `""`  |
+| `image.repository`  | Image repository, E.g. k8s/example-service                         | `""`  |
+| `image.tag`         | Tag of the image                                                   | `""`  |
+| `image.pullPolicy`  | The default pull policy is IfNotPresent which causes               | `""`  |
+| `image.pullSecrets` | Optionally specify an array of imagePullSecrets.                   | `[]`  |
 
 ### Configure Service Accounts for Pod
 
@@ -158,13 +161,21 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Environment variables that get added to the container
 
-| Name              | Description                                                             | Value |
-| ----------------- | ----------------------------------------------------------------------- | ----- |
-| `env.values`      | generic Environment variables that get added to the container           | `{}`  |
-| `env.refs`        | Environment variables as references to the pod                          | `{}`  |
-| `env.configmap`   | Environment variables that get added to the container from ConfigMap    | `{}`  |
-| `env.secret`      | Kubernetes secrets that get added to the container                      | `{}`  |
-| `env.vaultSecret` | Kubernetes secrets that get added to the container from Hashicorp Vault | `{}`  |
+| Name              | Description                                                                                            | Value |
+| ----------------- | ------------------------------------------------------------------------------------------------------ | ----- |
+| `env.values`      | generic Environment variables that get added to the container                                          | `{}`  |
+| `env.refs`        | Environment variables as references to the pod                                                         | `{}`  |
+| `env.configmap`   | Environment variables that get added to the container from ConfigMap                                   | `{}`  |
+| `env.secret`      | Kubernetes secrets that get added to the container                                                     | `{}`  |
+| `env.vaultSecret` | Kubernetes secrets that get added to the container from Hashicorp Vault                                | `{}`  |
+| `envFrom`         | Sources of environment variables for the container (configMapRef / secretRef). Supports helm templates | `[]`  |
+
+### ConfigMap with environment variables for the container
+
+| Name                | Description                                                                       | Value   |
+| ------------------- | --------------------------------------------------------------------------------- | ------- |
+| `configMap.enabled` | Create a ConfigMap from configMap.data and load it into the container via envFrom | `false` |
+| `configMap.data`    | Key-value pairs of the ConfigMap                                                  | `{}`    |
 
 ### Configuration of the service
 
