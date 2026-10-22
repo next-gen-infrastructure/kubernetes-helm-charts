@@ -154,15 +154,26 @@ nodeSelector: { }
 ## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 ##
 tolerations: [ ]
-## @param podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
-## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-##
-podAffinityPreset: ""
-## @param podAntiAffinityPreset Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+## @extra podAffinity Pod affinity. Ignored if `affinity` is set
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-## Allowed values: soft, hard
 ##
-podAntiAffinityPreset: soft
+podAffinity:
+  ## @param podAffinity.preset Preset type: soft (preferred), hard (required) or disabled
+  ##
+  preset: disabled
+  ## @param podAffinity.topologyKey Topology key of the affinity term
+  ##
+  topologyKey: kubernetes.io/hostname
+## @extra podAntiAffinity Pod anti-affinity. Ignored if `affinity` is set
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+##
+podAntiAffinity:
+  ## @param podAntiAffinity.preset Preset type: soft (preferred), hard (required) or disabled
+  ##
+  preset: soft
+  ## @param podAntiAffinity.topologyKey Topology key of the affinity term
+  ##
+  topologyKey: kubernetes.io/hostname
 ## @param preStopDelaySeconds pre-stop delay for graceful pod shutdown
 ## Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
 ##
@@ -213,7 +224,7 @@ nodeAffinityPreset:
   values: [ ]
 ## @param affinity Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
+## Note: podAffinity, podAntiAffinity and nodeAffinityPreset will be ignored when it's set
 ##
 affinity: { }
 ## @extra topologySpread Control spread of pods across topology domains (zones, nodes, etc.)

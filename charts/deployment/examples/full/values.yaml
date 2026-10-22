@@ -60,8 +60,10 @@ deployment:
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
-  podAffinityPreset: hard
-  podAntiAffinityPreset: soft
+  podAffinity:
+    preset: hard
+  podAntiAffinity:
+    preset: soft
   nodeAffinityPreset:
     type: soft
     key: topology.kubernetes.io/zone

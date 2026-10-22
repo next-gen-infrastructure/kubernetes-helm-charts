@@ -49,7 +49,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 - Fix configMaps names
 - Fix vaultSecret names
 - Support additional `service.ports`
-- Support for `podAffinityPreset`, `podAntiAffinityPreset`, `nodeAffinityPreset`
+- Support for `podAffinity`, `podAntiAffinity`, `nodeAffinityPreset`
 - Change `podSecurityContext` for nonRoot by default and 1001 user
 
 ## Parameters
@@ -103,8 +103,12 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`         |
 | `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`         |
 | `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`         |
-| `podAffinityPreset`                 | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                                | `""`         |
-| `podAntiAffinityPreset`             | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                           | `soft`       |
+| `podAffinity` | Pod affinity. Ignored if `affinity` is set |  |
+| `podAffinity.preset` | Preset type: soft (preferred), hard (required) or disabled | `disabled` |
+| `podAffinity.topologyKey` | Topology key of the affinity term | `kubernetes.io/hostname` |
+| `podAntiAffinity` | Pod anti-affinity. Ignored if `affinity` is set |  |
+| `podAntiAffinity.preset` | Preset type: soft (preferred), hard (required) or disabled | `soft` |
+| `podAntiAffinity.topologyKey` | Topology key of the affinity term | `kubernetes.io/hostname` |
 | `preStopDelaySeconds`               | pre-stop delay for graceful pod shutdown                                                                                           | `0`          |
 | `basicAuth`                         | Enable basic authentication                                                                                                        |              |
 | `basicAuth.enabled`                 | Enable basic authentication                                                                                                        | `false`      |
