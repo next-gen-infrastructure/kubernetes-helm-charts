@@ -208,12 +208,10 @@
         },
         "podAffinity": {
             "type": "object",
-            "description": "Pod affinity. Ignored if `affinity` is set",
             "properties": {
                 "preset": {
                     "type": "string",
                     "description": "Preset type: soft (preferred), hard (required) or disabled",
-                    "enum": ["soft", "hard", "disabled"],
                     "default": "disabled"
                 },
                 "topologyKey": {
@@ -225,12 +223,10 @@
         },
         "podAntiAffinity": {
             "type": "object",
-            "description": "Pod anti-affinity. Ignored if `affinity` is set",
             "properties": {
                 "preset": {
                     "type": "string",
                     "description": "Preset type: soft (preferred), hard (required) or disabled",
-                    "enum": ["soft", "hard", "disabled"],
                     "default": "soft"
                 },
                 "topologyKey": {
@@ -298,12 +294,10 @@
         },
         "topologySpread": {
             "type": "object",
-            "description": "Control spread of pods across topology domains (zones, nodes, etc.)",
             "properties": {
                 "preset": {
                     "type": "string",
                     "description": "Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled",
-                    "enum": ["soft", "hard", "custom", "disabled"],
                     "default": "soft"
                 },
                 "topologyKey": {
@@ -312,14 +306,15 @@
                     "default": "topology.kubernetes.io/zone"
                 },
                 "maxSkew": {
-                    "type": ["integer", "string"],
-                    "description": "Override maxSkew for soft/hard presets",
+                    "type": "string",
+                    "description": "Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)",
                     "default": ""
                 },
                 "constraints": {
                     "type": "array",
                     "description": "Raw topologySpreadConstraints, used only when preset is custom (supports templating)",
-                    "default": []
+                    "default": [],
+                    "items": {}
                 }
             }
         },
@@ -337,14 +332,14 @@
                     "default": false
                 },
                 "minAvailable": {
-                    "type": ["number", "string", "null"],
-                    "description": "Min available pods or percent of pods",
+                    "type": "number",
+                    "description": "Min available pods. Set only one of minAvailable and maxUnavailable (set minAvailable to 0 to use maxUnavailable)",
                     "default": 1
                 },
                 "maxUnavailable": {
-                    "type": ["number", "string", "null"],
-                    "description": "Max non-available pods or percent of pods",
-                    "default": null
+                    "type": "string",
+                    "description": "Max non-available pods or percent of pods, as a string (e.g. \"1\" or \"25%\")",
+                    "default": "\"\""
                 }
             }
         },

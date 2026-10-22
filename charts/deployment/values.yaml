@@ -258,11 +258,11 @@ pdb:
   ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @param pdb.minAvailable Min available pods or percent of pods. Set only one of minAvailable and maxUnavailable (set the other to null)
+  ## @param pdb.minAvailable Min available pods. Set only one of minAvailable and maxUnavailable (set minAvailable to 0 to use maxUnavailable)
   minAvailable: 1
-  ## @param pdb.maxUnavailable Max non-available pods or percent of pods
+  ## @param pdb.maxUnavailable [string] Max non-available pods or percent of pods, as a string (e.g. "1" or "25%")
   ##
-  maxUnavailable: null
+  maxUnavailable: ""
 ## @section Extra Containers
 ## @param initContainers Configuration for the init container
 ##
