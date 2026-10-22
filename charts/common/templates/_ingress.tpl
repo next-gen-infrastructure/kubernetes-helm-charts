@@ -27,14 +27,6 @@ service:
     {{- end }}
 {{- end -}}
 
-{{- define "common.ingress.domain" -}}
-{{- if eq .Values.global.environment "prod" -}}
-{{ .Values.global.domain }}
-{{- else -}}
-{{ substr 0 4 .Values.global.project }}.{{ .Values.global.environment }}.{{ .Values.global.domain }}
-{{- end -}}
-{{- end -}}
-
 {{- define "common.ingress.serviceName" -}}
 {{- if .Values.service.name -}}
 {{ include "common.tplvalues.render" ( dict "value" .Values.service.name "context" $) }}
@@ -51,7 +43,7 @@ preview-{{- include  "common.ingress.serviceName" . -}}
 {{- end -}}
 
 {{- define "common.ingress.host" -}}
-{{- include  "common.ingress.serviceName" . -}}.{{- include  "common.ingress.domain" . -}}
+{{- include  "common.ingress.serviceName" . -}}.{{ .Values.global.domain }}
 {{- end -}}
 
 {{/*
