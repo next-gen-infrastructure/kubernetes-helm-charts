@@ -661,6 +661,11 @@
                     "description": "If DNS has environment as sub-domain.",
                     "default": false
                 },
+                "hostPrefix": {
+                    "type": "string",
+                    "description": "Host label placed before the domain, replaces <global.serviceName> when set.",
+                    "default": ""
+                },
                 "path": {
                     "type": "string",
                     "description": "Prefix for the path routing",

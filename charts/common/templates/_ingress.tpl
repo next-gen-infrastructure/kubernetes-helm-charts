@@ -43,7 +43,9 @@ preview-{{- include  "common.ingress.serviceName" . -}}
 {{- end -}}
 
 {{- define "common.ingress.host" -}}
-{{- include  "common.ingress.serviceName" . -}}.{{ .Values.global.domain }}
+{{- default (include "common.ingress.serviceName" .) .Values.ingress.hostPrefix -}}
+{{- if .Values.ingress.subDomain }}.{{ required "global.environment is missing" .Values.global.environment }}{{ end -}}
+.{{ .Values.global.domain }}
 {{- end -}}
 
 {{/*

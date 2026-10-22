@@ -551,6 +551,10 @@ ingress:
   ## <global.serviceName>.[<global.environment>].<global.domain>
   ##
   subDomain: false
+  ## @param ingress.hostPrefix Host label placed before the domain, replaces <global.serviceName> when set.
+  ## The host is constructed as: <hostPrefix>.[<global.environment>].<global.domain>
+  ##
+  hostPrefix: ""
   ## @param ingress.path Prefix for the path routing
   ##
   path: "/"
