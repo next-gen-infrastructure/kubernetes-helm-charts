@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.7.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.6.0...common-4.7.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy.allowPodSelectors ([4005eb8](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/4005eb8080cbcf4473cfe2ed1e7277ad5d880268))
+* **common:** allow specific pods in networkpolicy via allowPodSelectors ([1a9705d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/1a9705d8225c5cef2208dd434cf6984a2721a0d8))
+
 ## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.5.0...common-4.6.0) (2026-10-23)
 
 

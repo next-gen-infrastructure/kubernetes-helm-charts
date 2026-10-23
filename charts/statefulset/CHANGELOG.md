@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.3.0...statefulset-4.4.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy.allowPodSelectors ([4005eb8](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/4005eb8080cbcf4473cfe2ed1e7277ad5d880268))
+* **statefulset:** add networkPolicy.allowPodSelectors ([b5b3031](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b5b30316662f4e487501b6fe66130787928a561a))
+
 ## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.2.0...statefulset-4.3.0) (2026-10-23)
 
 
