@@ -251,7 +251,7 @@ topologySpread:
 ## This is ignored if resources is set (resources is recommended for production).
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
 ##
-resourcesPreset: "nano"
+resourcesPreset: "none"
 ## @extra pdb Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ## minAvailable and maxUnavailable accept a number (1) or a percent string ("25%"); set only one, the other must be 0 or "".

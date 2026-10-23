@@ -72,6 +72,7 @@ spec:
           {{- end }}
           restartPolicy: "Never"
           serviceAccountName: {{ include "common.serviceAccount.name" $ }}
+          {{- include "common.images.renderPullSecrets" (dict "images" (list) "context" $) | nindent 10 }}
           containers:
             - name: {{ $key }}
               image: "{{ include "common.images.image"  $ }}"
