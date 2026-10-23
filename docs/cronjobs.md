@@ -27,6 +27,8 @@ cronjobs:
         API_KEY: { path: mySecret, secret: password }
 ```
 
+Chart-level `resourcesPreset` (default `none`) applies to jobs without `resources`; `securityContext` / `podSecurityContext` default to non-root like the other charts and a job's own `securityContext` is merged over the chart-level one (see [presets.md](presets.md)).
+
 Image comes from `global.image` (`registry`, `repository`, `tag`, `pullPolicy`, `pullSecrets`).
 
 Examples: `charts/cronjobs/examples/full`. Values reference: [charts/cronjobs/README.md](../charts/cronjobs/README.md).

@@ -69,7 +69,7 @@ Typical Daemon Set application
 | `podAntiAffinity`                   | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                          |
 | `podAntiAffinity.preset`            | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                   |
 | `podAntiAffinity.topologyKey`       | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname` |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                   |
+| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                   |
 | `resources`                         | Container resource requests and limits                                                                                             | `{}`                     |
 | `nodeAffinityPreset`                | Node affinity preset                                                                                                               |                          |
 | `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                     |
@@ -82,9 +82,8 @@ Typical Daemon Set application
 
 | Name                            | Description                                                 | Value   |
 | ------------------------------- | ----------------------------------------------------------- | ------- |
+| `pdb`                           | Pod disruption budget configuration                         |         |
 | `pdb.create`                    | Specifies whether a Pod disruption budget should be created | `false` |
-| `pdb.minAvailable`              | Min available pods or percent of pods                       | `1`     |
-| `pdb.maxUnavailable`            | Max non-available pods or percent of pods                   | `1`     |
 | `terminationGracePeriodSeconds` | Seconds the pod needs to gracefully terminate               | `""`    |
 
 ### Image for the deployment
