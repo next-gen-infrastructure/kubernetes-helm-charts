@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=values.schema.json
+global:
+  serviceName: "test"
+  environmentName: "stage"
+  image:
+    registry: "1234567890.dkr.ecr.eu-central-1.amazonaws.com"
+    repository: "k8s/example-service"
+    tag: "dev"
+deployment:
+  service:
+    ports:
+      http: 8080
+  networkPolicy:
+    enabled: true
+    # cilium: true is the default
+    ingressControllerNamespace: traefik
+    allowedNamespaces: [monitoring]
+    egress:
+      fqdns: ["api.stripe.com", "*.amazonaws.com"]

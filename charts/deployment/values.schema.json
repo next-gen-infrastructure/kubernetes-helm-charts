@@ -338,6 +338,70 @@
                 }
             }
         },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Create a network policy for the pods",
+                    "default": false
+                },
+                "cilium": {
+                    "type": "boolean",
+                    "description": "Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs",
+                    "default": true
+                },
+                "allowIngressFromIngressController": {
+                    "type": "boolean",
+                    "description": "Allow traffic from the namespace in ingressControllerNamespace",
+                    "default": true
+                },
+                "ingressControllerNamespace": {
+                    "type": "string",
+                    "description": "Namespace of the ingress controller",
+                    "default": "kube-system"
+                },
+                "allowSameNamespace": {
+                    "type": "boolean",
+                    "description": "Allow traffic from the release namespace",
+                    "default": true
+                },
+                "allowedNamespaces": {
+                    "type": "array",
+                    "description": "Additional namespaces allowed to reach the pods",
+                    "default": [],
+                    "items": {}
+                },
+                "egress": {
+                    "type": "object",
+                    "properties": {
+                        "allowDNS": {
+                            "type": "boolean",
+                            "description": "Allow DNS to kube-dns when egress is restricted",
+                            "default": true
+                        },
+                        "fqdns": {
+                            "type": "array",
+                            "description": "Hostnames pods may reach, e.g. [\"api.stripe.com\", \"*.amazonaws.com\"]. Cilium only",
+                            "default": [],
+                            "items": {}
+                        }
+                    }
+                },
+                "extraIngress": {
+                    "type": "array",
+                    "description": "Raw ingress rules in the native format of the selected kind (supports templating)",
+                    "default": [],
+                    "items": {}
+                },
+                "extraEgress": {
+                    "type": "array",
+                    "description": "Raw egress rules in the native format of the selected kind (supports templating)",
+                    "default": [],
+                    "items": {}
+                }
+            }
+        },
         "initContainers": {
             "type": "array",
             "description": "Configuration for the init container",
