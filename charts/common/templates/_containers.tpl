@@ -126,6 +126,7 @@ Return generated container configuration.
   {{- if .Values.securityContext }}
   securityContext: {{- toYaml .Values.securityContext | trim | nindent 4 }}
   {{- end }}
+  {{- if or .Values.volumes (.Values.persistence).enabled }}
   volumeMounts:
   {{- if .Values.volumes }}
   {{- include "common.volume.mounts" . | trim | nindent 4 }}
@@ -133,5 +134,6 @@ Return generated container configuration.
   {{- if (.Values.persistence).enabled }}
     - name: data
       mountPath: {{ required "persistence.path is required if persistence is enabled" .Values.persistence.path }}
+  {{- end }}
   {{- end }}
 {{- end -}}

@@ -103,10 +103,12 @@ spec:
         {{- include "common.containers.container" $values | nindent 8 }}
         {{- end }}
         {{- end }}
+      {{- if or .Values.volumes .Values.persistence.enabled }}
       volumes: {{- include "common.volume.definitions" . | nindent 8 }}
       {{- if .Values.persistence.enabled }}
         - name: data
           persistentVolumeClaim:
             claimName: {{ include "common.names.fullname" . }}
+      {{- end }}
       {{- end }}
 {{- end }}
