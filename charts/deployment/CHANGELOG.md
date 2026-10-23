@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.2.0...deployment-4.3.0) (2026-10-23)
+
+
+### Features
+
+* **deployment:** default resourcesPreset to none ([c674967](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c674967a431ee7f6b301dc30b3310d05c41bde57))
+* support imagePullSecrets in rollout, daemonset and cronjobs ([a1af4c5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a1af4c5bc344b4947358a1e4d4b8b4599ac72c43))
+* support imagePullSecrets in rollout, daemonset and cronjobs ([f8adf93](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f8adf932f47e988119dc7dd6ac991368600f9dd4))
+
+
+### Bug Fixes
+
+* omit empty volumes and volumeMounts when none are configured ([134a38b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/134a38bfe0d905962f20c97ef9a21f9dd939b27f))
+
 ## [4.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.1.0...deployment-4.2.0) (2026-10-23)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.0.0...cronjobs-4.1.0) (2026-10-23)
+
+
+### Features
+
+* support imagePullSecrets in rollout, daemonset and cronjobs ([a1af4c5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a1af4c5bc344b4947358a1e4d4b8b4599ac72c43))
+* support imagePullSecrets in rollout, daemonset and cronjobs ([f8adf93](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f8adf932f47e988119dc7dd6ac991368600f9dd4))
+
 ## [4.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-3.0.1...cronjobs-4.0.0) (2026-10-22)
 
 
