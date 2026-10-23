@@ -83,7 +83,20 @@ Generate Secrets based on Vault secrets.
 - name: {{ $key }}
   valueFrom:
     secretKeyRef:
-      name: {{ include "common.names.fullname" $ }}-vault
+      name: {{ $value.secretName | default (printf "%s-vault" (include "common.names.fullname" $)) }}
       key: {{ $key }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Merge the parent's env into a sub-container's env (sub-container wins). Returns YAML.
+Inherited vaultSecret entries keep pointing at the parent's secret.
+{{- include "common.envvar.inherit" (dict "parent" $ "child" .) -}}
+*/}}
+{{- define "common.envvar.inherit" -}}
+{{- $env := deepCopy (default (dict) .parent.Values.env) -}}
+{{- range $key, $value := default (dict) $env.vaultSecret -}}
+{{- $_ := set $value "secretName" (printf "%s-vault" (include "common.names.fullname" $.parent)) -}}
+{{- end -}}
+{{- mergeOverwrite $env (deepCopy (default (dict) .child.env)) | toYaml -}}
 {{- end -}}

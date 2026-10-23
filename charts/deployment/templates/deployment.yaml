@@ -64,6 +64,7 @@ spec:
         {{- $name := required "nameOverride is required for the init containers" $values.Values.nameOverride }}
         {{- $_ := set $values.Values "global" $.Values.global -}}
         {{- $__ := set $values.Values "volumes" ($values.Values.volumes | default $.Values.volumes) -}}
+        {{- if .inheritEnv }}{{- $___ := set $values.Values "env" (include "common.envvar.inherit" (dict "parent" $ "child" .) | fromYaml) -}}{{- end }}
         {{- include "common.containers.container" $values | nindent 8 }}
         {{- end }}
       {{- end }}
@@ -76,6 +77,7 @@ spec:
         {{- $name := required "nameOverride is required for the sidecar containers" $values.Values.nameOverride }}
         {{- $_ := set $values.Values "global" $.Values.global -}}
         {{- $__ := set $values.Values "volumes" ($values.Values.volumes | default $.Values.volumes) -}}
+        {{- if .inheritEnv }}{{- $___ := set $values.Values "env" (include "common.envvar.inherit" (dict "parent" $ "child" .) | fromYaml) -}}{{- end }}
         {{- include "common.containers.container" $values | nindent 8 }}
         {{- end }}
         {{- end }}
