@@ -98,6 +98,16 @@ Kubernetes Cron Jobs
 | `resources.requests` | The requests resources for the container                                                                                           | `{}`   |
 | `resourcesPreset`    | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none` |
 
+### Network policy
+
+| Name                            | Description                                                                                      | Value   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------ | ------- |
+| `networkPolicy.enabled`         | Create a network policy for the pods                                                             | `false` |
+| `networkPolicy.cilium`          | Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs | `true`  |
+| `networkPolicy.egress.allowDNS` | Allow DNS to kube-dns when egress is restricted                                                  | `true`  |
+| `networkPolicy.egress.fqdns`    | Hostnames pods may reach, e.g. ["api.stripe.com", "*.amazonaws.com"]. Cilium only                | `[]`    |
+| `networkPolicy.extraEgress`     | Raw egress rules in the native format of the selected kind (supports templating)                 | `[]`    |
+
 ### Cronjobs configuration
 
 | Name       | Description                     | Value |

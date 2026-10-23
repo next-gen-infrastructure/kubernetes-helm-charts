@@ -301,6 +301,43 @@
             "description": "Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).",
             "default": "none"
         },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Create a network policy for the pods",
+                    "default": false
+                },
+                "cilium": {
+                    "type": "boolean",
+                    "description": "Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs",
+                    "default": true
+                },
+                "egress": {
+                    "type": "object",
+                    "properties": {
+                        "allowDNS": {
+                            "type": "boolean",
+                            "description": "Allow DNS to kube-dns when egress is restricted",
+                            "default": true
+                        },
+                        "fqdns": {
+                            "type": "array",
+                            "description": "Hostnames pods may reach, e.g. [\"api.stripe.com\", \"*.amazonaws.com\"]. Cilium only",
+                            "default": [],
+                            "items": {}
+                        }
+                    }
+                },
+                "extraEgress": {
+                    "type": "array",
+                    "description": "Raw egress rules in the native format of the selected kind (supports templating)",
+                    "default": [],
+                    "items": {}
+                }
+            }
+        },
         "volumes": {
             "type": "object",
             "description": "Container volumes configuration",
