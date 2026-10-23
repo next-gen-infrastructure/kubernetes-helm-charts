@@ -103,7 +103,7 @@ Typical StateFul Set application
 | `topologySpread.topologyKey`        | Topology key for soft/hard presets                                                                                                 | `topology.kubernetes.io/zone` |
 | `topologySpread.maxSkew`            | Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)                                         | `""`                          |
 | `topologySpread.constraints`        | Raw topologySpreadConstraints, used only when preset is custom (supports templating)                                               | `[]`                          |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                        |
+| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                        |
 | `resources`                         | Container resource requests and limits                                                                                             | `{}`                          |
 | `nodeAffinityPreset`                | Node affinity preset                                                                                                               |                               |
 | `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                          |
@@ -116,9 +116,8 @@ Typical StateFul Set application
 
 | Name                            | Description                                                 | Value   |
 | ------------------------------- | ----------------------------------------------------------- | ------- |
+| `pdb`                           | Pod disruption budget configuration                         |         |
 | `pdb.create`                    | Specifies whether a Pod disruption budget should be created | `false` |
-| `pdb.minAvailable`              | Min available pods or percent of pods                       | `1`     |
-| `pdb.maxUnavailable`            | Max non-available pods or percent of pods                   | `1`     |
 | `terminationGracePeriodSeconds` | Seconds the pod needs to gracefully terminate               | `""`    |
 
 ### Image for the deployment

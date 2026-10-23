@@ -18,7 +18,7 @@ Allowed: `none`, `nano`, `micro`, `small`, `medium`, `large`, `xlarge`, `2xlarge
 | 2xlarge | 1 / 6 | 3072Mi / 12288Mi | 50Mi / 2Gi |
 
 - **Precedence:** a non-empty `resources` always wins; the preset is used only when `resources` is empty. `none` renders no `resources` block.
-- **Defaults:** `deployment` = `none`; `statefulset`, `daemonset` = `nano`. `cronjobs` has no preset, use `resources` (per job or chart-wide).
+- **Defaults:** `none` in `deployment`, `statefulset` and `daemonset`. `cronjobs` has no preset, use `resources` (per job or chart-wide).
 - Sidecar/init containers do not inherit the chart-level preset: each item reads its own `resources` / `resourcesPreset`, and gets no resources block if neither is set.
 - Presets are for testing and quick starts; set `resources` explicitly in production. An unknown value fails the render.
 
@@ -99,7 +99,7 @@ deployment:
 
 | Setting | deployment | statefulset | daemonset | cronjobs |
 |---|---|---|---|---|
-| `resourcesPreset` | none | nano | nano | n/a |
+| `resourcesPreset` | none | none | none | n/a |
 | pod anti-affinity | soft | soft | soft | soft |
 | pod affinity | disabled | disabled | disabled | disabled |
 | node affinity | off | off | off | off |

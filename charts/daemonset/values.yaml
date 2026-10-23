@@ -175,7 +175,7 @@ podAntiAffinity:
 ## This is ignored if server.resources is set (server.resources is recommended for production).
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
 ##
-resourcesPreset: "nano"
+resourcesPreset: "none"
 ## @param resources Container resource requests and limits
 ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
 ##
@@ -217,17 +217,20 @@ affinity: {}
 ##
 revisionHistoryLimit: 2
 ## @section Pod disruption budget configuration
+## @extra pdb Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+## minAvailable and maxUnavailable accept a number (1) or a percent string ("25%"); set only one, the other must be 0 or "".
 ##
 pdb:
   ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @param pdb.minAvailable Min available pods or percent of pods
+  ## @skip pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
+  ## The generated schema cannot express "number or string", so the type is not validated.
   minAvailable: 1
-  ## @param pdb.maxUnavailable Max non-available pods or percent of pods
+  ## @skip pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
   ##
-  maxUnavailable: 1
+  maxUnavailable: 0
 ## @param terminationGracePeriodSeconds Seconds the pod needs to gracefully terminate
 ## ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
 ##

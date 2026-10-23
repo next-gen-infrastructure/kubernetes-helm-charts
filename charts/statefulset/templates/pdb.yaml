@@ -1,4 +1,7 @@
 {{- if .Values.pdb.create }}
+{{- if and .Values.pdb.minAvailable .Values.pdb.maxUnavailable }}
+  {{- fail "PDB: set only one of pdb.minAvailable or pdb.maxUnavailable" }}
+{{- end }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:

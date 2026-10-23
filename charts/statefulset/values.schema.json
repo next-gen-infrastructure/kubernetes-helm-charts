@@ -265,7 +265,7 @@
         "resourcesPreset": {
             "type": "string",
             "description": "Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).",
-            "default": "nano"
+            "default": "none"
         },
         "resources": {
             "type": "object",
@@ -310,16 +310,6 @@
                     "type": "boolean",
                     "description": "Specifies whether a Pod disruption budget should be created",
                     "default": false
-                },
-                "minAvailable": {
-                    "type": "number",
-                    "description": "Min available pods or percent of pods",
-                    "default": 1
-                },
-                "maxUnavailable": {
-                    "type": "number",
-                    "description": "Max non-available pods or percent of pods",
-                    "default": 1
                 }
             }
         },

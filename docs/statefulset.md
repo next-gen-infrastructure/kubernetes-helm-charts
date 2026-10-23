@@ -10,7 +10,6 @@ StatefulSet, Service (+ headless Service `service-headless.yaml`, + LoadBalancer
 
 - No HPA, no Rollouts; `replicaCount` is fixed. `topologySpread` works as in `deployment` (see [presets.md](presets.md)).
 - `persistence.*` drives the volume claim; data survives pod rescheduling.
-- `resourcesPreset` defaults to `nano`.
 - `terminationGracePeriodSeconds`, `pdb.*` available.
 - Shares `env`, `envFrom`, `configMap`, `volumes`, probes, `initContainers` / `sidecarContainers`, `rbac`, `metrics`, `lifecycle`, `ingress` with `deployment`.
 
