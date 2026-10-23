@@ -12,6 +12,8 @@ Per-chart guides. Full value reference lives in each chart's generated `charts/<
 | configmaps | ConfigMaps | [configmaps.md](configmaps.md) |
 | vaultsecrets | ExternalSecrets | [vaultsecrets.md](vaultsecrets.md) |
 
+Cross-chart topics: [presets.md](presets.md) (resources, affinity, topology spread).
+
 ## Using a chart
 
 Charts are meant to be used as a dependency of a thin wrapper chart (see `charts/*/examples/*`), so the chart's values go under a key named after the chart:
