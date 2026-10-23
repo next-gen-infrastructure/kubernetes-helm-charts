@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.4.0...common-4.5.0) (2026-10-23)
+
+
+### Features
+
+* align pod affinity blocks with deployment and add topologySpread to statefulset ([b8cea29](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b8cea295f61c2f912cca93a9b7937b7140aa0455))
+* align pod affinity blocks with deployment and add topologySpread to statefulset ([605d71e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/605d71ebd4146527cf929edd8c3747482c4e2526))
+
 ## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.3.0...common-4.4.0) (2026-10-23)
 
 
