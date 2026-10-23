@@ -120,7 +120,7 @@ Return generated container configuration.
   {{- end }}
   {{- if .Values.resources }}
   resources: {{- toYaml .Values.resources | trim | nindent 4 }}
-  {{- else if .Values.resourcesPreset }}
+  {{- else if and .Values.resourcesPreset (ne .Values.resourcesPreset "none") }}
   resources: {{- include "common.resources.preset" (dict "type" .Values.resourcesPreset) | nindent 4 }}
   {{- end }}
   {{- if .Values.securityContext }}
