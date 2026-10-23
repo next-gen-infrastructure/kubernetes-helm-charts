@@ -35,14 +35,15 @@ Return the proper image name
 {{- end -}}
 
 {{/*
-Return the proper Docker Image Registry Secret Names evaluating values as templates
+Return the proper Docker Image Registry Secret Names evaluating values as templates.
+Secrets come from global.image.pullSecrets and from the pullSecrets of each given image.
 {{ include "common.images.renderPullSecrets" ( dict "images" (list .Values.path.to.the.image1, .Values.path.to.the.image2) "context" $) }}
 */}}
 {{- define "common.images.renderPullSecrets" -}}
   {{- $pullSecrets := list }}
   {{- $context := .context }}
 
-  {{- range (($context.Values.global).imagePullSecrets) -}}
+  {{- range (($context.Values.global).image).pullSecrets -}}
     {{- if kindIs "map" . -}}
       {{- $pullSecrets = append $pullSecrets (include "common.tplvalues.render" (dict "value" .name "context" $context)) -}}
     {{- else -}}

@@ -41,6 +41,14 @@ global:
     ## Ref: https://kubernetes.io/docs/concepts/containers/images/#updating-images
     ##
     pullPolicy: "IfNotPresent"
+    ## @param global.image.pullSecrets Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ##
+    ## pullSecrets:
+    ##   - myRegistryKeySecretName
+    ##
+    pullSecrets: [ ]
 ## @section Common parameters
 ## @param nameOverride By default, name uses '{{ .Chart.Name }}'.
 ## This overrides that and uses the given string instead.
@@ -230,6 +238,14 @@ image:
   ## Ref: https://kubernetes.io/docs/concepts/containers/images/#updating-images
   ##
   pullPolicy: ""
+  ## @param image.pullSecrets Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ##
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: [ ]
 ## @section Configure Service Accounts for Pod
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 serviceAccount:

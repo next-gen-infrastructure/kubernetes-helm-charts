@@ -52,6 +52,12 @@
                             "type": "string",
                             "description": "The default pull policy is IfNotPresent which causes",
                             "default": "IfNotPresent"
+                        },
+                        "pullSecrets": {
+                            "type": "array",
+                            "description": "Optionally specify an array of imagePullSecrets.",
+                            "default": [],
+                            "items": {}
                         }
                     }
                 }
@@ -293,6 +299,12 @@
                     "type": "string",
                     "description": "The default pull policy is IfNotPresent which causes",
                     "default": ""
+                },
+                "pullSecrets": {
+                    "type": "array",
+                    "description": "Optionally specify an array of imagePullSecrets.",
+                    "default": [],
+                    "items": {}
                 }
             }
         },
