@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.1.0...cronjobs-4.2.0) (2026-10-23)
+
+
+### Features
+
+* align defaults across workload charts and add cronjobs presets ([58d3e83](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/58d3e83c201774f6cc0020f910268b0dcb262b0c))
+* align pod affinity blocks with deployment and add topologySpread to statefulset ([b8cea29](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b8cea295f61c2f912cca93a9b7937b7140aa0455))
+* align pod affinity blocks with deployment and add topologySpread to statefulset ([605d71e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/605d71ebd4146527cf929edd8c3747482c4e2526))
+* **cronjobs:** add resourcesPreset and non-root security defaults ([3a91acc](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3a91acc57933b517ee1307201f87a17ca4f456f6))
+
 ## [4.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.0.0...cronjobs-4.1.0) (2026-10-23)
 
 
