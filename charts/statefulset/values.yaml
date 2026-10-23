@@ -356,6 +356,42 @@ configMap:
   ##   key1: value1
   ##
   data: { }
+## @section Network policy
+## Renders a CiliumNetworkPolicy (cilium=true) or a standard NetworkPolicy. Ingress is default-deny except the peers below.
+## Egress stays open unless egress.fqdns or extraEgress is set; then only DNS (if allowed) and the listed rules pass.
+## Ref: https://kubernetes.io/docs/concepts/services-networking/network-policies/
+##
+networkPolicy:
+  ## @param networkPolicy.enabled Create a network policy for the pods
+  ##
+  enabled: false
+  ## @param networkPolicy.cilium Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs
+  ##
+  cilium: true
+  ## @param networkPolicy.allowIngressFromIngressController Allow traffic from the namespace in ingressControllerNamespace
+  ##
+  allowIngressFromIngressController: true
+  ## @param networkPolicy.ingressControllerNamespace Namespace of the ingress controller
+  ##
+  ingressControllerNamespace: kube-system
+  ## @param networkPolicy.allowSameNamespace Allow traffic from the release namespace
+  ##
+  allowSameNamespace: true
+  ## @param networkPolicy.allowedNamespaces Additional namespaces allowed to reach the pods
+  ##
+  allowedNamespaces: []
+  ## @param networkPolicy.egress.allowDNS Allow DNS to kube-dns when egress is restricted
+  ## @param networkPolicy.egress.fqdns Hostnames pods may reach, e.g. ["api.stripe.com", "*.amazonaws.com"]. Cilium only
+  ##
+  egress:
+    allowDNS: true
+    fqdns: []
+  ## @param networkPolicy.extraIngress Raw ingress rules in the native format of the selected kind (supports templating)
+  ##
+  extraIngress: []
+  ## @param networkPolicy.extraEgress Raw egress rules in the native format of the selected kind (supports templating)
+  ##
+  extraEgress: []
 ## @section Extra Containers
 ## @param initContainers Configuration for the init container
 ##
