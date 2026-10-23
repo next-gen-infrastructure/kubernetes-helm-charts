@@ -357,6 +357,9 @@ networkPolicy:
   ## @param networkPolicy.allowSameNamespace Allow traffic from the release namespace
   ##
   allowSameNamespace: true
+  ## @param networkPolicy.allowPodSelectors Pods of the release namespace allowed in, as label maps, e.g. [{app.kubernetes.io/name: frontend}]. Used only when allowSameNamespace is false
+  ##
+  allowPodSelectors: []
   ## @param networkPolicy.allowedNamespaces Additional namespaces allowed to reach the pods
   ##
   allowedNamespaces: []

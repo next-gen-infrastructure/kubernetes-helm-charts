@@ -124,18 +124,19 @@ Typical Daemon Set application
 
 ### Network policy
 
-| Name                                              | Description                                                                                      | Value         |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------- |
-| `networkPolicy.enabled`                           | Create a network policy for the pods                                                             | `false`       |
-| `networkPolicy.cilium`                            | Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs | `true`        |
-| `networkPolicy.allowIngressFromIngressController` | Allow traffic from the namespace in ingressControllerNamespace                                   | `true`        |
-| `networkPolicy.ingressControllerNamespace`        | Namespace of the ingress controller                                                              | `kube-system` |
-| `networkPolicy.allowSameNamespace`                | Allow traffic from the release namespace                                                         | `true`        |
-| `networkPolicy.allowedNamespaces`                 | Additional namespaces allowed to reach the pods                                                  | `[]`          |
-| `networkPolicy.egress.allowDNS`                   | Allow DNS to kube-dns when egress is restricted                                                  | `true`        |
-| `networkPolicy.egress.fqdns`                      | Hostnames pods may reach, e.g. ["api.stripe.com", "*.amazonaws.com"]. Cilium only                | `[]`          |
-| `networkPolicy.extraIngress`                      | Raw ingress rules in the native format of the selected kind (supports templating)                | `[]`          |
-| `networkPolicy.extraEgress`                       | Raw egress rules in the native format of the selected kind (supports templating)                 | `[]`          |
+| Name                                              | Description                                                                                                                                    | Value         |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `networkPolicy.enabled`                           | Create a network policy for the pods                                                                                                           | `false`       |
+| `networkPolicy.cilium`                            | Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs                                               | `true`        |
+| `networkPolicy.allowIngressFromIngressController` | Allow traffic from the namespace in ingressControllerNamespace                                                                                 | `true`        |
+| `networkPolicy.ingressControllerNamespace`        | Namespace of the ingress controller                                                                                                            | `kube-system` |
+| `networkPolicy.allowSameNamespace`                | Allow traffic from the release namespace                                                                                                       | `true`        |
+| `networkPolicy.allowPodSelectors`                 | Pods of the release namespace allowed in, as label maps, e.g. [{app.kubernetes.io/name: frontend}]. Used only when allowSameNamespace is false | `[]`          |
+| `networkPolicy.allowedNamespaces`                 | Additional namespaces allowed to reach the pods                                                                                                | `[]`          |
+| `networkPolicy.egress.allowDNS`                   | Allow DNS to kube-dns when egress is restricted                                                                                                | `true`        |
+| `networkPolicy.egress.fqdns`                      | Hostnames pods may reach, e.g. ["api.stripe.com", "*.amazonaws.com"]. Cilium only                                                              | `[]`          |
+| `networkPolicy.extraIngress`                      | Raw ingress rules in the native format of the selected kind (supports templating)                                                              | `[]`          |
+| `networkPolicy.extraEgress`                       | Raw egress rules in the native format of the selected kind (supports templating)                                                               | `[]`          |
 
 ### Extra Containers
 
