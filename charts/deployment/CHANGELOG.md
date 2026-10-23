@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.3.0...deployment-4.4.0) (2026-10-23)
+
+
+### Features
+
+* **deployment:** add inheritEnv for sidecar and init containers ([939c578](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/939c57835b13c92012adcf6ae3e56f5749a73e27))
+* **deployment:** add inheritEnv for sidecar and init containers ([32a4fac](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/32a4fac07d27fb5f5765f84ca5b9b5b2da878d71))
+
 ## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.2.0...deployment-4.3.0) (2026-10-23)
 
 
