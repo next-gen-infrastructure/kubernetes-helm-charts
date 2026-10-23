@@ -366,6 +366,12 @@
                     "description": "Allow traffic from the release namespace",
                     "default": true
                 },
+                "allowPodSelectors": {
+                    "type": "array",
+                    "description": "Pods of the release namespace allowed in, as label maps, e.g. [{app.kubernetes.io/name: frontend}]. Used only when allowSameNamespace is false",
+                    "default": [],
+                    "items": {}
+                },
                 "allowedNamespaces": {
                     "type": "array",
                     "description": "Additional namespaces allowed to reach the pods",

@@ -20,6 +20,7 @@ Only Cilium can allow egress by hostname (`egress.fqdns`); setting it with `cili
 |---|---|---|
 | `allowIngressFromIngressController` + `ingressControllerNamespace` | `true`, `kube-system` | the ingress controller |
 | `allowSameNamespace` | `true` | the release namespace |
+| `allowPodSelectors` | `[]` | only these pods (label maps) of the release namespace; used when `allowSameNamespace` is `false` |
 | `allowedNamespaces` | `[]` | any extra namespaces |
 | `metrics.prometheusNamespace` (when `metrics.enabled`) | `monitoring` | Prometheus; reaches only the `metrics.port` service port |
 
@@ -46,6 +47,10 @@ deployment:
     enabled: true
     ingressControllerNamespace: traefik
     allowedNamespaces: [frontend]        # these namespaces reach the service ports
+    allowSameNamespace: false            # not the whole release namespace, only:
+    allowPodSelectors:
+      - app.kubernetes.io/name: web-gateway
+      - { app.kubernetes.io/name: admin, tier: backend }   # all labels must match
     egress:
       fqdns: ["api.stripe.com", "*.amazonaws.com"]   # DNS is allowed automatically
     extraIngress:
