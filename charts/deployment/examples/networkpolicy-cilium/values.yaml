@@ -18,6 +18,10 @@ deployment:
     enabled: true
     ingressControllerNamespace: traefik
     allowedNamespaces: [frontend]        # these namespaces reach the service ports
+    allowSameNamespace: false            # not the whole release namespace, only:
+    allowPodSelectors:
+      - app.kubernetes.io/name: web-gateway
+      - { app.kubernetes.io/name: admin, tier: backend }   # all labels must match
     egress:
       fqdns: ["api.stripe.com", "*.amazonaws.com"]   # DNS is allowed automatically
     extraIngress:
