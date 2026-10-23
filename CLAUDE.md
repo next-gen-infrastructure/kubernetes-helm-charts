@@ -29,6 +29,10 @@ scripts/test-examples.sh deployment # a single chart
 
 Pre-commit (config in `.pre-commit-config.yaml`): `pre-commit run --all-files`. Requires `helm-schema` (github.com/dadav/helm-schema) and `readme-generator` (bitnami-labs/readme-generator-for-helm) on PATH.
 
+## Documentation
+
+`docs/` holds hand-written per-chart guides (`docs/<chart>.md`, index in `docs/README.md`). Update the matching guide when a chart gains or changes user-facing behaviour (new resource, new toggle, changed default). Value-by-value reference stays in the generated chart `README.md`; do not duplicate it in `docs/`.
+
 ## Generated files — do not hand-edit
 
 For every chart, `README.md` and `values.schema.json` are generated from `values.yaml` by the pre-commit hook `.pre-commit/process.sh` (runs `helm-schema` and `readme-generator` for each chart whose `Chart.yaml`/`values.yaml` changed). Therefore:

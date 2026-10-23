@@ -22,7 +22,7 @@ helm search repo next-gen-infrastructure
 | [configmaps](charts/configmaps) | Standalone ConfigMaps |
 | [vaultsecrets](charts/vaultsecrets) | ExternalSecrets backed by Vault |
 
-Each chart's `README.md` documents its values (generated — see below).
+Guides for each chart (resources, behaviours, examples) are in [docs/](docs/README.md). Each chart's `README.md` is the generated values reference (see below).
 
 ## Development
 
