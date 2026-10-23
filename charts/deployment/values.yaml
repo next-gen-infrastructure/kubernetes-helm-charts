@@ -279,6 +279,7 @@ pdb:
 ##     command: []
 ##     args: []
 ##     resources: {}
+##     inheritEnv: false # true: merge the main container's env (incl. vaultSecret) into this one
 ##
 initContainers: [ ]
 ## @param sidecarContainers Configuration for the init container
@@ -293,6 +294,7 @@ initContainers: [ ]
 ##     command: []
 ##     args: []
 ##     resources: {}
+##     inheritEnv: false # true: merge the main container's env (incl. vaultSecret) into this one
 ##
 sidecarContainers: [ ]
 ## @param datadogIntegration Enable datadog related integration for tracing
