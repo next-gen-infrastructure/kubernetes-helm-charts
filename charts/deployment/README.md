@@ -127,7 +127,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `topologySpread.topologyKey`        | Topology key for soft/hard presets                                                                                                 | `topology.kubernetes.io/zone` |
 | `topologySpread.maxSkew`            | Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)                                         | `""`                          |
 | `topologySpread.constraints`        | Raw topologySpreadConstraints, used only when preset is custom (supports templating)                                               | `[]`                          |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                        |
+| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                        |
 | `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
 | `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
 

@@ -326,7 +326,7 @@
         "resourcesPreset": {
             "type": "string",
             "description": "Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).",
-            "default": "nano"
+            "default": "none"
         },
         "pdb": {
             "type": "object",
