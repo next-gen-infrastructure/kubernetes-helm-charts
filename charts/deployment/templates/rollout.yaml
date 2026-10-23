@@ -30,7 +30,7 @@ spec:
         alb:
           ingress: {{ include "common.names.fullname" . }}
           rootService: {{ include "common.ingress.serviceName" . }}
-          servicePort: {{ .Values.service.ports.http }}
+          servicePort: {{ include "common.ports.port" .Values.service.ports.http }}
       {{- end }}
 
   {{- end }}

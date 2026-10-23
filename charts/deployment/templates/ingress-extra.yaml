@@ -2,13 +2,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "common.names.fullname" . }}-extra
+  name: {{ include "common.ingress.name" (dict "name" .Values.ingressExtra.name "default" (printf "%s-extra" (include "common.names.fullname" .)) "context" $) }}
   namespace: {{ include "common.names.namespace" . | quote }}
   labels: {{ include "common.labels.standard" . | nindent 4 }}
   {{- with .Values.ingressExtra.annotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" . "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
     {{ range (required "ingressExtra.extraHosts are required for ingressExtra" .Values.ingressExtra.extraHosts) -}}
     {{- $portName := default "http" .port -}}

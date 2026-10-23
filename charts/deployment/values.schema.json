@@ -651,6 +651,16 @@
                     "description": "If service will be accessible outside of Kubernetes environment",
                     "default": false
                 },
+                "name": {
+                    "type": "string",
+                    "description": "If you need to specify an ingress's full name override.",
+                    "default": ""
+                },
+                "className": {
+                    "type": "string",
+                    "description": "Name of the ingress Class.",
+                    "default": "traefik"
+                },
                 "pathType": {
                     "type": "string",
                     "description": "Type of the path (available options \"ImplementationSpecific\", \"Exact\", \"Prefix\")",
@@ -676,6 +686,37 @@
                     "description": "Ingress annotations",
                     "default": {}
                 },
+                "traefik": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.",
+                            "default": false
+                        },
+                        "entryPoints": {
+                            "type": "array",
+                            "description": "Traefik entry points the route is attached to",
+                            "default": [
+                                "websecure"
+                            ],
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "middlewares": {
+                            "type": "array",
+                            "description": "Traefik middlewares applied to the route.",
+                            "default": [],
+                            "items": {}
+                        },
+                        "tls": {
+                            "type": "object",
+                            "description": "IngressRoute tls block.",
+                            "default": {}
+                        }
+                    }
+                },
                 "extraHosts": {
                     "type": "array",
                     "description": "Extra hosts for ingress",
@@ -691,6 +732,11 @@
                     "type": "boolean",
                     "description": "If service will be accessible outside of Kubernetes environment",
                     "default": false
+                },
+                "name": {
+                    "type": "string",
+                    "description": "If you need to specify an extra ingress's full name override.",
+                    "default": ""
                 },
                 "pathType": {
                     "type": "string",

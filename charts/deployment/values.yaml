@@ -431,7 +431,10 @@ service:
   ## @param service.ports Configuration of the service ports
   ## E.g.
   ## ports:
-  ##   http: 80
+  ##   http:
+  ##     port: 80
+  ##     protocol: TCP
+  ##     containerPort: 3000
   ##   https: 443
   ports: { }
   ## @param  service.healthCheckPath default HTTP Health check for container liveness and readiness.
@@ -543,6 +546,12 @@ ingress:
   ## @param ingress.enabled If service will be accessible outside of Kubernetes environment
   ##
   enabled: false
+  ## @param ingress.name If you need to specify an ingress's full name override.
+  ##
+  name: ""
+  ## @param ingress.className Name of the ingress Class.
+  ##
+  className: traefik
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
@@ -561,6 +570,27 @@ ingress:
   ## @param ingress.annotations Ingress annotations
   ##
   annotations: { }
+  traefik:
+    ## @param ingress.traefik.enabled Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.
+    ##
+    enabled: false
+    ## @param ingress.traefik.entryPoints Traefik entry points the route is attached to
+    ##
+    entryPoints:
+      - websecure
+    ## @param ingress.traefik.middlewares Traefik middlewares applied to the route.
+    ## E.g.
+    ## middlewares:
+    ##   - name: redirect
+    ##     namespace: infra
+    ##
+    middlewares: [ ]
+    ## @param ingress.traefik.tls IngressRoute tls block.
+    ## E.g.
+    ## tls:
+    ##   certResolver: le
+    ##
+    tls: { }
   ## @param ingress.extraHosts Extra hosts for ingress
   ## E.g.
   ## extraHosts:
@@ -575,6 +605,9 @@ ingressExtra:
   ## @param ingressExtra.enabled If service will be accessible outside of Kubernetes environment
   ##
   enabled: false
+  ## @param ingressExtra.name If you need to specify an extra ingress's full name override.
+  ##
+  name: ""
   ## @param ingressExtra.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix

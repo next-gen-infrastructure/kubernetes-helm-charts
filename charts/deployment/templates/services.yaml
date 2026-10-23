@@ -18,16 +18,16 @@ spec:
   ports:
     {{- range $key, $value := default (dict) .Values.service.ports }}
     - name: {{ $key }}
-      port: {{ $value }}
+      port: {{ include "common.ports.port" $value }}
       targetPort: {{ $key }}
-      protocol: TCP
+      protocol: {{ include "common.ports.protocol" $value }}
     {{- end }}
     {{- range .Values.sidecarContainers }}
     {{- range $key, $value := default (dict) (.service).ports }}
     - name: {{ $key }}
-      port: {{ $value }}
+      port: {{ include "common.ports.port" $value }}
       targetPort: {{ $key }}
-      protocol: TCP
+      protocol: {{ include "common.ports.protocol" $value }}
     {{- end }}
     {{- end }}
   selector: {{ include "common.labels.matchLabels" . | nindent 4 }}
@@ -51,16 +51,16 @@ spec:
   ports:
     {{- range $key, $value := default (dict) .Values.service.ports }}
     - name: {{ $key }}
-      port: {{ $value }}
+      port: {{ include "common.ports.port" $value }}
       targetPort: {{ $key }}
-      protocol: TCP
+      protocol: {{ include "common.ports.protocol" $value }}
     {{- end }}
     {{- range .Values.sidecarContainers }}
     {{- range $key, $value := default (dict) (.service).ports }}
     - name: {{ $key }}
-      port: {{ $value }}
+      port: {{ include "common.ports.port" $value }}
       targetPort: {{ $key }}
-      protocol: TCP
+      protocol: {{ include "common.ports.protocol" $value }}
     {{- end }}
     {{- end }}
   selector: {{ include "common.labels.matchLabels" . | nindent 4 }}
