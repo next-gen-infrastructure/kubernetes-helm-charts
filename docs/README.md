@@ -12,7 +12,7 @@ Per-chart guides. Full value reference lives in each chart's generated `charts/<
 | configmaps | ConfigMaps | [configmaps.md](configmaps.md) |
 | vaultsecrets | ExternalSecrets | [vaultsecrets.md](vaultsecrets.md) |
 
-Cross-chart topics: [presets.md](presets.md) (resources, affinity, topology spread).
+Cross-chart topics: [presets.md](presets.md) (resources, affinity, topology spread), [networkpolicy.md](networkpolicy.md) (Cilium / Kubernetes network policies).
 
 ## Using a chart
 
