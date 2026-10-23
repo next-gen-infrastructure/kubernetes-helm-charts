@@ -13,7 +13,7 @@ deployment:
   metrics:
     enabled: true
     port: http
-    namespace: monitoring
+    prometheusNamespace: monitoring
   networkPolicy:
     enabled: true
     # cilium: true is the default
