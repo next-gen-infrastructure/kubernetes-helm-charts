@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.0.0...statefulset-4.1.0) (2026-10-23)
+
+
+### Features
+
+* add Traefik IngressRoute, ingress name override and service port options ([c900616](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c900616c18989557b02274ec571da75d3acdebfb))
+* add Traefik IngressRoute, ingress name override and service port options ([b41d4b6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b41d4b6ca52084f1472c21c56a2e7774c4ba8da1))
+
 ## [4.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-3.0.1...statefulset-4.0.0) (2026-10-22)
 
 
