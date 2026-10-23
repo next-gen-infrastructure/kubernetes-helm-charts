@@ -38,6 +38,19 @@ service:
 {{- end -}}
 {{- end -}}
 
+{{/*
+Returns the ingress name: the rendered "name" override if set, else the default.
+Usage:
+{{ include "common.ingress.name" (dict "name" .Values.ingress.name "default" (include "common.names.fullname" .) "context" $) }}
+*/}}
+{{- define "common.ingress.name" -}}
+{{- if .name -}}
+{{- include "common.tplvalues.render" (dict "value" .name "context" .context) -}}
+{{- else -}}
+{{- .default -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "common.ingress.previewServiceName" -}}
 preview-{{- include  "common.ingress.serviceName" . -}}
 {{- end -}}

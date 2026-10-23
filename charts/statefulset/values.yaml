@@ -379,8 +379,11 @@ service:
   ## @param service.ports Configuration of the service ports
   ## E.g.
   ## ports:
-  ##   http: 80
-  ##   https: 443
+  ##   http:
+  ##     port: 80
+  ##     protocol: TCP        # defaults to TCP
+  ##     containerPort: 3000  # defaults to port
+  ##   https: 443             # shorthand for {port: 443}
   ports: {}
   ## @param  service.healthCheckPath default HTTP Health check for container liveness and readiness.
   ##

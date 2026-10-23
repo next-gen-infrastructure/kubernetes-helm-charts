@@ -1,14 +1,15 @@
-{{- if and .Values.ingress.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
+{{- if and .Values.ingress.enabled (not .Values.ingress.traefik.enabled) .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "common.ingress.name" (dict "name" .Values.ingress.name "default" (include "common.names.fullname" .) "context" $) }}
   namespace: {{ include "common.names.namespace" . | quote }}
   labels: {{ include "common.labels.standard" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" . "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
     - host: {{ include "common.ingress.host" . }}
       http:

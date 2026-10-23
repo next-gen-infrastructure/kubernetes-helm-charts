@@ -93,8 +93,8 @@ Return generated container configuration.
   ports:
   {{- range $key, $value := default (dict) .Values.service.ports }}
     - name: {{ $key }}
-      containerPort: {{ $value }}
-      protocol: TCP
+      containerPort: {{ include "common.ports.containerPort" $value }}
+      protocol: {{ include "common.ports.protocol" $value }}
   {{- end }}
   {{- end }}
   {{- if (.Values.lifecycle).enabled }}
