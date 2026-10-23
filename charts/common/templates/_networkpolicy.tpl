@@ -36,6 +36,10 @@ extraIngress / extraEgress are raw rules in the native format of the selected ki
 {{- if $nss -}}
   {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" $nss "ports" $ports) | fromYaml) -}}
 {{- end -}}
+{{- /* specific pods of the release namespace, only when the whole namespace is not allowed */ -}}
+{{- if and (not $np.allowSameNamespace) $np.allowPodSelectors -}}
+  {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespace" $ns "podSelectors" $np.allowPodSelectors "ports" $ports) | fromYaml) -}}
+{{- end -}}
 {{- /* prometheus may scrape the metrics port only */ -}}
 {{- if and (.Values.metrics).enabled (.Values.metrics).prometheusNamespace -}}
   {{- $mports := list -}}
@@ -95,7 +99,7 @@ spec: {{ toYaml $spec | nindent 2 }}
 {{- end -}}
 
 {{/*
-One ingress rule allowing the given namespaces to the given ports (all ports when empty).
+One ingress rule allowing the given namespaces, and pods (label maps) of .namespace, to the given ports (all ports when empty).
 */}}
 {{- define "common.networkpolicy.ingressRule" -}}
 {{- $peers := list -}}
@@ -104,6 +108,13 @@ One ingress rule allowing the given namespaces to the given ports (all ports whe
     {{- $peers = append $peers (dict "matchLabels" (dict "k8s:io.kubernetes.pod.namespace" .)) -}}
   {{- else -}}
     {{- $peers = append $peers (dict "namespaceSelector" (dict "matchLabels" (dict "kubernetes.io/metadata.name" .))) -}}
+  {{- end -}}
+{{- end -}}
+{{- range .podSelectors -}}
+  {{- if $.cilium -}}
+    {{- $peers = append $peers (dict "matchLabels" (merge (dict "k8s:io.kubernetes.pod.namespace" $.namespace) .)) -}}
+  {{- else -}}
+    {{- $peers = append $peers (dict "podSelector" (dict "matchLabels" .)) -}}
   {{- end -}}
 {{- end -}}
 {{- $rule := dict (ternary "fromEndpoints" "from" .cilium) $peers -}}
