@@ -28,26 +28,41 @@ Kubernetes Cron Jobs
 
 ### Common parameters
 
-| Name                          | Description                                                                               | Value                    |
-| ----------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
-| `nameOverride`                | By default, name uses '{{ .Chart.Name }}'.                                                | `""`                     |
-| `fullnameOverride`            | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                        | `""`                     |
-| `podSecurityContext`          | Pod security context                                                                      | `{}`                     |
-| `securityContext`             | Security context for the container                                                        | `{}`                     |
-| `hostPid`                     | Use the host’s pid namespace                                                              | `false`                  |
-| `nodeSelector`                | Node labels for pod assignment                                                            | `{}`                     |
-| `tolerations`                 | Tolerations for pod assignment                                                            | `[]`                     |
-| `podAffinity`                 | Pod affinity. Ignored if `affinity` is set                                                |                          |
-| `podAffinity.preset`          | Preset type: soft (preferred), hard (required) or disabled                                | `disabled`               |
-| `podAffinity.topologyKey`     | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
-| `podAntiAffinity`             | Pod anti-affinity. Ignored if `affinity` is set                                           |                          |
-| `podAntiAffinity.preset`      | Preset type: soft (preferred), hard (required) or disabled                                | `soft`                   |
-| `podAntiAffinity.topologyKey` | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
-| `nodeAffinityPreset`          | Node affinity preset                                                                      |                          |
-| `nodeAffinityPreset.type`     | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                     |
-| `nodeAffinityPreset.key`      | Node label key to match Ignored if `affinity` is set.                                     | `""`                     |
-| `nodeAffinityPreset.values`   | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                     |
-| `affinity`                    | Affinity for pod assignment                                                               | `{}`                     |
+| Name                                       | Description                                                                 | Value   |
+| ------------------------------------------ | --------------------------------------------------------------------------- | ------- |
+| `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                  | `""`    |
+| `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.          | `""`    |
+| `podSecurityContext`                       | Pod security context                                                        |         |
+| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                      | `1000`  |
+| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                    | `true`  |
+| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                      | `65534` |
+| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod        | `65534` |
+| `securityContext`                          | Container security context                                                  |         |
+| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process | `false` |
+| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                         | `true`  |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                      | `1000`  |
+| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                    | `true`  |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                      | `65534` |
+
+### securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+
+| Name                                | Description                                                                               | Value                    |
+| ----------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
+| `securityContext.capabilities.drop` | Drop all capabilities by default                                                          | `["ALL"]`                |
+| `hostPid`                           | Use the host’s pid namespace                                                              | `false`                  |
+| `nodeSelector`                      | Node labels for pod assignment                                                            | `{}`                     |
+| `tolerations`                       | Tolerations for pod assignment                                                            | `[]`                     |
+| `podAffinity`                       | Pod affinity. Ignored if `affinity` is set                                                |                          |
+| `podAffinity.preset`                | Preset type: soft (preferred), hard (required) or disabled                                | `disabled`               |
+| `podAffinity.topologyKey`           | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
+| `podAntiAffinity`                   | Pod anti-affinity. Ignored if `affinity` is set                                           |                          |
+| `podAntiAffinity.preset`            | Preset type: soft (preferred), hard (required) or disabled                                | `soft`                   |
+| `podAntiAffinity.topologyKey`       | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
+| `nodeAffinityPreset`                | Node affinity preset                                                                      |                          |
+| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                     |
+| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                     | `""`                     |
+| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                     |
+| `affinity`                          | Affinity for pod assignment                                                               | `{}`                     |
 
 ### Configure Service Accounts for Pod
 
@@ -77,10 +92,11 @@ Kubernetes Cron Jobs
 
 ### Container resource requests and limits
 
-| Name                 | Description                              | Value |
-| -------------------- | ---------------------------------------- | ----- |
-| `resources.limits`   | The resources limits for the container   | `{}`  |
-| `resources.requests` | The requests resources for the container | `{}`  |
+| Name                 | Description                                                                                                                        | Value  |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| `resources.limits`   | The resources limits for the container                                                                                             | `{}`   |
+| `resources.requests` | The requests resources for the container                                                                                           | `{}`   |
+| `resourcesPreset`    | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none` |
 
 ### Cronjobs configuration
 
