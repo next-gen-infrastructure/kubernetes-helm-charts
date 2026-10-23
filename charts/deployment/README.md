@@ -131,6 +131,21 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
 | `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
 
+### Network policy
+
+| Name                                              | Description                                                                                      | Value         |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------- |
+| `networkPolicy.enabled`                           | Create a network policy for the pods                                                             | `false`       |
+| `networkPolicy.cilium`                            | Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs | `true`        |
+| `networkPolicy.allowIngressFromIngressController` | Allow traffic from the namespace in ingressControllerNamespace                                   | `true`        |
+| `networkPolicy.ingressControllerNamespace`        | Namespace of the ingress controller                                                              | `kube-system` |
+| `networkPolicy.allowSameNamespace`                | Allow traffic from the release namespace                                                         | `true`        |
+| `networkPolicy.allowedNamespaces`                 | Additional namespaces allowed to reach the pods                                                  | `[]`          |
+| `networkPolicy.egress.allowDNS`                   | Allow DNS to kube-dns when egress is restricted                                                  | `true`        |
+| `networkPolicy.egress.fqdns`                      | Hostnames pods may reach, e.g. ["api.stripe.com", "*.amazonaws.com"]. Cilium only                | `[]`          |
+| `networkPolicy.extraIngress`                      | Raw ingress rules in the native format of the selected kind (supports templating)                | `[]`          |
+| `networkPolicy.extraEgress`                       | Raw egress rules in the native format of the selected kind (supports templating)                 | `[]`          |
+
 ### Extra Containers
 
 | Name                       | Description                                           | Value   |
@@ -268,18 +283,19 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Prometheus Exporter / Metrics
 
-| Name                                   | Description                                  | Value        |
-| -------------------------------------- | -------------------------------------------- | ------------ |
-| `metrics.enabled`                      | Enable prometheus to access metrics endpoint | `false`      |
-| `metrics.path`                         | Path to the prometheus metrics endpoint      | `/metrics`   |
-| `metrics.port`                         | Name of the service port for metrics         | `http`       |
-| `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                 | `false`      |
-| `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped  | `10s`        |
-| `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended      | `3s`         |
-| `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object  | `{}`         |
-| `metrics.rules.enabled`                | Create PrometheusRules object                | `false`      |
-| `metrics.rules.namespace`              | Namespace of the PrometheusRules object      | `monitoring` |
-| `metrics.rules.spec`                   | Configuration for the application alerting   | `[]`         |
+| Name                                   | Description                                                                                     | Value        |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------ |
+| `metrics.enabled`                      | Enable prometheus to access metrics endpoint                                                    | `false`      |
+| `metrics.path`                         | Path to the prometheus metrics endpoint                                                         | `/metrics`   |
+| `metrics.port`                         | Name of the service port for metrics                                                            | `http`       |
+| `metrics.prometheusNamespace`          | Namespace of Prometheus. When networkPolicy is enabled it may reach the metrics port from there | `monitoring` |
+| `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                                                                    | `false`      |
+| `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped                                                     | `10s`        |
+| `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended                                                         | `3s`         |
+| `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object                                                     | `{}`         |
+| `metrics.rules.enabled`                | Create PrometheusRules object                                                                   | `false`      |
+| `metrics.rules.namespace`              | Namespace of the PrometheusRules object                                                         | `monitoring` |
+| `metrics.rules.spec`                   | Configuration for the application alerting                                                      | `[]`         |
 
 ### Lifecycle configuration
 

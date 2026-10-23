@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=values.schema.json
+global:
+  serviceName: "test"
+  environmentName: "stage"
+  image:
+    registry: "1234567890.dkr.ecr.eu-central-1.amazonaws.com"
+    repository: "k8s/example-service"
+    tag: "dev"
+deployment:
+  service:
+    ports:
+      http: 8080
+  metrics:
+    enabled: true
+    port: http
+    prometheusNamespace: monitoring      # may scrape the metrics port only
+  networkPolicy:
+    enabled: true
+    ingressControllerNamespace: traefik
+    allowedNamespaces: [frontend]        # these namespaces reach the service ports
+    egress:
+      fqdns: ["api.stripe.com", "*.amazonaws.com"]   # DNS is allowed automatically
+    extraIngress:
+      # another app, only on one port
+      - fromEndpoints:
+          - matchLabels:
+              k8s:io.kubernetes.pod.namespace: batch
+              app.kubernetes.io/name: report-runner
+        toPorts:
+          - ports: [{ port: "8080", protocol: TCP }]
+    extraEgress:
+      # database pods in the release namespace
+      - toEndpoints:
+          - matchLabels:
+              k8s:io.kubernetes.pod.namespace: "{{ .Release.Namespace }}"
+              app.kubernetes.io/name: postgres
+        toPorts:
+          - ports: [{ port: "5432", protocol: TCP }]
+      # cache in another namespace
+      - toEndpoints:
+          - matchLabels:
+              k8s:io.kubernetes.pod.namespace: shared
+              app.kubernetes.io/name: redis
+        toPorts:
+          - ports: [{ port: "6379", protocol: TCP }]
+      # an IP range, not a hostname
+      - toCIDR: ["10.20.0.0/16"]
+        toPorts:
+          - ports: [{ port: "443", protocol: TCP }]
+      # the Kubernetes API server
+      - toEntities: [kube-apiserver]

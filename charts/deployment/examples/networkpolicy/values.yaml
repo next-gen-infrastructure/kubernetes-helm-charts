@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=values.schema.json
+global:
+  serviceName: "test"
+  environmentName: "stage"
+  image:
+    registry: "1234567890.dkr.ecr.eu-central-1.amazonaws.com"
+    repository: "k8s/example-service"
+    tag: "dev"
+deployment:
+  service:
+    ports:
+      http: 8080
+  metrics:
+    enabled: true
+    port: http
+    prometheusNamespace: monitoring
+  networkPolicy:
+    enabled: true
+    cilium: false
+    allowedNamespaces: [frontend]
+    extraIngress:
+      # another app, only on one port
+      - from:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: batch
+            podSelector:
+              matchLabels:
+                app.kubernetes.io/name: report-runner
+        ports: [{ port: 8080, protocol: TCP }]
+      # a fixed office range
+      - from:
+          - ipBlock: { cidr: 203.0.113.0/24 }
+    extraEgress:
+      # database pods in the release namespace (podSelector alone = same namespace)
+      - to:
+          - podSelector:
+              matchLabels:
+                app.kubernetes.io/name: postgres
+        ports: [{ port: 5432 }]
+      # cache in another namespace
+      - to:
+          - namespaceSelector:
+              matchLabels:
+                kubernetes.io/metadata.name: shared
+            podSelector:
+              matchLabels:
+                app.kubernetes.io/name: redis
+        ports: [{ port: 6379 }]
+      # everything public except private ranges
+      - to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
+              except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16]
+        ports: [{ port: 443 }]

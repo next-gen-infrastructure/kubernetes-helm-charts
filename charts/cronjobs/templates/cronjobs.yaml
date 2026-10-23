@@ -43,6 +43,8 @@ spec:
       ttlSecondsAfterFinished: {{ . }}
       {{- end }}
       template:
+        metadata:
+          labels: {{ include "common.labels.matchLabels" $ | nindent 12 }}
         spec:
           {{- if $.Values.podSecurityContext }}
           securityContext: {{ toYaml $.Values.podSecurityContext | nindent 12 }}

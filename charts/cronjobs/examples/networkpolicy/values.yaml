@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=values.schema.json
+global:
+  serviceName: "test"
+  environmentName: "stage"
+  image:
+    registry: "1234567890.dkr.ecr.eu-central-1.amazonaws.com"
+    repository: "k8s/example-service"
+    tag: "dev"
+cronjobs:
+  networkPolicy:
+    enabled: true
+    egress:
+      fqdns: ["api.stripe.com"]
+  cronjobs:
+    nightly:
+      schedule: "0 2 * * *"
