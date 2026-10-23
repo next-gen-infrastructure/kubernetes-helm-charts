@@ -16,11 +16,14 @@ extraIngress / extraEgress are raw rules in the native format of the selected ki
 
 {{- /* ports: cilium wants strings, NetworkPolicy ints */ -}}
 {{- $ports := list -}}
+{{- $byName := dict -}}
 {{- $svcs := concat (list (dict "service" .Values.service)) (default (list) .Values.sidecarContainers) -}}
 {{- range $svcs -}}
-  {{- range $_, $v := default (dict) (.service | default (dict)).ports -}}
+  {{- range $k, $v := default (dict) (.service | default (dict)).ports -}}
     {{- $p := include "common.ports.containerPort" $v | int -}}
-    {{- $ports = append $ports (dict "port" (ternary (toString $p) $p $cilium) "protocol" (include "common.ports.protocol" $v)) -}}
+    {{- $spec := dict "port" (ternary (toString $p) $p $cilium) "protocol" (include "common.ports.protocol" $v) -}}
+    {{- $ports = append $ports $spec -}}
+    {{- $_ := set $byName $k $spec -}}
   {{- end -}}
 {{- end -}}
 
@@ -31,19 +34,13 @@ extraIngress / extraEgress are raw rules in the native format of the selected ki
 {{- $nss = concat $nss (default (list) $np.allowedNamespaces) | uniq -}}
 {{- $ingress := list -}}
 {{- if $nss -}}
-  {{- $peers := list -}}
-  {{- range $nss -}}
-    {{- if $cilium -}}
-      {{- $peers = append $peers (dict "matchLabels" (dict "k8s:io.kubernetes.pod.namespace" .)) -}}
-    {{- else -}}
-      {{- $peers = append $peers (dict "namespaceSelector" (dict "matchLabels" (dict "kubernetes.io/metadata.name" .))) -}}
-    {{- end -}}
-  {{- end -}}
-  {{- $rule := dict (ternary "fromEndpoints" "from" $cilium) $peers -}}
-  {{- if $ports -}}
-    {{- $_ := set $rule (ternary "toPorts" "ports" $cilium) (ternary (list (dict "ports" $ports)) $ports $cilium) -}}
-  {{- end -}}
-  {{- $ingress = append $ingress $rule -}}
+  {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" $nss "ports" $ports) | fromYaml) -}}
+{{- end -}}
+{{- /* prometheus may scrape the metrics port only */ -}}
+{{- if and (.Values.metrics).enabled (.Values.metrics).namespace -}}
+  {{- $mports := list -}}
+  {{- with get $byName (toString .Values.metrics.port) }}{{ $mports = list . }}{{ end -}}
+  {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" (list .Values.metrics.namespace) "ports" $mports) | fromYaml) -}}
 {{- end -}}
 {{- with $np.extraIngress -}}
   {{- $ingress = concat $ingress (include "common.tplvalues.render" (dict "value" . "context" $ctx) | fromYamlArray) -}}
@@ -95,4 +92,23 @@ metadata:
   labels: {{ include "common.labels.standard" . | nindent 4 }}
 spec: {{ toYaml $spec | nindent 2 }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+One ingress rule allowing the given namespaces to the given ports (all ports when empty).
+*/}}
+{{- define "common.networkpolicy.ingressRule" -}}
+{{- $peers := list -}}
+{{- range .namespaces -}}
+  {{- if $.cilium -}}
+    {{- $peers = append $peers (dict "matchLabels" (dict "k8s:io.kubernetes.pod.namespace" .)) -}}
+  {{- else -}}
+    {{- $peers = append $peers (dict "namespaceSelector" (dict "matchLabels" (dict "kubernetes.io/metadata.name" .))) -}}
+  {{- end -}}
+{{- end -}}
+{{- $rule := dict (ternary "fromEndpoints" "from" .cilium) $peers -}}
+{{- if .ports -}}
+  {{- $_ := set $rule (ternary "toPorts" "ports" .cilium) (ternary (list (dict "ports" .ports)) .ports .cilium) -}}
+{{- end -}}
+{{- toYaml $rule -}}
 {{- end -}}

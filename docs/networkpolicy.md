@@ -20,7 +20,8 @@ Only Cilium can allow egress by hostname (`egress.fqdns`); setting it with `cili
 |---|---|---|
 | `allowIngressFromIngressController` + `ingressControllerNamespace` | `true`, `kube-system` | the ingress controller |
 | `allowSameNamespace` | `true` | the release namespace |
-| `allowedNamespaces` | `[]` | any extra namespaces (e.g. `monitoring` for Prometheus) |
+| `allowedNamespaces` | `[]` | any extra namespaces |
+| `metrics.namespace` (when `metrics.enabled`) | `monitoring` | Prometheus; reaches only the `metrics.port` service port |
 
 **Egress** stays fully open until `egress.fqdns` or `extraEgress` is set. Then everything not listed is denied, and kube-dns is allowed first when `egress.allowDNS` is `true` (the default). `cronjobs` has egress only; its ingress is fully denied.
 
