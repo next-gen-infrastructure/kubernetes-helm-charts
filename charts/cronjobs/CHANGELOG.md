@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.2.0...cronjobs-4.3.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy support (Cilium by default) ([e9091f0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e9091f0ca8e264bbccd17e048cb0b610e916e255))
+* **cronjobs:** add egress networkPolicy support and label job pods ([d66d73b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d66d73bf3dfa466793a07597943f5a2f80ffbb1a))
+
 ## [4.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.1.0...cronjobs-4.2.0) (2026-10-23)
 
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.2.0...daemonset-4.3.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy support (Cilium by default) ([e9091f0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e9091f0ca8e264bbccd17e048cb0b610e916e255))
+* **daemonset:** add metrics.namespace for network policy prometheus access ([90e471c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/90e471ce713d1193884a452adb18fe390cd7af9d))
+* **daemonset:** add networkPolicy support (Cilium by default) ([10dfc22](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/10dfc22dea92a4368bb13e3dc3e4b606021f43b1))
+
+
+### Bug Fixes
+
+* **daemonset:** rename metrics.namespace to metrics.prometheusNamespace ([60343e6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/60343e6d56dfb771b26167064d00dd8af51cea64))
+
 ## [4.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.1.0...daemonset-4.2.0) (2026-10-23)
 
 

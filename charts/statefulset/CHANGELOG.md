@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.2.0...statefulset-4.3.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy support (Cilium by default) ([e9091f0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e9091f0ca8e264bbccd17e048cb0b610e916e255))
+* **statefulset:** add metrics.namespace for network policy prometheus access ([ac63fa6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ac63fa696fa929a685ca21be37061a79b20d1e75))
+* **statefulset:** add networkPolicy support (Cilium by default) ([43262bb](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/43262bb6956f65162433116534fdddeeff778b1d))
+
+
+### Bug Fixes
+
+* **statefulset:** rename metrics.namespace to metrics.prometheusNamespace ([602074c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/602074c1b988a8dbae27ff2213b2d97fc1438e60))
+
 ## [4.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.1.0...statefulset-4.2.0) (2026-10-23)
 
 

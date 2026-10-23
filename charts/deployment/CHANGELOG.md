@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.4.0...deployment-4.5.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy support (Cilium by default) ([e9091f0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e9091f0ca8e264bbccd17e048cb0b610e916e255))
+* **deployment:** add metrics.namespace for network policy prometheus access ([17e49e5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/17e49e52d15f28cd5f40186424bdfb5e407e13ec))
+* **deployment:** add networkPolicy support (Cilium by default) ([273157e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/273157e787856d41079e3a1129de499b056f1cd5))
+
+
+### Bug Fixes
+
+* **deployment:** rename metrics.namespace to metrics.prometheusNamespace ([0b7cc6d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/0b7cc6daeb20eff6007bc7c1b79c2a6325c5dee2))
+
 ## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.3.0...deployment-4.4.0) (2026-10-23)
 
 

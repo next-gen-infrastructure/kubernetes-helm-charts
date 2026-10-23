@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.5.0...common-4.6.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy support (Cilium by default) ([e9091f0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e9091f0ca8e264bbccd17e048cb0b610e916e255))
+* **common:** add networkpolicy helper rendering NetworkPolicy or CiliumNetworkPolicy ([e847039](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e8470399c3d0ecaaf32c62508d9ef20310822382))
+* **common:** allow prometheus namespace to scrape the metrics port in networkpolicy ([d2a0cba](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d2a0cba8631d0bfd3ae5160c7484d3946d106aec))
+
 ## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.4.0...common-4.5.0) (2026-10-23)
 
 
