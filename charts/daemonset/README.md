@@ -186,7 +186,7 @@ Typical Daemon Set application
 | `metrics.enabled`                      | Enable prometheus to access metrics endpoint                                                    | `false`      |
 | `metrics.path`                         | Path to the prometheus metrics endpoint                                                         | `/metrics`   |
 | `metrics.port`                         | Name of the service port for metrics                                                            | `http`       |
-| `metrics.namespace`                    | Namespace of Prometheus. When networkPolicy is enabled it may reach the metrics port from there | `monitoring` |
+| `metrics.prometheusNamespace`          | Namespace of Prometheus. When networkPolicy is enabled it may reach the metrics port from there | `monitoring` |
 | `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                                                                    | `false`      |
 | `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped                                                     | `10s`        |
 | `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended                                                         | `3s`         |
