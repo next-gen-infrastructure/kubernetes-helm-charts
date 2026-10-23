@@ -4,6 +4,29 @@ entries:
   - annotations:
       category: Infrastructure
     apiVersion: v2
+    created: "2026-10-23T10:14:14.42855167Z"
+    description: A Library Helm Chart for grouping common logic between charts. This
+      chart is not deployable by itself.
+    digest: 9cb7d09c3fe2ccf22df0833b10fb3f2451216f42193ed4a71aef1caafbeecf09
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: common
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/common-4.5.0/common-4.5.0.tgz
+    version: 4.5.0
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
     created: "2026-10-23T09:55:21.90848397Z"
     description: A Library Helm Chart for grouping common logic between charts. This
       chart is not deployable by itself.
@@ -367,6 +390,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-10-23T10:14:15.399129114Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: fa87f90099be6a410b7287a797b4e0738375809cd61de971f413202ba6bf991f
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-4.2.0/cronjobs-4.2.0.tgz
+    version: 4.2.0
+  - apiVersion: v2
     created: "2026-10-23T00:39:51.750852744Z"
     dependencies:
     - name: common
@@ -529,6 +570,22 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-1.0.0/cronjobs-1.0.0.tgz
     version: 1.0.0
   daemonset:
+  - apiVersion: v2
+    created: "2026-10-23T10:14:16.23765309Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical Daemon Set application
+    digest: 91133a64aeefdac8ae83f1a0f8423e74032a502b62663024c52bde93364fff77
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-4.2.0/daemonset-4.2.0.tgz
+    version: 4.2.0
   - apiVersion: v2
     created: "2026-10-23T00:39:52.805482253Z"
     dependencies:
@@ -1207,6 +1264,25 @@ entries:
     version: 1.1.0
   statefulset:
   - apiVersion: v2
+    created: "2026-10-23T10:14:17.231148189Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical StateFul Set application
+    digest: d40dd67a651c702c3541e9227ddb3e6385405c96978e6e77ce78932647a64b79
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-4.2.0/statefulset-4.2.0.tgz
+    version: 4.2.0
+  - apiVersion: v2
     created: "2026-10-23T00:13:17.828436066Z"
     dependencies:
     - name: common
@@ -1606,4 +1682,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-23T09:55:22.775673361Z"
+generated: "2026-10-23T10:14:17.228319502Z"
