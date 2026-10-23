@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.5.0...deployment-4.6.0) (2026-10-23)
+
+
+### Features
+
+* add networkPolicy.allowPodSelectors ([4005eb8](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/4005eb8080cbcf4473cfe2ed1e7277ad5d880268))
+* **deployment:** add networkPolicy.allowPodSelectors ([eecb21a](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/eecb21a643379a07c1ce14df539a45ccf0fab050))
+
 ## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.4.0...deployment-4.5.0) (2026-10-23)
 
 
