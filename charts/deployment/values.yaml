@@ -700,6 +700,9 @@ metrics:
   ## @param metrics.port Name of the service port for metrics
   ##
   port: http
+  ## @param metrics.namespace Namespace of Prometheus. When networkPolicy is enabled it may reach the metrics port from there
+  ##
+  namespace: monitoring
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:

@@ -10,10 +10,13 @@ deployment:
   service:
     ports:
       http: 8080
+  metrics:
+    enabled: true
+    port: http
+    namespace: monitoring
   networkPolicy:
     enabled: true
     # cilium: true is the default
     ingressControllerNamespace: traefik
-    allowedNamespaces: [monitoring]
     egress:
       fqdns: ["api.stripe.com", "*.amazonaws.com"]
