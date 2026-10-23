@@ -748,7 +748,7 @@
                     "description": "Name of the service port for metrics",
                     "default": "http"
                 },
-                "namespace": {
+                "prometheusNamespace": {
                     "type": "string",
                     "description": "Namespace of Prometheus. When networkPolicy is enabled it may reach the metrics port from there",
                     "default": "monitoring"
