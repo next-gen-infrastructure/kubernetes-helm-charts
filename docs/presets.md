@@ -46,14 +46,15 @@ Matches pods of the same release (chart match labels) on a topology key.
 
 Anti-affinity is what spreads replicas over nodes; affinity co-locates them.
 
-Value shape differs between charts:
+All workload charts (`deployment`, `statefulset`, `daemonset`, `cronjobs`) use the same blocks:
 
-| Chart | Pod affinity | Pod anti-affinity |
-|---|---|---|
-| deployment | `podAffinity.preset` (default `disabled`), `podAffinity.topologyKey` | `podAntiAffinity.preset` (default `soft`), `podAntiAffinity.topologyKey` |
-| statefulset, daemonset, cronjobs | `podAffinityPreset` (default empty) | `podAntiAffinityPreset` (default `soft`) |
+| Value | Default |
+|---|---|
+| `podAffinity.preset` | `disabled` |
+| `podAntiAffinity.preset` | `soft` |
+| `podAffinity.topologyKey`, `podAntiAffinity.topologyKey` | `kubernetes.io/hostname` (one pod per node) |
 
-`topologyKey` defaults to `kubernetes.io/hostname` (one pod per node). Only `deployment` lets you change it.
+The old flat `podAffinityPreset` / `podAntiAffinityPreset` values were removed from `statefulset`, `daemonset` and `cronjobs`; move them to `podAffinity.preset` / `podAntiAffinity.preset`.
 
 ```yaml
 deployment:
@@ -75,13 +76,13 @@ nodeAffinityPreset:
 
 `soft` is preferred (weight 1), `hard` is required. For plain label matching, `nodeSelector` is simpler.
 
-## Topology spread: `topologySpread` (deployment only, Deployment and Rollout)
+## Topology spread: `topologySpread` (deployment, statefulset)
 
 | Value | Default | Meaning |
 |---|---|---|
 | `preset` | `soft` | `soft` = `ScheduleAnyway`, `hard` = `DoNotSchedule`, `custom` = use `constraints`, `disabled` = none |
 | `topologyKey` | `topology.kubernetes.io/zone` | domain to spread across |
-| `maxSkew` | auto | `1`; for `soft` with `autoscaling.minReplicas >= 10` it is `2`. Setting it overrides |
+| `maxSkew` | auto | `1`; for `soft` with `autoscaling.minReplicas >= 10` (deployment only) it is `2`. Setting it overrides |
 | `constraints` | `[]` | raw `topologySpreadConstraints`, only for `custom`, supports `{{ }}` |
 
 Any other `preset` value fails the render. The label selector is the release's match labels (plus `podLabels`).
@@ -100,6 +101,6 @@ deployment:
 |---|---|---|---|---|
 | `resourcesPreset` | none | nano | nano | n/a |
 | pod anti-affinity | soft | soft | soft | soft |
-| pod affinity | disabled | off | off | off |
+| pod affinity | disabled | disabled | disabled | disabled |
 | node affinity | off | off | off | off |
-| topology spread | soft (zone) | n/a | n/a | n/a |
+| topology spread | soft (zone) | soft (zone) | n/a | n/a |
