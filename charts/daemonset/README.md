@@ -54,25 +54,29 @@ Typical Daemon Set application
 
 ### securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
 
-| Name                                | Description                                                                                                                        | Value     |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]` |
-| `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`   |
-| `volumes`                           | Container volumes configuration                                                                                                    | `{}`      |
-| `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`      |
-| `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`      |
-| `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`      |
-| `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`      |
-| `podAffinityPreset`                 | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                                | `""`      |
-| `podAntiAffinityPreset`             | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                           | `soft`    |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`    |
-| `resources`                         | Container resource requests and limits                                                                                             | `{}`      |
-| `nodeAffinityPreset`                | Node affinity preset                                                                                                               |           |
-| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`      |
-| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                                                              | `""`      |
-| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`      |
-| `affinity`                          | Affinity for pod assignment                                                                                                        | `{}`      |
-| `revisionHistoryLimit`              | Number of old revisions to retain for rollback                                                                                     | `2`       |
+| Name                                | Description                                                                                                                        | Value                    |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]`                |
+| `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`                  |
+| `volumes`                           | Container volumes configuration                                                                                                    | `{}`                     |
+| `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`                     |
+| `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`                     |
+| `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`                     |
+| `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`                     |
+| `podAffinity`                       | Pod affinity. Ignored if `affinity` is set                                                                                         |                          |
+| `podAffinity.preset`                | Preset type: soft (preferred), hard (required) or disabled                                                                         | `disabled`               |
+| `podAffinity.topologyKey`           | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname` |
+| `podAntiAffinity`                   | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                          |
+| `podAntiAffinity.preset`            | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                   |
+| `podAntiAffinity.topologyKey`       | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname` |
+| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `nano`                   |
+| `resources`                         | Container resource requests and limits                                                                                             | `{}`                     |
+| `nodeAffinityPreset`                | Node affinity preset                                                                                                               |                          |
+| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                     |
+| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                                                              | `""`                     |
+| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`                     |
+| `affinity`                          | Affinity for pod assignment                                                                                                        | `{}`                     |
+| `revisionHistoryLimit`              | Number of old revisions to retain for rollback                                                                                     | `2`                      |
 
 ### Pod disruption budget configuration
 

@@ -206,15 +206,61 @@
             "default": [],
             "items": {}
         },
-        "podAffinityPreset": {
-            "type": "string",
-            "description": "Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": ""
+        "podAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "disabled"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
         },
-        "podAntiAffinityPreset": {
-            "type": "string",
-            "description": "Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": "soft"
+        "podAntiAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
+        },
+        "topologySpread": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled",
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key for soft/hard presets",
+                    "default": "topology.kubernetes.io/zone"
+                },
+                "maxSkew": {
+                    "type": "string",
+                    "description": "Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)",
+                    "default": ""
+                },
+                "constraints": {
+                    "type": "array",
+                    "description": "Raw topologySpreadConstraints, used only when preset is custom (supports templating)",
+                    "default": [],
+                    "items": {}
+                }
+            }
         },
         "resourcesPreset": {
             "type": "string",

@@ -28,22 +28,26 @@ Kubernetes Cron Jobs
 
 ### Common parameters
 
-| Name                        | Description                                                                               | Value   |
-| --------------------------- | ----------------------------------------------------------------------------------------- | ------- |
-| `nameOverride`              | By default, name uses '{{ .Chart.Name }}'.                                                | `""`    |
-| `fullnameOverride`          | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                        | `""`    |
-| `podSecurityContext`        | Pod security context                                                                      | `{}`    |
-| `securityContext`           | Security context for the container                                                        | `{}`    |
-| `hostPid`                   | Use the host’s pid namespace                                                              | `false` |
-| `nodeSelector`              | Node labels for pod assignment                                                            | `{}`    |
-| `tolerations`               | Tolerations for pod assignment                                                            | `[]`    |
-| `podAffinityPreset`         | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`    |
-| `podAntiAffinityPreset`     | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`  |
-| `nodeAffinityPreset`        | Node affinity preset                                                                      |         |
-| `nodeAffinityPreset.type`   | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`    |
-| `nodeAffinityPreset.key`    | Node label key to match Ignored if `affinity` is set.                                     | `""`    |
-| `nodeAffinityPreset.values` | Node label values to match. Ignored if `affinity` is set.                                 | `[]`    |
-| `affinity`                  | Affinity for pod assignment                                                               | `{}`    |
+| Name                          | Description                                                                               | Value                    |
+| ----------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
+| `nameOverride`                | By default, name uses '{{ .Chart.Name }}'.                                                | `""`                     |
+| `fullnameOverride`            | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                        | `""`                     |
+| `podSecurityContext`          | Pod security context                                                                      | `{}`                     |
+| `securityContext`             | Security context for the container                                                        | `{}`                     |
+| `hostPid`                     | Use the host’s pid namespace                                                              | `false`                  |
+| `nodeSelector`                | Node labels for pod assignment                                                            | `{}`                     |
+| `tolerations`                 | Tolerations for pod assignment                                                            | `[]`                     |
+| `podAffinity`                 | Pod affinity. Ignored if `affinity` is set                                                |                          |
+| `podAffinity.preset`          | Preset type: soft (preferred), hard (required) or disabled                                | `disabled`               |
+| `podAffinity.topologyKey`     | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
+| `podAntiAffinity`             | Pod anti-affinity. Ignored if `affinity` is set                                           |                          |
+| `podAntiAffinity.preset`      | Preset type: soft (preferred), hard (required) or disabled                                | `soft`                   |
+| `podAntiAffinity.topologyKey` | Topology key of the affinity term                                                         | `kubernetes.io/hostname` |
+| `nodeAffinityPreset`          | Node affinity preset                                                                      |                          |
+| `nodeAffinityPreset.type`     | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                     |
+| `nodeAffinityPreset.key`      | Node label key to match Ignored if `affinity` is set.                                     | `""`                     |
+| `nodeAffinityPreset.values`   | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                     |
+| `affinity`                    | Affinity for pod assignment                                                               | `{}`                     |
 
 ### Configure Service Accounts for Pod
 

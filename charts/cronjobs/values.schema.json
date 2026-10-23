@@ -94,15 +94,35 @@
             "default": [],
             "items": {}
         },
-        "podAffinityPreset": {
-            "type": "string",
-            "description": "Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": ""
+        "podAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "disabled"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
         },
-        "podAntiAffinityPreset": {
-            "type": "string",
-            "description": "Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-            "default": "soft"
+        "podAntiAffinity": {
+            "type": "object",
+            "properties": {
+                "preset": {
+                    "type": "string",
+                    "description": "Preset type: soft (preferred), hard (required) or disabled",
+                    "default": "soft"
+                },
+                "topologyKey": {
+                    "type": "string",
+                    "description": "Topology key of the affinity term",
+                    "default": "kubernetes.io/hostname"
+                }
+            }
         },
         "nodeAffinityPreset": {
             "type": "object",

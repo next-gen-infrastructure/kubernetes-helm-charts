@@ -15,7 +15,8 @@ Generate topology contstraints based on preset.
 */}}
 {{- define "common.topologySpreadConstraintPreset" -}}
 {{- $maxSkew := 1 }}
-{{- if and .context.Values.autoscaling.enabled (ge (.context.Values.autoscaling.minReplicas | int) 10) }}
+{{- $as := .context.Values.autoscaling | default dict }}
+{{- if and $as.enabled (ge ($as.minReplicas | int) 10) }}
 {{- $maxSkew = 2 }}
 {{- end }}
   {{- if eq .type "soft" }}
