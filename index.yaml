@@ -4,6 +4,29 @@ entries:
   - annotations:
       category: Infrastructure
     apiVersion: v2
+    created: "2026-10-23T10:45:52.259065983Z"
+    description: A Library Helm Chart for grouping common logic between charts. This
+      chart is not deployable by itself.
+    digest: 7eb84a3af4749b24c1adcb10ecda6aa1061a9c3e847302b316c55e18bbca7868
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: common
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/common-4.6.0/common-4.6.0.tgz
+    version: 4.6.0
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
     created: "2026-10-23T10:14:14.42855167Z"
     description: A Library Helm Chart for grouping common logic between charts. This
       chart is not deployable by itself.
@@ -390,6 +413,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-10-23T10:45:53.57711691Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: db69758a1e3d07dd93ff419f40e3013b38363fdb78742a5bf97ad83dcf6694c7
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-4.3.0/cronjobs-4.3.0.tgz
+    version: 4.3.0
+  - apiVersion: v2
     created: "2026-10-23T10:14:15.399129114Z"
     dependencies:
     - name: common
@@ -571,6 +612,22 @@ entries:
     version: 1.0.0
   daemonset:
   - apiVersion: v2
+    created: "2026-10-23T10:45:54.585094515Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical Daemon Set application
+    digest: 62c40f8e2eb59f85c7c2498db5ec3f36eda130b27d943113b0dd68d7110c87ca
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-4.3.0/daemonset-4.3.0.tgz
+    version: 4.3.0
+  - apiVersion: v2
     created: "2026-10-23T10:14:16.23765309Z"
     dependencies:
     - name: common
@@ -715,6 +772,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2026-10-23T10:45:55.624956796Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 55a0d9cafa607fb259299ca65f060bc0f79a746de3cc3e94d2fb7013a3cbf52b
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-4.5.0/deployment-4.5.0.tgz
+    version: 4.5.0
   - apiVersion: v2
     created: "2026-10-23T09:55:22.778410235Z"
     dependencies:
@@ -1264,6 +1341,25 @@ entries:
     version: 1.1.0
   statefulset:
   - apiVersion: v2
+    created: "2026-10-23T10:45:56.593264417Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical StateFul Set application
+    digest: f0309563836528f804a950c18fea2fe58bd656a2342f41e94ce6f32244d4ebc1
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-4.3.0/statefulset-4.3.0.tgz
+    version: 4.3.0
+  - apiVersion: v2
     created: "2026-10-23T10:14:17.231148189Z"
     dependencies:
     - name: common
@@ -1682,4 +1778,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-23T10:14:17.228319502Z"
+generated: "2026-10-23T10:45:56.590847621Z"
