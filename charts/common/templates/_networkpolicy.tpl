@@ -37,10 +37,10 @@ extraIngress / extraEgress are raw rules in the native format of the selected ki
   {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" $nss "ports" $ports) | fromYaml) -}}
 {{- end -}}
 {{- /* prometheus may scrape the metrics port only */ -}}
-{{- if and (.Values.metrics).enabled (.Values.metrics).namespace -}}
+{{- if and (.Values.metrics).enabled (.Values.metrics).prometheusNamespace -}}
   {{- $mports := list -}}
   {{- with get $byName (toString .Values.metrics.port) }}{{ $mports = list . }}{{ end -}}
-  {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" (list .Values.metrics.namespace) "ports" $mports) | fromYaml) -}}
+  {{- $ingress = append $ingress (include "common.networkpolicy.ingressRule" (dict "cilium" $cilium "namespaces" (list .Values.metrics.prometheusNamespace) "ports" $mports) | fromYaml) -}}
 {{- end -}}
 {{- with $np.extraIngress -}}
   {{- $ingress = concat $ingress (include "common.tplvalues.render" (dict "value" . "context" $ctx) | fromYamlArray) -}}
