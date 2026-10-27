@@ -26,6 +26,7 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 - **Scheduling:** soft pod anti-affinity and soft zone topology spread by default (`podAntiAffinity`, `topologySpread`); `affinity` overrides presets.
 - **Resources:** `resourcesPreset` defaults to `none`; `resources` wins when set.
 - **Probes:** liveness/readiness enabled, HTTP on `service.healthCheckPath` unless `healthCheckPath` / `tcpSocket` is set; `startupProbe` is opt-in.
+- **Service session affinity:** off (`service.sessionAffinity: None`). Set `ClientIP` to pin a client IP to one pod; behind an ingress controller that is the controller's IP, so prefer sticky cookies at the ingress.
 - **Extra containers:** `initContainers` / `sidecarContainers`; set `inheritEnv: true` to merge the main container's `env` (including `vaultSecret`) into them.
 - **Graceful shutdown:** `preStopDelaySeconds`, `lifecycle.*`.
 - **Integrations:** `datadogIntegration`, `githubActionsIntegration`, `basicAuth`.

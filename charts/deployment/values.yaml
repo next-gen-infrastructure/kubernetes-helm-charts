@@ -488,6 +488,10 @@ service:
   ## - 10.10.10.0/24
   ##
   loadBalancerSourceRanges: [ ]
+  ## @param service.sessionAffinity Session affinity of the service, None or ClientIP. ClientIP pins a client IP to one pod; behind an ingress controller that is the controller's IP, so load gets uneven
+  ## Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
+  ##
+  sessionAffinity: None
   ## @param service.annotations Service annotations
   ##
   annotations: { }
