@@ -31,8 +31,8 @@ spec:
     {{- end }}
     {{- end }}
   selector: {{ include "common.labels.matchLabels" . | nindent 4 }}
-  {{- if ne .Values.service.type "LoadBalancer" }}
-  sessionAffinity: ClientIP
+  {{- if ne (default "None" .Values.service.sessionAffinity) "None" }}
+  sessionAffinity: {{ .Values.service.sessionAffinity }}
   {{- end }}
 
 {{- if .Values.rollouts.enabled }}

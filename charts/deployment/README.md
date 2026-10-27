@@ -195,15 +195,16 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Configuration of the service
 
-| Name                               | Description                                                     | Value       |
-| ---------------------------------- | --------------------------------------------------------------- | ----------- |
-| `service.enabled`                  | If service should be created to expose Pod.                     | `true`      |
-| `service.name`                     | If you need to specify a service's full name override.          | `""`        |
-| `service.type`                     | Type of the service. One of ClusterIP, NodePort, LoadBalancer.  | `ClusterIP` |
-| `service.ports`                    | Configuration of the service ports                              | `{}`        |
-| `service.healthCheckPath`          | default HTTP Health check for container liveness and readiness. | `/`         |
-| `service.loadBalancerSourceRanges` | Address(es) that are allowed when service is LoadBalancer       | `[]`        |
-| `service.annotations`              | Service annotations                                             | `{}`        |
+| Name                               | Description                                                                                                                                                            | Value       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `service.enabled`                  | If service should be created to expose Pod.                                                                                                                            | `true`      |
+| `service.name`                     | If you need to specify a service's full name override.                                                                                                                 | `""`        |
+| `service.type`                     | Type of the service. One of ClusterIP, NodePort, LoadBalancer.                                                                                                         | `ClusterIP` |
+| `service.ports`                    | Configuration of the service ports                                                                                                                                     | `{}`        |
+| `service.healthCheckPath`          | default HTTP Health check for container liveness and readiness.                                                                                                        | `/`         |
+| `service.loadBalancerSourceRanges` | Address(es) that are allowed when service is LoadBalancer                                                                                                              | `[]`        |
+| `service.sessionAffinity`          | Session affinity of the service, None or ClientIP. ClientIP pins a client IP to one pod; behind an ingress controller that is the controller's IP, so load gets uneven | `None`      |
+| `service.annotations`              | Service annotations                                                                                                                                                    | `{}`        |
 
 ### Container liveness configuration.
 

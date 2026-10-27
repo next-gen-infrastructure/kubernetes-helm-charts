@@ -571,6 +571,11 @@
                     "default": [],
                     "items": {}
                 },
+                "sessionAffinity": {
+                    "type": "string",
+                    "description": "Session affinity of the service, None or ClientIP. ClientIP pins a client IP to one pod; behind an ingress controller that is the controller's IP, so load gets uneven",
+                    "default": "None"
+                },
                 "annotations": {
                     "type": "object",
                     "description": "Service annotations",
