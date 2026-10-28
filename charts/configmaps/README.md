@@ -12,6 +12,12 @@ The chart for creating configmaps.
 
 ## Parameters
 
+### Global parameters
+
+| Name             | Description                                                                                                                                                                                | Value  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| `global.enabled` | Install switch for parent charts: set `condition: global.enabled` on the dependency in the parent Chart.yaml and set this to false to skip the install. The chart templates do not read it | `true` |
+
 ### Configuration for custom configmaps
 
 | Name         | Description                         | Value |

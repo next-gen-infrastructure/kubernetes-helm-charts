@@ -5,6 +5,11 @@
         "global": {
             "type": "object",
             "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Install switch for parent charts: set `condition: global.enabled` on the dependency in the parent Chart.yaml and set this to false to skip the install. The chart templates do not read it",
+                    "default": true
+                },
                 "project": {
                     "type": "string",
                     "description": "The project of the service",
