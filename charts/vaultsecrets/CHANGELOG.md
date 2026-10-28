@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.1.0...vaultsecrets-3.2.0) (2026-10-28)
+
+
+### Features
+
+* **cronjobs,daemonset,statefulset,vaultsecrets:** render ExternalSecret as external-secrets.io/v1 ([#50](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/50)) ([e000199](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e0001999fe6ebaf0c403068d22cc8db8529d1967))
+
 ## [3.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.0.1...vaultsecrets-3.1.0) (2026-10-28)
 
 

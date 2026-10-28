@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.5.0...daemonset-4.6.0) (2026-10-28)
+
+
+### Features
+
+* **cronjobs,daemonset,statefulset,vaultsecrets:** render ExternalSecret as external-secrets.io/v1 ([#50](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/50)) ([e000199](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e0001999fe6ebaf0c403068d22cc8db8529d1967))
+
 ## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.4.0...daemonset-4.5.0) (2026-10-28)
 
 

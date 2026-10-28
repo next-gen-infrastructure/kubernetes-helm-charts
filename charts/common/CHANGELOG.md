@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.10.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.10.0...common-4.10.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **common:** render env secrets before values so $(VAR) can reference them ([#51](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/51)) ([d015cf1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d015cf13a03c1b63b1e5877d97f346fe23f50402))
+
 ## [4.10.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.9.0...common-4.10.0) (2026-10-28)
 
 
