@@ -314,15 +314,20 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `lifecycle.postStartCommand` | Command to be executed after the container start | `""`    |
 | `lifecycle.preStopCommand`   | Command to be executed before container shutdown | `""`    |
 
-### Create HorizontalPodAutoscaler object for deployment type
+### Create HorizontalPodAutoscaler (or KEDA ScaledObject) for the workload
 
-| Name                      | Description                      | Value   |
-| ------------------------- | -------------------------------- | ------- |
-| `autoscaling.enabled`     | If autoscaling is enabled        | `false` |
-| `autoscaling.minReplicas` | Min number of pod replicas       | `1`     |
-| `autoscaling.maxReplicas` | Max number of pod replicas       | `1`     |
-| `autoscaling.metrics`     | Configuration of scaling metrics | `[]`    |
-| `autoscaling.behavior`    | HPA Behavior                     | `{}`    |
+| Name                               | Description                                                                                                                                                   | Value   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `autoscaling.enabled`              | If autoscaling is enabled                                                                                                                                     | `false` |
+| `autoscaling.minReplicas`          | Min number of pod replicas                                                                                                                                    | `1`     |
+| `autoscaling.maxReplicas`          | Max number of pod replicas                                                                                                                                    | `1`     |
+| `autoscaling.metrics`              | Configuration of scaling metrics                                                                                                                              | `[]`    |
+| `autoscaling.behavior`             | HPA Behavior                                                                                                                                                  | `{}`    |
+| `autoscaling.keda.enabled`         | Render a KEDA ScaledObject (keda.sh/v1alpha1) instead of an HPA. Requires autoscaling.enabled and the KEDA CRDs; autoscaling.metrics is ignored, use triggers | `false` |
+| `autoscaling.keda.pollingInterval` | Seconds between trigger checks                                                                                                                                | `30`    |
+| `autoscaling.keda.cooldownPeriod`  | Seconds to wait after the last active trigger before scaling to zero                                                                                          | `300`   |
+| `autoscaling.keda.triggers`        | KEDA triggers, in the native format. autoscaling.behavior is passed to the managed HPA                                                                        | `[]`    |
+| `autoscaling.keda.advanced`        | Raw ScaledObject spec.advanced block (e.g. horizontalPodAutoscalerConfig, scalingModifiers)                                                                   | `{}`    |
 
 ### Persistence Parameters
 

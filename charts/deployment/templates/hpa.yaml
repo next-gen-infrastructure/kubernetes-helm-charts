@@ -1,4 +1,4 @@
-{{- if .Values.autoscaling.enabled -}}
+{{- if and .Values.autoscaling.enabled (not .Values.autoscaling.keda.enabled) -}}
 apiVersion: {{ include "common.capabilities.hpa.apiVersion" ( dict "context" $ ) }}
 kind: HorizontalPodAutoscaler
 metadata:
@@ -12,7 +12,7 @@ spec:
   {{- end }}
   scaleTargetRef:
     {{ if .Values.rollouts.enabled -}}
-    apiVersion: argoproj.io/v1alpha1
+    apiVersion: {{ include "common.capabilities.rollout.apiVersion" $ }}
     kind: Rollout
     {{ else -}}
     apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}

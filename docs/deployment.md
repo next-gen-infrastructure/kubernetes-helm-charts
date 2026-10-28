@@ -11,7 +11,7 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 | Service | `service.enabled` (default true) |
 | Ingress / extra Ingress | `ingress.enabled` / `ingressExtra.enabled` |
 | Traefik IngressRoute | `ingress.traefik.enabled` (not allowed with canary rollouts, fails validation) |
-| HPA | `autoscaling.enabled` |
+| HPA / KEDA ScaledObject | `autoscaling.enabled` / plus `autoscaling.keda.enabled` (uses `keda.triggers`, not `metrics`) |
 | PodDisruptionBudget | `pdb.create` |
 | PVC | `persistence.enabled` |
 | ServiceMonitor / PrometheusRule | `metrics.serviceMonitor.enabled` / `metrics.rules.enabled` |
