@@ -19,11 +19,7 @@ spec:
   timeZone: {{ . | quote }}
   {{- end }}
   suspend: {{ $value.suspend | default false }}
-  {{- if eq $.Values.global.environment "prod" }}
   concurrencyPolicy: {{ $value.concurrencyPolicy | default "Forbid" }}
-  {{- else }}
-  concurrencyPolicy: Forbid
-  {{- end }}
 
   {{- if $value.startingDeadlineSeconds }}
   startingDeadlineSeconds: {{ $value.startingDeadlineSeconds }}
@@ -34,11 +30,7 @@ spec:
 
   jobTemplate:
     spec:
-      {{- if eq $.Values.global.environment "prod" }}
       backoffLimit: {{ $value.backoffLimit | default 6  }}
-      {{- else }}
-      backoffLimit: 0
-      {{- end }}
       {{- with $value.activeDeadlineSeconds }}
       activeDeadlineSeconds: {{ . }}
       {{- end }}

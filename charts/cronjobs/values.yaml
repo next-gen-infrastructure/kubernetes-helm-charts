@@ -343,7 +343,7 @@ networkPolicy:
 #           "Forbid",
 #           "Replace"
 #         ],
-#         "description": "Only honoured when global.environment is prod, otherwise Forbid",
+#         "description": "What to do when a run is still active at the next schedule",
 #         "default": "Forbid"
 #       },
 #       "startingDeadlineSeconds": {
@@ -362,7 +362,7 @@ networkPolicy:
 #       },
 #       "backoffLimit": {
 #         "type": "integer",
-#         "description": "Retries before the job is considered failed. Only honoured when global.environment is prod, otherwise 0",
+#         "description": "Retries before the job is considered failed",
 #         "default": 6
 #       },
 #       "activeDeadlineSeconds": {
