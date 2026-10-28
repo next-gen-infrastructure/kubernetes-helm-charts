@@ -444,11 +444,19 @@
               "default": "10s",
               "type": "string"
             },
+            "params": {
+              "required": [],
+              "type": "object"
+            },
             "scrapeTimeout": {
               "default": "3s",
               "type": "string"
             },
             "selector": {
+              "required": [],
+              "type": "object"
+            },
+            "tlsConfig": {
               "required": [],
               "type": "object"
             }
