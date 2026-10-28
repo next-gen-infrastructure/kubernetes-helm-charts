@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.7.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.6.0...deployment-4.7.0) (2026-10-28)
+
+
+### Features
+
+* **common:** support in-memory emptyDir volumes ([8ce4544](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/8ce45447805f7be0ce732de8bd97f9254fe985d0))
+* **common:** support in-memory emptyDir volumes ([a65f0c6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a65f0c6ee67d592dcf3966c70ec1fa5d5c9880a0))
+
+
+### Bug Fixes
+
+* **deployment:** default service sessionAffinity to None ([d621ce7](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d621ce796c830a288972a12dd7d662d5240ee40f))
+* **deployment:** default service sessionAffinity to None, make it configurable ([d937d5a](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d937d5a6a55a7c921cf3505669f5c3ab98a7c9a8))
+
 ## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.5.0...deployment-4.6.0) (2026-10-23)
 
 

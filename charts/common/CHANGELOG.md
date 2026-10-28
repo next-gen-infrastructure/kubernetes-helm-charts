@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.8.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.7.0...common-4.8.0) (2026-10-28)
+
+
+### Features
+
+* **common:** support in-memory emptyDir volumes ([8ce4544](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/8ce45447805f7be0ce732de8bd97f9254fe985d0))
+* **common:** support in-memory emptyDir volumes ([a65f0c6](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/a65f0c6ee67d592dcf3966c70ec1fa5d5c9880a0))
+
 ## [4.7.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.6.0...common-4.7.0) (2026-10-23)
 
 
