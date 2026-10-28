@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.6.1...cronjobs-4.6.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **cronjobs:** honour backoffLimit and concurrencyPolicy in every environment ([#57](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/57)) ([d77f3d1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d77f3d10ac90af959299306fbd0dbd35f9093f6f))
+
 ## [4.6.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.6.0...cronjobs-4.6.1) (2026-10-28)
 
 
