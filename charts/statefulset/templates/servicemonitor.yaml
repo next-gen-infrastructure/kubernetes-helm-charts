@@ -18,6 +18,12 @@ spec:
       {{- with .Values.metrics.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ . }}
       {{- end }}
+      {{- with .Values.metrics.serviceMonitor.params }}
+      params: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.metrics.serviceMonitor.tlsConfig }}
+      tlsConfig: {{- toYaml . | nindent 8 }}
+      {{- end }}
   jobLabel: {{ include "common.names.fullname" . }}
   namespaceSelector:
     matchNames:

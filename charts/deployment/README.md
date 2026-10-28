@@ -299,6 +299,8 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `metrics.serviceMonitor.enabled`       | Create ServiceMonitor object                                                                    | `false`      |
 | `metrics.serviceMonitor.interval`      | Interval at which metrics should be scraped                                                     | `10s`        |
 | `metrics.serviceMonitor.scrapeTimeout` | Timeout after which the scrape is ended                                                         | `3s`         |
+| `metrics.serviceMonitor.params`        | URL query parameters of the scrape request, as lists of values                                  | `{}`         |
+| `metrics.serviceMonitor.tlsConfig`     | TLS settings of the scrape request, used with an https endpoint                                 | `{}`         |
 | `metrics.serviceMonitor.selector`      | Additional labels for ServiceMonitor object                                                     | `{}`         |
 | `metrics.rules.enabled`                | Create PrometheusRules object                                                                   | `false`      |
 | `metrics.rules.namespace`              | Namespace of the PrometheusRules object                                                         | `monitoring` |
