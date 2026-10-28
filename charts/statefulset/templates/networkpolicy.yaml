@@ -1,1 +1,24 @@
-{{ include "common.networkpolicy" . }}
+{{- if and .Values.networkPolicy.enabled (not .Values.networkPolicy.cilium) -}}
+apiVersion: {{ include "common.capabilities.networkPolicy.apiVersion" . }}
+kind: NetworkPolicy
+metadata:
+  name: {{ include "common.names.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{ include "common.labels.standard" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels: {{ include "common.labels.matchLabels" . | nindent 6 }}
+  {{- $ingress := include "common.networkpolicy.ingress" . | trim }}
+  {{- $egress := include "common.networkpolicy.egress" . | trim }}
+  policyTypes:
+    - Ingress
+    {{- if $egress }}
+    - Egress
+    {{- end }}
+  {{- with $ingress }}
+  ingress: {{ . | nindent 4 }}
+  {{- end }}
+  {{- with $egress }}
+  egress: {{ . | nindent 4 }}
+  {{- end }}
+{{- end }}

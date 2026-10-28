@@ -1,7 +1,7 @@
 # Network policies
 
 `deployment`, `statefulset`, `daemonset` and `cronjobs` can render a network policy for their pods. Off by default (`networkPolicy.enabled: false`).
-Implementation: `charts/common/templates/_networkpolicy.tpl`.
+Implementation: `templates/networkpolicy.yaml` and `templates/networkpolicy-cilium.yaml` in each chart (they render exclusively on `networkPolicy.cilium`); the rules come from `charts/common/templates/_networkpolicies.tpl`.
 
 ## Kind: `networkPolicy.cilium`
 

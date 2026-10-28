@@ -1,0 +1,16 @@
+{{- if and .Values.networkPolicy.enabled .Values.networkPolicy.cilium -}}
+apiVersion: {{ include "common.capabilities.cilium.apiVersion" $ }}
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "common.names.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{ include "common.labels.standard" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels: {{ include "common.labels.matchLabels" . | nindent 6 }}
+  {{- /* no ingress rules: an empty rule is default-deny */}}
+  ingress: {{ include "common.networkpolicy-cilium.ingress" . | trim | default "- {}" | nindent 4 }}
+  {{- with include "common.networkpolicy-cilium.egress" . | trim }}
+  egress: {{ . | nindent 4 }}
+  {{- end }}
+{{- end }}
