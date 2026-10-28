@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.3.0...cronjobs-4.4.0) (2026-10-28)
+
+
+### Features
+
+* add global.enabled to chart values ([#43](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/43)) ([396587d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/396587db869ac79a4bb48a9d47d31f8d1917f238))
+* **cronjobs,deployment,common:** job deadline, termination grace period, statefulset storage fixes ([#42](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/42)) ([f0f06f5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f0f06f5ea4db66bc2d7e3f9f1658ff24441e8ac9))
+
 ## [4.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.2.0...cronjobs-4.3.0) (2026-10-23)
 
 

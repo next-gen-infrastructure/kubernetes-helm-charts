@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.0.1...vaultsecrets-3.1.0) (2026-10-28)
+
+
+### Features
+
+* add global.enabled to chart values ([#43](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/43)) ([396587d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/396587db869ac79a4bb48a9d47d31f8d1917f238))
+
 ## [3.0.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.0.0...vaultsecrets-3.0.1) (2026-10-22)
 
 
