@@ -7,7 +7,7 @@
             "properties": {
                 "enabled": {
                     "type": "boolean",
-                    "description": "Install switch for parent charts: set `condition: global.enabled` on the dependency in the parent Chart.yaml and set this to false to skip the install. The chart templates do not read it",
+                    "description": "Skips the install when the parent chart sets `condition: global.enabled` on the dependency",
                     "default": true
                 },
                 "project": {

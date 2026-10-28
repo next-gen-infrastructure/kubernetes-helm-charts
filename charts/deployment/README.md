@@ -56,18 +56,18 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Global parameters
 
-| Name                       | Description                                                                                                                                                                                | Value          |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| `global.enabled`           | Install switch for parent charts: set `condition: global.enabled` on the dependency in the parent Chart.yaml and set this to false to skip the install. The chart templates do not read it | `true`         |
-| `global.serviceName`       | Name of the service. Affects public DNS.                                                                                                                                                   | `example`      |
-| `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets                                                                                                                   | `vault`        |
-| `global.environment`       | Name of the environment, one of "dev", "stage", "prod".                                                                                                                                    | `dev`          |
-| `global.domain`            | Company Root-level domain, expects                                                                                                                                                         | `""`           |
-| `global.image.registry`    | Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com                                                                                                                         | `""`           |
-| `global.image.repository`  | Image repository, E.g. k8s/example-service                                                                                                                                                 | `""`           |
-| `global.image.tag`         | Tag of the image                                                                                                                                                                           | `latest`       |
-| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes                                                                                                                                       | `IfNotPresent` |
-| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.                                                                                                                                           | `[]`           |
+| Name                       | Description                                                                                | Value          |
+| -------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
+| `global.enabled`           | Skips the install when the parent chart sets `condition: global.enabled` on the dependency | `true`         |
+| `global.serviceName`       | Name of the service. Affects public DNS.                                                   | `example`      |
+| `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets                   | `vault`        |
+| `global.environment`       | Name of the environment, one of "dev", "stage", "prod".                                    | `dev`          |
+| `global.domain`            | Company Root-level domain, expects                                                         | `""`           |
+| `global.image.registry`    | Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com                         | `""`           |
+| `global.image.repository`  | Image repository, E.g. k8s/example-service                                                 | `""`           |
+| `global.image.tag`         | Tag of the image                                                                           | `latest`       |
+| `global.image.pullPolicy`  | The default pull policy is IfNotPresent which causes                                       | `IfNotPresent` |
+| `global.image.pullSecrets` | Optionally specify an array of imagePullSecrets.                                           | `[]`           |
 
 ### Common parameters
 
