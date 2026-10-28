@@ -1,9 +1,9 @@
 {
-  "charts/common": "4.11.0",
+  "charts/common": "4.12.0",
   "charts/configmaps": "2.1.0",
-  "charts/cronjobs": "4.7.0",
+  "charts/cronjobs": "4.8.0",
   "charts/daemonset": "4.8.0",
-  "charts/deployment": "4.11.0",
+  "charts/deployment": "4.12.0",
   "charts/statefulset": "4.8.0",
   "charts/vaultsecrets": "3.3.0"
 }

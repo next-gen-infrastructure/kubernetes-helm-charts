@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.12.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.11.0...common-4.12.0) (2026-10-28)
+
+
+### Features
+
+* **common:** let explicit resources override resourcesPreset per key ([57b7acd](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/57b7acd28733591a2222517a873ef470cec6c2ba))
+* **common:** let explicit resources override resourcesPreset per key ([32a1cf4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/32a1cf4f87010046b4a19ef3cb5ce7ea6e137fc9))
+
 ## [4.11.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.10.1...common-4.11.0) (2026-10-28)
 
 
