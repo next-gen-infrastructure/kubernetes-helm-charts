@@ -82,6 +82,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `commonAnnotations`                        | Annotations to add to all deployed objects                                                     | `{}`    |
 | `podLabels`                                | Additional labels for the pod                                                                  | `{}`    |
 | `podAnnotations`                           | Additional annotations for the pod.                                                            | `{}`    |
+| `terminationGracePeriodSeconds`            | Seconds the pod needs to gracefully terminate (cluster default when empty)                     | `""`    |
 | `priorityClassName`                        | priorityClassName                                                                              | `""`    |
 | `podSecurityContext`                       | Pod security context                                                                           |         |
 | `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                         | `1000`  |

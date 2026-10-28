@@ -154,6 +154,21 @@ vaultVolumesSupport: false
 ##    vaultPath: my_secret_files
 ##    items:
 ##      - key.pass
+##  vault-ca:
+##    mountPath: /etc/vault
+##    readOnly: true # always set for secretName, vaultPath and hostPath
+##    configMapName: vault-ca-bundle # an existing ConfigMap, optionally with native `items`
+##    items:
+##      - key: ca.crt
+##        path: ca.crt
+##  vault-token:
+##    mountPath: /var/run/secrets/vault
+##    projected: # native projected volume spec
+##      sources:
+##        - serviceAccountToken:
+##            path: token
+##            audience: vault
+##            expirationSeconds: 3600
 volumes: { }
 ## @param command You can set a custom entrypoint for your docker container
 ##
@@ -405,6 +420,8 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the fullname template
   ##
   name: ""
+  ## @skip serviceAccount.automountServiceAccountToken Set to false to not mount the API token, unset keeps the default
+  automountServiceAccountToken: null
 ## @section Environment variables that get added to the container
 env:
   ## @param env.values generic Environment variables that get added to the container
