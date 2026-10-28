@@ -547,6 +547,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-10-28T13:24:43.961294896Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: 557f84965c3df452fabc2e1239645b37377ad7b590d6423526ad12bc46b07b6f
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-4.6.1/cronjobs-4.6.1.tgz
+    version: 4.6.1
+  - apiVersion: v2
     created: "2026-10-28T13:03:43.836570034Z"
     dependencies:
     - name: common
@@ -1008,6 +1026,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2026-10-28T13:24:45.103698578Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 55a8894de75c43176c5e95765059c64abc67980923bae11d278df28a503c0993
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-4.9.1/deployment-4.9.1.tgz
+    version: 4.9.1
   - apiVersion: v2
     created: "2026-10-28T12:16:34.221959341Z"
     dependencies:
@@ -2189,4 +2227,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T13:03:46.921044507Z"
+generated: "2026-10-28T13:24:45.100876977Z"
