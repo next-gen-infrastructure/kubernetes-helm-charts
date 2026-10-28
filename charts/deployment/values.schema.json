@@ -103,6 +103,11 @@
             "description": "Additional annotations for the pod.",
             "default": {}
         },
+        "terminationGracePeriodSeconds": {
+            "type": ["integer", "string"],
+            "description": "Seconds the pod needs to gracefully terminate",
+            "default": ""
+        },
         "priorityClassName": {
             "type": "string",
             "description": "priorityClassName",

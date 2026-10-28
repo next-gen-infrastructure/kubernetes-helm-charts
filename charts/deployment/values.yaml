@@ -77,6 +77,10 @@ podLabels: {}
 ## @param podAnnotations Additional annotations for the pod.
 ##
 podAnnotations: { }
+## @param terminationGracePeriodSeconds Seconds the pod needs to gracefully terminate (cluster default when empty)
+## ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
+##
+terminationGracePeriodSeconds: ""
 ## @param priorityClassName priorityClassName
 ##
 priorityClassName: ""
