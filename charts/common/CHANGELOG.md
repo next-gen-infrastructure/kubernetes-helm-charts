@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.10.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.9.0...common-4.10.0) (2026-10-28)
+
+
+### Features
+
+* **deployment,common:** existing-ConfigMap and projected volumes, readOnly mounts, automountServiceAccountToken ([#45](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/45)) ([b0032e5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b0032e5cd2b88777285812ec11aa98a225ddc662))
+
 ## [4.9.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.8.0...common-4.9.0) (2026-10-28)
 
 
