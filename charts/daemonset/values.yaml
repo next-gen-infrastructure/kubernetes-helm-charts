@@ -228,12 +228,21 @@ pdb:
   ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @skip pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
-  ## The generated schema cannot express "number or string", so the type is not validated.
+  # @schema
+  # type: [integer, string]
+  # @schema
+  ## @param pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
+  ##
   minAvailable: 1
-  ## @skip pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
+  # @schema
+  # type: [integer, string]
+  # @schema
+  ## @param pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
   ##
   maxUnavailable: 0
+# @schema
+# type: [integer, string]
+# @schema
 ## @param terminationGracePeriodSeconds Seconds the pod needs to gracefully terminate
 ## ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
 ##

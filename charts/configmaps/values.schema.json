@@ -1,21 +1,25 @@
 {
-    "title": "Chart Values",
-    "type": "object",
-    "properties": {
-        "global": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Skips the install when the parent chart sets `condition: global.enabled` on the dependency",
-                    "default": true
-                }
-            }
-        },
-        "configmaps": {
-            "type": "object",
-            "description": "Configuration for custom configmaps",
-            "default": {}
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "configmaps": {
+      "required": [],
+      "type": "object"
+    },
+    "exampleValue": {
+      "default": "common-chart",
+      "type": "string"
+    },
+    "global": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
         }
+      },
+      "required": [],
+      "type": "object"
     }
+  },
+  "required": [],
+  "type": "object"
 }

@@ -1,436 +1,424 @@
 {
-    "title": "Chart Values",
-    "type": "object",
-    "properties": {
-        "global": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Skips the install when the parent chart sets `condition: global.enabled` on the dependency",
-                    "default": true
-                },
-                "project": {
-                    "type": "string",
-                    "description": "The project of the service",
-                    "default": ""
-                },
-                "serviceName": {
-                    "type": "string",
-                    "description": "Name of the service. Affects public DNS.",
-                    "default": ""
-                },
-                "secretStore": {
-                    "type": "string",
-                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
-                    "default": "vault"
-                },
-                "environment": {
-                    "type": "string",
-                    "description": "Name of the environment, one of \"dev\", \"stage\", \"prod\".",
-                    "default": "dev"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "registry": {
-                            "type": "string",
-                            "description": "Image registry, E.g. 1234567890.dkr.ecr.eu-central-1.amazonaws.com",
-                            "default": ""
-                        },
-                        "repository": {
-                            "type": "string",
-                            "description": "Image repository, E.g. k8s/example-service",
-                            "default": ""
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag of the image",
-                            "default": "latest"
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "description": "The default pull policy is IfNotPresent which causes",
-                            "default": "IfNotPresent"
-                        },
-                        "pullSecrets": {
-                            "type": "array",
-                            "description": "Optionally specify an array of imagePullSecrets.",
-                            "default": [],
-                            "items": {}
-                        }
-                    }
-                }
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "required": [],
+      "type": "object"
+    },
+    "configMap": {
+      "properties": {
+        "data": {
+          "required": [],
+          "type": "object"
         },
-        "nameOverride": {
-            "type": "string",
-            "description": "By default, name uses '{{ .Chart.Name }}'.",
-            "default": ""
-        },
-        "fullnameOverride": {
-            "type": "string",
-            "description": "By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.",
-            "default": ""
-        },
-        "podSecurityContext": {
-            "type": "object",
-            "properties": {
-                "runAsUser": {
-                    "type": "number",
-                    "description": "The UID to run the entrypoint of the container process",
-                    "default": 1000
-                },
-                "runAsNonRoot": {
-                    "type": "boolean",
-                    "description": "Indicates that the container must run as a non-root user",
-                    "default": true
-                },
-                "runAsGroup": {
-                    "type": "number",
-                    "description": "The GID to run the entrypoint of the container process",
-                    "default": 65534
-                },
-                "fsGroup": {
-                    "type": "number",
-                    "description": "A special supplemental group that applies to all containers in a pod",
-                    "default": 65534
-                }
-            }
-        },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "allowPrivilegeEscalation": {
-                    "type": "boolean",
-                    "description": "Controls whether a process can gain more privileges than its parent process",
-                    "default": false
-                },
-                "readOnlyRootFilesystem": {
-                    "type": "boolean",
-                    "description": "Mounts the container's root filesystem as read-only",
-                    "default": true
-                },
-                "runAsUser": {
-                    "type": "number",
-                    "description": "The UID to run the entrypoint of the container process",
-                    "default": 1000
-                },
-                "runAsNonRoot": {
-                    "type": "boolean",
-                    "description": "Indicates that the container must run as a non-root user",
-                    "default": true
-                },
-                "runAsGroup": {
-                    "type": "number",
-                    "description": "The GID to run the entrypoint of the container process",
-                    "default": 65534
-                },
-                "capabilities": {
-                    "type": "object",
-                    "properties": {
-                        "drop": {
-                            "type": "array",
-                            "description": "Drop all capabilities by default",
-                            "default": [
-                                "ALL"
-                            ],
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "hostPid": {
-            "type": "boolean",
-            "description": "Use the host’s pid namespace",
-            "default": false
-        },
-        "nodeSelector": {
-            "type": "object",
-            "description": "Node labels for pod assignment",
-            "default": {}
-        },
-        "tolerations": {
-            "type": "array",
-            "description": "Tolerations for pod assignment",
-            "default": [],
-            "items": {}
-        },
-        "podAffinity": {
-            "type": "object",
-            "properties": {
-                "preset": {
-                    "type": "string",
-                    "description": "Preset type: soft (preferred), hard (required) or disabled",
-                    "default": "disabled"
-                },
-                "topologyKey": {
-                    "type": "string",
-                    "description": "Topology key of the affinity term",
-                    "default": "kubernetes.io/hostname"
-                }
-            }
-        },
-        "podAntiAffinity": {
-            "type": "object",
-            "properties": {
-                "preset": {
-                    "type": "string",
-                    "description": "Preset type: soft (preferred), hard (required) or disabled",
-                    "default": "soft"
-                },
-                "topologyKey": {
-                    "type": "string",
-                    "description": "Topology key of the affinity term",
-                    "default": "kubernetes.io/hostname"
-                }
-            }
-        },
-        "nodeAffinityPreset": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`",
-                    "default": ""
-                },
-                "key": {
-                    "type": "string",
-                    "description": "Node label key to match Ignored if `affinity` is set.",
-                    "default": ""
-                },
-                "values": {
-                    "type": "array",
-                    "description": "Node label values to match. Ignored if `affinity` is set.",
-                    "default": [],
-                    "items": {}
-                }
-            }
-        },
-        "affinity": {
-            "type": "object",
-            "description": "Affinity for pod assignment",
-            "default": {}
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "create": {
-                    "type": "boolean",
-                    "description": "Specifies whether a service account should be created",
-                    "default": false
-                },
-                "annotations": {
-                    "type": "object",
-                    "description": "Annotations to add to the service account",
-                    "default": {}
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The name of the service account to use.",
-                    "default": ""
-                }
-            }
-        },
-        "env": {
-            "type": "object",
-            "properties": {
-                "values": {
-                    "type": "object",
-                    "description": "generic Environment variables that get added to the container",
-                    "default": {}
-                },
-                "refs": {
-                    "type": "object",
-                    "description": "Environment variables as references to the pod",
-                    "default": {}
-                },
-                "configmap": {
-                    "type": "object",
-                    "description": "Environment variables that get added to the container from ConfigMap",
-                    "default": {}
-                },
-                "secret": {
-                    "type": "object",
-                    "description": "Kubernetes secrets that get added to the container",
-                    "default": {}
-                },
-                "vaultSecret": {
-                    "type": "object",
-                    "description": "Kubernetes secrets that get added to the container from Hashicorp Vault",
-                    "default": {}
-                }
-            }
-        },
-        "envFrom": {
-            "type": "array",
-            "description": "Sources of environment variables for the container (configMapRef / secretRef). Supports helm templates",
-            "default": [],
-            "items": {}
-        },
-        "configMap": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Create a ConfigMap from configMap.data and load it into the container via envFrom",
-                    "default": false
-                },
-                "data": {
-                    "type": "object",
-                    "description": "Key-value pairs of the ConfigMap",
-                    "default": {}
-                }
-            }
-        },
-        "resources": {
-            "type": "object",
-            "properties": {
-                "limits": {
-                    "type": "object",
-                    "description": "The resources limits for the container",
-                    "default": {}
-                },
-                "requests": {
-                    "type": "object",
-                    "description": "The requests resources for the container",
-                    "default": {}
-                }
-            }
-        },
-        "resourcesPreset": {
-            "type": "string",
-            "description": "Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).",
-            "default": "none"
-        },
-        "networkPolicy": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Create a network policy for the pods",
-                    "default": false
-                },
-                "cilium": {
-                    "type": "boolean",
-                    "description": "Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs",
-                    "default": true
-                },
-                "egress": {
-                    "type": "object",
-                    "properties": {
-                        "allowDNS": {
-                            "type": "boolean",
-                            "description": "Allow DNS to kube-dns when egress is restricted",
-                            "default": true
-                        },
-                        "fqdns": {
-                            "type": "array",
-                            "description": "Hostnames pods may reach, e.g. [\"api.stripe.com\", \"*.amazonaws.com\"]. Cilium only",
-                            "default": [],
-                            "items": {}
-                        }
-                    }
-                },
-                "extraEgress": {
-                    "type": "array",
-                    "description": "Raw egress rules in the native format of the selected kind (supports templating)",
-                    "default": [],
-                    "items": {}
-                }
-            }
-        },
-        "cronjobs": {
-            "type": "object",
-            "description": "Cronjobs configuration, keyed by job name",
-            "default": {},
-            "additionalProperties": {
-                "type": "object",
-                "required": ["schedule"],
-                "properties": {
-                    "schedule": {
-                        "type": "string",
-                        "description": "Cron schedule"
-                    },
-                    "timeZone": {
-                        "type": "string",
-                        "description": "IANA time zone of the schedule"
-                    },
-                    "suspend": {
-                        "type": "boolean",
-                        "description": "Suspend subsequent runs",
-                        "default": false
-                    },
-                    "concurrencyPolicy": {
-                        "type": "string",
-                        "enum": ["Allow", "Forbid", "Replace"],
-                        "description": "Only honoured when global.environment is prod, otherwise Forbid",
-                        "default": "Forbid"
-                    },
-                    "startingDeadlineSeconds": {
-                        "type": "integer",
-                        "description": "Deadline in seconds for starting a run that missed its schedule"
-                    },
-                    "failedJobsHistoryLimit": {
-                        "type": "integer",
-                        "description": "Failed jobs to keep",
-                        "default": 3
-                    },
-                    "successfulJobsHistoryLimit": {
-                        "type": "integer",
-                        "description": "Successful jobs to keep",
-                        "default": 1
-                    },
-                    "backoffLimit": {
-                        "type": "integer",
-                        "description": "Retries before the job is considered failed. Only honoured when global.environment is prod, otherwise 0",
-                        "default": 6
-                    },
-                    "activeDeadlineSeconds": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "description": "Hard cap on the job's runtime in seconds; the pods are terminated past it"
-                    },
-                    "ttlSecondsAfterFinished": {
-                        "type": "integer",
-                        "description": "Seconds after which a finished job and its pods are deleted"
-                    },
-                    "command": {
-                        "type": "array",
-                        "description": "Container command",
-                        "items": {"type": "string"}
-                    },
-                    "args": {
-                        "type": "array",
-                        "description": "Container args",
-                        "items": {"type": "string"}
-                    },
-                    "annotations": {
-                        "type": ["object", "null"],
-                        "description": "CronJob annotations"
-                    },
-                    "resources": {
-                        "type": "object",
-                        "description": "Container resource requests and limits"
-                    },
-                    "securityContext": {
-                        "type": "object",
-                        "description": "Container security context, merged over the chart-level one"
-                    },
-                    "env": {
-                        "type": "object",
-                        "description": "Job-level env: values and vaultSecret"
-                    }
-                }
-            }
-        },
-        "volumes": {
-            "type": "object",
-            "description": "Container volumes configuration",
-            "default": {}
+        "enabled": {
+          "default": false,
+          "type": "boolean"
         }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "cronjobs": {
+      "additionalProperties": {
+        "properties": {
+          "activeDeadlineSeconds": {
+            "description": "Hard cap on the job's runtime in seconds; the pods are terminated past it",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "annotations": {
+            "description": "CronJob annotations",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "args": {
+            "description": "Container args",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "backoffLimit": {
+            "default": 6,
+            "description": "Retries before the job is considered failed. Only honoured when global.environment is prod, otherwise 0",
+            "type": "integer"
+          },
+          "command": {
+            "description": "Container command",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "concurrencyPolicy": {
+            "default": "Forbid",
+            "description": "Only honoured when global.environment is prod, otherwise Forbid",
+            "enum": [
+              "Allow",
+              "Forbid",
+              "Replace"
+            ],
+            "type": "string"
+          },
+          "env": {
+            "description": "Job-level env: values and vaultSecret",
+            "type": "object"
+          },
+          "failedJobsHistoryLimit": {
+            "default": 3,
+            "description": "Failed jobs to keep",
+            "type": "integer"
+          },
+          "resources": {
+            "description": "Container resource requests and limits",
+            "type": "object"
+          },
+          "schedule": {
+            "description": "Cron schedule",
+            "type": "string"
+          },
+          "securityContext": {
+            "description": "Container security context, merged over the chart-level one",
+            "type": "object"
+          },
+          "startingDeadlineSeconds": {
+            "description": "Deadline in seconds for starting a run that missed its schedule",
+            "type": "integer"
+          },
+          "successfulJobsHistoryLimit": {
+            "default": 1,
+            "description": "Successful jobs to keep",
+            "type": "integer"
+          },
+          "suspend": {
+            "default": false,
+            "description": "Suspend subsequent runs",
+            "type": "boolean"
+          },
+          "timeZone": {
+            "description": "IANA time zone of the schedule",
+            "type": "string"
+          },
+          "ttlSecondsAfterFinished": {
+            "description": "Seconds after which a finished job and its pods are deleted",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "schedule"
+        ],
+        "type": "object"
+      },
+      "default": {},
+      "description": "Cronjobs configuration, keyed by job name",
+      "required": [],
+      "type": "object"
+    },
+    "env": {
+      "properties": {
+        "configmap": {
+          "required": [],
+          "type": "object"
+        },
+        "refs": {
+          "required": [],
+          "type": "object"
+        },
+        "secret": {
+          "required": [],
+          "type": "object"
+        },
+        "values": {
+          "required": [],
+          "type": "object"
+        },
+        "vaultSecret": {
+          "required": [],
+          "type": "object"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "envFrom": {
+      "items": {
+        "required": []
+      },
+      "type": "array"
+    },
+    "exampleValue": {
+      "default": "common-chart",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "type": "string"
+    },
+    "global": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "environment": {
+          "default": "dev",
+          "type": "string"
+        },
+        "image": {
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "type": "string"
+            },
+            "pullSecrets": {
+              "items": {
+                "required": []
+              },
+              "type": "array"
+            },
+            "registry": {
+              "default": "",
+              "type": "string"
+            },
+            "repository": {
+              "default": "",
+              "type": "string"
+            },
+            "tag": {
+              "default": "latest",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "project": {
+          "default": "",
+          "type": "string"
+        },
+        "secretStore": {
+          "default": "vault",
+          "type": "string"
+        },
+        "serviceName": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "hostPid": {
+      "default": false,
+      "type": "boolean"
+    },
+    "nameOverride": {
+      "default": "",
+      "type": "string"
+    },
+    "networkPolicy": {
+      "properties": {
+        "cilium": {
+          "default": true,
+          "type": "boolean"
+        },
+        "egress": {
+          "properties": {
+            "allowDNS": {
+              "default": true,
+              "type": "boolean"
+            },
+            "fqdns": {
+              "items": {
+                "required": []
+              },
+              "type": "array"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "extraEgress": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "nodeAffinityPreset": {
+      "properties": {
+        "key": {
+          "default": "",
+          "type": "string"
+        },
+        "type": {
+          "default": "",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "nodeSelector": {
+      "required": [],
+      "type": "object"
+    },
+    "podAffinity": {
+      "properties": {
+        "preset": {
+          "default": "disabled",
+          "type": "string"
+        },
+        "topologyKey": {
+          "default": "kubernetes.io/hostname",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "podAntiAffinity": {
+      "properties": {
+        "preset": {
+          "default": "soft",
+          "type": "string"
+        },
+        "topologyKey": {
+          "default": "kubernetes.io/hostname",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "properties": {
+        "fsGroup": {
+          "default": 65534,
+          "type": "integer"
+        },
+        "runAsGroup": {
+          "default": 65534,
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "resources": {
+      "properties": {
+        "limits": {
+          "required": [],
+          "type": "object"
+        },
+        "requests": {
+          "required": [],
+          "type": "object"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "resourcesPreset": {
+      "default": "none",
+      "type": "string"
+    },
+    "securityContext": {
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "type": "boolean"
+        },
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "type": "array"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 65534,
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "type": "object"
+        },
+        "create": {
+          "default": false,
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "type": "array"
+    },
+    "volumes": {
+      "required": [],
+      "type": "object"
     }
+  },
+  "required": [],
+  "type": "object"
 }
