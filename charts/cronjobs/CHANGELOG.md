@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.4.0...cronjobs-4.5.0) (2026-10-28)
+
+
+### Features
+
+* **cronjobs:** add serviceAccount.automountServiceAccountToken ([#48](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/48)) ([dfcb876](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/dfcb8763e175cf51b9065f94d1fb90358ddeafe7))
+
 ## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.3.0...cronjobs-4.4.0) (2026-10-28)
 
 
