@@ -13,6 +13,6 @@ kubeSecrets:
       secret: password     # property inside it (defaults to name)
 ```
 
-Requires [External Secrets Operator](https://external-secrets.io) and the named `ClusterSecretStore` in the cluster. Uses `external-secrets.io/v1beta1`.
+Requires [External Secrets Operator](https://external-secrets.io) and the named `ClusterSecretStore` in the cluster. Uses `external-secrets.io/v1`.
 
 Values reference: [charts/vaultsecrets/README.md](../charts/vaultsecrets/README.md).
