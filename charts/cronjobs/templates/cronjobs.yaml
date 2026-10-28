@@ -77,6 +77,9 @@ spec:
           {{- end }}
           restartPolicy: "Never"
           serviceAccountName: {{ include "common.serviceAccount.name" $ }}
+          {{- if kindIs "bool" $.Values.serviceAccount.automountServiceAccountToken }}
+          automountServiceAccountToken: {{ $.Values.serviceAccount.automountServiceAccountToken }}
+          {{- end }}
           {{- include "common.images.renderPullSecrets" (dict "images" (list) "context" $) | nindent 10 }}
           containers:
             - name: {{ $key }}

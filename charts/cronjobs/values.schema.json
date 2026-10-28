@@ -396,6 +396,14 @@
           "required": [],
           "type": "object"
         },
+        "automountServiceAccountToken": {
+          "default": "null",
+          "required": [],
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
         "create": {
           "default": false,
           "type": "boolean"

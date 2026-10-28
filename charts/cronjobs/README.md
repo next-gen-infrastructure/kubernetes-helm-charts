@@ -67,11 +67,12 @@ Kubernetes Cron Jobs
 
 ### Configure Service Accounts for Pod
 
-| Name                         | Description                                           | Value   |
-| ---------------------------- | ----------------------------------------------------- | ------- |
-| `serviceAccount.create`      | Specifies whether a service account should be created | `false` |
-| `serviceAccount.annotations` | Annotations to add to the service account             | `{}`    |
-| `serviceAccount.name`        | The name of the service account to use.               | `""`    |
+| Name                                          | Description                                                      | Value   |
+| --------------------------------------------- | ---------------------------------------------------------------- | ------- |
+| `serviceAccount.create`                       | Specifies whether a service account should be created            | `false` |
+| `serviceAccount.annotations`                  | Annotations to add to the service account                        | `{}`    |
+| `serviceAccount.name`                         | The name of the service account to use.                          | `""`    |
+| `serviceAccount.automountServiceAccountToken` | Set to false to not mount the API token, unset keeps the default | `nil`   |
 
 ### Environment variables that get added to the container
 
