@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.11.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.10.0...deployment-4.11.0) (2026-10-28)
+
+
+### Features
+
+* **deployment:** KEDA ScaledObject; split network policy templates; capabilities for CRD apiVersions ([3f4e55e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3f4e55e73e49a69179d460c6f172fb637beddd9f))
+* **deployment:** render a KEDA ScaledObject instead of the HPA ([7e52231](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/7e5223139bf49938172d4d6eca595556fd97b970))
+
 ## [4.10.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.9.1...deployment-4.10.0) (2026-10-28)
 
 
