@@ -338,6 +338,90 @@
                 }
             }
         },
+        "cronjobs": {
+            "type": "object",
+            "description": "Cronjobs configuration, keyed by job name",
+            "default": {},
+            "additionalProperties": {
+                "type": "object",
+                "required": ["schedule"],
+                "properties": {
+                    "schedule": {
+                        "type": "string",
+                        "description": "Cron schedule"
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "IANA time zone of the schedule"
+                    },
+                    "suspend": {
+                        "type": "boolean",
+                        "description": "Suspend subsequent runs",
+                        "default": false
+                    },
+                    "concurrencyPolicy": {
+                        "type": "string",
+                        "enum": ["Allow", "Forbid", "Replace"],
+                        "description": "Only honoured when global.environment is prod, otherwise Forbid",
+                        "default": "Forbid"
+                    },
+                    "startingDeadlineSeconds": {
+                        "type": "integer",
+                        "description": "Deadline in seconds for starting a run that missed its schedule"
+                    },
+                    "failedJobsHistoryLimit": {
+                        "type": "integer",
+                        "description": "Failed jobs to keep",
+                        "default": 3
+                    },
+                    "successfulJobsHistoryLimit": {
+                        "type": "integer",
+                        "description": "Successful jobs to keep",
+                        "default": 1
+                    },
+                    "backoffLimit": {
+                        "type": "integer",
+                        "description": "Retries before the job is considered failed. Only honoured when global.environment is prod, otherwise 0",
+                        "default": 6
+                    },
+                    "activeDeadlineSeconds": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "Hard cap on the job's runtime in seconds; the pods are terminated past it"
+                    },
+                    "ttlSecondsAfterFinished": {
+                        "type": "integer",
+                        "description": "Seconds after which a finished job and its pods are deleted"
+                    },
+                    "command": {
+                        "type": "array",
+                        "description": "Container command",
+                        "items": {"type": "string"}
+                    },
+                    "args": {
+                        "type": "array",
+                        "description": "Container args",
+                        "items": {"type": "string"}
+                    },
+                    "annotations": {
+                        "type": ["object", "null"],
+                        "description": "CronJob annotations"
+                    },
+                    "resources": {
+                        "type": "object",
+                        "description": "Container resource requests and limits"
+                    },
+                    "securityContext": {
+                        "type": "object",
+                        "description": "Container security context, merged over the chart-level one"
+                    },
+                    "env": {
+                        "type": "object",
+                        "description": "Job-level env: values and vaultSecret"
+                    }
+                }
+            }
+        },
         "volumes": {
             "type": "object",
             "description": "Container volumes configuration",

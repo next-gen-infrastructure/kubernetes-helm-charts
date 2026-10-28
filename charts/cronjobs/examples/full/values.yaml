@@ -33,6 +33,7 @@ cronjobs:
       failedJobsHistoryLimit: 10
       successfulJobsHistoryLimit: 2
       backoffLimit: 6 # number of times it will retries before it is considered failed. The default is 6.
+      activeDeadlineSeconds: 3600 # hard cap on the job's runtime; the pods are terminated past it
       annotations:
       resources:
         limits:
