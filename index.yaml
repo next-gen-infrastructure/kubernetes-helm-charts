@@ -4,6 +4,29 @@ entries:
   - annotations:
       category: Infrastructure
     apiVersion: v2
+    created: "2026-10-28T18:17:40.433915216Z"
+    description: A Library Helm Chart for grouping common logic between charts. This
+      chart is not deployable by itself.
+    digest: 4e3fed61cda5cde2dbd9219358eda3ab3fa6498fcade2d4db6707dff2af6eae9
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: common
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/common-4.11.0/common-4.11.0.tgz
+    version: 4.11.0
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
     created: "2026-10-28T13:03:42.917604656Z"
     description: A Library Helm Chart for grouping common logic between charts. This
       chart is not deployable by itself.
@@ -547,6 +570,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-10-28T18:17:41.667370323Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: 02c296a1d770e792f46ab2d7ab35d6ad88725cefe6391d57a2c22cad315b4842
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-4.7.0/cronjobs-4.7.0.tgz
+    version: 4.7.0
+  - apiVersion: v2
     created: "2026-10-28T13:55:12.928851962Z"
     dependencies:
     - name: common
@@ -836,6 +877,22 @@ entries:
     version: 1.0.0
   daemonset:
   - apiVersion: v2
+    created: "2026-10-28T18:17:42.814026441Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical Daemon Set application
+    digest: 931fea0651c4857e34d2fab00efe711d0e45590787a1dce0921ee61db58f8222
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-4.8.0/daemonset-4.8.0.tgz
+    version: 4.8.0
+  - apiVersion: v2
     created: "2026-10-28T13:46:35.283726938Z"
     dependencies:
     - name: common
@@ -1060,6 +1117,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2026-10-28T18:17:44.13137201Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 4ebbf454d10ce89988a4131741a158ebccf87fdc19831eb05734cee869873b8f
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-4.11.0/deployment-4.11.0.tgz
+    version: 4.11.0
   - apiVersion: v2
     created: "2026-10-28T13:46:36.446784347Z"
     dependencies:
@@ -1749,6 +1826,25 @@ entries:
     version: 1.1.0
   statefulset:
   - apiVersion: v2
+    created: "2026-10-28T18:17:45.581318817Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical StateFul Set application
+    digest: 95b8d05a4199ead981127e1d0c946457e8c4c6990e19c165f11ed028af225e68
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-4.8.0/statefulset-4.8.0.tgz
+    version: 4.8.0
+  - apiVersion: v2
     created: "2026-10-28T13:46:37.784984142Z"
     dependencies:
     - name: common
@@ -2130,6 +2226,25 @@ entries:
     version: 1.0.0
   vaultsecrets:
   - apiVersion: v2
+    created: "2026-10-28T18:17:46.671618968Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Generator of the secrets from remote Vault server
+    digest: 0daafea5c7787fdbde8b0a27956876cb9ec5d2cb1f726fba237d75a9129ee751
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: vaultsecrets
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/vaultsecrets
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-3.3.0/vaultsecrets-3.3.0.tgz
+    version: 3.3.0
+  - apiVersion: v2
     created: "2026-10-28T13:03:46.922262756Z"
     dependencies:
     - name: common
@@ -2300,4 +2415,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T13:55:12.926198816Z"
+generated: "2026-10-28T18:17:46.670729334Z"
