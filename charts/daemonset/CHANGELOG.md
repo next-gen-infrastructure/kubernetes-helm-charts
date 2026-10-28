@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.7.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.6.0...daemonset-4.7.0) (2026-10-28)
+
+
+### Features
+
+* **deployment,statefulset,daemonset:** add metrics.serviceMonitor.params and tlsConfig ([#55](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/55)) ([c15a08b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c15a08baad9094feb12326a284064679b6f9d3f6))
+
 ## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.5.0...daemonset-4.6.0) (2026-10-28)
 
 
