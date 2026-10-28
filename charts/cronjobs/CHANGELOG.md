@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.6.0...cronjobs-4.6.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deployment,cronjobs:** env secrets before values, bundle common &gt;= 4.10.1 ([#53](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/53)) ([b23b721](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b23b721873e9f5e197c1e18e98f93d736412b361))
+
 ## [4.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.5.0...cronjobs-4.6.0) (2026-10-28)
 
 
