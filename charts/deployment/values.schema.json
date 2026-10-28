@@ -5,6 +5,11 @@
         "global": {
             "type": "object",
             "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Skips the install when the parent chart sets `condition: global.enabled` on the dependency",
+                    "default": true
+                },
                 "serviceName": {
                     "type": "string",
                     "description": "Name of the service. Affects public DNS.",

@@ -12,6 +12,12 @@ The chart for creating configmaps.
 
 ## Parameters
 
+### Global parameters
+
+| Name             | Description                                                                                | Value  |
+| ---------------- | ------------------------------------------------------------------------------------------ | ------ |
+| `global.enabled` | Skips the install when the parent chart sets `condition: global.enabled` on the dependency | `true` |
+
 ### Configuration for custom configmaps
 
 | Name         | Description                         | Value |

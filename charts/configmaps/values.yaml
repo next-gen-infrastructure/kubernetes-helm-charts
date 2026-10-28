@@ -4,6 +4,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+## @section Global parameters
+global:
+  ## @param global.enabled Skips the install when the parent chart sets `condition: global.enabled` on the dependency
+  ##
+  enabled: true
 ## @section Configuration for custom configmaps
 ## @param configmaps Configuration for custom configmaps
 ## Example:

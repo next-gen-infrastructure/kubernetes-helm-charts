@@ -14,16 +14,17 @@ Generator of the secrets from remote Vault server
 
 ### Global parameters
 
-| Name                      | Description                                                              | Value          |
-| ------------------------- | ------------------------------------------------------------------------ | -------------- |
-| `global.project`          | The project of the service                                               | `""`           |
-| `global.serviceName`      | Name of the service. Affects public DNS.                                 | `example`      |
-| `global.secretStore`      | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets | `vault`        |
-| `global.environment`      | Type of the environment, one of "dev", "stage", "prod".                  | `dev`          |
-| `global.domain`           | Company Root-level domain, expects                                       | `""`           |
-| `global.image.name`       | Name of the image,                                                       | `""`           |
-| `global.image.tag`        | Tag of the image                                                         | `latest`       |
-| `global.image.pullPolicy` | The default pull policy is IfNotPresent which causes                     | `IfNotPresent` |
+| Name                      | Description                                                                                | Value          |
+| ------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
+| `global.enabled`          | Skips the install when the parent chart sets `condition: global.enabled` on the dependency | `true`         |
+| `global.project`          | The project of the service                                                                 | `""`           |
+| `global.serviceName`      | Name of the service. Affects public DNS.                                                   | `example`      |
+| `global.secretStore`      | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets                   | `vault`        |
+| `global.environment`      | Type of the environment, one of "dev", "stage", "prod".                                    | `dev`          |
+| `global.domain`           | Company Root-level domain, expects                                                         | `""`           |
+| `global.image.name`       | Name of the image,                                                                         | `""`           |
+| `global.image.tag`        | Tag of the image                                                                           | `latest`       |
+| `global.image.pullPolicy` | The default pull policy is IfNotPresent which causes                                       | `IfNotPresent` |
 
 ### Kubernetes secrets
 
