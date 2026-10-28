@@ -109,8 +109,8 @@
             "default": {}
         },
         "terminationGracePeriodSeconds": {
-            "type": ["integer", "string"],
-            "description": "Seconds the pod needs to gracefully terminate",
+            "type": "string",
+            "description": "Seconds the pod needs to gracefully terminate (cluster default when empty)",
             "default": ""
         },
         "priorityClassName": {

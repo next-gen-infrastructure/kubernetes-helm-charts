@@ -12,7 +12,7 @@ Return generated volume mounts.
   {{ if $value.subPath -}}
   subPath: {{ $value.subPath }}
   {{ end -}}
-  {{ if or $value.secretName $value.vaultPath $value.hostPath -}}
+  {{ if or $value.readOnly $value.secretName $value.vaultPath $value.hostPath -}}
   readOnly: true
   {{- end -}}
 {{- end -}}
@@ -36,6 +36,14 @@ Return generated volume definitions.
   {{- else if $value.configMap -}}
   configMap:
     name: {{ include "common.names.fullname" $ }}-{{ $key }}
+  {{- else if $value.configMapName -}}
+  configMap:
+    name: {{ $value.configMapName }}
+    {{- with $value.items }}
+    items: {{- toYaml . | nindent 6 }}
+    {{- end }}
+  {{- else if $value.projected -}}
+  projected: {{- toYaml $value.projected | nindent 4 }}
   {{- else if $value.secretName -}}
   secret:
     secretName: {{ $value.secretName }}
@@ -63,6 +71,14 @@ Return generated volume definitions.
   {{- else if $value.configMap -}}
   configMap:
     name: {{ include "common.names.fullname" $ }}-{{ $key }}
+  {{- else if $value.configMapName -}}
+  configMap:
+    name: {{ $value.configMapName }}
+    {{- with $value.items }}
+    items: {{- toYaml . | nindent 6 }}
+    {{- end }}
+  {{- else if $value.projected -}}
+  projected: {{- toYaml $value.projected | nindent 4 }}
   {{- else if $value.secretName -}}
   secret:
     secretName: {{ $value.secretName }}

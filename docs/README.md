@@ -46,7 +46,7 @@ deployment:
 - **Images:** built from `global.image.*`, overridable per chart via `image.*` (`registry/repository:tag`).
 - **Env sources** (`env.*`): `values` (templatable), `refs` (downward API), `configmap`, `secret`, `vaultSecret` (via ExternalSecret, Vault path `<environment>/<path>`, store `global.secretStore`).
 - **Templating in values:** strings may contain `{{ ... }}`, rendered with `common.tplvalues.render`.
-- **`volumes`:** map of name → `mountPath` plus one of `emptyDir`, `hostPath`, `configMap`, `secretName`, `vaultPath` (+ `items`; needs `vaultVolumesSupport: true`).
+- **`volumes`:** map of name → `mountPath` plus one of `emptyDir`, `hostPath`, `configMap`, `secretName`, `vaultPath` (+ `items`; needs `vaultVolumesSupport: true`), `configMapName` (an existing ConfigMap, optional `items`), `projected` (native projected spec); `readOnly: true` makes the mount read-only.
 
 ## Testing
 
