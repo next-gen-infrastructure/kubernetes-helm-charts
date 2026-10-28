@@ -1,0 +1,33 @@
+{{- if and .Values.autoscaling.enabled .Values.autoscaling.keda.enabled -}}
+apiVersion: {{ include "common.capabilities.keda.apiVersion" $ }}
+kind: ScaledObject
+metadata:
+  name: {{ include "common.names.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels: {{ include "common.labels.standard" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    {{ if .Values.rollouts.enabled -}}
+    apiVersion: {{ include "common.capabilities.rollout.apiVersion" $ }}
+    kind: Rollout
+    {{ else -}}
+    apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+    kind: Deployment
+    {{ end -}}
+    name: {{ include "common.names.fullname" . }}
+  minReplicaCount: {{ .Values.autoscaling.minReplicas }}
+  maxReplicaCount: {{ .Values.autoscaling.maxReplicas }}
+  pollingInterval: {{ .Values.autoscaling.keda.pollingInterval }}
+  cooldownPeriod: {{ .Values.autoscaling.keda.cooldownPeriod }}
+  {{- if or .Values.autoscaling.keda.advanced .Values.autoscaling.behavior }}
+  advanced:
+    {{- with .Values.autoscaling.keda.advanced }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- if and .Values.autoscaling.behavior (not (.Values.autoscaling.keda.advanced).horizontalPodAutoscalerConfig) }}
+    horizontalPodAutoscalerConfig:
+      behavior: {{- toYaml .Values.autoscaling.behavior | nindent 8 }}
+    {{- end }}
+  {{- end }}
+  triggers: {{- toYaml .Values.autoscaling.keda.triggers | nindent 4 }}
+{{- end }}

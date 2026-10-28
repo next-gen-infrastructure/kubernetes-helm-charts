@@ -112,6 +112,40 @@ Return the appropriate apiVersion for Horizontal Pod Autoscaler.
 {{- end -}}
 
 {{/*
+Return the apiVersion of the custom resources of the operators the charts can render for.
+Usage:
+{{ include "common.capabilities.externalSecret.apiVersion" $ }}
+*/}}
+{{- define "common.capabilities.externalSecret.apiVersion" -}}
+{{- print "external-secrets.io/v1" -}}
+{{- end -}}
+
+{{/* ServiceMonitor and PrometheusRule */}}
+{{- define "common.capabilities.prometheusOperator.apiVersion" -}}
+{{- print "monitoring.coreos.com/v1" -}}
+{{- end -}}
+
+{{/* Argo Rollout */}}
+{{- define "common.capabilities.rollout.apiVersion" -}}
+{{- print "argoproj.io/v1alpha1" -}}
+{{- end -}}
+
+{{/* CiliumNetworkPolicy */}}
+{{- define "common.capabilities.cilium.apiVersion" -}}
+{{- print "cilium.io/v2" -}}
+{{- end -}}
+
+{{/* KEDA ScaledObject */}}
+{{- define "common.capabilities.keda.apiVersion" -}}
+{{- print "keda.sh/v1alpha1" -}}
+{{- end -}}
+
+{{/* Traefik IngressRoute */}}
+{{- define "common.capabilities.traefik.apiVersion" -}}
+{{- print "traefik.io/v1alpha1" -}}
+{{- end -}}
+
+{{/*
 Return the appropriate apiVersion for Vertical Pod Autoscaler.
 */}}
 {{- define "common.capabilities.vpa.apiVersion" -}}

@@ -829,7 +829,7 @@ lifecycle:
   ## preStopCommand: echo 'Bye!'
   ##
   preStopCommand: ""
-## @section Create HorizontalPodAutoscaler object for deployment type
+## @section Create HorizontalPodAutoscaler (or KEDA ScaledObject) for the workload
 ## Ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
 ##
 autoscaling:
@@ -879,6 +879,28 @@ autoscaling:
   ##         periodSeconds: 15
   ##     selectPolicy: Max
   behavior: { }
+  keda:
+    ## @param autoscaling.keda.enabled Render a KEDA ScaledObject (keda.sh/v1alpha1) instead of an HPA. Requires autoscaling.enabled and the KEDA CRDs; autoscaling.metrics is ignored, use triggers
+    ##
+    enabled: false
+    ## @param autoscaling.keda.pollingInterval Seconds between trigger checks
+    ##
+    pollingInterval: 30
+    ## @param autoscaling.keda.cooldownPeriod Seconds to wait after the last active trigger before scaling to zero
+    ##
+    cooldownPeriod: 300
+    ## @param autoscaling.keda.triggers KEDA triggers, in the native format. autoscaling.behavior is passed to the managed HPA
+    ## E.g.
+    ## triggers:
+    ## - type: cpu
+    ##   metricType: Utilization
+    ##   metadata:
+    ##     value: "60"
+    ##
+    triggers: []
+    ## @param autoscaling.keda.advanced Raw ScaledObject spec.advanced block (e.g. horizontalPodAutoscalerConfig, scalingModifiers)
+    ##
+    advanced: {}
 ## @section Persistence Parameters
 ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
 ##

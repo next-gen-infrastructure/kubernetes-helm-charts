@@ -21,6 +21,34 @@
           "default": false,
           "type": "boolean"
         },
+        "keda": {
+          "properties": {
+            "advanced": {
+              "required": [],
+              "type": "object"
+            },
+            "cooldownPeriod": {
+              "default": 300,
+              "type": "integer"
+            },
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "pollingInterval": {
+              "default": 30,
+              "type": "integer"
+            },
+            "triggers": {
+              "items": {
+                "required": []
+              },
+              "type": "array"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
         "maxReplicas": {
           "default": 1,
           "type": "integer"

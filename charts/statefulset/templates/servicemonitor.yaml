@@ -1,5 +1,5 @@
 {{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
-apiVersion: monitoring.coreos.com/v1
+apiVersion: {{ include "common.capabilities.prometheusOperator.apiVersion" $ }}
 kind: ServiceMonitor
 metadata:
   name: {{ template "common.names.fullname" . }}
