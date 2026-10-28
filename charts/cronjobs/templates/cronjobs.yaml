@@ -101,11 +101,10 @@ spec:
               {{- if $value.args }}
               args: {{ toYaml $value.args | nindent 16 }}
               {{- end }}
-              {{- $resources := merge (default dict $value.resources) (default dict $.Values.resources) }}
-              {{- if or $resources.limits $resources.requests }}
-              resources: {{ toYaml $resources | nindent 16 }}
-              {{- else if and $.Values.resourcesPreset (ne $.Values.resourcesPreset "none") }}
-              resources: {{- include "common.resources.preset" (dict "type" $.Values.resourcesPreset) | nindent 16 }}
+              {{- $explicit := merge (default dict $value.resources) (default dict $.Values.resources) }}
+              {{- $resources := include "common.resources.resolve" (dict "preset" $.Values.resourcesPreset "resources" $explicit) }}
+              {{- if $resources }}
+              resources: {{- $resources | trim | nindent 16 }}
               {{- end }}
               {{- if $.Values.volumes }}
               volumeMounts: {{- include "common.volume.mounts" $ | trim | nindent 16 }}

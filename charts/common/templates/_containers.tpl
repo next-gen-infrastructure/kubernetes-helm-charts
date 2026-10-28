@@ -119,10 +119,9 @@ Return generated container configuration.
             {{ .Values.lifecycle.preStopCommand | nindent 12 }}
   {{- end }}
   {{- end }}
-  {{- if .Values.resources }}
-  resources: {{- toYaml .Values.resources | trim | nindent 4 }}
-  {{- else if and .Values.resourcesPreset (ne .Values.resourcesPreset "none") }}
-  resources: {{- include "common.resources.preset" (dict "type" .Values.resourcesPreset) | nindent 4 }}
+  {{- $resources := include "common.resources.resolve" (dict "preset" .Values.resourcesPreset "resources" .Values.resources) }}
+  {{- if $resources }}
+  resources: {{- $resources | trim | nindent 4 }}
   {{- end }}
   {{- if .Values.securityContext }}
   securityContext: {{- toYaml .Values.securityContext | trim | nindent 4 }}

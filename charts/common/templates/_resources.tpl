@@ -48,3 +48,24 @@ These presets are for basic testing and not meant to be used in production
 {{- printf "ERROR: Preset key '%s' invalid. Allowed values are %s" .type (join "," (keys $presets)) | fail -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the resources for a container: the preset (if any) as a base, with explicit resources
+overriding it key by key, e.g. resources.requests.cpu replaces only the preset's requests.cpu.
+{{ include "common.resources.resolve" (dict "preset" .Values.resourcesPreset "resources" .Values.resources) -}}
+*/}}
+{{- define "common.resources.resolve" -}}
+{{- $base := dict -}}
+{{- if and .preset (ne .preset "none") -}}
+{{- $base = include "common.resources.preset" (dict "type" .preset) | fromYaml -}}
+{{- end -}}
+{{- $resources := mergeOverwrite $base (deepCopy (default dict .resources)) -}}
+{{- range $key, $value := $resources -}}
+{{- if not $value -}}
+{{- $_ := unset $resources $key -}}
+{{- end -}}
+{{- end -}}
+{{- if $resources -}}
+{{- toYaml $resources -}}
+{{- end -}}
+{{- end -}}
