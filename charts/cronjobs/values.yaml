@@ -167,6 +167,12 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the fullname template
   ##
   name: ""
+  # @schema
+  # type: [boolean, "null"]
+  # @schema
+  ## @param serviceAccount.automountServiceAccountToken Set to false to not mount the API token, unset keeps the default
+  ##
+  automountServiceAccountToken: null
 ## @section Environment variables that get added to the container
 ##
 env:
