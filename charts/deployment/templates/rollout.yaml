@@ -1,5 +1,5 @@
 {{- if .Values.rollouts.enabled -}}
-apiVersion: argoproj.io/v1alpha1
+apiVersion: {{ include "common.capabilities.rollout.apiVersion" $ }}
 kind: Rollout
 metadata:
   name: {{ include "common.names.fullname" . }}

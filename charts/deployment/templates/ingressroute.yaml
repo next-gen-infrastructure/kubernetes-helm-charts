@@ -1,7 +1,7 @@
 {{- if and .Values.ingress.enabled .Values.ingress.traefik.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
 {{- $match := ternary "Path" "PathPrefix" (eq .Values.ingress.pathType "Exact") -}}
 {{- $host := include "common.ingress.host" . -}}
-apiVersion: traefik.io/v1alpha1
+apiVersion: {{ include "common.capabilities.traefik.apiVersion" $ }}
 kind: IngressRoute
 metadata:
   name: {{ include "common.ingress.name" (dict "name" .Values.ingress.name "default" (include "common.names.fullname" .) "context" $) }}

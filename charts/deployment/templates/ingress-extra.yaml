@@ -1,5 +1,5 @@
 {{- if and .Values.ingressExtra.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
-apiVersion: networking.k8s.io/v1
+apiVersion: {{ include "common.capabilities.ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
   name: {{ include "common.ingress.name" (dict "name" .Values.ingressExtra.name "default" (printf "%s-extra" (include "common.names.fullname" .)) "context" $) }}
