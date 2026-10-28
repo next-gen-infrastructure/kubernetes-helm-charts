@@ -15,20 +15,21 @@ Return generated container configuration.
   {{- end }}
   {{- if or (.Values.env).values (.Values.env).refs (.Values.env).configmap (.Values.env).secret (.Values.env).vaultSecret }}
   env:
-  {{- if .Values.env.values -}}
-  {{- include "common.envvar.value" . | trim | nindent 2 -}}
-  {{- end -}}
-  {{- if or .Values.env.refs .Values.datadogIntegration -}}
-  {{- include "common.envvar.ref" . | trim | nindent 2 -}}
-  {{- end -}}
-  {{- if .Values.env.configmap -}}
-  {{- include "common.envvar.configmap" . | trim | nindent 2 -}}
+  {{- /* Kubernetes expands $(VAR) only against earlier entries; keep values last so they can reference secrets. */ -}}
+  {{- if .Values.env.vaultSecret -}}
+  {{- include "common.envvar.vaultSecret" . | trim | nindent 2 -}}
   {{- end -}}
   {{- if .Values.env.secret -}}
   {{- include "common.envvar.secret" . | trim | nindent 2 -}}
   {{- end -}}
-  {{- if .Values.env.vaultSecret -}}
-  {{- include "common.envvar.vaultSecret" . | trim | nindent 2 -}}
+  {{- if .Values.env.configmap -}}
+  {{- include "common.envvar.configmap" . | trim | nindent 2 -}}
+  {{- end -}}
+  {{- if or .Values.env.refs .Values.datadogIntegration -}}
+  {{- include "common.envvar.ref" . | trim | nindent 2 -}}
+  {{- end -}}
+  {{- if .Values.env.values -}}
+  {{- include "common.envvar.value" . | trim | nindent 2 -}}
   {{- end -}}
   {{- end -}}
   {{- if or .Values.envFrom (.Values.configMap).enabled }}
