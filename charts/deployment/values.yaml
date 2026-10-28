@@ -128,6 +128,10 @@ vaultVolumesSupport: false
 ##   shared-files:
 ##     mountPath: /tmp/shared
 ##     emptyDir: true
+##   shm:
+##     mountPath: /dev/shm
+##     emptyDir: true
+##     inMemory: true # backs the emptyDir with tmpfs (medium: Memory)
 ##   central-config:
 ##     mountPath: /central-config
 ##     configMap:

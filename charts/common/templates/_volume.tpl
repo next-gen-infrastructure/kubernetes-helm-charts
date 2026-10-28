@@ -28,7 +28,10 @@ Return generated volume definitions.
 {{- range $key, $value := $allVolumes }}
 - name: {{ $key }}
   {{ if $value.emptyDir -}}
-  emptyDir: {}
+  emptyDir: {{- if $value.inMemory }}
+    medium: Memory
+  {{- else }} {}
+  {{- end }}
   {{- else if $value.configMap -}}
   configMap:
     name: {{ include "common.names.fullname" $ }}-{{ $key }}
@@ -51,7 +54,10 @@ Return generated volume definitions.
 {{- range $key, $value := $allVolumes }}
 - name: {{ $key }}
   {{ if $value.emptyDir -}}
-  emptyDir: {}
+  emptyDir: {{- if $value.inMemory }}
+    medium: Memory
+  {{- else }} {}
+  {{- end }}
   {{- else if $value.configMap -}}
   configMap:
     name: {{ include "common.names.fullname" $ }}-{{ $key }}
