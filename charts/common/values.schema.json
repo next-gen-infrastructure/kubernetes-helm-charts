@@ -1,5 +1,15 @@
 {
-    "title": "Chart Values",
-    "type": "object",
-    "properties": {}
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "exampleValue": {
+      "default": "common-chart",
+      "type": "string"
+    },
+    "global": {
+      "required": [],
+      "type": "object"
+    }
+  },
+  "required": [],
+  "type": "object"
 }

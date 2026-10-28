@@ -80,6 +80,9 @@ podLabels: {}
 ## @param podAnnotations Additional annotations for the pod.
 ##
 podAnnotations: { }
+# @schema
+# type: [integer, string]
+# @schema
 ## @param terminationGracePeriodSeconds Seconds the pod needs to gracefully terminate (cluster default when empty)
 ## ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
 ##
@@ -286,10 +289,16 @@ pdb:
   ## @param pdb.create Specifies whether a Pod disruption budget should be created
   ##
   create: false
-  ## @skip pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
-  ## The generated schema cannot express "number or string", so the type is not validated.
+  # @schema
+  # type: [integer, string]
+  # @schema
+  ## @param pdb.minAvailable Min available pods or percent of pods (number or string, e.g. 1 or "25%")
+  ##
   minAvailable: 1
-  ## @skip pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
+  # @schema
+  # type: [integer, string]
+  # @schema
+  ## @param pdb.maxUnavailable Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")
   ##
   maxUnavailable: 0
 ## @section Network policy
@@ -420,7 +429,11 @@ serviceAccount:
   ## If not set and create is true, a name is generated using the fullname template
   ##
   name: ""
-  ## @skip serviceAccount.automountServiceAccountToken Set to false to not mount the API token, unset keeps the default
+  # @schema
+  # type: [boolean, "null"]
+  # @schema
+  ## @param serviceAccount.automountServiceAccountToken Set to false to not mount the API token, unset keeps the default
+  ##
   automountServiceAccountToken: null
 ## @section Environment variables that get added to the container
 env:

@@ -35,9 +35,11 @@ Pre-commit (config in `.pre-commit-config.yaml`): `pre-commit run --all-files`. 
 
 ## Generated files — do not hand-edit
 
-For every chart, `README.md` and `values.schema.json` are generated from `values.yaml` by the pre-commit hook `.pre-commit/process.sh` (runs `helm-schema` and `readme-generator` for each chart whose `Chart.yaml`/`values.yaml` changed). Therefore:
+For every chart, `README.md` and `values.schema.json` are generated from `values.yaml` by the pre-commit hook `.pre-commit/process.sh` (runs `helm-schema` for the schema and `readme-generator` for the README, for each chart whose `Chart.yaml`/`values.yaml` changed). The two tools own separate outputs: `helm-schema` writes `values.schema.json`, `readme-generator` only writes `README.md`. Therefore:
 
-- Document values in `values.yaml` using the Bitnami annotation comments (`## @section ...`, `## @param name Description`, `## @skip`). Every value must have a `@param` line or README generation fails.
+- Document values in `values.yaml` using the Bitnami annotation comments (`## @section ...`, `## @param name Description`) for the README. Every value must have a `@param` line or README generation fails.
+- Types are inferred from the default value. When that is wrong (union, nullable, nested structure), add a `# @schema` block directly above the key's comment block, e.g. `# @schema` / `# type: [integer, string]` / `# @schema`. The block body is YAML; any JSON Schema keyword works. Do not use `## @skip` for this, give the key a `@param` and a `# @schema` block instead.
+- `helm-schema` runs with `-k additionalProperties,required,description,title`, so schema descriptions exist only where a `# @schema` block sets them explicitly.
 - After changing any `values.yaml`, regenerate via pre-commit rather than editing `README.md` or `values.schema.json` directly.
 
 ## Releases and versioning

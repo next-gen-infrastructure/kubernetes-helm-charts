@@ -132,6 +132,8 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                        |
 | `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
 | `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
+| `pdb.minAvailable`                  | Min available pods or percent of pods (number or string, e.g. 1 or "25%")                                                          | `1`                           |
+| `pdb.maxUnavailable`                | Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")                                                      | `0`                           |
 
 ### Network policy
 
@@ -171,11 +173,12 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Configure Service Accounts for Pod
 
-| Name                         | Description                                           | Value   |
-| ---------------------------- | ----------------------------------------------------- | ------- |
-| `serviceAccount.create`      | Specifies whether a service account should be created | `false` |
-| `serviceAccount.annotations` | Annotations to add to the service account             | `{}`    |
-| `serviceAccount.name`        | The name of the service account to use.               | `""`    |
+| Name                                          | Description                                                      | Value   |
+| --------------------------------------------- | ---------------------------------------------------------------- | ------- |
+| `serviceAccount.create`                       | Specifies whether a service account should be created            | `false` |
+| `serviceAccount.annotations`                  | Annotations to add to the service account                        | `{}`    |
+| `serviceAccount.name`                         | The name of the service account to use.                          | `""`    |
+| `serviceAccount.automountServiceAccountToken` | Set to false to not mount the API token, unset keeps the default | `nil`   |
 
 ### Environment variables that get added to the container
 

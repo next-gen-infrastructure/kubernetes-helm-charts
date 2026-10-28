@@ -112,7 +112,10 @@ for file in "$@"; do
       pushd $file_chart_path > /dev/null
       helm dep update --skip-refresh
       # Installation: https://github.com/dadav/helm-schema?tab=readme-ov-file#installation
-      helm-schema
+      # The schema comes from helm-schema only: `# @schema` blocks in values.yaml carry types the README tool
+      # cannot express (unions, nullable). -k drops auto-generated descriptions/titles/required lists, which
+      # would otherwise be junk copied from the `## @param` comments.
+      helm-schema -k additionalProperties,required,description,title
       # helm-schema recurses into examples/; those schemas go stale and break example rendering
       if [ -d examples ]; then
         find examples -name values.schema.json -delete
@@ -120,8 +123,7 @@ for file in "$@"; do
       # Installation: https://github.com/bitnami-labs/readme-generator-for-helm#install
       readme-generator \
         --values values.yaml \
-        --readme README.md \
-        --schema values.schema.json
+        --readme README.md
       popd > /dev/null
       seen_chart_paths+=( "$file_chart_path" )
     fi

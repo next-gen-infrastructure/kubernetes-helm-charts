@@ -1,61 +1,63 @@
 {
-    "title": "Chart Values",
-    "type": "object",
-    "properties": {
-        "global": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Skips the install when the parent chart sets `condition: global.enabled` on the dependency",
-                    "default": true
-                },
-                "project": {
-                    "type": "string",
-                    "description": "The project of the service",
-                    "default": ""
-                },
-                "serviceName": {
-                    "type": "string",
-                    "description": "Name of the service. Affects public DNS.",
-                    "default": "example"
-                },
-                "secretStore": {
-                    "type": "string",
-                    "description": "Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets",
-                    "default": "vault"
-                },
-                "environment": {
-                    "type": "string",
-                    "description": "Type of the environment, one of \"dev\", \"stage\", \"prod\".",
-                    "default": "dev"
-                },
-                "domain": {
-                    "type": "string",
-                    "description": "Company Root-level domain, expects",
-                    "default": ""
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "description": "Name of the image,",
-                            "default": ""
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag of the image",
-                            "default": "latest"
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "description": "The default pull policy is IfNotPresent which causes",
-                            "default": "IfNotPresent"
-                        }
-                    }
-                }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "exampleValue": {
+      "default": "common-chart",
+      "type": "string"
+    },
+    "global": {
+      "properties": {
+        "domain": {
+          "default": "",
+          "type": "string"
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "environment": {
+          "default": "dev",
+          "type": "string"
+        },
+        "image": {
+          "properties": {
+            "name": {
+              "default": "",
+              "type": "string"
+            },
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "type": "string"
+            },
+            "tag": {
+              "default": "latest",
+              "type": "string"
             }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "project": {
+          "default": "",
+          "type": "string"
+        },
+        "secretStore": {
+          "default": "vault",
+          "type": "string"
+        },
+        "serviceName": {
+          "default": "example",
+          "type": "string"
         }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "kubeSecrets": {
+      "required": [],
+      "type": "object"
     }
+  },
+  "required": [],
+  "type": "object"
 }
