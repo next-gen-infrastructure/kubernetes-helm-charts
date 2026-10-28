@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.11.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.10.1...common-4.11.0) (2026-10-28)
+
+
+### Features
+
+* **common:** add apiVersion capabilities for operator CRDs ([dd349da](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/dd349da922e367c6c1b92a0588e59f340f6e5da8))
+* **deployment:** KEDA ScaledObject; split network policy templates; capabilities for CRD apiVersions ([3f4e55e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3f4e55e73e49a69179d460c6f172fb637beddd9f))
+
 ## [4.10.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.10.0...common-4.10.1) (2026-10-28)
 
 

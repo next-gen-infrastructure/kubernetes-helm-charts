@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.7.0...daemonset-4.8.0) (2026-10-28)
+
+
+### Features
+
+* **deployment:** KEDA ScaledObject; split network policy templates; capabilities for CRD apiVersions ([3f4e55e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3f4e55e73e49a69179d460c6f172fb637beddd9f))
+
 ## [4.7.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.6.0...daemonset-4.7.0) (2026-10-28)
 
 
