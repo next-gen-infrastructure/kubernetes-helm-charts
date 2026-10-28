@@ -39,6 +39,9 @@ spec:
       {{- else }}
       backoffLimit: 0
       {{- end }}
+      {{- with $value.activeDeadlineSeconds }}
+      activeDeadlineSeconds: {{ . }}
+      {{- end }}
       {{- with $value.ttlSecondsAfterFinished }}
       ttlSecondsAfterFinished: {{ . }}
       {{- end }}

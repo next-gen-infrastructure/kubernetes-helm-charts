@@ -112,6 +112,6 @@ Kubernetes Cron Jobs
 
 | Name       | Description                     | Value |
 | ---------- | ------------------------------- | ----- |
-| `cronjobs` | Cronjobs configuration          | `{}`  |
+| `cronjobs` | Cronjobs configuration, keyed by job name (see `values.yaml` for the per-job options, incl. `activeDeadlineSeconds`) | `{}`  |
 | `volumes`  | Container volumes configuration | `{}`  |
 

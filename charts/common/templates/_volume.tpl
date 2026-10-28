@@ -26,6 +26,7 @@ Return generated volume definitions.
 {{- define "common.volume.definitions" -}}
 {{- $allVolumes := default (dict) .Values.volumes -}}
 {{- range $key, $value := $allVolumes }}
+{{- if not $value.storage }}
 - name: {{ $key }}
   {{ if $value.emptyDir -}}
   emptyDir: {{- if $value.inMemory }}
@@ -48,6 +49,7 @@ Return generated volume definitions.
   secret:
     secretName: {{ include "common.names.fullname" $ }}-vault-{{ $key }}
   {{- end -}}
+{{- end }}
 {{- end -}}
 {{- range .Values.sidecarContainers }}
 {{- $allVolumes := default (dict) .volumes -}}
@@ -84,6 +86,9 @@ Return generated volume definitions.
     name: {{ $key }}
   spec:
     accessModes: [ "ReadWriteOnce" ]
+    {{- with $value.storageClass }}
+    storageClassName: {{ . }}
+    {{- end }}
     resources:
       requests:
         storage: {{ $value.storage }}
