@@ -7,7 +7,7 @@ type: application
 dependencies:
   - name: common
     repository: "file://../common"
-    version: ">=2.0.0"
+    version: ">=4.10.1"
 home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
 sources:
   - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
