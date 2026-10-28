@@ -89,9 +89,10 @@ spec:
               securityContext: {{ toYaml . | nindent 16 }}
               {{- end }}
               env:
+                {{- /* Kubernetes expands $(VAR) only against earlier entries; keep values last so they can reference secrets. */}}
+                {{- include "cronjobs.job.vaultSecret" (dict "jobName" $key "job" $value "global" $) | indent 16 }}
                 {{- include "cronjobs.globalenv.value" $ | indent 16 }}
                 {{- include "cronjobs.job.value" $value | indent 16 }}
-                {{- include "cronjobs.job.vaultSecret" (dict "jobName" $key "job" $value "global" $) | indent 16 }}
               {{- if or $.Values.envFrom $.Values.configMap.enabled }}
               envFrom:
                 {{- if $.Values.configMap.enabled }}
