@@ -74,41 +74,25 @@ spec:
           {{- end }}
           {{- include "common.images.renderPullSecrets" (dict "images" (list) "context" $) | nindent 10 }}
           containers:
-            - name: {{ $key }}
-              image: "{{ include "common.images.image"  $ }}"
-              imagePullPolicy: {{ $.Values.global.image.pullPolicy }}
-              {{- with merge (default dict $value.securityContext) (default dict $.Values.securityContext) }}
-              securityContext: {{ toYaml . | nindent 16 }}
-              {{- end }}
-              env:
-                {{- /* Kubernetes expands $(VAR) only against earlier entries; keep values last so they can reference secrets. */}}
-                {{- include "cronjobs.job.vaultSecret" (dict "jobName" $key "job" $value "global" $) | indent 16 }}
-                {{- include "cronjobs.globalenv.value" $ | indent 16 }}
-                {{- include "cronjobs.job.value" $value | indent 16 }}
-              {{- if or $.Values.envFrom $.Values.configMap.enabled }}
-              envFrom:
-                {{- if $.Values.configMap.enabled }}
-                - configMapRef:
-                    name: {{ include "common.names.fullname" $ }}
-                {{- end }}
-                {{- with $.Values.envFrom }}
-                {{- include "common.tplvalues.render" (dict "value" . "context" $) | nindent 16 }}
-                {{- end }}
-              {{- end }}
-              {{- if $value.command }}
-              command: {{- toYaml $value.command | nindent 16 }}
-              {{- end }}
-              {{- if $value.args }}
-              args: {{ toYaml $value.args | nindent 16 }}
-              {{- end }}
-              {{- $explicit := merge (default dict $value.resources) (default dict $.Values.resources) }}
-              {{- $resources := include "common.resources.resolve" (dict "preset" $.Values.resourcesPreset "resources" $explicit) }}
-              {{- if $resources }}
-              resources: {{- $resources | trim | nindent 16 }}
-              {{- end }}
-              {{- if $.Values.volumes }}
-              volumeMounts: {{- include "common.volume.mounts" $ | trim | nindent 16 }}
-              {{- end }}
+            {{- /* Values the common container reads: the chart's, with this job's command, args, env, resources and securityContext on top. */}}
+            {{- $jobValues := deepCopy $.Values }}
+            {{- $_ := set $jobValues "containerName" $key }}
+            {{- $_ := set $jobValues "command" $value.command }}
+            {{- $_ := set $jobValues "args" $value.args }}
+            {{- $_ := set $jobValues "securityContext" (merge (default dict $value.securityContext) (default dict $.Values.securityContext)) }}
+            {{- $_ := set $jobValues "resources" (merge (default dict $value.resources) (default dict $.Values.resources)) }}
+            {{- /* Vault secrets keep their per-chart / per-job Secret names. */}}
+            {{- $vaultSecret := dict }}
+            {{- range $name, $_ := default dict $.Values.env.vaultSecret }}
+            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-%s-vault" $.Release.Name $.Chart.Name)) }}
+            {{- end }}
+            {{- range $name, $_ := default dict (default dict $value.env).vaultSecret }}
+            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-%s-%s-vault" $.Release.Name $.Chart.Name $key)) }}
+            {{- end }}
+            {{- $env := mergeOverwrite (deepCopy (default dict $.Values.env)) (deepCopy (default dict $value.env)) }}
+            {{- $_ := set $env "vaultSecret" $vaultSecret }}
+            {{- $_ := set $jobValues "env" $env }}
+            {{- include "common.containers.container" (dict "Values" $jobValues "Chart" $.Chart "Release" $.Release "Template" $.Template) | nindent 12 }}
           {{- if $.Values.volumes }}
           volumes: {{- include "common.volume.definitions" $ | nindent 12 }}
           {{- end }}

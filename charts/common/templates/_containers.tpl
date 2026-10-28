@@ -4,7 +4,7 @@ Return generated container configuration.
 {{- include "common.containers.container" . }}
 */}}
 {{- define "common.containers.container" -}}
-- name: "{{ include "common.names.fullname" . }}"
+- name: {{ .Values.containerName | default (include "common.names.fullname" .) | quote }}
   image: "{{ include "common.images.image" . }}"
   imagePullPolicy: {{ (.Values.image).pullPolicy | default .Values.global.image.pullPolicy | quote }}
   {{- if .Values.command }}
