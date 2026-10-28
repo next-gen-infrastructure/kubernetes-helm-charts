@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.4.0...statefulset-4.5.0) (2026-10-28)
+
+
+### Features
+
+* add global.enabled to chart values ([#43](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/43)) ([396587d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/396587db869ac79a4bb48a9d47d31f8d1917f238))
+
 ## [4.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.3.0...statefulset-4.4.0) (2026-10-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.3...configmaps-2.1.0) (2026-10-28)
+
+
+### Features
+
+* add global.enabled to chart values ([#43](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/issues/43)) ([396587d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/396587db869ac79a4bb48a9d47d31f8d1917f238))
+
 ## [2.0.3](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.2...configmaps-2.0.3) (2026-10-22)
 
 
