@@ -48,6 +48,17 @@ deployment:
 - **Templating in values:** strings may contain `{{ ... }}`, rendered with `common.tplvalues.render`.
 - **`volumes`:** map of name → `mountPath` plus one of `emptyDir`, `hostPath`, `configMap`, `secretName`, `vaultPath` (+ `items`; needs `vaultVolumesSupport: true`), `configMapName` (an existing ConfigMap, optional `items`), `projected` (native projected spec); `readOnly: true` makes the mount read-only.
 
+## ExternalSecret sync wave
+
+Every `ExternalSecret` rendered by these charts carries `argocd.argoproj.io/sync-wave: "-1"`, so Argo CD applies it before workloads (default wave `0`). Reasoning:
+
+- **The secret must exist before the pod starts.** An `ExternalSecret` only creates the target `Secret` once the External Secrets Operator reconciles it. A pod referencing that `Secret` through `env.vaultSecret` (or a `vaultPath` volume) cannot start until it exists.
+- **Without ordering, rollouts race.** Argo CD would apply the workload and the `ExternalSecret` in the same wave; new pods hit `CreateContainerConfigError` (`secret not found`) and wait for kubelet retries until the operator catches up. On first install this is noisy; on updates that add or rename a secret key, the new ReplicaSet can fail its rollout.
+- **Waves wait for health.** Argo CD runs a wave only after the previous one is healthy. The `ExternalSecret` becomes healthy once it is `Ready` (the `Secret` is synced), so workloads in wave `0` start with their secrets in place.
+- **Fail early.** A bad Vault path or missing store shows up as a failed `ExternalSecret` in wave `-1` and blocks the sync, rather than as crash-looping pods.
+
+The annotation is ignored outside Argo CD (plain `helm install`), where ordering is not enforced.
+
 ## Testing
 
 ```bash
