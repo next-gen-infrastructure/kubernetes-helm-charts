@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.13.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.12.0...deployment-4.13.0) (2026-10-31)
+
+
+### Features
+
+* add argocd sync-wave -1 annotation to ExternalSecrets ([7097e67](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/7097e67eab70b211e53d61bbd777850983ce37fc))
+* add argocd sync-wave -1 annotation to ExternalSecrets ([35d78c7](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/35d78c7ac991c817060eddc4fbc88ea2810e3d75))
+
 ## [4.12.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.11.0...deployment-4.12.0) (2026-10-28)
 
 
