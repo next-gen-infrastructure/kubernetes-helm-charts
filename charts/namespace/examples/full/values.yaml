@@ -1,0 +1,50 @@
+# Every optional block enabled.
+global:
+  environment: dev
+  secretStore: vault
+
+namespace:
+  namespace:
+    labels:
+      team: osint
+  registrySecret:
+    enabled: true
+  defaultServiceAccount:
+    imagePullSecrets:
+      - extra-pull-secret
+  lokiAlerts:
+    enabled: true
+    groups:
+      - name: "{{ .Release.Namespace }}"
+        interval: 1m
+        rules:
+          - alert: WorkerErrors
+            expr: 'sum by (pod) (count_over_time({namespace="{{ .Release.Namespace }}"} |= "ERROR" [10m])) > 5'
+            for: 10m
+            labels:
+              severity: warning
+            annotations:
+              summary: 'errors on {{ "{{ $labels.pod }}" }}'
+  prometheusRules:
+    enabled: true
+    additionalLabels:
+      release: kube-prometheus-stack
+    groups:
+      - name: "{{ .Release.Namespace }}"
+        rules:
+          - alert: PodCrashLooping
+            expr: increase(kube_pod_container_status_restarts_total{namespace="{{ .Release.Namespace }}"}[15m]) > 3
+            for: 5m
+            labels:
+              severity: critical
+            annotations:
+              summary: 'pod {{ "{{ $labels.pod }}" }} is crash looping'
+  imageUpdater:
+    enabled: true
+    registry: ghcr.io/tesari-ai
+    tagPrefix: dev
+    gitBranch: dev
+    applications:
+      - name: osint-core-gateway
+        imageRepository: osint-gateway
+      - name: osint-core-chat

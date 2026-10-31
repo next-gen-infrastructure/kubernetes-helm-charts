@@ -1,0 +1,14 @@
+{{- if and .Values.prometheusRules.enabled .Values.prometheusRules.groups }}
+---
+apiVersion: {{ include "common.capabilities.prometheusOperator.apiVersion" . }}
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+  {{- with .Values.prometheusRules.additionalLabels }}
+  labels: {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  groups:
+  {{- tpl (toYaml .Values.prometheusRules.groups) . | nindent 4 }}
+{{- end }}

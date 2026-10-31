@@ -20,6 +20,10 @@
       "component": "deployment",
       "package-name": "deployment"
     },
+    "charts/namespace": {
+      "component": "namespace",
+      "package-name": "namespace"
+    },
     "charts/statefulset": {
       "component": "statefulset",
       "package-name": "statefulset"

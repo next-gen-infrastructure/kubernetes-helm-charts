@@ -1,0 +1,15 @@
+apiVersion: v2
+name: namespace
+version: 0.1.0
+description: Namespace and namespace objects chart
+type: application
+dependencies:
+  - name: common
+    repository: "file://../common"
+    version: ">=4.10.1"
+home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+sources:
+  - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/namespace
+maintainers:
+  - name: Alexander Dobrodey
+    url: https://github.com/ADobrodey

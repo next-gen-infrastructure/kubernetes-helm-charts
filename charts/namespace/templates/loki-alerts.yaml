@@ -1,0 +1,16 @@
+{{- if and .Values.lokiAlerts.enabled .Values.lokiAlerts.groups }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki-alerts-{{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    loki_rule: "true"
+  annotations:
+    tenant: {{ .Values.lokiAlerts.tenant | quote }}
+data:
+  {{ .Release.Namespace }}.yaml: |
+    groups:
+    {{- tpl (toYaml .Values.lokiAlerts.groups) . | nindent 4 }}
+{{- end }}
