@@ -593,6 +593,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-10-31T15:06:21.56774771Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: 581d802359e86666457000708d12040bfde8dbd37c88aa5caacbd101339a38df
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-4.9.0/cronjobs-4.9.0.tgz
+    version: 4.9.0
+  - apiVersion: v2
     created: "2026-10-28T20:03:12.418906342Z"
     dependencies:
     - name: common
@@ -918,6 +936,22 @@ entries:
     version: 1.0.0
   daemonset:
   - apiVersion: v2
+    created: "2026-10-31T15:06:22.478616311Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical Daemon Set application
+    digest: 1846133533c7645d42027cbf4f9471dc4daff1671a693fe50dd1db01425dc5a7
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-4.9.0/daemonset-4.9.0.tgz
+    version: 4.9.0
+  - apiVersion: v2
     created: "2026-10-28T18:17:42.814026441Z"
     dependencies:
     - name: common
@@ -1158,6 +1192,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2026-10-31T15:06:23.468831906Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: 59c315591492789bf0f979374763c8f54dee2949d6d2c2d1caf72565dd535e02
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-4.13.0/deployment-4.13.0.tgz
+    version: 4.13.0
   - apiVersion: v2
     created: "2026-10-28T20:03:13.94681335Z"
     dependencies:
@@ -1830,6 +1884,26 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/k8s-common-1.0.0/k8s-common-1.0.0.tgz
     version: 1.0.0
+  namespace:
+  - apiVersion: v2
+    created: "2026-10-31T15:06:24.42221175Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Namespace and namespace objects chart
+    digest: 414d65f08fbf09d92b1800399742f0e319ac1d91210439979f9f4ec3cfa75129
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: namespace
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/namespace
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/namespace-0.2.0/namespace-0.2.0.tgz
+    version: 0.2.0
   sso-roles:
   - apiVersion: v2
     created: "2024-10-15T23:06:37.365790451Z"
@@ -1886,6 +1960,25 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/sso-roles-1.1.0/sso-roles-1.1.0.tgz
     version: 1.1.0
   statefulset:
+  - apiVersion: v2
+    created: "2026-10-31T15:06:25.366853794Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical StateFul Set application
+    digest: d1b875bf6c53d3a066c6648010e2e2ce4856ad047c9ab620137b2d1e87d0b4ce
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-4.9.0/statefulset-4.9.0.tgz
+    version: 4.9.0
   - apiVersion: v2
     created: "2026-10-28T18:17:45.581318817Z"
     dependencies:
@@ -2287,6 +2380,25 @@ entries:
     version: 1.0.0
   vaultsecrets:
   - apiVersion: v2
+    created: "2026-10-31T15:06:26.569201045Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Generator of the secrets from remote Vault server
+    digest: c4ccfcf1a445f7941223882a7470999cc8ff70b56c031735232673572b323c3c
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: vaultsecrets
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/vaultsecrets
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-3.4.0/vaultsecrets-3.4.0.tgz
+    version: 3.4.0
+  - apiVersion: v2
     created: "2026-10-28T18:17:46.671618968Z"
     dependencies:
     - name: common
@@ -2476,4 +2588,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-28T20:03:13.943543426Z"
+generated: "2026-10-31T15:06:26.568291844Z"
