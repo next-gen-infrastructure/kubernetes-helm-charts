@@ -14,6 +14,7 @@ Library chart (`type: library`), not installable. Provides the named templates e
 | `common.resources.*` | `resourcesPreset` (`none`, `nano` ... `2xlarge`) |
 | `common.capabilities.*` | API version detection |
 | `common.tplvalues.render` | render `{{ }}` inside values |
+| `common.tplvalues.toYaml` | render `{{ }}` in every string of a map/list, return YAML (safe for long strings) |
 | `common.secrets.*`, `common.storage.*`, `common.volume.*`, `common.serviceaccount.*` | helpers |
 | `templates/validations/` | database credential validators |
 
