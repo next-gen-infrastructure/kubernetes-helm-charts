@@ -4,6 +4,29 @@ entries:
   - annotations:
       category: Infrastructure
     apiVersion: v2
+    created: "2026-10-31T15:22:39.729604068Z"
+    description: A Library Helm Chart for grouping common logic between charts. This
+      chart is not deployable by itself.
+    digest: a83c7e4351f6b3ff26f479a202ace6c506819cefb8c6300bf06540c95d35056b
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: common
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/common
+    type: library
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/common-4.13.0/common-4.13.0.tgz
+    version: 4.13.0
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
     created: "2026-10-28T20:03:11.13617209Z"
     description: A Library Helm Chart for grouping common logic between charts. This
       chart is not deployable by itself.
@@ -1886,6 +1909,25 @@ entries:
     version: 1.0.0
   namespace:
   - apiVersion: v2
+    created: "2026-10-31T15:22:40.85269705Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Namespace and namespace objects chart
+    digest: d505cdc1ae895cfd583c2bc28e481940e57857794bd839cd122def6cc2a20f89
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: namespace
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/namespace
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/namespace-1.0.0/namespace-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     created: "2026-10-31T15:06:24.42221175Z"
     dependencies:
     - name: common
@@ -2588,4 +2630,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-10-31T15:06:26.568291844Z"
+generated: "2026-10-31T15:22:40.851750029Z"
