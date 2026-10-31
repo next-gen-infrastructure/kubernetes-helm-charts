@@ -50,3 +50,45 @@ Usage:
 {{- end -}}
 {{ $dst | toYaml }}
 {{- end -}}
+
+{{/*
+Renders every string of a value (map, list or string) with tpl, then returns the value as YAML.
+Unlike common.tplvalues.render, tpl runs on each string and not on toYaml output: toYaml folds long strings
+at ~80 columns, which can split an escape such as {{ "{{ $labels.pod }}" }} and break tpl.
+Usage:
+{{ include "common.tplvalues.toYaml" ( dict "value" .Values.path.to.the.Value "context" $ ) }}
+*/}}
+{{- define "common.tplvalues.toYaml" -}}
+{{- if kindIs "map" .value -}}
+  {{- include "common.tplvalues.toJson" . | fromJson | toYaml -}}
+{{- else if kindIs "slice" .value -}}
+  {{- include "common.tplvalues.toJson" . | fromJsonArray | toYaml -}}
+{{- else if kindIs "string" .value -}}
+  {{- tpl .value .context -}}
+{{- else -}}
+  {{- .value | toYaml -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Internal: JSON of a value with tpl applied to every string. See common.tplvalues.toYaml.
+*/}}
+{{- define "common.tplvalues.toJson" -}}
+{{- $ctx := .context -}}
+{{- $items := list -}}
+{{- if kindIs "map" .value -}}
+  {{- range $k, $v := .value -}}
+    {{- $items = append $items (printf "%s:%s" ($k | toJson) (include "common.tplvalues.toJson" (dict "value" $v "context" $ctx))) -}}
+  {{- end -}}
+  {{- printf "{%s}" (join "," $items) -}}
+{{- else if kindIs "slice" .value -}}
+  {{- range .value -}}
+    {{- $items = append $items (include "common.tplvalues.toJson" (dict "value" . "context" $ctx)) -}}
+  {{- end -}}
+  {{- printf "[%s]" (join "," $items) -}}
+{{- else if kindIs "string" .value -}}
+  {{- tpl .value $ctx | toJson -}}
+{{- else -}}
+  {{- .value | toJson -}}
+{{- end -}}
+{{- end -}}
