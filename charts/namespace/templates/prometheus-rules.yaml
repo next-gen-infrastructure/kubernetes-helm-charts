@@ -10,5 +10,5 @@ metadata:
   {{- end }}
 spec:
   groups:
-  {{- tpl (toYaml .Values.prometheusRules.groups) . | nindent 4 }}
+  {{- include "common.tplvalues.toYaml" (dict "value" .Values.prometheusRules.groups "context" .) | nindent 4 }}
 {{- end }}

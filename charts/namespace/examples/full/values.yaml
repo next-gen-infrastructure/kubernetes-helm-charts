@@ -24,7 +24,7 @@ namespace:
             labels:
               severity: warning
             annotations:
-              summary: 'errors on {{ "{{ $labels.pod }}" }}'
+              summary: 'errors in {{ .Release.Namespace }}: the worker logged more than five ERROR lines on {{ "{{ $labels.pod }}" }} in 10m'
   prometheusRules:
     enabled: true
     additionalLabels:

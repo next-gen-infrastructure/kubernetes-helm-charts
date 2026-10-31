@@ -12,5 +12,5 @@ metadata:
 data:
   {{ .Release.Namespace }}.yaml: |
     groups:
-    {{- tpl (toYaml .Values.lokiAlerts.groups) . | nindent 4 }}
+    {{- include "common.tplvalues.toYaml" (dict "value" .Values.lokiAlerts.groups "context" .) | nindent 4 }}
 {{- end }}
