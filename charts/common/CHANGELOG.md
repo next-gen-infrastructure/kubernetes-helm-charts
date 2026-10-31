@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.13.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.12.0...common-4.13.0) (2026-10-31)
+
+
+### Features
+
+* **common:** add tplvalues.toYaml helper ([383aa2e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/383aa2edc07ba6a63abf82d2bff713cd772051de))
+
+
+### Bug Fixes
+
+* **namespace:** render alert groups with common.tplvalues.toYaml (release 1.0.0) ([2e1977f](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2e1977f5d9be748b6bb5bec7ad777aed81037b21))
+
 ## [4.12.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.11.0...common-4.12.0) (2026-10-28)
 
 
