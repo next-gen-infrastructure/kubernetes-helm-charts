@@ -1,0 +1,31 @@
+{{- with .Values.imageUpdater }}
+{{- if and .enabled .applications }}
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: {{ $.Release.Namespace }}-image-updater
+  namespace: {{ .namespace }}
+spec:
+  commonUpdateSettings:
+    updateStrategy: {{ .updateStrategy | quote }}
+    allowTags: "regexp:^{{ required "imageUpdater.tagPrefix is required" .tagPrefix }}-.*"
+    forceUpdate: {{ .forceUpdate }}
+  writeBackConfig:
+    method: "git"
+    gitConfig:
+      branch: {{ required "imageUpdater.gitBranch is required" .gitBranch | quote }}
+      writeBackTarget: {{ tpl .writeBackTarget $ | quote }}
+  applicationRefs:
+  {{- range .applications }}
+    - namePattern: {{ .name }}
+      images:
+        - alias: {{ .alias | default .name }}
+          imageName: {{ required "imageUpdater.registry is required" $.Values.imageUpdater.registry }}/{{ .imageRepository | default .name }}
+          manifestTargets:
+            helm:
+              name: global.image.repository
+              tag: global.image.tag
+  {{- end }}
+{{- end }}
+{{- end }}

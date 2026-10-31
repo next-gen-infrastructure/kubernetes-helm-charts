@@ -1,0 +1,177 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "defaultServiceAccount": {
+      "properties": {
+        "automountServiceAccountToken": {
+          "default": true,
+          "type": "boolean"
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "imagePullSecrets": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "exampleValue": {
+      "default": "common-chart",
+      "type": "string"
+    },
+    "global": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "environment": {
+          "default": "dev",
+          "type": "string"
+        },
+        "secretStore": {
+          "default": "vault",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "imageUpdater": {
+      "properties": {
+        "applications": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        },
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "forceUpdate": {
+          "default": true,
+          "type": "boolean"
+        },
+        "gitBranch": {
+          "default": "",
+          "type": "string"
+        },
+        "namespace": {
+          "default": "argocd",
+          "type": "string"
+        },
+        "registry": {
+          "default": "",
+          "type": "string"
+        },
+        "tagPrefix": {
+          "default": "",
+          "type": "string"
+        },
+        "updateStrategy": {
+          "default": "newest-build",
+          "type": "string"
+        },
+        "writeBackTarget": {
+          "default": "helmvalues:./values-{{ .Values.global.environment }}.yaml",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "lokiAlerts": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "groups": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        },
+        "tenant": {
+          "default": "fake",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "namespace": {
+      "properties": {
+        "annotations": {
+          "required": [],
+          "type": "object"
+        },
+        "create": {
+          "default": true,
+          "type": "boolean"
+        },
+        "labels": {
+          "required": [],
+          "type": "object"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "prometheusRules": {
+      "properties": {
+        "additionalLabels": {
+          "required": [],
+          "type": "object"
+        },
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "groups": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "registrySecret": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "name": {
+          "default": "github-registry-secret",
+          "type": "string"
+        },
+        "refreshInterval": {
+          "default": "1h",
+          "type": "string"
+        },
+        "remoteKey": {
+          "default": "ghcr-private-registry",
+          "type": "string"
+        },
+        "server": {
+          "default": "ghcr.io",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  "required": [],
+  "type": "object"
+}

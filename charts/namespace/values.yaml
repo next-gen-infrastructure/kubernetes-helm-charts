@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=values.schema.json
+# Namespace and the objects every namespace needs: pull secret, default ServiceAccount, alerts, image updater.
+# The release namespace (`helm install -n <ns>`) is the namespace that is configured.
+
+## @section Global parameters
+global:
+  ## @param global.enabled Skips the install when the parent chart sets `condition: global.enabled` on the dependency
+  ##
+  enabled: true
+  ## @param global.environment Environment name, used for the ImageUpdater write-back file `values-<environment>.yaml`
+  ##
+  environment: dev
+  ## @param global.secretStore Name of the ClusterSecretStore used by the registry ExternalSecret
+  ##
+  secretStore: vault
+
+## @section Namespace
+namespace:
+  ## @param namespace.create Render the Namespace object (named after the release namespace)
+  ##
+  create: true
+  ## @param namespace.labels Labels of the Namespace
+  ##
+  labels: {}
+  ## @param namespace.annotations Annotations of the Namespace
+  ##
+  annotations: {}
+
+## @section Registry pull secret
+registrySecret:
+  ## @param registrySecret.enabled Render an ExternalSecret that builds a `kubernetes.io/dockerconfigjson` Secret
+  ##
+  enabled: false
+  ## @param registrySecret.name Name of the ExternalSecret and of the resulting Secret
+  ##
+  name: github-registry-secret
+  ## @param registrySecret.server Registry host in the dockerconfigjson
+  ##
+  server: ghcr.io
+  ## @param registrySecret.remoteKey Remote key (absolute, no environment prefix) holding the properties `username`, `password` and `auth`
+  ##
+  remoteKey: ghcr-private-registry
+  ## @param registrySecret.refreshInterval How often the ExternalSecret is re-synced
+  ##
+  refreshInterval: 1h
+
+## @section Default ServiceAccount
+defaultServiceAccount:
+  ## @param defaultServiceAccount.enabled Manage the `default` ServiceAccount; rendered only when there is at least one pull secret
+  ##
+  enabled: true
+  ## @param defaultServiceAccount.automountServiceAccountToken Value of `automountServiceAccountToken`
+  ##
+  automountServiceAccountToken: true
+  ## @param defaultServiceAccount.imagePullSecrets Names of extra pull secrets (`registrySecret.name` is added automatically when enabled)
+  ##
+  imagePullSecrets: []
+
+## @section Loki alerts
+lokiAlerts:
+  ## @param lokiAlerts.enabled Render a ConfigMap picked up by the Loki ruler (`loki_rule: "true"`)
+  ##
+  enabled: false
+  ## @param lokiAlerts.tenant Loki tenant annotation
+  ##
+  tenant: fake
+  ## @param lokiAlerts.groups Loki rule groups. Rendered with `tpl`: use `{{ .Release.Namespace }}` and escape Loki templates as `{{ "{{ $labels.pod }}" }}`
+  ##
+  groups: []
+
+## @section Prometheus rules
+prometheusRules:
+  ## @param prometheusRules.enabled Render a Prometheus Operator PrometheusRule
+  ##
+  enabled: false
+  ## @param prometheusRules.additionalLabels Extra labels of the PrometheusRule (e.g. the `release` label the Prometheus selects on)
+  ##
+  additionalLabels: {}
+  ## @param prometheusRules.groups Rule groups. Rendered with `tpl`: escape Prometheus templates as `{{ "{{ $labels.pod }}" }}`
+  ##
+  groups: []
+
+## @section Image updater
+imageUpdater:
+  ## @param imageUpdater.enabled Render an Argo CD Image Updater `ImageUpdater` for the Applications of this namespace
+  ##
+  enabled: false
+  ## @param imageUpdater.namespace Namespace of the Argo CD Applications; the ImageUpdater must live there (it only matches Applications in its own namespace)
+  ##
+  namespace: argocd
+  ## @param imageUpdater.registry Image registry prefix, e.g. `ghcr.io/tesari-ai`
+  ##
+  registry: ""
+  ## @param imageUpdater.tagPrefix Only tags matching `^<tagPrefix>-.*` are considered (`dev`, `sha`)
+  ##
+  tagPrefix: ""
+  ## @param imageUpdater.gitBranch Branch the tag is committed to
+  ##
+  gitBranch: ""
+  ## @param imageUpdater.updateStrategy Image Updater update strategy
+  ##
+  updateStrategy: newest-build
+  ## @param imageUpdater.forceUpdate Update even when the Application is not out of sync
+  ##
+  forceUpdate: true
+  ## @param imageUpdater.writeBackTarget Git write-back target, rendered with `tpl`
+  ##
+  writeBackTarget: "helmvalues:./values-{{ .Values.global.environment }}.yaml"
+  ## @param imageUpdater.applications Applications to update: `name` (Application name pattern), `imageRepository` (defaults to `name`), `alias` (defaults to `name`)
+  ##
+  applications: []
