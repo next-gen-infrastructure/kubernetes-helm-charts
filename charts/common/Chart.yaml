@@ -1,3 +1,4 @@
+# Released together with the other charts of this repository: the major version is kept in step (5.x).
 apiVersion: v2
 name: common
 version: 4.15.0
