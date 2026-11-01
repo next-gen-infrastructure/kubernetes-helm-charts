@@ -32,3 +32,5 @@ Chart-level `resourcesPreset` (default `none`) applies to jobs without `resource
 Image comes from `global.image` (`registry`, `repository`, `tag`, `pullPolicy`, `pullSecrets`).
 
 Examples: `charts/cronjobs/examples/full`. Values reference: [charts/cronjobs/README.md](../charts/cronjobs/README.md).
+
+Temp directory: An `emptyDir` is mounted at `/tmp` by default (`tmpDir.enabled`), because the root filesystem is read-only. `tmpDir` is the only thing that manages `/tmp`: set `tmpDir.enabled: false` before mounting `/tmp` through `volumes`, or the pod gets a duplicate mount. `tmpDir.inMemory` and `tmpDir.sizeLimit` tune it.

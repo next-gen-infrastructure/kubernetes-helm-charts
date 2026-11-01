@@ -80,6 +80,7 @@ podAnnotations: {}
 ## @param priorityClassName priorityClassName
 ##
 priorityClassName: ""
+## @section Security context
 ## @extra podSecurityContext Pod security context
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 ##
@@ -115,13 +116,27 @@ securityContext:
   ## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
   ##
   runAsGroup: 65534
-  ## @section securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ## @extra securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ##
   capabilities:
     ## @param securityContext.capabilities.drop Drop all capabilities by default
     drop: [ "ALL" ]
+## @section Volumes
 ## @param vaultVolumesSupport support for vault secrets as files. Defaults false.
 ##
 vaultVolumesSupport: false
+## @extra tmpDir Writable emptyDir mounted at /tmp, for the read-only root filesystem
+##
+tmpDir:
+  ## @param tmpDir.enabled Mount an emptyDir at /tmp, do not also mount /tmp through volumes
+  ##
+  enabled: true
+  ## @param tmpDir.inMemory Back the /tmp emptyDir with memory (tmpfs)
+  ##
+  inMemory: false
+  ## @param tmpDir.sizeLimit Size limit of the /tmp emptyDir, e.g. 512Mi
+  ##
+  sizeLimit: ""
 ## @param volumes Container volumes configuration
 ## E.g.
 ## volumes:
@@ -144,6 +159,7 @@ vaultVolumesSupport: false
 ##    items:
 ##      - key.pass
 volumes: {}
+## @section Pod configuration
 ## @param command You can set a custom entrypoint for your docker container
 ##
 command: []
@@ -436,10 +452,6 @@ initContainers: [ ]
 ##     resources: {}
 ##
 sidecarContainers: [ ]
-## @param datadogIntegration Enable datadog related integration for tracing
-## E.g.
-## datadogIntegration: true
-datadogIntegration: false
 ## @param githubActionsIntegration Allow github runners to create resources in namespace
 ## E.g.
 ## githubActionsIntegration: true

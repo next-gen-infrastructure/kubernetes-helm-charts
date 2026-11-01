@@ -1,10 +1,36 @@
 {{/* vim: set filetype=mustache: */}}
 {{/*
+Return the volumes to render as YAML: .Values.volumes plus the writable /tmp emptyDir when tmpDir.enabled is true.
+{{- include "common.volume.effective" . | fromYaml }}
+*/}}
+{{- define "common.volume.effective" -}}
+{{- $vols := deepCopy (default (dict) .Values.volumes) -}}
+{{- $tmpDir := default (dict) .Values.tmpDir -}}
+{{- if $tmpDir.enabled -}}
+{{- $_ := set $vols "tmp" (dict
+  "mountPath" "/tmp"
+  "emptyDir" true
+  "inMemory" $tmpDir.inMemory
+  "sizeLimit" $tmpDir.sizeLimit
+) -}}
+{{- end -}}
+{{- toYaml $vols -}}
+{{- end -}}
+
+{{/*
+Return "true" when there is at least one volume to render (.Values.volumes or the default /tmp).
+{{- if include "common.volume.enabled" . }}
+*/}}
+{{- define "common.volume.enabled" -}}
+{{- if include "common.volume.effective" . | fromYaml -}}true{{- end -}}
+{{- end -}}
+
+{{/*
 Return generated volume mounts.
 {{- include "common.volume.mounts" . }}
 */}}
 {{- define "common.volume.mounts" -}}
-{{- $allVolumes := default (dict) .Values.volumes -}}
+{{- $allVolumes := include "common.volume.effective" . | fromYaml -}}
 {{- range $key, $value := $allVolumes }}
 {{- if $value.mountPath }}
 - name: {{ $key }}
@@ -24,13 +50,19 @@ Return generated volume definitions.
 {{- include "common.volume.definitions" . }}
 */}}
 {{- define "common.volume.definitions" -}}
-{{- $allVolumes := default (dict) .Values.volumes -}}
+{{- $allVolumes := include "common.volume.effective" . | fromYaml -}}
 {{- range $key, $value := $allVolumes }}
 {{- if not $value.storage }}
 - name: {{ $key }}
   {{ if $value.emptyDir -}}
-  emptyDir: {{- if $value.inMemory }}
+  emptyDir:
+  {{- if or $value.inMemory $value.sizeLimit }}
+    {{- if $value.inMemory }}
     medium: Memory
+    {{- end }}
+    {{- with $value.sizeLimit }}
+    sizeLimit: {{ . }}
+    {{- end }}
   {{- else }} {}
   {{- end }}
   {{- else if $value.configMap -}}
@@ -64,8 +96,14 @@ Return generated volume definitions.
 {{- range $key, $value := $allVolumes }}
 - name: {{ $key }}
   {{ if $value.emptyDir -}}
-  emptyDir: {{- if $value.inMemory }}
+  emptyDir:
+  {{- if or $value.inMemory $value.sizeLimit }}
+    {{- if $value.inMemory }}
     medium: Memory
+    {{- end }}
+    {{- with $value.sizeLimit }}
+    sizeLimit: {{ . }}
+    {{- end }}
   {{- else }} {}
   {{- end }}
   {{- else if $value.configMap -}}

@@ -39,10 +39,6 @@
       "required": [],
       "type": "object"
     },
-    "datadogIntegration": {
-      "default": false,
-      "type": "boolean"
-    },
     "env": {
       "properties": {
         "configmap": {
@@ -770,6 +766,24 @@
         "integer",
         "string"
       ]
+    },
+    "tmpDir": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "inMemory": {
+          "default": false,
+          "type": "boolean"
+        },
+        "sizeLimit": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
     },
     "tolerations": {
       "items": {

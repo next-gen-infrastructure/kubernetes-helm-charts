@@ -87,9 +87,16 @@ podAnnotations: { }
 ## ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#hook-handler-execution
 ##
 terminationGracePeriodSeconds: ""
+# @schema
+# type: [boolean, "null"]
+# @schema
+## @param enableServiceLinks Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true)
+##
+enableServiceLinks: null
 ## @param priorityClassName priorityClassName
 ##
 priorityClassName: ""
+## @section Security context
 ## @extra podSecurityContext Pod security context
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 ##
@@ -125,13 +132,27 @@ securityContext:
   ## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
   ##
   runAsGroup: 65534
-  ## @section securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ## @extra securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ##
   capabilities:
     ## @param securityContext.capabilities.drop Drop all capabilities by default
     drop: [ "ALL" ]
+## @section Volumes
 ## @param vaultVolumesSupport support for vault secrets as files. Defaults false.
 ##
 vaultVolumesSupport: false
+## @extra tmpDir Writable emptyDir mounted at /tmp, for the read-only root filesystem
+##
+tmpDir:
+  ## @param tmpDir.enabled Mount an emptyDir at /tmp, do not also mount /tmp through volumes
+  ##
+  enabled: true
+  ## @param tmpDir.inMemory Back the /tmp emptyDir with memory (tmpfs)
+  ##
+  inMemory: false
+  ## @param tmpDir.sizeLimit Size limit of the /tmp emptyDir, e.g. 512Mi
+  ##
+  sizeLimit: ""
 ## @param volumes Container volumes configuration
 ## e.g.:
 ## volumes:
@@ -173,6 +194,7 @@ vaultVolumesSupport: false
 ##            audience: vault
 ##            expirationSeconds: 3600
 volumes: { }
+## @section Pod configuration
 ## @param command You can set a custom entrypoint for your docker container
 ##
 command: [ ]
@@ -281,6 +303,18 @@ topologySpread:
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
 ##
 resourcesPreset: "none"
+## @param resources Container resource requests and limits
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+##
+## E.g.
+## resources:
+##   requests:
+##     cpu: 10m
+##     memory: 50Mi
+##   limits:
+##     cpu: 50m
+##     memory: 50Mi
+resources: {}
 ## @extra pdb Pod disruption budget configuration
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
 ## minAvailable and maxUnavailable accept a number (1) or a percent string ("25%"); set only one, the other must be 0 or "".
@@ -371,26 +405,10 @@ initContainers: [ ]
 ##     inheritEnv: false # true: merge the main container's env (incl. vaultSecret) into this one
 ##
 sidecarContainers: [ ]
-## @param datadogIntegration Enable datadog related integration for tracing
-## E.g.
-## datadogIntegration: true
-datadogIntegration: false
 ## @param githubActionsIntegration Allow github runners to create resources in namespace
 ## E.g.
 ## githubActionsIntegration: true
 githubActionsIntegration: false
-## @param resources Container resource requests and limits
-## ref: https://kubernetes.io/docs/user-guide/compute-resources/
-##
-## E.g.
-## resources:
-##   requests:
-##     cpu: 10m
-##     memory: 50Mi
-##   limits:
-##     cpu: 50m
-##     memory: 50Mi
-resources: {}
 ## @section Image for the deployment
 ##
 image:

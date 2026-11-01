@@ -11,6 +11,7 @@ StatefulSet, Service (+ headless Service `service-headless.yaml`, + LoadBalancer
 - No HPA, no Rollouts; `replicaCount` is fixed. `topologySpread` works as in `deployment` (see [presets.md](presets.md)).
 - `persistence.*` drives the volume claim; data survives pod rescheduling.
 - `terminationGracePeriodSeconds`, `pdb.*` available.
+- **Temp directory:** an `emptyDir` is mounted at `/tmp` by default (`tmpDir.enabled`), because the root filesystem is read-only. `tmpDir` is the only thing that manages `/tmp`: set `tmpDir.enabled: false` before mounting `/tmp` through `volumes`, or the pod gets a duplicate mount. `tmpDir.inMemory` and `tmpDir.sizeLimit` tune it.
 - Shares `env`, `envFrom`, `configMap`, `volumes`, probes, `initContainers` / `sidecarContainers`, `rbac`, `metrics`, `lifecycle`, `ingress` with `deployment`.
 
 Examples: `charts/statefulset/examples/{full,sidecar}`. Values reference: [charts/statefulset/README.md](../charts/statefulset/README.md).

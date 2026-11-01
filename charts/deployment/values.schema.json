@@ -117,9 +117,13 @@
       "required": [],
       "type": "object"
     },
-    "datadogIntegration": {
-      "default": false,
-      "type": "boolean"
+    "enableServiceLinks": {
+      "default": "null",
+      "required": [],
+      "type": [
+        "boolean",
+        "null"
+      ]
     },
     "env": {
       "properties": {
@@ -985,6 +989,24 @@
         "integer",
         "string"
       ]
+    },
+    "tmpDir": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "inMemory": {
+          "default": false,
+          "type": "boolean"
+        },
+        "sizeLimit": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
     },
     "tolerations": {
       "items": {
