@@ -308,6 +308,10 @@
               },
               "type": "array"
             },
+            "middlewares": {
+              "required": [],
+              "type": "object"
+            },
             "routes": {
               "items": {
                 "required": []

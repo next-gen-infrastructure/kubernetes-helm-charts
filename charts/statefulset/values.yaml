@@ -600,6 +600,21 @@ ingress:
     ##
     entryPoints:
       - websecure
+    ## @param ingress.traefik.middlewares Traefik Middleware objects to create: the key is the name, the value is the spec (templates allowed).
+    ## Routes use them by name in routes[].middlewares. Rendered only together with the IngressRoute.
+    ## E.g.
+    ## middlewares:
+    ##   ratelimit:
+    ##     rateLimit:
+    ##       average: 2
+    ##       burst: 10
+    ##   www-redirect:
+    ##     redirectRegex:
+    ##       regex: '^https?://www\.example\.com(/.*)?$'
+    ##       replacement: https://example.com${1}
+    ##       permanent: true
+    ##
+    middlewares: { }
     ## @param ingress.traefik.routes Routes of the IngressRoute, each one matching any of its hosts and any of its paths.
     ## defaultHost (default true) adds the generated host, extraHosts adds more hosts and may use templates (at least one host is required);
     ## paths defaults to [ingress.path]; middlewares are names of Middleware objects in the release namespace.
