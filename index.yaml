@@ -796,6 +796,24 @@ entries:
     version: 1.0.0
   cronjobs:
   - apiVersion: v2
+    created: "2026-11-01T19:26:50.959417428Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Kubernetes Cron Jobs
+    digest: 1f97a03394f3f640ee4ca14a7a5987f78a909476532ab11bd28132c103d7048f
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: cronjobs
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/cronjobs
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/cronjobs-5.2.2/cronjobs-5.2.2.tgz
+    version: 5.2.2
+  - apiVersion: v2
     created: "2026-11-01T19:10:16.652771586Z"
     dependencies:
     - name: common
@@ -3325,4 +3343,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-01T19:10:20.240195737Z"
+generated: "2026-11-01T19:26:50.957206305Z"
