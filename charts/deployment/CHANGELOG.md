@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.14.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.13.0...deployment-4.14.0) (2026-11-01)
+
+
+### Features
+
+* **common:** mount a writable /tmp by default ([d37fb60](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d37fb6047baeb112062c23ae66e246507cf15dda))
+* **deployment:** add enableServiceLinks ([be4da0d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/be4da0d47aba354bb292aa933b83d40a65495e06))
+* enableServiceLinks and a writable /tmp by default ([f86c200](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f86c2005790d4c4d237081552b3f19e87b52f632))
+
 ## [4.13.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.12.0...deployment-4.13.0) (2026-10-31)
 
 

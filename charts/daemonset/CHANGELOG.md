@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.10.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.9.0...daemonset-4.10.0) (2026-11-01)
+
+
+### Features
+
+* enableServiceLinks and a writable /tmp by default ([f86c200](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f86c2005790d4c4d237081552b3f19e87b52f632))
+
 ## [4.9.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-4.8.0...daemonset-4.9.0) (2026-10-31)
 
 
