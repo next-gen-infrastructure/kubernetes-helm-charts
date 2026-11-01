@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cronjobs
-version: 5.2.1
+version: 5.2.2
 description: Kubernetes Cron Jobs
 type: application
 dependencies:
