@@ -59,7 +59,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | Name                       | Description                                                                                | Value          |
 | -------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
 | `global.enabled`           | Skips the install when the parent chart sets `condition: global.enabled` on the dependency | `true`         |
-| `global.serviceName`       | Name of the service. Affects public DNS.                                                   | `example`      |
+| `global.serviceName`       | Name of the service. Affects public DNS.                                                   | `""`           |
 | `global.secretStore`       | Name of the ClusterSecretStore used by ExternalSecrets for Vault secrets                   | `vault`        |
 | `global.environment`       | Name of the environment, one of "dev", "stage", "prod".                                    | `dev`          |
 | `global.domain`            | Company Root-level domain, expects                                                         | `""`           |
