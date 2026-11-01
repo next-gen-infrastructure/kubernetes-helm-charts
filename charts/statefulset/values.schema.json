@@ -183,6 +183,10 @@
           "required": [],
           "type": "object"
         },
+        "className": {
+          "default": "traefik",
+          "type": "string"
+        },
         "enabled": {
           "default": false,
           "type": "boolean"
@@ -204,6 +208,37 @@
         "subDomain": {
           "default": false,
           "type": "boolean"
+        },
+        "traefik": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "entryPoints": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "type": "array"
+            },
+            "routes": {
+              "items": {
+                "required": []
+              },
+              "type": "array"
+            },
+            "tls": {
+              "required": [],
+              "type": "object"
+            }
+          },
+          "required": [],
+          "type": "object"
         }
       },
       "required": [],

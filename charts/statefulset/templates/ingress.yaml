@@ -1,4 +1,4 @@
-{{- if and .Values.ingress.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
+{{- if and .Values.ingress.enabled (not .Values.ingress.traefik.enabled) .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
 apiVersion: {{ include "common.capabilities.ingress.apiVersion" $ }}
 kind: Ingress
 metadata:

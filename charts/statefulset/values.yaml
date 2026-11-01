@@ -566,6 +566,9 @@ ingress:
   ## @param ingress.enabled If service will be accessible outside of Kubernetes environment
   ##
   enabled: false
+  ## @param ingress.className Name of the ingress Class, used by the Traefik IngressRoute.
+  ##
+  className: traefik
   ## @param ingress.pathType Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")
   ##
   pathType: Prefix
@@ -588,6 +591,39 @@ ingress:
   ##   paths: []
   ##
   extraHosts: []
+  ## @extra Traefik IngressRoute (traefik.io/v1alpha1) configuration
+  traefik:
+    ## @param ingress.traefik.enabled Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.
+    ##
+    enabled: false
+    ## @param ingress.traefik.entryPoints Traefik entry points the route is attached to
+    ##
+    entryPoints:
+      - websecure
+    ## @param ingress.traefik.routes Routes of the IngressRoute, each one matching any of its hosts and any of its paths.
+    ## defaultHost (default true) adds the generated host, extraHosts adds more hosts and may use templates (at least one host is required);
+    ## paths defaults to [ingress.path]; middlewares are names of Middleware objects in the release namespace.
+    ## Empty: one route for the generated host and ingress.path, without middlewares.
+    ## E.g.
+    ## routes:
+    ##   - defaultHost: true
+    ##     extraHosts:
+    ##       - www.{{ .Values.global.domain }}
+    ##       - "{{ .Values.global.domain }}"
+    ##     paths:
+    ##       - /api
+    ##       - /auth
+    ##     middlewares:
+    ##       - www-redirect
+    ##       - ratelimit
+    ##
+    routes: [ ]
+    ## @param ingress.traefik.tls IngressRoute tls block.
+    ## E.g.
+    ## tls:
+    ##   certResolver: le
+    ##
+    tls: { }
 ## @section Configuration for the extra load-balancer
 ##
 ingressExtra:
