@@ -51,7 +51,7 @@ global:
     ##
     pullSecrets: [ ]
 ## @section Common parameters
-## @param nameOverride By default, name uses '{{ .Chart.Name }}'.
+## @param nameOverride By default, name uses '{{ .Chart.Name }}'. When set, global.serviceName no longer names the workload, which keeps init and sidecar containers apart from the main container.
 ## This overrides that and uses the given string instead.
 ##
 nameOverride: ""
