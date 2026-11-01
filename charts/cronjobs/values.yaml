@@ -14,6 +14,7 @@ global:
   ##
   project:  ""
   ## @param global.serviceName Name of the service. Affects public DNS.
+  ## Also the name of the workload, unless `fullnameOverride` is set.
   ## E.g. php-admin, service-api
   ##
   serviceName: ""

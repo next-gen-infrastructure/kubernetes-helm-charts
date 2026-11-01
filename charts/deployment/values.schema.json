@@ -216,7 +216,7 @@
           "type": "string"
         },
         "serviceName": {
-          "default": "example",
+          "default": "",
           "type": "string"
         }
       },
