@@ -15,19 +15,39 @@ spec:
   {{- with .Values.ingress.traefik.entryPoints }}
   entryPoints: {{- toYaml . | nindent 4 }}
   {{- end }}
+  {{- $routes := .Values.ingress.traefik.routes | default (list (dict)) -}}
   routes:
-    {{- $hosts := list (dict "host" $host "service" (include "common.ingress.serviceName" .)) }}
-    {{- if and (eq .Values.rollouts.strategy "blueGreen") .Values.rollouts.enabled }}
-    {{- $hosts = append $hosts (dict "host" (printf "preview-%s" $host) "service" (include "common.ingress.previewServiceName" .)) }}
-    {{- end }}
-    {{- range $hosts }}
+    {{- range $routes }}
+    {{- /* One rule per route: any of its hosts and any of its paths. */ -}}
+    {{- $hosts := ternary (list $host) (list) (or (not (hasKey . "defaultHost")) .defaultHost) }}
+    {{- $hosts = concat $hosts (include "common.tplvalues.render" (dict "value" (.extraHosts | default list) "context" $) | fromYamlArray) }}
+    {{- if not $hosts }}{{- fail "ingress.traefik.routes[] needs defaultHost or at least one extraHosts entry" }}{{- end }}
+    {{- $paths := .paths | default (list $.Values.ingress.path) }}
     - kind: Rule
-      match: Host(`{{ .host }}`) && {{ $match }}(`{{ $.Values.ingress.path }}`)
-      {{- with $.Values.ingress.traefik.middlewares }}
-      middlewares: {{- toYaml . | nindent 8 }}
+      match: (Host(`{{ join "`) || Host(`" $hosts }}`)) && ({{ $match }}(`{{ join (printf "`) || %s(`" $match) $paths }}`))
+      {{- with .middlewares }}
+      middlewares:
+        {{- range . }}
+        - name: {{ . }}
+          namespace: {{ include "common.names.namespace" $ | quote }}
+        {{- end }}
       {{- end }}
       services:
-        - name: {{ .service }}
+        - name: {{ include "common.ingress.serviceName" $ }}
+          port: http
+    {{- end }}
+    {{- if and (eq .Values.rollouts.strategy "blueGreen") .Values.rollouts.enabled }}
+    - kind: Rule
+      match: Host(`preview-{{ $host }}`) && {{ $match }}(`{{ .Values.ingress.path }}`)
+      {{- with (first $routes).middlewares }}
+      middlewares:
+        {{- range . }}
+        - name: {{ . }}
+          namespace: {{ include "common.names.namespace" $ | quote }}
+        {{- end }}
+      {{- end }}
+      services:
+        - name: {{ include "common.ingress.previewServiceName" . }}
           port: http
     {{- end }}
   {{- with .Values.ingress.traefik.tls }}

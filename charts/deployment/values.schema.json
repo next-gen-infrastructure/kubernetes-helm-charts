@@ -308,7 +308,7 @@
               },
               "type": "array"
             },
-            "middlewares": {
+            "routes": {
               "items": {
                 "required": []
               },
