@@ -28,6 +28,7 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 - **Probes:** liveness/readiness enabled, HTTP on `service.healthCheckPath` unless `healthCheckPath` / `tcpSocket` is set; `startupProbe` is opt-in.
 - **Service session affinity:** off (`service.sessionAffinity: None`). Set `ClientIP` to pin a client IP to one pod; behind an ingress controller that is the controller's IP, so prefer sticky cookies at the ingress.
 - **Extra containers:** `initContainers` / `sidecarContainers`; set `inheritEnv: true` to merge the main container's `env` (including `vaultSecret`) into them.
+- **Service links:** unset by default, so the cluster default applies and Kubernetes injects `<SERVICE>_PORT=tcp://...` style variables for every Service in the namespace. Set `enableServiceLinks: false` when an app reads an env var with the same name as one of those (for example a Service named `yente` and `YENTE_PORT`).
 - **Graceful shutdown:** `preStopDelaySeconds`, `lifecycle.*`.
 - **Integrations:** `datadogIntegration`, `githubActionsIntegration`, `basicAuth`.
 

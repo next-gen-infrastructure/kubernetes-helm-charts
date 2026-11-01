@@ -71,30 +71,31 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Common parameters
 
-| Name                                       | Description                                                                                    | Value   |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------- |
-| `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                                     | `""`    |
-| `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                             | `""`    |
-| `namespaceOverride`                        | Override the namespace of all rendered resources (defaults to the release namespace)           | `""`    |
-| `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the | `1`     |
-| `revisionHistoryLimit`                     | Number of old ReplicaSets to retain for rollback                                               | `2`     |
-| `commonLabels`                             | Labels to add to all deployed objects                                                          | `{}`    |
-| `commonAnnotations`                        | Annotations to add to all deployed objects                                                     | `{}`    |
-| `podLabels`                                | Additional labels for the pod                                                                  | `{}`    |
-| `podAnnotations`                           | Additional annotations for the pod.                                                            | `{}`    |
-| `terminationGracePeriodSeconds`            | Seconds the pod needs to gracefully terminate (cluster default when empty)                     | `""`    |
-| `priorityClassName`                        | priorityClassName                                                                              | `""`    |
-| `podSecurityContext`                       | Pod security context                                                                           |         |
-| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                         | `1000`  |
-| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                       | `true`  |
-| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                         | `65534` |
-| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                           | `65534` |
-| `securityContext`                          | Container security context                                                                     |         |
-| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                    | `false` |
-| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                            | `true`  |
-| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                         | `1000`  |
-| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                       | `true`  |
-| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                         | `65534` |
+| Name                                       | Description                                                                                                                                     | Value   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`    |
+| `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`    |
+| `namespaceOverride`                        | Override the namespace of all rendered resources (defaults to the release namespace)                                                            | `""`    |
+| `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`     |
+| `revisionHistoryLimit`                     | Number of old ReplicaSets to retain for rollback                                                                                                | `2`     |
+| `commonLabels`                             | Labels to add to all deployed objects                                                                                                           | `{}`    |
+| `commonAnnotations`                        | Annotations to add to all deployed objects                                                                                                      | `{}`    |
+| `podLabels`                                | Additional labels for the pod                                                                                                                   | `{}`    |
+| `podAnnotations`                           | Additional annotations for the pod.                                                                                                             | `{}`    |
+| `terminationGracePeriodSeconds`            | Seconds the pod needs to gracefully terminate (cluster default when empty)                                                                      | `""`    |
+| `enableServiceLinks`                       | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil`   |
+| `priorityClassName`                        | priorityClassName                                                                                                                               | `""`    |
+| `podSecurityContext`                       | Pod security context                                                                                                                            |         |
+| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                                                          | `1000`  |
+| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                                                                        | `true`  |
+| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                                                          | `65534` |
+| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                                                                            | `65534` |
+| `securityContext`                          | Container security context                                                                                                                      |         |
+| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                                                                     | `false` |
+| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                                                                             | `true`  |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                                                                          | `1000`  |
+| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                                                                        | `true`  |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                                                                          | `65534` |
 
 ### securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
 

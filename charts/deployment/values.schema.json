@@ -121,6 +121,14 @@
       "default": false,
       "type": "boolean"
     },
+    "enableServiceLinks": {
+      "default": "null",
+      "required": [],
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
     "env": {
       "properties": {
         "configmap": {
