@@ -25,7 +25,7 @@ Return generated container configuration.
   {{- if .Values.env.configmap -}}
   {{- include "common.envvar.configmap" . | trim | nindent 2 -}}
   {{- end -}}
-  {{- if or .Values.env.refs .Values.datadogIntegration -}}
+  {{- if .Values.env.refs -}}
   {{- include "common.envvar.ref" . | trim | nindent 2 -}}
   {{- end -}}
   {{- if .Values.env.values -}}

@@ -58,6 +58,7 @@ nameOverride: ""
 ## This overrides that and uses the given string instead.
 ##
 fullnameOverride: ""
+## @section Security context
 ## @extra podSecurityContext Pod security context
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 ##
@@ -93,10 +94,12 @@ securityContext:
   ## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
   ##
   runAsGroup: 65534
-  ## @section securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ## @extra securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+  ##
   capabilities:
     ## @param securityContext.capabilities.drop Drop all capabilities by default
     drop: [ "ALL" ]
+## @section Pod configuration
 ## @param hostPid Use the host’s pid namespace
 ## E.g.
 ## hostPid: true
@@ -154,6 +157,28 @@ nodeAffinityPreset:
 ## Note: podAffinity, podAntiAffinity and nodeAffinityPreset will be ignored when it's set
 ##
 affinity: {}
+## @extra resources Container resource requests and limits
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+resources:
+  ## @param resources.limits The resources limits for the container
+  ## E.g.
+  ## limits:
+  ##   cpu: 50m
+  ##   memory: 50Mi
+  ##
+  limits: {}
+  ## @param resources.requests The requests resources for the container
+  ## E.g.
+  ## requests:
+  ##   cpu: 10m
+  ##   memory: 50Mi
+  ##
+  requests: {}
+## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
+## Values set in resources override the matching preset values (resources is recommended for production).
+## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
+##
+resourcesPreset: "none"
 ## @section Configure Service Accounts for Pod
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 serviceAccount:
@@ -236,29 +261,6 @@ configMap:
   ##   key1: value1
   ##
   data: { }
-## @section Container resource requests and limits
-## ref: https://kubernetes.io/docs/user-guide/compute-resources/
-resources:
-  ## @param resources.limits The resources limits for the container
-  ## E.g.
-  ## limits:
-  ##   cpu: 50m
-  ##   memory: 50Mi
-  ##
-  limits: {}
-  ## @param resources.requests The requests resources for the container
-  ## E.g.
-  ## requests:
-  ##   cpu: 10m
-  ##   memory: 50Mi
-  ##
-  requests: {}
-## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
-## Values set in resources override the matching preset values (resources is recommended for production).
-## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
-##
-resourcesPreset: "none"
-
 ## @section Network policy
 ## Renders a CiliumNetworkPolicy (cilium=true) or a standard NetworkPolicy. Ingress is denied (jobs listen on nothing).
 ## Egress stays open unless egress.fqdns or extraEgress is set; then only DNS (if allowed) and the listed rules pass.
@@ -413,6 +415,7 @@ networkPolicy:
 # @schema
 cronjobs: {}
 
+## @section Volumes
 ## @extra tmpDir Writable emptyDir mounted at /tmp, for the read-only root filesystem
 ##
 tmpDir:

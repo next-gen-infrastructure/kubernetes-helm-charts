@@ -39,10 +39,6 @@
       "required": [],
       "type": "object"
     },
-    "datadogIntegration": {
-      "default": false,
-      "type": "boolean"
-    },
     "env": {
       "properties": {
         "configmap": {

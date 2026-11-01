@@ -71,74 +71,86 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Common parameters
 
-| Name                                       | Description                                                                                                                                     | Value   |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `nameOverride`                             | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`    |
-| `fullnameOverride`                         | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`    |
-| `namespaceOverride`                        | Override the namespace of all rendered resources (defaults to the release namespace)                                                            | `""`    |
-| `replicaCount`                             | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`     |
-| `revisionHistoryLimit`                     | Number of old ReplicaSets to retain for rollback                                                                                                | `2`     |
-| `commonLabels`                             | Labels to add to all deployed objects                                                                                                           | `{}`    |
-| `commonAnnotations`                        | Annotations to add to all deployed objects                                                                                                      | `{}`    |
-| `podLabels`                                | Additional labels for the pod                                                                                                                   | `{}`    |
-| `podAnnotations`                           | Additional annotations for the pod.                                                                                                             | `{}`    |
-| `terminationGracePeriodSeconds`            | Seconds the pod needs to gracefully terminate (cluster default when empty)                                                                      | `""`    |
-| `enableServiceLinks`                       | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil`   |
-| `priorityClassName`                        | priorityClassName                                                                                                                               | `""`    |
-| `podSecurityContext`                       | Pod security context                                                                                                                            |         |
-| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                                                          | `1000`  |
-| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                                                                        | `true`  |
-| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                                                          | `65534` |
-| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                                                                            | `65534` |
-| `securityContext`                          | Container security context                                                                                                                      |         |
-| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                                                                     | `false` |
-| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                                                                             | `true`  |
-| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                                                                          | `1000`  |
-| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                                                                        | `true`  |
-| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                                                                          | `65534` |
+| Name                            | Description                                                                                                                                     | Value |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `nameOverride`                  | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`  |
+| `fullnameOverride`              | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`  |
+| `namespaceOverride`             | Override the namespace of all rendered resources (defaults to the release namespace)                                                            | `""`  |
+| `replicaCount`                  | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`   |
+| `revisionHistoryLimit`          | Number of old ReplicaSets to retain for rollback                                                                                                | `2`   |
+| `commonLabels`                  | Labels to add to all deployed objects                                                                                                           | `{}`  |
+| `commonAnnotations`             | Annotations to add to all deployed objects                                                                                                      | `{}`  |
+| `podLabels`                     | Additional labels for the pod                                                                                                                   | `{}`  |
+| `podAnnotations`                | Additional annotations for the pod.                                                                                                             | `{}`  |
+| `terminationGracePeriodSeconds` | Seconds the pod needs to gracefully terminate (cluster default when empty)                                                                      | `""`  |
+| `enableServiceLinks`            | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil` |
+| `priorityClassName`             | priorityClassName                                                                                                                               | `""`  |
 
-### securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
+### Security context
 
-| Name                                | Description                                                                                                                        | Value                         |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]`                     |
-| `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`                       |
-| `tmpDir`                            | Writable emptyDir mounted at /tmp, for the read-only root filesystem                                                               |                               |
-| `tmpDir.enabled`                    | Mount an emptyDir at /tmp, do not also mount /tmp through volumes                                                                  | `true`                        |
-| `tmpDir.inMemory`                   | Back the /tmp emptyDir with memory (tmpfs)                                                                                         | `false`                       |
-| `tmpDir.sizeLimit`                  | Size limit of the /tmp emptyDir, e.g. 512Mi                                                                                        | `""`                          |
-| `volumes`                           | Container volumes configuration                                                                                                    | `{}`                          |
-| `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`                          |
-| `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`                          |
-| `nodeSelector`                      | Node labels for pod assignment                                                                                                     | `{}`                          |
-| `tolerations`                       | Tolerations for pod assignment                                                                                                     | `[]`                          |
-| `podAffinity`                       | Pod affinity. Ignored if `affinity` is set                                                                                         |                               |
-| `podAffinity.preset`                | Preset type: soft (preferred), hard (required) or disabled                                                                         | `disabled`                    |
-| `podAffinity.topologyKey`           | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
-| `podAntiAffinity`                   | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                               |
-| `podAntiAffinity.preset`            | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                        |
-| `podAntiAffinity.topologyKey`       | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
-| `preStopDelaySeconds`               | pre-stop delay for graceful pod shutdown                                                                                           | `0`                           |
-| `basicAuth`                         | Enable basic authentication                                                                                                        |                               |
-| `basicAuth.enabled`                 | Enable basic authentication                                                                                                        | `false`                       |
-| `basicAuth.username`                | Username for basic authentication                                                                                                  | `admin`                       |
-| `basicAuth.password`                | Password for basic authentication                                                                                                  | `""`                          |
-| `basicAuth.secretName`              | Name of the existing secret containing the basic auth credentials                                                                  | `basic-auth`                  |
-| `nodeAffinityPreset`                | Node affinity preset                                                                                                               |                               |
-| `nodeAffinityPreset.type`           | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                          |
-| `nodeAffinityPreset.key`            | Node label key to match Ignored if `affinity` is set.                                                                              | `""`                          |
-| `nodeAffinityPreset.values`         | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`                          |
-| `affinity`                          | Affinity for pod assignment                                                                                                        | `{}`                          |
-| `topologySpread`                    | Control spread of pods across topology domains (zones, nodes, etc.)                                                                |                               |
-| `topologySpread.preset`             | Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled                                     | `soft`                        |
-| `topologySpread.topologyKey`        | Topology key for soft/hard presets                                                                                                 | `topology.kubernetes.io/zone` |
-| `topologySpread.maxSkew`            | Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)                                         | `""`                          |
-| `topologySpread.constraints`        | Raw topologySpreadConstraints, used only when preset is custom (supports templating)                                               | `[]`                          |
-| `resourcesPreset`                   | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                        |
-| `pdb`                               | Pod disruption budget configuration                                                                                                |                               |
-| `pdb.create`                        | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
-| `pdb.minAvailable`                  | Min available pods or percent of pods (number or string, e.g. 1 or "25%")                                                          | `1`                           |
-| `pdb.maxUnavailable`                | Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")                                                      | `0`                           |
+| Name                                       | Description                                                                                | Value     |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------ | --------- |
+| `podSecurityContext`                       | Pod security context                                                                       |           |
+| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                     | `1000`    |
+| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                   | `true`    |
+| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                     | `65534`   |
+| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                       | `65534`   |
+| `securityContext`                          | Container security context                                                                 |           |
+| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                | `false`   |
+| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                        | `true`    |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                     | `1000`    |
+| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                   | `true`    |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                     | `65534`   |
+| `securityContext.capabilities`             | Grant certain privileges to a process without granting all the privileges of the root user |           |
+| `securityContext.capabilities.drop`        | Drop all capabilities by default                                                           | `["ALL"]` |
+
+### Volumes
+
+| Name                  | Description                                                          | Value   |
+| --------------------- | -------------------------------------------------------------------- | ------- |
+| `vaultVolumesSupport` | support for vault secrets as files. Defaults false.                  | `false` |
+| `tmpDir`              | Writable emptyDir mounted at /tmp, for the read-only root filesystem |         |
+| `tmpDir.enabled`      | Mount an emptyDir at /tmp, do not also mount /tmp through volumes    | `true`  |
+| `tmpDir.inMemory`     | Back the /tmp emptyDir with memory (tmpfs)                           | `false` |
+| `tmpDir.sizeLimit`    | Size limit of the /tmp emptyDir, e.g. 512Mi                          | `""`    |
+| `volumes`             | Container volumes configuration                                      | `{}`    |
+
+### Pod configuration
+
+| Name                          | Description                                                                                                                        | Value                         |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `command`                     | You can set a custom entrypoint for your docker container                                                                          | `[]`                          |
+| `args`                        | You can set a custom arguments for your docker container                                                                           | `[]`                          |
+| `nodeSelector`                | Node labels for pod assignment                                                                                                     | `{}`                          |
+| `tolerations`                 | Tolerations for pod assignment                                                                                                     | `[]`                          |
+| `podAffinity`                 | Pod affinity. Ignored if `affinity` is set                                                                                         |                               |
+| `podAffinity.preset`          | Preset type: soft (preferred), hard (required) or disabled                                                                         | `disabled`                    |
+| `podAffinity.topologyKey`     | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
+| `podAntiAffinity`             | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                               |
+| `podAntiAffinity.preset`      | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                        |
+| `podAntiAffinity.topologyKey` | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname`      |
+| `preStopDelaySeconds`         | pre-stop delay for graceful pod shutdown                                                                                           | `0`                           |
+| `basicAuth`                   | Enable basic authentication                                                                                                        |                               |
+| `basicAuth.enabled`           | Enable basic authentication                                                                                                        | `false`                       |
+| `basicAuth.username`          | Username for basic authentication                                                                                                  | `admin`                       |
+| `basicAuth.password`          | Password for basic authentication                                                                                                  | `""`                          |
+| `basicAuth.secretName`        | Name of the existing secret containing the basic auth credentials                                                                  | `basic-auth`                  |
+| `nodeAffinityPreset`          | Node affinity preset                                                                                                               |                               |
+| `nodeAffinityPreset.type`     | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                          |
+| `nodeAffinityPreset.key`      | Node label key to match Ignored if `affinity` is set.                                                                              | `""`                          |
+| `nodeAffinityPreset.values`   | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`                          |
+| `affinity`                    | Affinity for pod assignment                                                                                                        | `{}`                          |
+| `topologySpread`              | Control spread of pods across topology domains (zones, nodes, etc.)                                                                |                               |
+| `topologySpread.preset`       | Spread mode: soft (ScheduleAnyway), hard (DoNotSchedule), custom (use constraints) or disabled                                     | `soft`                        |
+| `topologySpread.topologyKey`  | Topology key for soft/hard presets                                                                                                 | `topology.kubernetes.io/zone` |
+| `topologySpread.maxSkew`      | Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)                                         | `""`                          |
+| `topologySpread.constraints`  | Raw topologySpreadConstraints, used only when preset is custom (supports templating)                                               | `[]`                          |
+| `resourcesPreset`             | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                        |
+| `resources`                   | Container resource requests and limits                                                                                             | `{}`                          |
+| `pdb`                         | Pod disruption budget configuration                                                                                                |                               |
+| `pdb.create`                  | Specifies whether a Pod disruption budget should be created                                                                        | `false`                       |
+| `pdb.minAvailable`            | Min available pods or percent of pods (number or string, e.g. 1 or "25%")                                                          | `1`                           |
+| `pdb.maxUnavailable`          | Max non-available pods or percent of pods (number or string, e.g. 1 or "25%")                                                      | `0`                           |
 
 ### Network policy
 
@@ -162,9 +174,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | -------------------------- | ----------------------------------------------------- | ------- |
 | `initContainers`           | Configuration for the init container                  | `[]`    |
 | `sidecarContainers`        | Configuration for the init container                  | `[]`    |
-| `datadogIntegration`       | Enable datadog related integration for tracing        | `false` |
 | `githubActionsIntegration` | Allow github runners to create resources in namespace | `false` |
-| `resources`                | Container resource requests and limits                | `{}`    |
 
 ### Image for the deployment
 

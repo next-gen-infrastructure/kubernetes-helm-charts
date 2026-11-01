@@ -30,7 +30,7 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 - **Extra containers:** `initContainers` / `sidecarContainers`; set `inheritEnv: true` to merge the main container's `env` (including `vaultSecret`) into them.
 - **Service links:** unset by default, so the cluster default applies and Kubernetes injects `<SERVICE>_PORT=tcp://...` style variables for every Service in the namespace. Set `enableServiceLinks: false` when an app reads an env var with the same name as one of those (for example a Service named `yente` and `YENTE_PORT`).
 - **Graceful shutdown:** `preStopDelaySeconds`, `lifecycle.*`.
-- **Integrations:** `datadogIntegration`, `githubActionsIntegration`, `basicAuth`.
+- **Integrations:** `githubActionsIntegration`, `basicAuth`.
 - **Temp directory:** an `emptyDir` is mounted at `/tmp` by default (`tmpDir.enabled`), because the root filesystem is read-only. `tmpDir` is the only thing that manages `/tmp`: set `tmpDir.enabled: false` before mounting `/tmp` through `volumes`, or the pod gets a duplicate mount. `tmpDir.inMemory` and `tmpDir.sizeLimit` tune it.
 
 ## Minimal values
