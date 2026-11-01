@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.0.0...statefulset-5.1.0) (2026-11-01)
+
+
+### Features
+
+* **common:** build the Traefik IngressRoute routes in a shared helper ([b7c4953](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b7c4953995481a543b79a24c10eaa8293400fd74))
+* **ingress:** create Traefik Middleware objects from ingress.traefik.middlewares ([9ca6a78](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/9ca6a78f4b8ea2e7aa0133dfcd16f4d08ac39bd2))
+* **statefulset:** add a Traefik IngressRoute configured with routes ([e326ffb](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e326ffb17f1d54ba51d33d5fd35091852e123e81))
+* **statefulset:** name the Services like the deployment chart ([ec44b60](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ec44b6091cc8cc54261faa9ff2f731b78b7a7bbc))
+* Traefik IngressRoute routes and Middlewares, consistent Service names (deployment, statefulset) ([0f5dc22](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/0f5dc2233116828d8cee6c149e58d6240a28094c))
+
 ## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-4.11.0...statefulset-5.0.0) (2026-11-01)
 
 

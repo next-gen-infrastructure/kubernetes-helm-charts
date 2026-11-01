@@ -1,10 +1,10 @@
 {
-  "charts/common": "5.0.0",
+  "charts/common": "5.1.0",
   "charts/configmaps": "5.0.0",
   "charts/cronjobs": "5.0.0",
   "charts/daemonset": "5.0.0",
-  "charts/deployment": "5.0.0",
+  "charts/deployment": "5.1.0",
   "charts/namespace": "5.0.0",
-  "charts/statefulset": "5.0.0",
+  "charts/statefulset": "5.1.0",
   "charts/vaultsecrets": "5.0.0"
 }
