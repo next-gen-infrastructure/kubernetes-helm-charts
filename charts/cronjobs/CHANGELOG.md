@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.11.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.10.0...cronjobs-4.11.0) (2026-11-01)
+
+
+### Features
+
+* add enableServiceLinks to statefulset, cronjobs and daemonset ([e56b0a4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e56b0a498841c5d7ca752673012043ad8f6978ce))
+* add enableServiceLinks to statefulset, cronjobs and daemonset ([1937b78](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/1937b78bb0ab0c2180dce759c318e93e29b0f44c))
+
 ## [4.10.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.9.0...cronjobs-4.10.0) (2026-11-01)
 
 
