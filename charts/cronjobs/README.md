@@ -54,26 +54,27 @@ Kubernetes Cron Jobs
 
 ### Pod configuration
 
-| Name                          | Description                                                                                                                        | Value                    |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `hostPid`                     | Use the host’s pid namespace                                                                                                       | `false`                  |
-| `nodeSelector`                | Node labels for pod assignment                                                                                                     | `{}`                     |
-| `tolerations`                 | Tolerations for pod assignment                                                                                                     | `[]`                     |
-| `podAffinity`                 | Pod affinity. Ignored if `affinity` is set                                                                                         |                          |
-| `podAffinity.preset`          | Preset type: soft (preferred), hard (required) or disabled                                                                         | `disabled`               |
-| `podAffinity.topologyKey`     | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname` |
-| `podAntiAffinity`             | Pod anti-affinity. Ignored if `affinity` is set                                                                                    |                          |
-| `podAntiAffinity.preset`      | Preset type: soft (preferred), hard (required) or disabled                                                                         | `soft`                   |
-| `podAntiAffinity.topologyKey` | Topology key of the affinity term                                                                                                  | `kubernetes.io/hostname` |
-| `nodeAffinityPreset`          | Node affinity preset                                                                                                               |                          |
-| `nodeAffinityPreset.type`     | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                          | `""`                     |
-| `nodeAffinityPreset.key`      | Node label key to match Ignored if `affinity` is set.                                                                              | `""`                     |
-| `nodeAffinityPreset.values`   | Node label values to match. Ignored if `affinity` is set.                                                                          | `[]`                     |
-| `affinity`                    | Affinity for pod assignment                                                                                                        | `{}`                     |
-| `resources`                   | Container resource requests and limits                                                                                             |                          |
-| `resources.limits`            | The resources limits for the container                                                                                             | `{}`                     |
-| `resources.requests`          | The requests resources for the container                                                                                           | `{}`                     |
-| `resourcesPreset`             | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). | `none`                   |
+| Name                          | Description                                                                                                                                     | Value                    |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `enableServiceLinks`          | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil`                    |
+| `hostPid`                     | Use the host’s pid namespace                                                                                                                    | `false`                  |
+| `nodeSelector`                | Node labels for pod assignment                                                                                                                  | `{}`                     |
+| `tolerations`                 | Tolerations for pod assignment                                                                                                                  | `[]`                     |
+| `podAffinity`                 | Pod affinity. Ignored if `affinity` is set                                                                                                      |                          |
+| `podAffinity.preset`          | Preset type: soft (preferred), hard (required) or disabled                                                                                      | `disabled`               |
+| `podAffinity.topologyKey`     | Topology key of the affinity term                                                                                                               | `kubernetes.io/hostname` |
+| `podAntiAffinity`             | Pod anti-affinity. Ignored if `affinity` is set                                                                                                 |                          |
+| `podAntiAffinity.preset`      | Preset type: soft (preferred), hard (required) or disabled                                                                                      | `soft`                   |
+| `podAntiAffinity.topologyKey` | Topology key of the affinity term                                                                                                               | `kubernetes.io/hostname` |
+| `nodeAffinityPreset`          | Node affinity preset                                                                                                                            |                          |
+| `nodeAffinityPreset.type`     | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`                                                       | `""`                     |
+| `nodeAffinityPreset.key`      | Node label key to match Ignored if `affinity` is set.                                                                                           | `""`                     |
+| `nodeAffinityPreset.values`   | Node label values to match. Ignored if `affinity` is set.                                                                                       | `[]`                     |
+| `affinity`                    | Affinity for pod assignment                                                                                                                     | `{}`                     |
+| `resources`                   | Container resource requests and limits                                                                                                          |                          |
+| `resources.limits`            | The resources limits for the container                                                                                                          | `{}`                     |
+| `resources.requests`          | The requests resources for the container                                                                                                        | `{}`                     |
+| `resourcesPreset`             | Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).              | `none`                   |
 
 ### Configure Service Accounts for Pod
 

@@ -117,6 +117,14 @@
       "required": [],
       "type": "object"
     },
+    "enableServiceLinks": {
+      "default": "null",
+      "required": [],
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
     "env": {
       "properties": {
         "configmap": {

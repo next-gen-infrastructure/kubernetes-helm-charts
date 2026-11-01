@@ -11,6 +11,7 @@ Library chart (`type: library`), not installable. Provides the named templates e
 | `common.envvar.*` | env from value / ref / configmap / secret / vaultSecret |
 | `common.ingress.*` | host construction, Ingress objects |
 | `common.affinities.*`, `common.spread.*` | affinity presets, topology spread |
+| `common.pod.enableServiceLinks` | the pod spec `enableServiceLinks` field, rendered when `enableServiceLinks` is set to true or false |
 | `common.resources.*` | `resourcesPreset` (`none`, `nano` ... `2xlarge`) |
 | `common.capabilities.*` | API version detection |
 | `common.tplvalues.render` | render `{{ }}` inside values |
