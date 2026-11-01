@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.1.0...common-5.2.0) (2026-11-01)
+
+
+### Features
+
+* name workloads after global.serviceName ([3969ad4](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/3969ad497e9cd7dda80db3c450b73f10071affa2))
+* name workloads after global.serviceName ([4c429c7](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/4c429c7a7c33a5c84e7da4c89d79505b117f45fb))
+
 ## [5.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.0.0...common-5.1.0) (2026-11-01)
 
 
