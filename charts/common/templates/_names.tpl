@@ -22,12 +22,12 @@ Create chart name and version as used by the chart label.
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
-If global.serviceName is set it is used as the full name instead; fullnameOverride still wins.
+If global.serviceName is set it is used as the full name instead, unless nameOverride is set (init and sidecar containers share global and carry a nameOverride); fullnameOverride still wins.
 */}}
 {{- define "common.names.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else if .Values.global.serviceName -}}
+{{- else if and .Values.global.serviceName (not .Values.nameOverride) -}}
 {{- .Values.global.serviceName | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
