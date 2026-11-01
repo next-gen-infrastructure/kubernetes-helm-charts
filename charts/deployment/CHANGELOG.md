@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-5.2.0...deployment-5.3.0) (2026-11-01)
+
+
+### Features
+
+* document the default app label and serviceName-based full name ([80fd449](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/80fd4493befc05f503335097a676bf11eded5f7e))
+* document the default app label and serviceName-based full name ([c583ddd](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c583ddd86494bcfd2adaaa048f351d3a5c14cd26))
+
 ## [5.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-5.1.0...deployment-5.2.0) (2026-11-01)
 
 
