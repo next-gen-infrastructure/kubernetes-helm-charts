@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.2.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-5.2.0...daemonset-5.2.1) (2026-11-01)
+
+
+### Bug Fixes
+
+* keep init and sidecar containers off the serviceName-based full name ([2847e8b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/2847e8b5f8f9d44069eba7b7757efdb9b41d2e21))
+* keep init and sidecar containers off the serviceName-based full name ([ba1dbc7](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ba1dbc7ecc15c0c7758b07b0ca9a039a20ea38cd))
+
 ## [5.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-5.1.0...daemonset-5.2.0) (2026-11-01)
 
 
