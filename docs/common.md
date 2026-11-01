@@ -12,6 +12,7 @@ Library chart (`type: library`), not installable. Provides the named templates e
 | `common.ingress.*` | host construction, Ingress objects |
 | `common.affinities.*`, `common.spread.*` | affinity presets, topology spread |
 | `common.pod.enableServiceLinks` | the pod spec `enableServiceLinks` field, rendered when `enableServiceLinks` is set to true or false |
+| `common.ingress.traefik.routes` | the rules of a Traefik IngressRoute from `ingress.traefik.routes`, used by `deployment` and `statefulset` |
 | `common.resources.*` | `resourcesPreset` (`none`, `nano` ... `2xlarge`) |
 | `common.capabilities.*` | API version detection |
 | `common.tplvalues.render` | render `{{ }}` inside values |

@@ -1,6 +1,4 @@
 {{- if and .Values.ingress.enabled .Values.ingress.traefik.enabled .Values.service.enabled ( eq .Values.service.type "ClusterIP") -}}
-{{- $match := ternary "Path" "PathPrefix" (eq .Values.ingress.pathType "Exact") -}}
-{{- $host := include "common.ingress.host" . -}}
 apiVersion: {{ include "common.capabilities.traefik.apiVersion" $ }}
 kind: IngressRoute
 metadata:
@@ -15,27 +13,7 @@ spec:
   {{- with .Values.ingress.traefik.entryPoints }}
   entryPoints: {{- toYaml . | nindent 4 }}
   {{- end }}
-  {{- $routes := .Values.ingress.traefik.routes | default (list (dict)) }}
-  routes:
-    {{- range $routes }}
-    {{- /* One rule per route: any of its hosts and any of its paths. */ -}}
-    {{- $hosts := ternary (list $host) (list) (or (not (hasKey . "defaultHost")) .defaultHost) }}
-    {{- $hosts = concat $hosts (include "common.tplvalues.render" (dict "value" (.extraHosts | default list) "context" $) | fromYamlArray) }}
-    {{- if not $hosts }}{{- fail "ingress.traefik.routes[] needs defaultHost or at least one extraHosts entry" }}{{- end }}
-    {{- $paths := .paths | default (list $.Values.ingress.path) }}
-    - kind: Rule
-      match: (Host(`{{ join "`) || Host(`" $hosts }}`)) && ({{ $match }}(`{{ join (printf "`) || %s(`" $match) $paths }}`))
-      {{- with .middlewares }}
-      middlewares:
-        {{- range . }}
-        - name: {{ . }}
-          namespace: {{ include "common.names.namespace" $ | quote }}
-        {{- end }}
-      {{- end }}
-      services:
-        - name: {{ print (include "common.ingress.serviceName" $) "-http" }}
-          port: http
-    {{- end }}
+  routes: {{- include "common.ingress.traefik.routes" (dict "serviceSuffix" "-http" "context" $) | trim | nindent 4 }}
   {{- with .Values.ingress.traefik.tls }}
   tls: {{- toYaml . | nindent 4 }}
   {{- end }}
