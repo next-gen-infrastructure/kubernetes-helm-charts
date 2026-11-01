@@ -87,10 +87,10 @@ spec:
             {{- /* Vault secrets keep their per-chart / per-job Secret names. */}}
             {{- $vaultSecret := dict }}
             {{- range $name, $_ := default dict $.Values.env.vaultSecret }}
-            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-%s-vault" $.Release.Name $.Chart.Name)) }}
+            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-vault" (include "common.names.fullname" $))) }}
             {{- end }}
             {{- range $name, $_ := default dict (default dict $value.env).vaultSecret }}
-            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-%s-%s-vault" $.Release.Name $.Chart.Name $key)) }}
+            {{- $_ := set $vaultSecret $name (dict "secretName" (printf "%s-%s-vault" (include "common.names.fullname" $) $key)) }}
             {{- end }}
             {{- $env := mergeOverwrite (deepCopy (default dict $.Values.env)) (deepCopy (default dict $value.env)) }}
             {{- $_ := set $env "vaultSecret" $vaultSecret }}
