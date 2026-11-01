@@ -97,19 +97,18 @@ Returns the routes of a Traefik IngressRoute from ingress.traefik.routes (one ro
 host and ingress.path when the list is empty). A route matches any of its hosts (defaultHost, default
 true, adds the generated host; extraHosts adds more and may use templates) and any of its paths
 (default ingress.path) and carries its own middlewares (names of Middleware objects in the release
-namespace). The routes target the Service named by common.ingress.serviceName plus the optional
-serviceSuffix (statefulset: "-http"). With an enabled blue-green rollout an extra rule for preview-<host>
+namespace). The routes target the Service named by common.ingress.serviceName. With an enabled
+blue-green rollout an extra rule for preview-<host>
 targets the preview Service and reuses the first route's middlewares.
 Usage:
 routes: {{- include "common.ingress.traefik.routes" (dict "context" $) | trim | nindent 4 }}
-routes: {{- include "common.ingress.traefik.routes" (dict "serviceSuffix" "-http" "context" $) | trim | nindent 4 }}
 */}}
 {{- define "common.ingress.traefik.routes" -}}
 {{- $ctx := .context -}}
 {{- $host := include "common.ingress.host" $ctx -}}
 {{- $match := ternary "Path" "PathPrefix" (eq $ctx.Values.ingress.pathType "Exact") -}}
 {{- $routes := $ctx.Values.ingress.traefik.routes | default (list (dict)) -}}
-{{- $service := print (include "common.ingress.serviceName" $ctx) (.serviceSuffix | default "") -}}
+{{- $service := include "common.ingress.serviceName" $ctx -}}
 {{- $rollouts := $ctx.Values.rollouts | default (dict) -}}
 {{- range $routes }}
 {{- $hosts := ternary (list $host) (list) (or (not (hasKey . "defaultHost")) .defaultHost) }}

@@ -13,7 +13,7 @@ spec:
   {{- with .Values.ingress.traefik.entryPoints }}
   entryPoints: {{- toYaml . | nindent 4 }}
   {{- end }}
-  routes: {{- include "common.ingress.traefik.routes" (dict "serviceSuffix" "-http" "context" $) | trim | nindent 4 }}
+  routes: {{- include "common.ingress.traefik.routes" (dict "context" $) | trim | nindent 4 }}
   {{- with .Values.ingress.traefik.tls }}
   tls: {{- toYaml . | nindent 4 }}
   {{- end }}

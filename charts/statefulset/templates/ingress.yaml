@@ -15,7 +15,7 @@ spec:
         paths:
           - path: "/"
             pathType: {{ .Values.ingress.pathType }}
-            backend: {{- include "common.ingress.backend" (dict "serviceName" (print (include "common.ingress.serviceName" .) "-http") "servicePort" "http" "context" .) | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "common.ingress.serviceName" .) "servicePort" "http" "context" .) | nindent 14 }}
     {{ range .Values.ingress.extraHosts -}}
     {{- $portName := default "http" .port -}}
     - host: {{ .host | quote }}
@@ -25,12 +25,12 @@ spec:
           {{ range .paths -}}
           - path: {{ . }}
             pathType: {{ $.Values.ingress.pathType }}
-            backend: {{- include "common.ingress.backend" (dict "serviceName" (print (include "common.ingress.serviceName" $) "-http") "servicePort" $portName "context" $) | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "common.ingress.serviceName" $) "servicePort" $portName "context" $) | nindent 14 }}
           {{ end -}}
           {{ else -}}
           - path: "/"
             pathType: {{ $.Values.ingress.pathType }}
-            backend: {{- include "common.ingress.backend" (dict "serviceName" (print (include "common.ingress.serviceName" $) "-http") "servicePort" $portName "context" $) | nindent 14 }}
+            backend: {{- include "common.ingress.backend" (dict "serviceName" (include "common.ingress.serviceName" $) "servicePort" $portName "context" $) | nindent 14 }}
           {{ end -}}
     {{ end -}}
 {{- end }}
