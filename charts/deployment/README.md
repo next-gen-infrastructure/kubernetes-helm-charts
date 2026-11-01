@@ -268,21 +268,23 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 
 ### Configuration for the main load-balancer
 
-| Name                          | Description                                                                      | Value           |
-| ----------------------------- | -------------------------------------------------------------------------------- | --------------- |
-| `ingress.enabled`             | If service will be accessible outside of Kubernetes environment                  | `false`         |
-| `ingress.name`                | If you need to specify an ingress's full name override.                          | `""`            |
-| `ingress.className`           | Name of the ingress Class.                                                       | `traefik`       |
-| `ingress.pathType`            | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix") | `Prefix`        |
-| `ingress.subDomain`           | If DNS has environment as sub-domain.                                            | `false`         |
-| `ingress.hostPrefix`          | Host label placed before the domain, replaces <global.serviceName> when set.     | `""`            |
-| `ingress.path`                | Prefix for the path routing                                                      | `/`             |
-| `ingress.annotations`         | Ingress annotations                                                              | `{}`            |
-| `ingress.traefik.enabled`     | Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.       | `false`         |
-| `ingress.traefik.entryPoints` | Traefik entry points the route is attached to                                    | `["websecure"]` |
-| `ingress.traefik.middlewares` | Traefik middlewares applied to the route.                                        | `[]`            |
-| `ingress.traefik.tls`         | IngressRoute tls block.                                                          | `{}`            |
-| `ingress.extraHosts`          | Extra hosts for ingress                                                          | `[]`            |
+| Name                          | Description                                                                                           | Value           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- | --------------- |
+| `ingress.enabled`             | If service will be accessible outside of Kubernetes environment                                       | `false`         |
+| `ingress.name`                | If you need to specify an ingress's full name override.                                               | `""`            |
+| `ingress.className`           | Name of the ingress Class.                                                                            | `traefik`       |
+| `ingress.pathType`            | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")                      | `Prefix`        |
+| `ingress.subDomain`           | If DNS has environment as sub-domain.                                                                 | `false`         |
+| `ingress.hostPrefix`          | Host label placed before the domain, replaces <global.serviceName> when set.                          | `""`            |
+| `ingress.path`                | Prefix for the path routing                                                                           | `/`             |
+| `ingress.annotations`         | Ingress annotations                                                                                   | `{}`            |
+| `ingress.extraHosts`          | Extra hosts for ingress                                                                               | `[]`            |
+| `Traefik`                     | IngressRoute (traefik.io/v1alpha1) configuration                                                      |                 |
+| `ingress.traefik.enabled`     | Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.                            | `false`         |
+| `ingress.traefik.entryPoints` | Traefik entry points the route is attached to                                                         | `["websecure"]` |
+| `ingress.traefik.middlewares` | Traefik Middleware objects to create: the key is the name, the value is the spec (templates allowed). | `{}`            |
+| `ingress.traefik.routes`      | Routes of the IngressRoute, each one matching any of its hosts and any of its paths.                  | `[]`            |
+| `ingress.traefik.tls`         | IngressRoute tls block.                                                                               | `{}`            |
 
 ### Configuration for the extra load-balancer
 
