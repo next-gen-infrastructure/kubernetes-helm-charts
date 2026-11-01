@@ -72,6 +72,9 @@ spec:
           {{- if kindIs "bool" $.Values.serviceAccount.automountServiceAccountToken }}
           automountServiceAccountToken: {{ $.Values.serviceAccount.automountServiceAccountToken }}
           {{- end }}
+          {{- with include "common.pod.enableServiceLinks" $ }}
+          {{ . }}
+          {{- end }}
           {{- include "common.images.renderPullSecrets" (dict "images" (list) "context" $) | nindent 10 }}
           containers:
             {{- /* Values the common container reads: the chart's, with this job's command, args, env, resources and securityContext on top. */}}

@@ -60,16 +60,17 @@ Typical StateFul Set application
 
 ### Common parameters
 
-| Name                | Description                                                                                    | Value |
-| ------------------- | ---------------------------------------------------------------------------------------------- | ----- |
-| `nameOverride`      | By default, name uses '{{ .Chart.Name }}'.                                                     | `""`  |
-| `fullnameOverride`  | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                             | `""`  |
-| `replicaCount`      | Number of the parallel-running containers. The controller will eventually make the size of the | `1`   |
-| `commonLabels`      | Labels to add to all deployed objects                                                          | `{}`  |
-| `commonAnnotations` | Annotations to add to all deployed objects                                                     | `{}`  |
-| `podLabels`         | Additional labels for the pod                                                                  | `{}`  |
-| `podAnnotations`    | Additional annotations for the pod.                                                            | `{}`  |
-| `priorityClassName` | priorityClassName                                                                              | `""`  |
+| Name                 | Description                                                                                                                                     | Value |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `nameOverride`       | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`  |
+| `fullnameOverride`   | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`  |
+| `replicaCount`       | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`   |
+| `commonLabels`       | Labels to add to all deployed objects                                                                                                           | `{}`  |
+| `commonAnnotations`  | Annotations to add to all deployed objects                                                                                                      | `{}`  |
+| `podLabels`          | Additional labels for the pod                                                                                                                   | `{}`  |
+| `podAnnotations`     | Additional annotations for the pod.                                                                                                             | `{}`  |
+| `enableServiceLinks` | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil` |
+| `priorityClassName`  | priorityClassName                                                                                                                               | `""`  |
 
 ### Security context
 

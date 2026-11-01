@@ -32,16 +32,17 @@ Typical Daemon Set application
 
 ### Common parameters
 
-| Name                            | Description                                                        | Value |
-| ------------------------------- | ------------------------------------------------------------------ | ----- |
-| `nameOverride`                  | By default, name uses '{{ .Chart.Name }}'.                         | `""`  |
-| `fullnameOverride`              | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'. | `""`  |
-| `commonLabels`                  | Labels to add to all deployed objects                              | `{}`  |
-| `commonAnnotations`             | Annotations to add to all deployed objects                         | `{}`  |
-| `podLabels`                     | Additional labels for the pod                                      | `{}`  |
-| `podAnnotations`                | Additional annotations for the pod.                                | `{}`  |
-| `terminationGracePeriodSeconds` | Seconds the pod needs to gracefully terminate                      | `""`  |
-| `priorityClassName`             | priorityClassName                                                  | `""`  |
+| Name                            | Description                                                                                                                                     | Value |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `nameOverride`                  | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`  |
+| `fullnameOverride`              | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`  |
+| `commonLabels`                  | Labels to add to all deployed objects                                                                                                           | `{}`  |
+| `commonAnnotations`             | Annotations to add to all deployed objects                                                                                                      | `{}`  |
+| `podLabels`                     | Additional labels for the pod                                                                                                                   | `{}`  |
+| `podAnnotations`                | Additional annotations for the pod.                                                                                                             | `{}`  |
+| `terminationGracePeriodSeconds` | Seconds the pod needs to gracefully terminate                                                                                                   | `""`  |
+| `enableServiceLinks`            | Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true) | `nil` |
+| `priorityClassName`             | priorityClassName                                                                                                                               | `""`  |
 
 ### Security context
 

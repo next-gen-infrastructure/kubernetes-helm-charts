@@ -77,6 +77,12 @@ podLabels: {}
 ## @param podAnnotations Additional annotations for the pod.
 ##
 podAnnotations: {}
+# @schema
+# type: [boolean, "null"]
+# @schema
+## @param enableServiceLinks Set to false to stop Kubernetes injecting the Service environment variables (e.g. YENTE_PORT=tcp://...), unset keeps the cluster default (true)
+##
+enableServiceLinks: null
 ## @param priorityClassName priorityClassName
 ##
 priorityClassName: ""
