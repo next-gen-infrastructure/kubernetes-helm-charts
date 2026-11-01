@@ -1,5 +1,15 @@
 # Changelog
 
+## [5.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-5.0.0...deployment-5.1.0) (2026-11-01)
+
+
+### Features
+
+* **common:** build the Traefik IngressRoute routes in a shared helper ([b7c4953](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b7c4953995481a543b79a24c10eaa8293400fd74))
+* **deployment:** configure the Traefik IngressRoute with routes ([c091c2e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c091c2ea118e62770c9e0c7b9fc96b2d2e2bb851))
+* **ingress:** create Traefik Middleware objects from ingress.traefik.middlewares ([9ca6a78](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/9ca6a78f4b8ea2e7aa0133dfcd16f4d08ac39bd2))
+* Traefik IngressRoute routes and Middlewares, consistent Service names (deployment, statefulset) ([0f5dc22](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/0f5dc2233116828d8cee6c149e58d6240a28094c))
+
 ## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-4.15.0...deployment-5.0.0) (2026-11-01)
 
 
