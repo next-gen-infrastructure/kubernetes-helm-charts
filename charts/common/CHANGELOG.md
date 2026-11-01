@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.2.0...common-5.3.0) (2026-11-01)
+
+
+### Features
+
+* label workloads with app=&lt;fullname&gt; by default ([6e82d39](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/6e82d399bcdeffef9e5c137ee4055fb191fcecb3))
+* label workloads with app=&lt;fullname&gt; by default ([aa127bc](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/aa127bc594261fdbb7432ed28a6632e19cfbb3ce))
+
 ## [5.2.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.1.0...common-5.2.0) (2026-11-01)
 
 
