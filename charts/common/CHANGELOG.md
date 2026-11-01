@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.15.0...common-5.0.0) (2026-11-01)
+
+
+### Miscellaneous Chores
+
+* **common:** align the major version with the other charts ([11afd3f](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/11afd3f2917d096c6acc67cb5d7a03d9b1bde8b0))
+
 ## [4.15.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-4.14.0...common-4.15.0) (2026-11-01)
 
 

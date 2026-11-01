@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.11.0...cronjobs-5.0.0) (2026-11-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default group and fsGroup of deployment, cronjobs, statefulset and daemonset change from 65534 to 1000. Existing volumes are re-chowned to group 1000 on the next mount. Set the values explicitly to keep 65534.
+
+### Features
+
+* default the pod and container group to 1000 ([ef64651](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ef64651c47befd158b0a2a7455c9163f22a89380))
+
 ## [4.11.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-4.10.0...cronjobs-4.11.0) (2026-11-01)
 
 

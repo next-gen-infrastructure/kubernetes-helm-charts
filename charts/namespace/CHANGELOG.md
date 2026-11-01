@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-1.0.0...namespace-5.0.0) (2026-11-01)
+
+
+### Miscellaneous Chores
+
+* **namespace:** align the major version with the other charts ([745b269](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/745b269b49376a4909db80b0d4564404beda54fe))
+
 ## [1.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-0.2.0...namespace-1.0.0) (2026-10-31)
 
 

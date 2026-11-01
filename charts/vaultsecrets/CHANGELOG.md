@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.4.0...vaultsecrets-5.0.0) (2026-11-01)
+
+
+### Miscellaneous Chores
+
+* **vaultsecrets:** align the major version with the other charts ([23fdede](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/23fdede6f807f99bc1a4f42a48b2d72f2a4c719c))
+
 ## [3.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/vaultsecrets-3.3.0...vaultsecrets-3.4.0) (2026-10-31)
 
 
