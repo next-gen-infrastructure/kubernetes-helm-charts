@@ -416,6 +416,24 @@
       "required": [],
       "type": "object"
     },
+    "tmpDir": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "inMemory": {
+          "default": false,
+          "type": "boolean"
+        },
+        "sizeLimit": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
     "tolerations": {
       "items": {
         "required": []

@@ -138,6 +138,18 @@ securityContext:
 ## @param vaultVolumesSupport support for vault secrets as files. Defaults false.
 ##
 vaultVolumesSupport: false
+## @extra tmpDir Writable emptyDir mounted at /tmp, for the read-only root filesystem
+##
+tmpDir:
+  ## @param tmpDir.enabled Mount an emptyDir at /tmp, do not also mount /tmp through volumes
+  ##
+  enabled: true
+  ## @param tmpDir.inMemory Back the /tmp emptyDir with memory (tmpfs)
+  ##
+  inMemory: false
+  ## @param tmpDir.sizeLimit Size limit of the /tmp emptyDir, e.g. 512Mi
+  ##
+  sizeLimit: ""
 ## @param volumes Container volumes configuration
 ## e.g.:
 ## volumes:

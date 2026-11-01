@@ -93,7 +93,7 @@ spec:
             {{- $_ := set $env "vaultSecret" $vaultSecret }}
             {{- $_ := set $jobValues "env" $env }}
             {{- include "common.containers.container" (dict "Values" $jobValues "Chart" $.Chart "Release" $.Release "Template" $.Template) | nindent 12 }}
-          {{- if $.Values.volumes }}
+          {{- if include "common.volume.enabled" $ }}
           volumes: {{- include "common.volume.definitions" $ | nindent 12 }}
           {{- end }}
 {{- end }}

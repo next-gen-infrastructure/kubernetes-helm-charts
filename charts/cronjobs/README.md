@@ -112,8 +112,12 @@ Kubernetes Cron Jobs
 
 ### Cronjobs configuration
 
-| Name       | Description                                                                                                          | Value |
-| ---------- | -------------------------------------------------------------------------------------------------------------------- | ----- |
-| `cronjobs` | Cronjobs configuration, keyed by job name (see `values.yaml` for the per-job options, incl. `activeDeadlineSeconds`) | `{}`  |
-| `volumes`  | Container volumes configuration                                                                                      | `{}`  |
+| Name               | Description                                                                                                          | Value   |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- | ------- |
+| `cronjobs`         | Cronjobs configuration, keyed by job name (see `values.yaml` for the per-job options, incl. `activeDeadlineSeconds`) | `{}`    |
+| `tmpDir`           | Writable emptyDir mounted at /tmp, for the read-only root filesystem                                                 |         |
+| `tmpDir.enabled`   | Mount an emptyDir at /tmp, do not also mount /tmp through volumes                                                    | `true`  |
+| `tmpDir.inMemory`  | Back the /tmp emptyDir with memory (tmpfs)                                                                           | `false` |
+| `tmpDir.sizeLimit` | Size limit of the /tmp emptyDir, e.g. 512Mi                                                                          | `""`    |
+| `volumes`          | Container volumes configuration                                                                                      | `{}`    |
 

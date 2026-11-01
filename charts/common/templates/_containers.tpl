@@ -126,9 +126,9 @@ Return generated container configuration.
   {{- if .Values.securityContext }}
   securityContext: {{- toYaml .Values.securityContext | trim | nindent 4 }}
   {{- end }}
-  {{- if or .Values.volumes (.Values.persistence).enabled }}
+  {{- if or (include "common.volume.enabled" .) (.Values.persistence).enabled }}
   volumeMounts:
-  {{- if .Values.volumes }}
+  {{- if include "common.volume.enabled" . }}
   {{- include "common.volume.mounts" . | trim | nindent 4 }}
   {{- end }}
   {{- if (.Values.persistence).enabled }}

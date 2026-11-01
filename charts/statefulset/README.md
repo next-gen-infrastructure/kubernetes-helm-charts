@@ -88,6 +88,10 @@ Typical StateFul Set application
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `securityContext.capabilities.drop` | Drop all capabilities by default                                                                                                   | `["ALL"]`                     |
 | `vaultVolumesSupport`               | support for vault secrets as files. Defaults false.                                                                                | `false`                       |
+| `tmpDir`                            | Writable emptyDir mounted at /tmp, for the read-only root filesystem                                                               |                               |
+| `tmpDir.enabled`                    | Mount an emptyDir at /tmp, do not also mount /tmp through volumes                                                                  | `true`                        |
+| `tmpDir.inMemory`                   | Back the /tmp emptyDir with memory (tmpfs)                                                                                         | `false`                       |
+| `tmpDir.sizeLimit`                  | Size limit of the /tmp emptyDir, e.g. 512Mi                                                                                        | `""`                          |
 | `volumes`                           | Container volumes configuration                                                                                                    | `{}`                          |
 | `command`                           | You can set a custom entrypoint for your docker container                                                                          | `[]`                          |
 | `args`                              | You can set a custom arguments for your docker container                                                                           | `[]`                          |
