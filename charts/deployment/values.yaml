@@ -69,7 +69,7 @@ replicaCount: 1
 ## @param revisionHistoryLimit Number of old ReplicaSets to retain for rollback
 ##
 revisionHistoryLimit: 2
-## @param commonLabels Labels to add to all deployed objects
+## @param commonLabels Labels to add to all deployed objects. Objects are also labelled `app: <fullname>`, set `app` here to override it
 ##
 commonLabels: {}
 ## @param commonAnnotations Annotations to add to all deployed objects

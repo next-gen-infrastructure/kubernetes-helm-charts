@@ -62,7 +62,7 @@ nameOverride: ""
 ## This overrides that and uses the given string instead.
 ##
 fullnameOverride: ""
-## @param commonLabels Labels to add to all deployed objects
+## @param commonLabels Labels to add to all deployed objects. Objects are also labelled `app: <fullname>`, set `app` here to override it
 ##
 commonLabels: {}
 ## @param commonAnnotations Annotations to add to all deployed objects

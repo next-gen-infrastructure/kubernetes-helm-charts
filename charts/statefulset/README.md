@@ -65,7 +65,7 @@ Typical StateFul Set application
 | `nameOverride`       | By default, name uses '{{ .Chart.Name }}'.                                                                                                      | `""`  |
 | `fullnameOverride`   | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                              | `""`  |
 | `replicaCount`       | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`   |
-| `commonLabels`       | Labels to add to all deployed objects                                                                                                           | `{}`  |
+| `commonLabels`       | Labels to add to all deployed objects. Objects are also labelled `app: <fullname>`, set `app` here to override it                               | `{}`  |
 | `commonAnnotations`  | Annotations to add to all deployed objects                                                                                                      | `{}`  |
 | `podLabels`          | Additional labels for the pod                                                                                                                   | `{}`  |
 | `podAnnotations`     | Additional annotations for the pod.                                                                                                             | `{}`  |
