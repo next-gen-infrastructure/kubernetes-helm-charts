@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.1.0...configmaps-5.0.0) (2026-11-01)
+
+
+### Miscellaneous Chores
+
+* **configmaps:** align the major version with the other charts ([d86f354](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d86f354614296b0646536c4a32cc71c62770f8fb))
+
 ## [2.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/configmaps-2.0.3...configmaps-2.1.0) (2026-10-28)
 
 

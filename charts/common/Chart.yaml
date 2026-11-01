@@ -1,7 +1,7 @@
 # Released together with the other charts of this repository: the major version is kept in step (5.x).
 apiVersion: v2
 name: common
-version: 4.15.0
+version: 5.0.0
 description: A Library Helm Chart for grouping common logic between charts. This
   chart is not deployable by itself.
 annotations:
