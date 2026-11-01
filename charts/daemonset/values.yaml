@@ -102,10 +102,13 @@ podSecurityContext:
   runAsNonRoot: true
   ## @param podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
   ##
-  runAsGroup: 65534
+  runAsGroup: 1000
   ## @param podSecurityContext.fsGroup A special supplemental group that applies to all containers in a pod
   ##
-  fsGroup: 65534
+  fsGroup: 1000
+  ## @param podSecurityContext.fsGroupChangePolicy When the kubelet changes the volume ownership to fsGroup: OnRootMismatch only if the volume root differs, Always on every mount
+  ##
+  fsGroupChangePolicy: OnRootMismatch
 ## @extra securityContext Container security context
 ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
 ##
@@ -124,7 +127,7 @@ securityContext:
   runAsNonRoot: true
   ## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
   ##
-  runAsGroup: 65534
+  runAsGroup: 1000
   ## @extra securityContext.capabilities Grant certain privileges to a process without granting all the privileges of the root user
   ##
   capabilities:
