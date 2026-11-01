@@ -78,7 +78,7 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `namespaceOverride`             | Override the namespace of all rendered resources (defaults to the release namespace)                                                            | `""`  |
 | `replicaCount`                  | Number of the parallel-running containers. The controller will eventually make the size of the                                                  | `1`   |
 | `revisionHistoryLimit`          | Number of old ReplicaSets to retain for rollback                                                                                                | `2`   |
-| `commonLabels`                  | Labels to add to all deployed objects                                                                                                           | `{}`  |
+| `commonLabels`                  | Labels to add to all deployed objects. Objects are also labelled `app: <fullname>`, set `app` here to override it                               | `{}`  |
 | `commonAnnotations`             | Annotations to add to all deployed objects                                                                                                      | `{}`  |
 | `podLabels`                     | Additional labels for the pod                                                                                                                   | `{}`  |
 | `podAnnotations`                | Additional annotations for the pod.                                                                                                             | `{}`  |

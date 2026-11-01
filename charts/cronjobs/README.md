@@ -29,10 +29,10 @@ Kubernetes Cron Jobs
 
 ### Common parameters
 
-| Name               | Description                                                        | Value |
-| ------------------ | ------------------------------------------------------------------ | ----- |
-| `nameOverride`     | By default, name uses '{{ .Chart.Name }}'.                         | `""`  |
-| `fullnameOverride` | By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'. | `""`  |
+| Name               | Description                                                                                        | Value |
+| ------------------ | -------------------------------------------------------------------------------------------------- | ----- |
+| `nameOverride`     | By default, name uses '{{ .Chart.Name }}'.                                                         | `""`  |
+| `fullnameOverride` | By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'. | `""`  |
 
 ### Security context
 

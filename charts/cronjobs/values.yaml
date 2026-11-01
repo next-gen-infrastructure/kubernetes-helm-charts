@@ -55,7 +55,7 @@ global:
 ## This overrides that and uses the given string instead.
 ##
 nameOverride: ""
-## @param fullnameOverride By default, fullname uses '{{ .Release.Name }}-{{ .Chart.Name }}'.
+## @param fullnameOverride By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'.
 ## This overrides that and uses the given string instead.
 ##
 fullnameOverride: ""
