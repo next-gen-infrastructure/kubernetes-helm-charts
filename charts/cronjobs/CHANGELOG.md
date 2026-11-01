@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.2.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-5.2.1...cronjobs-5.2.2) (2026-11-01)
+
+
+### Bug Fixes
+
+* **cronjobs:** name the Vault ExternalSecrets after the chart full name ([30b4c97](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/30b4c97927314219465bc8e9e20782a31e931cbc))
+* **cronjobs:** name the Vault ExternalSecrets after the chart full name ([ebafbfc](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ebafbfcee45f63a60f1eb1cccd1a11cbc3d2fc41))
+
 ## [5.2.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-5.2.0...cronjobs-5.2.1) (2026-11-01)
 
 

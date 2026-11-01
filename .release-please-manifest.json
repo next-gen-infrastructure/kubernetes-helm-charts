@@ -1,7 +1,7 @@
 {
   "charts/common": "5.3.1",
   "charts/configmaps": "5.0.0",
-  "charts/cronjobs": "5.2.1",
+  "charts/cronjobs": "5.2.2",
   "charts/daemonset": "5.2.1",
   "charts/deployment": "5.3.1",
   "charts/namespace": "5.0.0",
