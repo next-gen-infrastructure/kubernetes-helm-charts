@@ -571,11 +571,15 @@
     "podSecurityContext": {
       "properties": {
         "fsGroup": {
-          "default": 65534,
+          "default": 1000,
           "type": "integer"
         },
+        "fsGroupChangePolicy": {
+          "default": "OnRootMismatch",
+          "type": "string"
+        },
         "runAsGroup": {
-          "default": 65534,
+          "default": 1000,
           "type": "integer"
         },
         "runAsNonRoot": {
@@ -692,7 +696,7 @@
           "type": "boolean"
         },
         "runAsGroup": {
-          "default": 65534,
+          "default": 1000,
           "type": "integer"
         },
         "runAsNonRoot": {

@@ -36,21 +36,22 @@ Kubernetes Cron Jobs
 
 ### Security context
 
-| Name                                       | Description                                                                                | Value     |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------ | --------- |
-| `podSecurityContext`                       | Pod security context                                                                       |           |
-| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                     | `1000`    |
-| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                   | `true`    |
-| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                     | `65534`   |
-| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                       | `65534`   |
-| `securityContext`                          | Container security context                                                                 |           |
-| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                | `false`   |
-| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                        | `true`    |
-| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                     | `1000`    |
-| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                   | `true`    |
-| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                     | `65534`   |
-| `securityContext.capabilities`             | Grant certain privileges to a process without granting all the privileges of the root user |           |
-| `securityContext.capabilities.drop`        | Drop all capabilities by default                                                           | `["ALL"]` |
+| Name                                       | Description                                                                                                                     | Value            |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `podSecurityContext`                       | Pod security context                                                                                                            |                  |
+| `podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                                          | `1000`           |
+| `podSecurityContext.runAsNonRoot`          | Indicates that the container must run as a non-root user                                                                        | `true`           |
+| `podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                                          | `1000`           |
+| `podSecurityContext.fsGroup`               | A special supplemental group that applies to all containers in a pod                                                            | `1000`           |
+| `podSecurityContext.fsGroupChangePolicy`   | When the kubelet changes the volume ownership to fsGroup: OnRootMismatch only if the volume root differs, Always on every mount | `OnRootMismatch` |
+| `securityContext`                          | Container security context                                                                                                      |                  |
+| `securityContext.allowPrivilegeEscalation` | Controls whether a process can gain more privileges than its parent process                                                     | `false`          |
+| `securityContext.readOnlyRootFilesystem`   | Mounts the container's root filesystem as read-only                                                                             | `true`           |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                                                          | `1000`           |
+| `securityContext.runAsNonRoot`             | Indicates that the container must run as a non-root user                                                                        | `true`           |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                                                          | `1000`           |
+| `securityContext.capabilities`             | Grant certain privileges to a process without granting all the privileges of the root user                                      |                  |
+| `securityContext.capabilities.drop`        | Drop all capabilities by default                                                                                                | `["ALL"]`        |
 
 ### Pod configuration
 

@@ -22,7 +22,7 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 
 ## Notable behaviours
 
-- **Security defaults:** non-root (uid 1000 / gid 65534), read-only root FS, all capabilities dropped.
+- **Security defaults:** non-root (uid 1000 / gid 1000), read-only root FS, all capabilities dropped.
 - **Scheduling:** soft pod anti-affinity and soft zone topology spread by default (`podAntiAffinity`, `topologySpread`); `affinity` overrides presets.
 - **Resources:** `resourcesPreset` defaults to `none`; `resources` wins when set.
 - **Probes:** liveness/readiness enabled, HTTP on `service.healthCheckPath` unless `healthCheckPath` / `tcpSocket` is set; `startupProbe` is opt-in.
