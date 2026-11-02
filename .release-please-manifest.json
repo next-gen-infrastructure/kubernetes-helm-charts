@@ -3,8 +3,8 @@
   "charts/configmaps": "5.0.0",
   "charts/cronjobs": "5.2.2",
   "charts/daemonset": "5.2.1",
-  "charts/deployment": "5.3.1",
+  "charts/deployment": "5.3.2",
   "charts/namespace": "5.0.0",
-  "charts/statefulset": "5.3.1",
+  "charts/statefulset": "5.3.2",
   "charts/vaultsecrets": "5.0.0"
 }
