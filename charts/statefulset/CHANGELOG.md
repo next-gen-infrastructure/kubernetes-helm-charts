@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.3.1...statefulset-5.3.2) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deployment,statefulset:** allow both standard traefik EntryPoints by default ([b197cfc](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b197cfc91c185d71ec7206a407d84e057a6f8e3b))
+
 ## [5.3.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.3.0...statefulset-5.3.1) (2026-11-01)
 
 
