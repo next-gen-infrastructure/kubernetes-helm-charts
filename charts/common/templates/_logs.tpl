@@ -9,7 +9,7 @@ Usage:
 */}}
 {{- define "common.logs.podLabels" -}}
 {{- if .Values.podLogs.enabled -}}
-podlogs: "true"
+monitoring.grafana.com/podlogs: enabled
 {{- end -}}
 {{- end -}}
 
