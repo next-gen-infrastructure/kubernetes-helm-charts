@@ -16,7 +16,7 @@ validate() {
     -summary \
     -kubernetes-version "$K8S_VERSION" \
     -ignore-missing-schemas \
-    -skip IngressRoute,ImageUpdater,PodLogs \
+    -skip IngressRoute,ImageUpdater \
     `# ^ datreeio catalog schemas are stale: IngressRoute lacks ingressClassName, and` \
     `#   ImageUpdater still marks spec.namespace required (dropped in the latest CRD).` \
     `#   helm template still validates their YAML/templating.` \

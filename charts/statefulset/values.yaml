@@ -689,28 +689,6 @@ rbac:
   ##       - list
   ##
   rules: [ ]
-## @section Log collection (Grafana Alloy PodLogs)
-##
-podLogs:
-  ## @param podLogs.enabled Render a PodLogs resource (monitoring.grafana.com/v1alpha2) for the pods of this release and label them `monitoring.grafana.com/podlogs: enabled`.
-  ## The collector must run loki.source.podlogs and drop pods with that label from its generic pipeline, otherwise logs are collected twice.
-  ##
-  enabled: false
-  ## @param podLogs.name PodLogs resource name override. Defaults to the full name of the release.
-  ##
-  name: ""
-  ## @param podLogs.relabelings Extra relabelings (templates allowed), added after the default `app` one.
-  ##
-  relabelings: [ ]
-  ## @param podLogs.pipelineStages Log processing stages applied to these pods (Loki/Promtail pipeline stages, templates allowed).
-  ## These logs bypass the collector's generic processing, so include what you need (e.g. a drop older_than stage).
-  ## E.g.
-  ## pipelineStages:
-  ##   - cri: {}
-  ##   - drop:
-  ##       older_than: 5m
-  ##
-  pipelineStages: [ ]
 ## @section Prometheus Exporter / Metrics
 ##
 metrics:
