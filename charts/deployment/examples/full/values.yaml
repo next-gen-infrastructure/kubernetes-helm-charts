@@ -22,6 +22,12 @@ deployment:
   fullnameOverride: ""
   podLabels:
     example: test
+  podLogs:
+    enabled: true
+    pipelineStages:
+      - cri: {}
+      - drop:
+          older_than: 5m
   podAnnotations:
     foo.example: bar
   priorityClassName: "critical"

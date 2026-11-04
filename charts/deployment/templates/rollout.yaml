@@ -45,7 +45,7 @@ spec:
 
   template:
     metadata:
-      labels: {{ include "common.labels.standard" (dict "customLabels" .Values.podLabels "context" $ ) | nindent 8 }}
+      labels: {{ include "common.labels.standard" (dict "customLabels" (mergeOverwrite (dict) .Values.podLabels (include "common.logs.podLabels" $ | fromYaml)) "context" $ ) | nindent 8 }}
       {{- if or .Values.podAnnotations .Values.metrics.enabled }}
       {{- include "common.annotations.podAnnotations" . | trim | nindent 8 }}
       {{- end }}

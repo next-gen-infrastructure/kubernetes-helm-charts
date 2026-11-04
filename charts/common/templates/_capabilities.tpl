@@ -145,6 +145,11 @@ Usage:
 {{- print "traefik.io/v1alpha1" -}}
 {{- end -}}
 
+{{/* Grafana Alloy PodLogs */}}
+{{- define "common.capabilities.podlogs.apiVersion" -}}
+{{- print "monitoring.grafana.com/v1alpha2" -}}
+{{- end -}}
+
 {{/*
 Return the appropriate apiVersion for Vertical Pod Autoscaler.
 */}}

@@ -4,7 +4,7 @@ StatefulSet application with stable network identity and persistent storage.
 
 ## Resources
 
-StatefulSet, Service (+ headless Service `<name>-headless` in `service-headless.yaml`, + LoadBalancer Service `service-lb.yaml`), PVC, Ingress / extra Ingress, PodDisruptionBudget, ServiceMonitor, PrometheusRule, ServiceAccount, Role / RoleBinding, ConfigMap, ExternalSecret.
+StatefulSet, Service (+ headless Service `<name>-headless` in `service-headless.yaml`, + LoadBalancer Service `service-lb.yaml`), PVC, Ingress / extra Ingress, PodDisruptionBudget, ServiceMonitor, PrometheusRule, PodLogs (`podLogs.enabled`, see [deployment.md](deployment.md)), ServiceAccount, Role / RoleBinding, ConfigMap, ExternalSecret.
 
 ## Differences from `deployment`
 

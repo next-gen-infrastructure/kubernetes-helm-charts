@@ -220,6 +220,9 @@
                 "anyOf": [
                   {
                     "type": "string"
+                  },
+                  {
+                    "type": "string"
                   }
                 ],
                 "required": []
@@ -604,6 +607,32 @@
       "type": "object"
     },
     "podLabels": {
+      "required": [],
+      "type": "object"
+    },
+    "podLogs": {
+      "properties": {
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "pipelineStages": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        },
+        "relabelings": {
+          "items": {
+            "required": []
+          },
+          "type": "array"
+        }
+      },
       "required": [],
       "type": "object"
     },
