@@ -240,21 +240,21 @@ Typical StateFul Set application
 
 ### Configuration for the main load-balancer
 
-| Name                          | Description                                                                                           | Value           |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------- | --------------- |
-| `ingress.enabled`             | If service will be accessible outside of Kubernetes environment                                       | `false`         |
-| `ingress.className`           | Name of the ingress Class, used by the Traefik IngressRoute.                                          | `traefik`       |
-| `ingress.pathType`            | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")                      | `Prefix`        |
-| `ingress.subDomain`           | If DNS has environment as sub-domain.                                                                 | `false`         |
-| `ingress.path`                | Prefix for the path routing                                                                           | `/`             |
-| `ingress.annotations`         | Ingress annotations                                                                                   | `{}`            |
-| `ingress.extraHosts`          | Extra hosts for ingress                                                                               | `[]`            |
-| `Traefik`                     | IngressRoute (traefik.io/v1alpha1) configuration                                                      |                 |
-| `ingress.traefik.enabled`     | Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.                            | `false`         |
-| `ingress.traefik.entryPoints` | Traefik entry points the route is attached to                                                         | `["websecure"]` |
-| `ingress.traefik.middlewares` | Traefik Middleware objects to create: the key is the name, the value is the spec (templates allowed). | `{}`            |
-| `ingress.traefik.routes`      | Routes of the IngressRoute, each one matching any of its hosts and any of its paths.                  | `[]`            |
-| `ingress.traefik.tls`         | IngressRoute tls block.                                                                               | `{}`            |
+| Name                          | Description                                                                                           | Value                 |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------- |
+| `ingress.enabled`             | If service will be accessible outside of Kubernetes environment                                       | `false`               |
+| `ingress.className`           | Name of the ingress Class, used by the Traefik IngressRoute.                                          | `traefik`             |
+| `ingress.pathType`            | Type of the path (available options "ImplementationSpecific", "Exact", "Prefix")                      | `Prefix`              |
+| `ingress.subDomain`           | If DNS has environment as sub-domain.                                                                 | `false`               |
+| `ingress.path`                | Prefix for the path routing                                                                           | `/`                   |
+| `ingress.annotations`         | Ingress annotations                                                                                   | `{}`                  |
+| `ingress.extraHosts`          | Extra hosts for ingress                                                                               | `[]`                  |
+| `Traefik`                     | IngressRoute (traefik.io/v1alpha1) configuration                                                      |                       |
+| `ingress.traefik.enabled`     | Render a Traefik IngressRoute (traefik.io/v1alpha1) instead of an Ingress.                            | `false`               |
+| `ingress.traefik.entryPoints` | Traefik entry points the route is attached to                                                         | `["web","websecure"]` |
+| `ingress.traefik.middlewares` | Traefik Middleware objects to create: the key is the name, the value is the spec (templates allowed). | `{}`                  |
+| `ingress.traefik.routes`      | Routes of the IngressRoute, each one matching any of its hosts and any of its paths.                  | `[]`                  |
+| `ingress.traefik.tls`         | IngressRoute tls block.                                                                               | `{}`                  |
 
 ### Configuration for the extra load-balancer
 
@@ -274,6 +274,15 @@ Typical StateFul Set application
 | ------------- | -------------------------------------------------- | ------ |
 | `rbac.create` | Specifies whether RBAC resources should be created | `true` |
 | `rbac.rules`  | Custom RBAC rules to set                           | `[]`   |
+
+### Log collection (Grafana Alloy PodLogs)
+
+| Name                     | Description                                                                                                                | Value   |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `podLogs.enabled`        | Render a PodLogs resource (monitoring.grafana.com/v1alpha2) for the pods of this release and label them `podlogs: "true"`. | `false` |
+| `podLogs.name`           | PodLogs resource name override. Defaults to the full name of the release.                                                  | `""`    |
+| `podLogs.relabelings`    | Extra relabelings (templates allowed), added after the default `app` one.                                                  | `[]`    |
+| `podLogs.pipelineStages` | Log processing stages applied to these pods (Loki/Promtail pipeline stages, templates allowed).                            | `[]`    |
 
 ### Prometheus Exporter / Metrics
 
