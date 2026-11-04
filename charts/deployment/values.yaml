@@ -789,7 +789,7 @@ rbac:
 ## @section Log collection (Grafana Alloy PodLogs)
 ##
 podLogs:
-  ## @param podLogs.enabled Render a PodLogs resource (monitoring.grafana.com/v1alpha2) for the pods of this release and label them `podlogs: "true"`.
+  ## @param podLogs.enabled Render a PodLogs resource (monitoring.grafana.com/v1alpha2) for the pods of this release and label them `monitoring.grafana.com/podlogs: enabled`.
   ## The collector must run loki.source.podlogs and drop pods with that label from its generic pipeline, otherwise logs are collected twice.
   ##
   enabled: false
