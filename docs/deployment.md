@@ -15,7 +15,6 @@ Typical microservice: a Deployment **or** an Argo Rollout, plus Service, Ingress
 | PodDisruptionBudget | `pdb.create` |
 | PVC | `persistence.enabled` |
 | ServiceMonitor / PrometheusRule | `metrics.serviceMonitor.enabled` / `metrics.rules.enabled` |
-| Grafana Alloy PodLogs | `podLogs.enabled` (labels the pods `monitoring.grafana.com/podlogs: enabled`; the collector must run `loki.source.podlogs` and drop pods with that label from its generic pipeline) |
 | ServiceAccount, Role, RoleBinding | `serviceAccount.create`, `rbac.create` |
 | ConfigMap (env) | `configMap.enabled` |
 | ExternalSecret | `env.vaultSecret` entries |

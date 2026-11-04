@@ -306,15 +306,6 @@ Typical microservice chart. Supports Ingress controller, horizontal-scalable con
 | `rbac.create` | Specifies whether RBAC resources should be created | `true` |
 | `rbac.rules`  | Custom RBAC rules to set                           | `[]`   |
 
-### Log collection (Grafana Alloy PodLogs)
-
-| Name                     | Description                                                                                                                                        | Value   |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `podLogs.enabled`        | Render a PodLogs resource (monitoring.grafana.com/v1alpha2) for the pods of this release and label them `monitoring.grafana.com/podlogs: enabled`. | `false` |
-| `podLogs.name`           | PodLogs resource name override. Defaults to the full name of the release.                                                                          | `""`    |
-| `podLogs.relabelings`    | Extra relabelings (templates allowed), added after the default `app` one.                                                                          | `[]`    |
-| `podLogs.pipelineStages` | Log processing stages applied to these pods (Loki/Promtail pipeline stages, templates allowed).                                                    | `[]`    |
-
 ### Prometheus Exporter / Metrics
 
 | Name                                   | Description                                                                                     | Value        |
