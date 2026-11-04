@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.3.2...statefulset-5.4.0) (2026-11-04)
+
+
+### Features
+
+* **common,deployment,statefulset:** add Grafana Alloy PodLogs support ([f7c1d73](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/f7c1d7327e0d9a8226e6cec01d554d701a7794bc))
+* **common,deployment,statefulset:** add Grafana Alloy PodLogs support ([2018534](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/20185349ef88d5f19261ffc42f868c89bbd48d86))
+
 ## [5.3.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.3.1...statefulset-5.3.2) (2026-11-02)
 
 
