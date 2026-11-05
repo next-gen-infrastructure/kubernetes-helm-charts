@@ -424,7 +424,7 @@
     "networkPolicy": {
       "properties": {
         "allowIngressFromIngressController": {
-          "default": true,
+          "default": false,
           "type": "boolean"
         },
         "allowPodSelectors": {

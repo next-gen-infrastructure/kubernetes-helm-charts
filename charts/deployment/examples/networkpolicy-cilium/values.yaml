@@ -16,6 +16,7 @@ deployment:
     prometheusNamespace: monitoring      # may scrape the metrics port only
   networkPolicy:
     enabled: true
+    allowIngressFromIngressController: true   # public ingress
     ingressControllerNamespace: traefik
     allowedNamespaces: [frontend]        # these namespaces reach the service ports
     allowSameNamespace: false            # not the whole release namespace, only:

@@ -408,7 +408,7 @@ networkPolicy:
   cilium: true
   ## @param networkPolicy.allowIngressFromIngressController Allow traffic from the namespace in ingressControllerNamespace
   ##
-  allowIngressFromIngressController: true
+  allowIngressFromIngressController: false
   ## @param networkPolicy.ingressControllerNamespace Namespace of the ingress controller
   ##
   ingressControllerNamespace: traefik
