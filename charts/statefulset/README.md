@@ -182,7 +182,7 @@ Typical StateFul Set application
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
 | `networkPolicy.enabled`                           | Create a network policy for the pods                                                                                                           | `false`   |
 | `networkPolicy.cilium`                            | Render a CiliumNetworkPolicy (cilium.io/v2) instead of a NetworkPolicy. Requires the Cilium CRDs                                               | `true`    |
-| `networkPolicy.allowIngressFromIngressController` | Allow traffic from the namespace in ingressControllerNamespace                                                                                 | `true`    |
+| `networkPolicy.allowIngressFromIngressController` | Allow traffic from the namespace in ingressControllerNamespace                                                                                 | `false`   |
 | `networkPolicy.ingressControllerNamespace`        | Namespace of the ingress controller                                                                                                            | `traefik` |
 | `networkPolicy.allowSameNamespace`                | Allow traffic from the release namespace                                                                                                       | `true`    |
 | `networkPolicy.allowPodSelectors`                 | Pods of the release namespace allowed in, as label maps, e.g. [{app.kubernetes.io/name: frontend}]. Used only when allowSameNamespace is false | `[]`      |

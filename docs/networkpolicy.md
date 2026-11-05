@@ -18,7 +18,7 @@ Only Cilium can allow egress by hostname (`egress.fqdns`); setting it with `cili
 
 | Value | Default | Namespace |
 |---|---|---|
-| `allowIngressFromIngressController` + `ingressControllerNamespace` | `true`, `traefik` | the ingress controller |
+| `allowIngressFromIngressController` + `ingressControllerNamespace` | `false`, `traefik` | the ingress controller; enable it only for services behind the ingress |
 | `allowSameNamespace` | `true` | the release namespace |
 | `allowPodSelectors` | `[]` | only these pods (label maps) of the release namespace; used when `allowSameNamespace` is `false` |
 | `allowedNamespaces` | `[]` | any extra namespaces |
@@ -45,6 +45,7 @@ deployment:
     prometheusNamespace: monitoring      # may scrape the metrics port only
   networkPolicy:
     enabled: true
+    allowIngressFromIngressController: true   # public ingress
     ingressControllerNamespace: traefik
     allowedNamespaces: [frontend]        # these namespaces reach the service ports
     allowSameNamespace: false            # not the whole release namespace, only:

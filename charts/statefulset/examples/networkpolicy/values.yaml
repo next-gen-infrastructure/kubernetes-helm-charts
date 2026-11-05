@@ -13,6 +13,7 @@ statefulset:
   networkPolicy:
     enabled: true
     # cilium: true is the default
+    allowIngressFromIngressController: true   # public ingress
     ingressControllerNamespace: traefik
     allowedNamespaces: [monitoring]
     egress:
