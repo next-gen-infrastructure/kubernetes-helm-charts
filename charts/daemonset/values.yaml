@@ -378,7 +378,7 @@ networkPolicy:
   allowIngressFromIngressController: true
   ## @param networkPolicy.ingressControllerNamespace Namespace of the ingress controller
   ##
-  ingressControllerNamespace: kube-system
+  ingressControllerNamespace: traefik
   ## @param networkPolicy.allowSameNamespace Allow traffic from the release namespace
   ##
   allowSameNamespace: true

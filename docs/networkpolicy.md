@@ -18,7 +18,7 @@ Only Cilium can allow egress by hostname (`egress.fqdns`); setting it with `cili
 
 | Value | Default | Namespace |
 |---|---|---|
-| `allowIngressFromIngressController` + `ingressControllerNamespace` | `true`, `kube-system` | the ingress controller |
+| `allowIngressFromIngressController` + `ingressControllerNamespace` | `true`, `traefik` | the ingress controller |
 | `allowSameNamespace` | `true` | the release namespace |
 | `allowPodSelectors` | `[]` | only these pods (label maps) of the release namespace; used when `allowSameNamespace` is `false` |
 | `allowedNamespaces` | `[]` | any extra namespaces |

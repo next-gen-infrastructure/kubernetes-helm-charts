@@ -370,7 +370,7 @@
           "type": "array"
         },
         "ingressControllerNamespace": {
-          "default": "kube-system",
+          "default": "traefik",
           "type": "string"
         }
       },
