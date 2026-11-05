@@ -1334,6 +1334,22 @@ entries:
     version: 1.0.0
   daemonset:
   - apiVersion: v2
+    created: "2026-11-05T19:33:53.797247046Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical Daemon Set application
+    digest: 85b9f5a2bccbd85a4dbc8a8836bccdb43baed758f61cb1b86fcaa25adf10adcb
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    name: daemonset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/daemonset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-5.4.0/daemonset-5.4.0.tgz
+    version: 5.4.0
+  - apiVersion: v2
     created: "2026-11-05T12:27:14.593139271Z"
     dependencies:
     - name: common
@@ -1702,6 +1718,26 @@ entries:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/daemonset-1.1.0/daemonset-1.1.0.tgz
     version: 1.1.0
   deployment:
+  - apiVersion: v2
+    created: "2026-11-05T19:33:55.049542926Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Typical microservice chart. Supports Ingress controller, horizontal-scalable
+      containers
+    digest: eb0a9f26eaea0d7377cb579a3865bcb642d893befc2500a72177b43a275b6360
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: deployment
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/deployment
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/deployment-5.7.0/deployment-5.7.0.tgz
+    version: 5.7.0
   - apiVersion: v2
     created: "2026-11-05T18:43:26.936191577Z"
     dependencies:
@@ -2729,6 +2765,25 @@ entries:
     version: 1.1.0
   statefulset:
   - apiVersion: v2
+    created: "2026-11-05T19:33:56.111749392Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=2.0.0'
+    description: Typical StateFul Set application
+    digest: d94c9f471b3215c67df65190473517714f73aed52c2ede2107f5f2b9355aa408
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: statefulset
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/statefulset
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/statefulset-5.6.0/statefulset-5.6.0.tgz
+    version: 5.6.0
+  - apiVersion: v2
     created: "2026-11-05T12:27:16.754120959Z"
     dependencies:
     - name: common
@@ -3565,4 +3620,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-05T18:43:26.932724786Z"
+generated: "2026-11-05T19:33:56.109360811Z"
