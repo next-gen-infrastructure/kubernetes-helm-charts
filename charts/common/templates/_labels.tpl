@@ -16,19 +16,18 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 {{- end -}}
 
 {{/*
-Kubernetes standard labels, plus "app" set to the full name (log collectors key on it); custom labels can override it
+Kubernetes standard labels. "app.kubernetes.io/name" is the full name of the workload, so every workload of a release, e.g. an API and its worker, has its own name; "app.kubernetes.io/instance" is the release. Custom labels can override them.
 {{ include "common.labels.standard" (dict "customLabels" .Values.commonLabels "context" $) -}}
 */}}
 {{- define "common.labels.standard" -}}
 {{- if and (hasKey . "customLabels") (hasKey . "context") -}}
-{{- $default := dict "app" (include "common.names.fullname" .context) "app.kubernetes.io/name" (include "common.names.name" .context) "helm.sh/chart" (include "common.names.chart" .context) "app.kubernetes.io/instance" .context.Release.Name "app.kubernetes.io/managed-by" .context.Release.Service -}}
+{{- $default := dict "app.kubernetes.io/name" (include "common.names.fullname" .context) "helm.sh/chart" (include "common.names.chart" .context) "app.kubernetes.io/instance" .context.Release.Name "app.kubernetes.io/managed-by" .context.Release.Service -}}
 {{- with .context.Chart.AppVersion -}}
 {{- $_ := set $default "app.kubernetes.io/version" (include "common.labels.value" .) -}}
 {{- end -}}
 {{ template "common.tplvalues.merge" (dict "values" (list .customLabels $default) "context" .context) }}
 {{- else -}}
-app: {{ include "common.names.fullname" . }}
-app.kubernetes.io/name: {{ include "common.names.name" . }}
+app.kubernetes.io/name: {{ include "common.names.fullname" . }}
 helm.sh/chart: {{ include "common.names.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -49,9 +48,9 @@ overwrote them on metadata.labels fields.
 */}}
 {{- define "common.labels.matchLabels" -}}
 {{- if and (hasKey . "customLabels") (hasKey . "context") -}}
-{{ merge (pick (include "common.tplvalues.render" (dict "value" .customLabels "context" .context) | fromYaml) "app.kubernetes.io/name" "app.kubernetes.io/instance") (dict "app.kubernetes.io/name" (include "common.names.name" .context) "app.kubernetes.io/instance" .context.Release.Name ) | toYaml }}
+{{ merge (pick (include "common.tplvalues.render" (dict "value" .customLabels "context" .context) | fromYaml) "app.kubernetes.io/name" "app.kubernetes.io/instance") (dict "app.kubernetes.io/name" (include "common.names.fullname" .context) "app.kubernetes.io/instance" .context.Release.Name ) | toYaml }}
 {{- else -}}
-app.kubernetes.io/name: {{ include "common.names.name" . }}
+app.kubernetes.io/name: {{ include "common.names.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 {{- end -}}

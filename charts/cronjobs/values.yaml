@@ -55,7 +55,7 @@ global:
 ## This overrides that and uses the given string instead.
 ##
 nameOverride: ""
-## @param fullnameOverride By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'.
+## @param fullnameOverride By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'. It is also the value of the `app.kubernetes.io/name` label and of the pod selector, so it must differ between the workloads of a release.
 ## This overrides that and uses the given string instead.
 ##
 fullnameOverride: ""

@@ -29,10 +29,10 @@ Kubernetes Cron Jobs
 
 ### Common parameters
 
-| Name               | Description                                                                                                                                                                  | Value |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| `nameOverride`     | By default, name uses '{{ .Chart.Name }}'. When set, global.serviceName no longer names the workload, which keeps init and sidecar containers apart from the main container. | `""`  |
-| `fullnameOverride` | By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'.                                                                           | `""`  |
+| Name               | Description                                                                                                                                                                                                                                  | Value |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `nameOverride`     | By default, name uses '{{ .Chart.Name }}'. When set, global.serviceName no longer names the workload, which keeps init and sidecar containers apart from the main container.                                                                 | `""`  |
+| `fullnameOverride` | By default, fullname is global.serviceName when set, else '{{ .Release.Name }}-{{ .Chart.Name }}'. It is also the value of the `app.kubernetes.io/name` label and of the pod selector, so it must differ between the workloads of a release. | `""`  |
 
 ### Security context
 
