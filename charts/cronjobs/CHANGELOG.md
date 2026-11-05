@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-5.2.2...cronjobs-6.0.0) (2026-11-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **common,deployment,statefulset,daemonset,cronjobs:** app.kubernetes.io/name changes from the chart/alias name to the workload full name, and the app label is removed. Deployment, StatefulSet and DaemonSet selectors are immutable, so existing workloads must be recreated, and hand-written selectors on app.kubernetes.io/name must be updated.
+
+### Features
+
+* **common,deployment,statefulset,daemonset,cronjobs:** use the workload name as app.kubernetes.io/name, drop app label ([dbfcb6b](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/dbfcb6b9c5ef667394f3e2393402f9dd7126426d))
+
 ## [5.2.2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/cronjobs-5.2.1...cronjobs-5.2.2) (2026-11-01)
 
 
