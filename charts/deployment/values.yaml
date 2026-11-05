@@ -299,6 +299,13 @@ topologySpread:
   ## @param topologySpread.maxSkew Override maxSkew for soft/hard presets (default: 1, soft with 10+ autoscaling replicas: 2)
   ##
   maxSkew: ""
+  ## @param topologySpread.nodeTaintsPolicy Honor ignores nodes the pods can't tolerate (e.g. tainted control-plane nodes) when counting domains, otherwise they count as empty and block the rollout surge pod. Used by soft/hard presets; empty keeps the Kubernetes default (Ignore)
+  ##
+  nodeTaintsPolicy: Honor
+  ## @param topologySpread.matchLabelKeys Pod label keys whose values are added to the constraint's selector, so only pods of the same revision are counted and old pods being replaced don't skew the spread during a rollout. Used by soft/hard presets
+  ##
+  matchLabelKeys:
+    - pod-template-hash
   ## @param topologySpread.constraints Raw topologySpreadConstraints, used only when preset is custom (supports templating)
   ##
   constraints: []

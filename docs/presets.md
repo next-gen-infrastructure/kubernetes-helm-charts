@@ -84,6 +84,8 @@ nodeAffinityPreset:
 | `topologyKey` | `topology.kubernetes.io/zone` | domain to spread across |
 | `maxSkew` | auto | `1`; for `soft` with `autoscaling.minReplicas >= 10` (deployment only) it is `2`. Setting it overrides |
 | `constraints` | `[]` | raw `topologySpreadConstraints`, only for `custom`, supports `{{ }}` |
+| `nodeTaintsPolicy` | `Honor` (deployment) | `Honor` ignores nodes the pods can't tolerate (e.g. tainted control-plane nodes) when counting domains; without it they count as empty, the minimum stays 0, and a rollout's surge pod can't be placed on a `hard` preset. Empty = Kubernetes default (`Ignore`). `soft`/`hard` only |
+| `matchLabelKeys` | `[pod-template-hash]` (deployment) | label keys added to the selector so only pods of the same revision are counted; otherwise old pods being replaced skew the spread and the new pods can all end up on one node. `soft`/`hard` only. Not set in `statefulset` |
 
 Any other `preset` value fails the render. The label selector is the release's match labels (plus `podLabels`).
 
