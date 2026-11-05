@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-5.5.0...deployment-5.6.0) (2026-11-05)
+
+
+### Features
+
+* **common,deployment:** spread rollout pods across nodes with taint-aware, per-revision constraints ([ce363fa](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/ce363fae91bda6bc227d247d07d06cdb0c0330b0))
+* **common,deployment:** taint-aware, per-revision topology spread ([d6cda63](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/d6cda635935a82ca710bf892a86f10c836467676))
+
 ## [5.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/deployment-5.4.0...deployment-5.5.0) (2026-11-05)
 
 
