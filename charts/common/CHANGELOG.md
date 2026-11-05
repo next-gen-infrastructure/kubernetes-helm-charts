@@ -1,5 +1,19 @@
 # Changelog
 
+## [5.4.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.4.0...common-5.4.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* **common,deployment,statefulset:** use monitoring.grafana.com/podlogs pod label ([e157b63](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/e157b63e2dd1a9b318b6f7c0de80fc9a103bacc0))
+* **common,deployment,statefulset:** use monitoring.grafana.com/podlogs pod label ([b2cf83c](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b2cf83c7cc7346b798852ccdcdf74931e4c740a4))
+
+
+### Reverts
+
+* **common,deployment,statefulset:** remove Grafana Alloy PodLogs support ([8a3290d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/8a3290d2e202f836c0b783339f20dfe83f0a4741))
+* **common,deployment,statefulset:** remove Grafana Alloy PodLogs support ([b819908](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/b81990838094eccf88d25ed83579ac6836083a73))
+
 ## [5.4.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/common-5.3.1...common-5.4.0) (2026-11-04)
 
 

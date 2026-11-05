@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.3.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-5.2.1...daemonset-5.3.0) (2026-11-05)
+
+
+### Features
+
+* **daemonset,deployment,statefulset:** switch default ingress namespace ([eb31b18](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/eb31b18702591645763443437097708327abb56f))
+* **daemonset,deployment,statefulset:** switch default ingress namespace ([c4692a2](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/c4692a28fb2762b39cad8bd04f279ef9b5ed9564))
+
 ## [5.2.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/daemonset-5.2.0...daemonset-5.2.1) (2026-11-01)
 
 
