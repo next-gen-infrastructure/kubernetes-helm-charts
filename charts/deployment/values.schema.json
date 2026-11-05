@@ -1033,8 +1033,23 @@
           },
           "type": "array"
         },
+        "matchLabelKeys": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "type": "array"
+        },
         "maxSkew": {
           "default": "",
+          "type": "string"
+        },
+        "nodeTaintsPolicy": {
+          "default": "Honor",
           "type": "string"
         },
         "preset": {

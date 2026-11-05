@@ -55,6 +55,13 @@ Generate topology spread constraints
 - maxSkew: {{ .maxSkew | default 1 }}
   topologyKey: {{ .topologyKey | default "topology.kubernetes.io/zone" }}
   whenUnsatisfiable: {{ .whenUnsatisfiable | default "ScheduleAnyway" }}
+  {{- $ts := .context.Values.topologySpread | default dict }}
+  {{- with $ts.nodeTaintsPolicy }}
+  nodeTaintsPolicy: {{ . }}
+  {{- end }}
+  {{- with $ts.matchLabelKeys }}
+  matchLabelKeys: {{- toYaml . | nindent 4 }}
+  {{- end }}
   labelSelector:
     matchLabels: {{- include "common.labels.matchLabels" (dict "customLabels" .context.Values.podLabels "context" .context) | nindent 6 }}
 {{- end }}
