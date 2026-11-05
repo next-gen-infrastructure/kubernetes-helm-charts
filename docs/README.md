@@ -13,7 +13,7 @@ Per-chart guides. Full value reference lives in each chart's generated `charts/<
 | vaultsecrets | ExternalSecrets | [vaultsecrets.md](vaultsecrets.md) |
 | namespace | Namespace, registry ExternalSecret + default ServiceAccount pull secret, Loki alerts, PrometheusRule, ImageUpdater | [namespace.md](namespace.md) |
 
-Cross-chart topics: [presets.md](presets.md) (resources, affinity, topology spread), [networkpolicy.md](networkpolicy.md) (Cilium / Kubernetes network policies).
+Cross-chart topics: [presets.md](presets.md) (resources, affinity, topology spread), [networkpolicy.md](networkpolicy.md) (Cilium / Kubernetes network policies), [labels.md](labels.md) (labels and pod selectors, several workloads in one release).
 
 ## Using a chart
 
