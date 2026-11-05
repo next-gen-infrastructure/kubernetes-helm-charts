@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.6.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.5.0...statefulset-5.6.0) (2026-11-05)
+
+
+### Features
+
+* **deployment,statefulset,daemonset:** default allowIngressFromIngressController to false ([5198463](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/519846369f95b9555eb190eae73128fea7ac695a))
+* **deployment,statefulset,daemonset:** default allowIngressFromIngressController to false ([af13c9d](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/af13c9da263ca5d4be8dd48e582f478aad141ed9))
+
 ## [5.5.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.4.0...statefulset-5.5.0) (2026-11-05)
 
 
