@@ -89,6 +89,28 @@
     },
     "lokiAlerts": {
       "properties": {
+        "appErrors": {
+          "properties": {
+            "dashboardUrl": {
+              "default": "",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "errorCountThreshold": {
+              "default": 5,
+              "type": "integer"
+            },
+            "runbookBaseUrl": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
         "enabled": {
           "default": false,
           "type": "boolean"
