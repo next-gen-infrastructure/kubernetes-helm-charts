@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-5.0.0...namespace-5.1.0) (2026-11-06)
+
+
+### Features
+
+* **namespace:** add built-in Loki app error alerts ([36d5399](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/36d53997a1f921fcac9e5f4602a871d73014eada))
+* **namespace:** add built-in Loki app error alerts ([5641039](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/5641039f13053e5bc17aa728efa9318a8ec9e8b2))
+
 ## [5.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-1.0.0...namespace-5.0.0) (2026-11-01)
 
 
