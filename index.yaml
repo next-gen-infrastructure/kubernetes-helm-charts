@@ -2729,6 +2729,25 @@ entries:
     version: 1.0.0
   namespace:
   - apiVersion: v2
+    created: "2026-11-06T00:31:10.384351188Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      version: '>=4.10.1'
+    description: Namespace and namespace objects chart
+    digest: 17418fbbec9417700c460a075dda3a3a26f0691612db2752d31e559f1768bc95
+    home: https://next-gen-infrastructure.github.io/kubernetes-helm-charts
+    maintainers:
+    - name: Alexander Dobrodey
+      url: https://github.com/ADobrodey
+    name: namespace
+    sources:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/tree/main/charts/namespace
+    type: application
+    urls:
+    - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/namespace-5.1.1/namespace-5.1.1.tgz
+    version: 5.1.1
+  - apiVersion: v2
     created: "2026-11-06T00:24:14.239215001Z"
     dependencies:
     - name: common
@@ -3735,4 +3754,4 @@ entries:
     urls:
     - https://github.com/next-gen-infrastructure/kubernetes-helm-charts/releases/download/vaultsecrets-1.0.0/vaultsecrets-1.0.0.tgz
     version: 1.0.0
-generated: "2026-11-06T00:24:14.237473659Z"
+generated: "2026-11-06T00:31:10.382819161Z"
