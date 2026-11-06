@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.1](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-5.1.0...namespace-5.1.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* **namespace:** template dashboard URL ([36c3e12](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/36c3e122ac248fc8fc16d9e9e6760683008baf7a))
+
 ## [5.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/namespace-5.0.0...namespace-5.1.0) (2026-11-06)
 
 
