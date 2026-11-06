@@ -1,4 +1,4 @@
-{{- if and .Values.lokiAlerts.enabled .Values.lokiAlerts.groups }}
+{{- if and .Values.lokiAlerts.enabled (or .Values.lokiAlerts.groups .Values.lokiAlerts.appErrors.enabled) }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -12,5 +12,51 @@ metadata:
 data:
   {{ .Release.Namespace }}.yaml: |
     groups:
+    {{- if .Values.lokiAlerts.appErrors.enabled }}
+    {{- $url := .Values.lokiAlerts.appErrors.runbookBaseUrl }}
+    {{- $dash := .Values.lokiAlerts.appErrors.dashboardUrl }}
+    - name: {{ .Release.Namespace }}-app-errors
+      interval: 1m
+      rules:
+        - alert: LokiAppErrors
+          expr: |
+            sum by (namespace, app) (
+              count_over_time({namespace="{{ .Release.Namespace }}"} | json | level = "error" | __error__ = "" [10m])
+            ) > {{ .Values.lokiAlerts.appErrors.errorCountThreshold }}
+          for: 5m
+          labels:
+            alertname: High App Errors Count (>{{ .Values.lokiAlerts.appErrors.errorCountThreshold }} in last 10 minutes)
+            severity: warning
+            instance: '{{ "{{ $labels.namespace }}" }}/{{ "{{ $labels.app }}" }}'
+          annotations:
+            summary: '🚨 ERROR logs detected in {{ "{{ $labels.app }}" }}'
+            {{- if $url }}
+            runbook_url: {{ $url }}/LokiAppErrors.md
+            {{- end }}
+            {{- if $dash }}
+            dashboard_url: '{{ $dash }}?var-namespace={{ .Release.Namespace }}&var-app={{ "{{ $labels.app }}" }}'
+            {{- end }}
+        - alert: LokiAppErrorsRate
+          expr: |
+            sum by (namespace, app) (rate({namespace="{{ .Release.Namespace }}"} | json | level = "error" | __error__ = "" [15m]))
+            /
+            sum by (namespace, app) (rate({namespace="{{ .Release.Namespace }}"}[15m]))
+            > 0.05
+          for: 10m
+          labels:
+            alertname: High App Error Rate (>5% in last 15 minutes)
+            severity: warning
+            instance: '{{ "{{ $labels.namespace }}" }}/{{ "{{ $labels.app }}" }}'
+          annotations:
+            summary: '🚨 High error rate in {{ "{{ $labels.app }}" }}'
+            {{- if $url }}
+            runbook_url: {{ $url }}/LokiAppErrorsRate.md
+            {{- end }}
+            {{- if $dash }}
+            dashboard_url: '{{ $dash }}?var-namespace={{ .Release.Namespace }}&var-app={{ "{{ $labels.app }}" }}'
+            {{- end }}
+    {{- end }}
+    {{- if .Values.lokiAlerts.groups }}
     {{- include "common.tplvalues.toYaml" (dict "value" .Values.lokiAlerts.groups "context" .) | nindent 4 }}
+    {{- end }}
 {{- end }}

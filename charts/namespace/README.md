@@ -46,11 +46,15 @@ Namespace and namespace objects chart: registry pull secret, default ServiceAcco
 
 ### Loki alerts
 
-| Name                 | Description                                                                                                                    | Value   |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| `lokiAlerts.enabled` | Render a ConfigMap picked up by the Loki ruler (`loki_rule: "true"`)                                                           | `false` |
-| `lokiAlerts.tenant`  | Loki tenant annotation                                                                                                         | `fake`  |
-| `lokiAlerts.groups`  | Loki rule groups. Rendered with `tpl`: use `{{ .Release.Namespace }}` and escape Loki templates as `{{ "{{ $labels.pod }}" }}` | `[]`    |
+| Name                                       | Description                                                                                                                                                                                        | Value   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `lokiAlerts.enabled`                       | Render a ConfigMap picked up by the Loki ruler (`loki_rule: "true"`)                                                                                                                               | `false` |
+| `lokiAlerts.tenant`                        | Loki tenant annotation                                                                                                                                                                             | `fake`  |
+| `lokiAlerts.groups`                        | Loki rule groups. Rendered with `tpl`: use `{{ .Release.Namespace }}` and escape Loki templates as `{{ "{{ $labels.pod }}" }}`                                                                     | `[]`    |
+| `lokiAlerts.appErrors.enabled`             | Add the built-in `LokiAppErrors` (`level=error` JSON log lines in 10m, see `errorCountThreshold`) and `LokiAppErrorsRate` (>5% error lines in 15m) alerts, per `app` stream label of the namespace | `false` |
+| `lokiAlerts.appErrors.errorCountThreshold` | `LokiAppErrors` fires when an app logs more than this many error lines in 10m                                                                                                                      | `5`     |
+| `lokiAlerts.appErrors.runbookBaseUrl`      | Base URL of the runbooks; `runbook_url` is `<runbookBaseUrl>/<alert>.md`. Annotation omitted when empty                                                                                            | `""`    |
+| `lokiAlerts.appErrors.dashboardUrl`        | Dashboard URL without query; `?var-namespace=<ns>&var-app=<app>` is appended (e.g. `https://grafana.example.com/d/application-errors/application-errors`). Annotation omitted when empty           | `""`    |
 
 ### Prometheus rules
 
