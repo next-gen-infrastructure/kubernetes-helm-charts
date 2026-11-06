@@ -37,7 +37,7 @@ imageUpdater:
 
 Notes:
 
-- `groups` of `lokiAlerts` and `prometheusRules` and `imageUpdater.writeBackTarget` are rendered with `tpl`: Loki/Prometheus templates must be escaped as `{{ "{{ $labels.pod }}" }}`.
+- `groups` of `lokiAlerts` and `prometheusRules`, `lokiAlerts.appErrors.dashboardUrl` and `imageUpdater.writeBackTarget` are rendered with `tpl`: Loki/Prometheus templates must be escaped as `{{ "{{ $labels.pod }}" }}`.
 - The `ImageUpdater` is created in `imageUpdater.namespace` (default `argocd`), not in the release namespace: it only matches Applications in its own namespace (the CRD has no namespace field). The Argo CD project of the installing Application must therefore allow `argocd` as a destination.
 - The ExternalSecret carries the `sync-wave: "-1"` annotation like the other charts.
 

@@ -14,7 +14,7 @@ data:
     groups:
     {{- if .Values.lokiAlerts.appErrors.enabled }}
     {{- $url := .Values.lokiAlerts.appErrors.runbookBaseUrl }}
-    {{- $dash := .Values.lokiAlerts.appErrors.dashboardUrl }}
+    {{- $dash := tpl .Values.lokiAlerts.appErrors.dashboardUrl . }}
     - name: {{ .Release.Namespace }}-app-errors
       interval: 1m
       rules:

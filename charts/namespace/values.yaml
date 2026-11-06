@@ -78,7 +78,7 @@ lokiAlerts:
     ## @param lokiAlerts.appErrors.runbookBaseUrl Base URL of the runbooks; `runbook_url` is `<runbookBaseUrl>/<alert>.md`. Annotation omitted when empty
     ##
     runbookBaseUrl: ""
-    ## @param lokiAlerts.appErrors.dashboardUrl Dashboard URL without query; `?var-namespace=<ns>&var-app=<app>` is appended (e.g. `https://grafana.example.com/d/application-errors/application-errors`). Annotation omitted when empty
+    ## @param lokiAlerts.appErrors.dashboardUrl Dashboard URL without query, rendered with `tpl` (e.g. `https://grafana.{{ .Values.global.domain }}/d/application-errors/application-errors`); `?var-namespace=<ns>&var-app=<app>` is appended. Annotation omitted when empty
     ##
     dashboardUrl: ""
 
