@@ -68,19 +68,6 @@ lokiAlerts:
   ## @param lokiAlerts.groups Loki rule groups. Rendered with `tpl`: use `{{ .Release.Namespace }}` and escape Loki templates as `{{ "{{ $labels.pod }}" }}`
   ##
   groups: []
-  appErrors:
-    ## @param lokiAlerts.appErrors.enabled Add the built-in `LokiAppErrors` (`level=error` JSON log lines in 10m, see `errorCountThreshold`) and `LokiAppErrorsRate` (>5% error lines in 15m) alerts, per `app` stream label of the namespace
-    ##
-    enabled: false
-    ## @param lokiAlerts.appErrors.errorCountThreshold `LokiAppErrors` fires when an app logs more than this many error lines in 10m
-    ##
-    errorCountThreshold: 5
-    ## @param lokiAlerts.appErrors.runbookBaseUrl Base URL of the runbooks; `runbook_url` is `<runbookBaseUrl>/<alert>.md`. Annotation omitted when empty
-    ##
-    runbookBaseUrl: ""
-    ## @param lokiAlerts.appErrors.dashboardUrl Dashboard URL without query, rendered with `tpl` (e.g. `https://grafana.{{ .Values.global.domain }}/d/application-errors/application-errors`); `?var-namespace=<ns>&var-app=<app>` is appended. Annotation omitted when empty
-    ##
-    dashboardUrl: ""
 
 ## @section Prometheus rules
 prometheusRules:
