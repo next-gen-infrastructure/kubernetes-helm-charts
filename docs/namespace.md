@@ -7,7 +7,7 @@ Per-namespace bootstrap, installed with `-n <namespace>` (the release namespace 
 | `namespace.create` (default `true`) | `Namespace` named after the release namespace |
 | `registrySecret.enabled` | `ExternalSecret` building a `kubernetes.io/dockerconfigjson` Secret from the Vault key `registrySecret.remoteKey` (properties `username`, `password`, `auth`), via `global.secretStore` |
 | `defaultServiceAccount` | `default` ServiceAccount with `imagePullSecrets` = `registrySecret.name` (when enabled) + `imagePullSecrets`; skipped when the list would be empty |
-| `lokiAlerts` | ConfigMap `loki-alerts-<ns>` labelled `loki_rule: "true"` with `groups`; `lokiAlerts.appErrors.enabled` adds the built-in `LokiAppErrors` / `LokiAppErrorsRate` group (`app` stream label, JSON `level=error`) |
+| `lokiAlerts` | ConfigMap `loki-alerts-<ns>` labelled `loki_rule: "true"` with `groups` |
 | `prometheusRules` | `PrometheusRule` `<ns>` with `groups` |
 | `imageUpdater` | Argo CD Image Updater `ImageUpdater` `<ns>-image-updater` for the listed Applications |
 
@@ -37,7 +37,7 @@ imageUpdater:
 
 Notes:
 
-- `groups` of `lokiAlerts` and `prometheusRules`, `lokiAlerts.appErrors.dashboardUrl` and `imageUpdater.writeBackTarget` are rendered with `tpl`: Loki/Prometheus templates must be escaped as `{{ "{{ $labels.pod }}" }}`.
+- `groups` of `lokiAlerts` and `prometheusRules` and `imageUpdater.writeBackTarget` are rendered with `tpl`: Loki/Prometheus templates must be escaped as `{{ "{{ $labels.pod }}" }}`.
 - The `ImageUpdater` is created in `imageUpdater.namespace` (default `argocd`), not in the release namespace: it only matches Applications in its own namespace (the CRD has no namespace field). The Argo CD project of the installing Application must therefore allow `argocd` as a destination.
 - The ExternalSecret carries the `sync-wave: "-1"` annotation like the other charts.
 
