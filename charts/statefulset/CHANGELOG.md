@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-6.0.0...statefulset-6.1.0) (2026-11-16)
+
+
+### Features
+
+* **resources:** drop a preset request or limit with none or -1 ([eec16b5](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/eec16b59807e1a35118ade5500303d5b808a214b))
+* **resources:** drop a preset request or limit with none or -1 ([350fd3e](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/commit/350fd3e4dc580872e77712019c171ee89526573a))
+
 ## [6.0.0](https://github.com/next-gen-infrastructure/kubernetes-helm-charts/compare/statefulset-5.6.0...statefulset-6.0.0) (2026-11-05)
 
 
