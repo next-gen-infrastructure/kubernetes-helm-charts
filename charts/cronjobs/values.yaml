@@ -186,6 +186,7 @@ resources:
   requests: {}
 ## @param resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge).
 ## Values set in resources override the matching preset values (resources is recommended for production).
+## Set a value in resources to none or -1 to drop it from the preset, e.g. resources.limits.cpu: none removes the CPU limit.
 ## More information: https://github.com/next-gen-infrastructure/kubernetes-helm-charts/blob/main/global/common/templates/_resources.tpl#L9
 ##
 resourcesPreset: "none"

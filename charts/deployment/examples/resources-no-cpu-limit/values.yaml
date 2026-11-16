@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=values.schema.json
+# Keep the small preset, drop only its CPU limit (requests and the memory limit stay as in the preset).
+global:
+  serviceName: "test"
+  environmentName: "stage"
+  image:
+    registry: "1234567890.dkr.ecr.eu-central-1.amazonaws.com"
+    repository: "k8s/example-service"
+    tag: "dev"
+deployment:
+  resourcesPreset: small
+  resources:
+    limits:
+      cpu: none
+  service:
+    ports:
+      http: 8080
