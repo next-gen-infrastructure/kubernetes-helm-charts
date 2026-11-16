@@ -57,3 +57,11 @@ labels: {{ include "common.labels.standard" (dict "customLabels" .Values.commonL
 Values flow: a shared `global` block (`serviceName`, `environment`, `secretStore`, `domain`, `image.{name,tag,pullPolicy,pullSecrets}`) drives naming, DNS/ingress hosts (`<serviceName>.[<environment>].<domain>`) and the ExternalSecret store (`secretStore`) and Vault path (`<environment>/<path>`), and image construction; chart-level values cover the workload specifics. Since `common` is consumed through each chart's `charts/` subdirectory, changes to `common` only take effect in a dependent chart after re-running `helm dependency update` there — stale vendored copies are the usual cause of "my template change did nothing".
 
 The `deployment` chart renders either a standard Deployment or an Argo Rollout depending on `rollouts.enabled` (mutually exclusive templates gated by the same flag).
+
+## Working rules
+
+- For any chart or values change, run `helm template` before and after and show the diff as verification.
+- Keep per-resource templates in separate files (e.g. `networkpolicy.yaml`, `ciliumnetworkpolicy.yaml`); put shared logic in the `common` library helpers.
+- Resolve apiVersions through `common.capabilities.*`, matching the existing pattern.
+- When told "use only X" for values, ask whether that means removing the alternatives before deleting existing options.
+- Keep feature PRs and fix PRs separate, but ask if a related fix should be included.

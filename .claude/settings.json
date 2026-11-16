@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path'); case \"$f\" in */charts/*) d=$(echo \"$f\" | sed -E 's#(.*/charts/[^/]+)/.*#\\1#'); helm lint \"$d\" >&2 || exit 2;; esac"
+          }
+        ]
+      }
+    ]
+  }
+}
