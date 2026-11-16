@@ -17,7 +17,8 @@ Allowed: `none`, `nano`, `micro`, `small`, `medium`, `large`, `xlarge`, `2xlarge
 | xlarge | 1 / 3 | 3072Mi / 6144Mi | 50Mi / 2Gi |
 | 2xlarge | 1 / 6 | 3072Mi / 12288Mi | 50Mi / 2Gi |
 
-- **Precedence:** a non-empty `resources` always wins; the preset is used only when `resources` is empty. `none` renders no `resources` block.
+- **Precedence:** `resources` is merged over the preset key by key, so `resources.limits.cpu: 2` changes only the CPU limit and keeps the rest of the preset. With the preset `none` only `resources` is used, and an empty result renders no `resources` block.
+- **Dropping a value:** set it to `none` or `-1` (string or number) to remove that single request or limit from the result, e.g. `resources: {limits: {cpu: none}}` keeps the preset's requests and memory limit but sets no CPU limit. `null` cannot be used, Helm removes it before the template runs.
 - **Defaults:** `none` in all workload charts. In `cronjobs` the preset is chart-wide; a job's own `resources` (merged over chart-level `resources`) wins.
 - Sidecar/init containers do not inherit the chart-level preset: each item reads its own `resources` / `resourcesPreset`, and gets no resources block if neither is set.
 - Presets are for testing and quick starts; set `resources` explicitly in production. An unknown value fails the render.
@@ -28,6 +29,14 @@ deployment:
   resources:
     requests: { cpu: 200m, memory: 256Mi }
     limits: { memory: 512Mi }
+```
+
+```yaml
+deployment:
+  resourcesPreset: small
+  resources:
+    limits:
+      cpu: none                # or -1: no CPU limit, requests and memory limit stay as in the preset
 ```
 
 ## Affinity

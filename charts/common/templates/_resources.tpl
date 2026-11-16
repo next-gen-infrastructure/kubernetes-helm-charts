@@ -52,6 +52,7 @@ These presets are for basic testing and not meant to be used in production
 {{/*
 Return the resources for a container: the preset (if any) as a base, with explicit resources
 overriding it key by key, e.g. resources.requests.cpu replaces only the preset's requests.cpu.
+A value of "none" or -1 removes that key instead (resources.limits.cpu: none drops the CPU limit of the preset).
 {{ include "common.resources.resolve" (dict "preset" .Values.resourcesPreset "resources" .Values.resources) -}}
 */}}
 {{- define "common.resources.resolve" -}}
@@ -60,6 +61,16 @@ overriding it key by key, e.g. resources.requests.cpu replaces only the preset's
 {{- $base = include "common.resources.preset" (dict "type" .preset) | fromYaml -}}
 {{- end -}}
 {{- $resources := mergeOverwrite $base (deepCopy (default dict .resources)) -}}
+{{- /* A value of "none" or -1 drops that single request/limit (e.g. limits.cpu: none keeps the rest of the preset). */ -}}
+{{- range $section, $values := $resources -}}
+{{- if kindIs "map" $values -}}
+{{- range $name, $value := $values -}}
+{{- if has (toString $value) (list "none" "-1") -}}
+{{- $_ := unset $values $name -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{- range $key, $value := $resources -}}
 {{- if not $value -}}
 {{- $_ := unset $resources $key -}}
